@@ -1,0 +1,38 @@
+Hola !
+
+- Che te pido mil perdones, no te pude avisar antes, pero durante la semana el servidor de correo de mi laburo, el que me brinda/hostea la inefable casilla de correo, dbarrabino@conicet.gov.ar, reventó por los aires mal, he perdido correos a cagarme, así que si me mandaste algo, seguramente no me llegó jamás
+- En miras de lo anterior, y si bien lo van a arreglar al citado servidor de correo, te sugiero/imploro/exijo que me mandes correos a dbarrabino@gmail.com , de ahora en más, ya sea para el trabajo profesional, para Calidad, para lo que sea, por las dudas. Es lo más seguro. Obviamente dicho esto, mañana mismo se cae GMail, pero bue ... me imagino que tienen mejores backups que en mi laburo
+
+-------------------------
+
+- Respositorio: Google Code o Assembla. VOT Google Code, qué se yo, me cae simpático
+
+- Nombre del TP: Estamos haciendo un trabajo que apunta a investigar las herramientas Terracotta y JBoss, digamos, por decirlo así. Terracotta no existe como palabra en sí, es un numbre de fantasía, la palabra que sí existe es Terracota (http://es.wikipedia.org/wiki/Terracota). JBoss es de Red Hat. Estuve leyendo por ahí y hay como una cosa re mítica en el origen del nombre (http://www.cyberciti.biz/tips/how-red-hat-got-its-name.html ; entre otros), algunos dicen que tiene que ver con una clara alusión al "rojo" de revolución, comunismo, Rusia, etc, y por otro lado dicen que el fundador un día se encontró con un sombrero rojo de lacrosse (http://es.wikipedia.org/wiki/Lacrosse) que era de su abuelo, y nombró su incipiente compañía en honor a su abuelo, simbolizado en el sombrero rojo. Ahora bien, juntando todo, y luego de dar vueltas por algunos artículos de Wikipedia (algunos de los cuales cito aquí), te envío una lista de nombres de los cuales podría salir el nombre de nuestro proyecto a modo global y/o del repositorio y/o de la aplicación de prueba:
+
+Nombres derivados de limar con Terracotta:
+- eritrea (http://es.wikipedia.org/wiki/Eritrea)
+- terranova (http://es.wikipedia.org/wiki/Terranova)
+- labrador (http://es.wikipedia.org/wiki/Terranova)
+- canada (http://es.wikipedia.org/wiki/Terranova)
+- arcilla
+- etruria (http://es.wikipedia.org/wiki/Terracota)
+- merimde (http://es.wikipedia.org/wiki/Terracota)
+- qin (http://es.wikipedia.org/wiki/Guerreros_de_Terracota)
+
+Nombres derivados de limar con JBoss/Red Hat
+- octubre
+- redoctober / red october / octubre rojo / octubrerojo (http://www.imdb.com/title/tt0099810/ ; enorme película !)
+- red star / redstar / estrella roja / estrellaroja (http://en.wikipedia.org/wiki/Red_star)
+- lacrosse (http://www.cyberciti.biz/tips/how-red-hat-got-its-name.html)
+- guantanamo
+- borsalino (http://es.wikipedia.org/wiki/Fedora_(sombrero))
+- krueger (http://es.wikipedia.org/wiki/Fedora_(sombrero))
+- indiana, indi, jones (http://es.wikipedia.org/wiki/Fedora_(sombrero))
+
+Qué se yo, ojalá alguno te guste
+
+Acá al pie del cañón para lo que necesites ! Me tengo que instalar más cosas, lo hago lo antes posible
+
+Saludos
+
+Diego
