@@ -8,6 +8,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <a href="/qinweb/hello">Hola!</a>
+        <a href="/qinweb/hello.html">Hola!</a>
     </body>
 </html>
