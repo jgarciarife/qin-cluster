@@ -8,14 +8,19 @@
 
 	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
-			<value>
-				/hello.html=helloController
-            </value>
+			<props>
+				<prop key="/hello.html">helloController</prop>
+				<prop key="/login.html">loginController</prop>
+				<prop key="/consulta.html">consultaController</prop>
+            </props>
 		</property>
 	</bean>
 
 
 	<jee:jndi-lookup id="helloBean" jndi-name="ear-1.0/HelloImpl/local-com.qin.Hello"
+		resource-ref="true" />
+		
+	<jee:jndi-lookup id="registracionBean" jndi-name="ear-1.0/RegistracionImpl/local-com.qin.Registracion"
 		resource-ref="true" />
 
 
@@ -27,6 +32,14 @@
 
 	<bean id="helloController" class="com.qin.hello.HelloController">
 		<property name="helloBean" ref="helloBean" />
+	</bean>
+	
+	<bean id="loginController" class="com.qin.login.LoginController">
+		<property name="registracionBean" ref="registracionBean" />
+	</bean>
+	
+	<bean id="consultaController" class="com.qin.consultas.ConsultaController">
+		<property name="registracionBean" ref="registracionBean" />
 	</bean>
 
 </beans>
