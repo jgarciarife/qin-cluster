@@ -17,10 +17,10 @@
 	</bean>
 
 
-	<jee:jndi-lookup id="helloBean" jndi-name="ear-1.0/HelloImpl/local-com.qin.Hello"
+	<jee:jndi-lookup id="helloBean" jndi-name="qinear-1.0/HelloImpl/local-com.qin.Hello"
 		resource-ref="true" />
 		
-	<jee:jndi-lookup id="registracionBean" jndi-name="ear-1.0/RegistracionImpl/local-com.qin.Registracion"
+	<jee:jndi-lookup id="registracionBean" jndi-name="qinear-1.0/RegistracionImpl/local-com.qin.Registracion"
 		resource-ref="true" />
 
 
