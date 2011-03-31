@@ -8,7 +8,7 @@
    <modules>
       <module>qinweb</module>
       <module>qinejb</module>
-      <module>ear</module>
+      <module>qinear</module>
    </modules>
    <dependencyManagement>
       <dependencies>
