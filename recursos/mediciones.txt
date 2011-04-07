@@ -1,0 +1,116 @@
+Investigar
+
+Martín
+	The Grinder (open source)
+	Load Runner (HP)
+	http://blackanvil.blogspot.com/2006/06/shootout-load-runner-vs-grinder-vs.html
+
+Diego
+	SilkPerformer (Borland)
+	Rational Performance Tester (IBM)
+	WebLOAD (Radview Software)
+	
+http://www.theserverside.com/news/1363731/Performance-Engineering-a-Practitioners-Approach-to-Performance-Testing
+
+Herramientas de medición
+
+1.- SilkPerformer (Borland)
+2.- Rational Performance Tester (IBM)
+3.- WebLOAD (Radview Software)
+
+----------------------------------------------------
+1.- SilkPerformer
+
+Web: http://www.microfocus.com/products/silk/silkperformer/
+Empresa: Borland; bah, MicroFocus, pero aparentemente MicroFocus compró Borland
+Licencia: Poniendo estaba la garza, hay un trial por ahí
+OS: Windows a pleno, como gran gauchada soporta Firefox
+Chamuyeta:
+Es una herramienta de evaluación de desempeño pensada para ayudar a optimizar el desempeño en aplicaciones de negocio.
+Presenta la posibilidad de montar rápidamente ... eso nunca me gusta, pero bue ... y sin requerimientos específicos de hardware o software, pruebas que simulan picos de demanda con muchísimos usuarios y cuellos de botella, ya sea en la nube o en una aplicación clásica.
+Aparentemente soportaría el esquema enterprise de aplicaciones web; o al menos se jacta de poder trabajar con múltiples escenarios tecnológicos.
+SilkPerformer también comprende SilkPerformer Diagnostics para identificar y ayudar a resolver cuellos de botella de escalabilidad y desempeño, y SilkPerformer Cloudburst, una aplicación para simular grandes picos de demanda de una nube.
+Casualmente uno de los párrafos "publicitarios" se asemeja mucho a alguno de nuestros párrafos. Dicho párrafo establece que las aplicaciones de software son el motor de los negocios hoy día, por lo que el nivel de uso que tienen es muy elevado, lo que deriva en un gran stress sobre las aplicaciones, que de todas maneras deben poder responder incluso bajo ese nivel de exigencia. En ese contexto, SilkPerformer al brindar la posibilidad de probar dichas aplicaciones bajo mucho stress, ayudan a garantizar que las mismas podrán prevalecer en condiciones adversas. Si una aplicación no pasa la prueba, SilkPerformer provee información al respecto y ayuda a diagnosticar el problema.
+Generalmente, se encuentran los problemas luego de solo una prueba.
+Luego de la versión 2009 SilkPerformer provee un mecanismo para grabar reglas, que automatiza la parametrización y correlación de la sesión de las transacciones de los negocios web. Esto reduce el esfuerzo y tiempo de scripting y de montaje de la prueba en general. Para crear reglas complejas, hay templates predefinidos. Las reglas pueden ser muy variadas, como por ejemplo grabar páginas web o incorporar o no imágenes, pop ups o avisos de la página web. Se pueden crear, editar, copiar y eliminar reglas. También se pueden crear reglas a partir de TrueLog Explorer, lo que permite
+Tiene una herramienta de línea de comandos.
+Es browser-driven
+URLs de interés
+- http://blog.dynatrace.com/2010/05/04/elevating-web-and-load-testing-with-microfocus-silkperformer-diagnostics-powered-by-dynatrace/
+Conclusión
+PROs:
+- Borland, o lo que queda de ellos. Me caen bien, no lo puedo evitar.
+- Aparentemente es muy bueno
+- En lo que sería una especie de "manifesto" (?) dicen lo mismo que pusimos nosotros, por lo cual imagino que sería una ayuda interesante para nuestro proyecto
+- ABM de reglas
+- Diagnóstico si algo falla, en etapa de desarrollo, y ayuda para llegar a origen del problema.
+- Browser driven
+CONs:
+- Solo Windows ... eso nunca me gusta, pero bue ... si realmente es bueno todo bien
+- Pago ... eso nunca me gusta, pero bue ... si realmente es bueno todo bien
+- Hay una lista de software testeado, en que por ejemplo en la parte de base de datos no figura MySQL. Ok, es un tester que claramente opera contra el navegador, o tal vez contra el servidor, pero me llama la atención este punto. No me llego a dar una idea, sin haber usado esto, respecto de qué jode o no que no soporte MySQL. Aparentemente, lo que ofrece es end-to-end análisis, y si no responde contra MySQL, nuestro "end" se hace más cortito
+- Hay otra listita de requerimientos para instalarlo, en que figura, como si fuera mandatory, un procesador de 64 bits. Ah bue !! Espero haber leído o interpretado mal
+- Al margen de lo anterior, creo que claramente es una aplicación que demanda muchos recursos, tal vez lo debería correr yo en mi PC de escritorio y nada más, ni siquiera mostrar el día que presentemos
+
+2.- Rational Performance Tester (IBM)
+
+Una debilidad personal. Ya he usado herramientas de Rational anteriormente, para evaluar performance de programas C/C++. Tal vez lo que yo usé no era exactamente esto, tal vez incluso ha cambiado de nombre, aunque no la palabra Rational componiendo el nombre. Pero la cuestión es que es un ALTO-CAÑO y seguramente no ha cambiado, o ha mejorado. Tal como ya nos dijo Gary Baldi (?), es de IBM, garantía indiscutida de calidad desbocada. En algún momento, ya no pude arrancar el Rational de C/C++ ni con la clave que me anduvo siempre, y ahí lo perdí. Lo lloré como a mi gato Felipe (?!!!)
+
+Web: http://www-01.ibm.com/software/awdtools/tester/performance/#
+Empresa: IBM
+Licencia: Ultra pago. A comerla. Hay un trial
+OS: Varios !!! SilkPerformer comela !
+Chamuyeta:
+Es una herramienta pensada para identificar presencia y causa de cuellos de botella en aplicaciones.
+Permite hacer pruebas sin usar lenguaje alguno, es super usable e intuitivo
+Tiene un editor muy completo, y provee una vista más general así como detalles
+Se pueden automatizar la variabilidad de los datos de prueba y permite el ingreso de texto java customizado para alguna customizacion particular de la prueba.
+Ofrece la posibilidad de emular varias cantidades de usuario, sin despilfarrar recursos.
+Reportes al instante
+Se supone que combina información tanto del servidor como de la prueba en sí, para tener datos más ricos
+URLs de interés:
+- http://www.rational.com.ar/herramientas/performancetester.html
+- http://www.rational.com.ar/cursos/essentialsofperformancetester.html
+- http://en.wikipedia.org/wiki/IBM_Rational_Performance_Tester
+Conclusión
+PROs:
+- Es una calentura personal mía
+- IBM. Todo dicho
+- Doy fé de que las cosas de Rational funcionan, es el único que conozco de todos estos
+- Creo que es menos lamebotas de Microsoft que SilkPerformer, cosa que me cae ultra simpática
+- También permite evaluar y diagnosticar problemas, ideal para la fase de desarrollo
+CONs:
+- Trial
+- Tal vez no sea tan excesivamente modernoso
+
+3.- WebLOAD (Radview Software)
+
+Web: http://www.webload.org/ | http://www.radview.com/
+Empresa: RadView Software
+Licencia: Open Source !
+OS:
+Chamuyeta:
+Copipasteo esto porque no encontré nada salvo esto:
+WebLOAD es una herramienta de la empresa Radview, Inc para la generación de carga inicialmente diseñada para probar aplicaciones Web. Entre sus características principales, citamos las siguientes:
+El hecho de que todos los «scripts» o guiones de pruebas puieden ser desarrollados en un lenguaje estándar como JavaScript.
+La implementacion de Radview considera algunas extensiones propietarias. La prueba puede ser controlada por una simple estación ejecutando la consola de WebLoad.
+Todos los datos coleccionados durante una sesión de pruebas son almacenados en la estación que ejecuta la consola.
+Presenta la capaciada de coleccionar contadores de rendimiento de los diversos servidores que están siendo probados, a través del uso de diferentes protocolos para la extracción de contadores, tales como RSTAD, SNMP y PerfMon.
+El producto presenta herramienta para realizar análisis de regresión.
+Es posible la ejecución de diferentes conjuntos de scripts mediante la utilización delas «Agendas Mixtas», las cuales permiten su ejecución utilizando diferentes pesos porcentuales para cada uno de ellos.
+Ofrece la posibilidad de exportar los datos de las sesiones de pruebas hacia otras herramientas de análisis o de manipulación de datos, tales como MS Excel. 
+URLs de interés:
+- http://www.optima.com.mx/webload.htm
+Conclusión
+PROs:
+- Open Source
+- Aparentemente tiene muchos años detrás, imagino que eso es bueno
+- Aparentemente, es la mejor alternativa a LoadRunner (?????????????)
+CONs:
+- No sé si busqué mal o qué, pero no encontré textos como en los otros dos casos, salvo esto mismo que te mando
+- La versión Open Source es exageradamente cruda en comparación con lo que debe ser una aplicación medianamente normal de este tipo. No me gusta para nada eso. Mirando todo lo que NO tiene la versión Open Source, te ponés a laburar para crackear la versión paga, sin dudas
+
+Conclusión general, al menos de mi lote:
+1.- Rational
+2.- SilkPerformer
+3.- WebLOAD (mmmmmmmmmmmmmmmmm)
