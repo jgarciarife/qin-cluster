@@ -5,25 +5,15 @@
 			version="1.0">
 	<persistence-unit name="qin">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-<<<<<<< .mine
 		<jta-data-source>java:/DefaultDS</jta-data-source>
-=======
->>>>>>> .r86
 		<properties>
-			<!--property name="hibernate.hbm2ddl.auto" value="create-drop" /-->
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+			<!--property name="hibernate.hbm2ddl.auto" value="update" /-->
 			<property name="hibernate.archive.autodetection" value="class" />
 			<property name="hibernate.show_sql" value="true"/>
 			<property name="hibernate.transaction.flush_before_completion" value="true"/>
 			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider"/>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
-<<<<<<< .mine
-=======
-			<property name="hibernate.connection.driver_class" value="org.gjt.mm.mysql.Driver"/>
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost/qin"/>
-			<property name="hibernate.connection.username" value="root" />
->>>>>>> .r86
-			<property name="hibernate.connection.password" value="diego" />
 		</properties>
 	</persistence-unit>
 </persistence>
