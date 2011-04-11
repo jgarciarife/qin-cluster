@@ -2,13 +2,10 @@ package com.qin.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -18,10 +15,7 @@ import javax.persistence.UniqueConstraint;
 public class UsuarioEntity implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hibernate_sequence")
-	@SequenceGenerator(name = "hibernate_sequence", sequenceName = "hibernate_sequence")
-	@Basic(optional = false)
-	@Column(name = "id", nullable = false)
+	@GeneratedValue
 	private Long id;
 
 	@Column(name = "apellido", nullable = false)
