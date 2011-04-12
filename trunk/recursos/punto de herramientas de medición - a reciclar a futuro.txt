@@ -1,0 +1,36 @@
+04.1.6.- Herramientas de medición de desempeño
+
+	Se consideraron las siguientes herramientas de medición de desempeño:
+
+SilkPerformer (http://www.microfocus.com/products/silk/silkperformer/)
+Herramienta comercial desarrollada por MicroFocus – Borland. Existe un versión de prueba disponible. Corre sobre sistemas operativos Windows. Se utiliza para realizar mediciones de desempeño simulando sobre la aplicación grandes picos de demanda, muchos usuarios y cuellos de botella. Dichas simulaciones se construyen con reglas, y la herramienta tiene la posibilidad de crearlas, editarlas, eliminarlas y almacenarlas para mayor practicidad. Si se llega a detectar algún inconveniente, la herramienta brinda la posibilidad de analizar la situación y llegar a formar un diagnóstico que ayude a enmendar el problema.
+
+Rational Performance Tester (http://www-01.ibm.com/software/awdtools/tester/performance/#)
+Herramienta comercial desarrollada por IBM. Existe un versión de prueba disponible. Corre sobre varios sistemas operativos, en particular aquellos que se van a usar para desarrollar el presente trabajo. Se utiliza como en el caso anterior para realizar mediciones de desempeño simulando sobre la aplicación grandes picos de demanda, muchos usuarios y cuellos de botella. Dichas simulaciones se pueden construir con una serie de funcionalidades que provee la citada herramienta, que posibilitan armar las reglas de manera intuitiva, sin siquiera llegar a programarlas. Se pueden automatizar la variabilidad de los datos de prueba y permite el ingreso de texto java customizado para algún ajuste particular de la prueba. A diferencia del caso anterior, estadísticamente consume menos recursos al momento de su ejecución
+
+WebLOAD (http://www.webload.org/ | http://www.radview.com/)
+Herramienta diseñada para probar aplicaciones Web. Ofrece la posibilidad de programar las pruebas en lenguajes de programación standard, como ser JavaScript. Entre sus características salientes, podemos citar la posibilidad de almacenar los resultados de las pruebas, la posibilidad de desde un nodo de una red administrar las pruebas en el resto de los nodos con múltiples protocolos de comunicación, la creación de análisis de regresión, múltiple ejecución de scripts de pruebas, y exportación de resultados en formatos comunes como ser los formatos de las aplicaciones ofimáticas de Microsoft.
+
+The Grinder (http://grinder.sourceforge.net/)
+Herramienta Open source para realizar pruebas de carga, esta basada en java, por lo que puede ser ejecutada en cualquier sistema operativo que soporte dicha teconologia. Está basada en la creacion de scripts que seran ejecutados para probar la aplicacion. Su principal caracteristica es que dichos scripts se deben realizar en Jython, lenguaje que puede importar librerias y clases del lenguaje java, proveyendo la posibilidad de probar aplicaciones realizadas en este lenguaje, no solo mediante la interfaz de usuario, sino tambien mediante la utilización de codigo propio de la aplicacion.
+
+LoadRunner (https://h10078.www1.hp.com/cda/hpms/display/main/hpms_content.jsp?zn=bto&cp=1-11-126-17^8_4000_100)
+Herramienta de la empresa HP, para realizar pruebas de performance utilizando tests de carga y de stress, esta herramienta provee una interfaz grafica muy buena, permite crear scripts o generarlos automaticamente mediante la interaccion con un navegador de internet, genera estadisticas de los tiempos de respuesta y arroja resultados en diferentes graficos para su analisis. Permite realizar pruebas principalmente mediante la interfaz web de una aplicacion, e inclusive mediante WebServices disponibles de la aplicacion. La herramienta no es gratuita, pero tiene una version de prueba. Funciona solamente bajo Windows. 
+
+JMeter (http://jakarta.apache.org/jmeter/)
+Es un proyecto de Apache Jakarta que puede ser utilizado como una herramienta de prueba de carga para analizar y medir el desempeño de una variedad de servicios, con énfasis en aplicaciones web. Es mayormente una herramienta de generación de carga, más orientada a generar pruebas interactuando directamente con el front end de la aplicación web. Sin embargo, con el paso del tiempo se lo ha preparado para desempeñarse según distintas funcionalidades. Es gratuito, corre en varios sistemas operativos en particular en los que serán usados para desarrollar el presente trabajo práctico. 
+
+
+
+	De la lista considerada, se decició optar por usar Rational Performance Testear, The Grinder y JMeter. Las justificaciones son:
+
+Rational Performance Tester (http://www-01.ibm.com/software/awdtools/tester/performance/#)
+La citada herramienta forma parte de la batería de herramientas Rational, las cuales perteneces a IBM. La familia entera de herramientas es grupo de herramientas de enorme calidad y excelente desempeño, que garantizan su uso sin problemas, Está avalada por una empresa de enorme prestigio como IBM. Además, Rational Performance Tester tiene básicamente las mismas funcionalidades que las otras herramientas de igual porte, pero en este caso se alcanzan los mismos resultados con una cierta economía de recursos. Puede correr en varios sistemas operativos. Hay versión de pruebas para utilizar, con la que seguramente se podrá hacer este trabajo sin problemas.
+
+JMeter (http://jakarta.apache.org/jmeter/)
+Es una herramienta clásica de Apache a lo que medición de desempeño se refiere. Es Open Source, hay muchísima información disponible. Con esta herramienta se pueden generar casos de prueba que utilizen la interfaz web de la aplicacion muy facilmente, por lo que es ideal para hacer pruebas de este tipo, y complementar cualquier faltante de informacion o funcionalidad de esta herramienta con las otras herramientas seleccionadas.
+
+The Grinder (http://grinder.sourceforge.net/)
+Es una herramienta gratuita y muy poderosa, se pueden realizar pruebas a varios niveles de la aplicacion, ya que permite utilizar el codigo de ésta. Se puede utilizar en cualquier sistema operativo que soporte Java.
+
+	Particularmente, Rational Performance Tester y JMeter serán usados para efectuar pruebas interactuando con el front end de la aplicación es decir con el navegador web y el HTML ejecutado. Esto es así para aprovechar la característica que tienen ambas herramientas para armar pruebas sobre el navegador con relativa facilidad. Por otro lado, The Grinder será usado para efectuar pruebas sobre los servidores de la aplicación, ya que el lenguaje con que se generan los scripts de prueba es lo suficientemente versátil y poderoso para lograr esto, mientras que no presenta facilidades, como en los otros dos casos, para ejecutar pruebas en el front end con facilidad.
