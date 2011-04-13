@@ -2,7 +2,6 @@ package com.qin.bean;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.PersistenceContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import com.qin.eao.UsuarioEAO;
 import com.qin.entity.UsuarioEntity;
 
-@PersistenceContext(unitName = "qin", name = "qin")
 @Stateless
 public class UsuarioBean implements Usuario {
 
