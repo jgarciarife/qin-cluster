@@ -1,0 +1,1 @@
+mysql-connector-java-5.1.12.jar => [jboss as 6 home]/server/default/lib/mysql-connector-java-5.1.12.jar
