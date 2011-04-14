@@ -4,19 +4,15 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import com.qin.entity.base.BaseEntity;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "usuario", catalog = "qin", uniqueConstraints = @UniqueConstraint(columnNames = "nombre_usuario"))
-public class UsuarioEntity implements Serializable {
-
-	@Id
-	@GeneratedValue
-	private Long id;
+public class Usuario extends BaseEntity implements Serializable {
 
 	@Column(name = "apellido", nullable = false)
 	private String apellido;
@@ -30,22 +26,7 @@ public class UsuarioEntity implements Serializable {
 	@Column(name = "contrasenia_usuario", nullable = false)
 	private String contraseniaUsuario;
 
-	public UsuarioEntity() {
-	}
-
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
+	public Usuario() {
 	}
 
 	/**
