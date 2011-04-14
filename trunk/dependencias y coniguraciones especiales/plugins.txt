@@ -1,6 +1,0 @@
-Helios
-- m2e		http://m2eclipse.sonatype.org/sites/m2e
-- m2e extras	http://m2eclipse.sonatype.org/sites/m2e-extras
-- JBoss Tools	http://download.jboss.org/jbosstools/updates/stable/helios/
-- Subclipse	http://subclipse.tigris.org/update_1.6.x/
-- WTP
