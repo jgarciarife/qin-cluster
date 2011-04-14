@@ -6,8 +6,8 @@ import javax.ejb.Stateless;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.qin.bean.Usuario;
-import com.qin.entity.UsuarioEntity;
+import com.qin.entity.Usuario;
+import com.qin.manager.RegistracionManager;
 
 @Stateless
 public class HelloImpl implements Hello {
@@ -15,11 +15,11 @@ public class HelloImpl implements Hello {
 	protected static Logger logger = LoggerFactory.getLogger(HelloImpl.class);
 
 	@EJB
-	private Usuario usuario;
+	private RegistracionManager usuario;
 
 	public String getMessage() {
 		try {
-			UsuarioEntity usuarioEntity = new UsuarioEntity();
+			Usuario usuarioEntity = new Usuario();
 			usuarioEntity.setId(null);
 			usuarioEntity.setApellido("Moreyra");
 			usuarioEntity.setNombre("Martín");

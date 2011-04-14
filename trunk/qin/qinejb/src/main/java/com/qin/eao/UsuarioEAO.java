@@ -1,14 +1,14 @@
 package com.qin.eao;
 
-import com.qin.entity.UsuarioEntity;
+import com.qin.entity.Usuario;
 
 public interface UsuarioEAO {
 
-	void insert(UsuarioEntity usuario) throws Exception;
+	void insert(Usuario usuario) throws Exception;
 
-	void update(UsuarioEntity usuario) throws Exception;
+	void update(Usuario usuario) throws Exception;
 
-	void delete(UsuarioEntity usuario) throws Exception;
+	void delete(Usuario usuario) throws Exception;
 
-	UsuarioEntity findById(UsuarioEntity usuario) throws Exception;
+	Usuario findById(Usuario usuario) throws Exception;
 }
