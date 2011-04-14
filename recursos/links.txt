@@ -20,3 +20,7 @@ Clusterización:
 	http://docs.jboss.org/jbossas/jboss4guide/r4/html/cluster.chapt.html
 	http://www.terracotta.org/platform/how-terracotta-works y 	http://www.terracotta.org/platform/platform-concepts
 	http://www.terracotta.org/platform/hello-clustered-world
+	
+Performance:
+	http://www.theserverside.com/news/1363731/Performance-Engineering-a-Practitioners-Approach-to-Performance-Testing
+	http://blackanvil.blogspot.com/2006/06/shootout-load-runner-vs-grinder-vs.html
