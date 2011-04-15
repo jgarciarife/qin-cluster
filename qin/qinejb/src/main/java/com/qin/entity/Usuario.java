@@ -1,7 +1,5 @@
 package com.qin.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,7 +10,7 @@ import com.qin.entity.base.BaseEntity;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "usuario", catalog = "qin", uniqueConstraints = @UniqueConstraint(columnNames = "nombre_usuario"))
-public class Usuario extends BaseEntity implements Serializable {
+public class Usuario extends BaseEntity {
 
 	@Column(name = "apellido", nullable = false)
 	private String apellido;
