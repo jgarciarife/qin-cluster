@@ -1,10 +1,13 @@
 package com.qin.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @SuppressWarnings("serial")
-// @Entity
-// @Table(name = "docente", catalog = "qin")
+@Entity
+@Table(name = "docente", catalog = "qin")
+//@DiscriminatorValue("docente")
 public class Docente extends Usuario {
 
 	@Column(name = "matricula", nullable = false)
@@ -16,7 +19,7 @@ public class Docente extends Usuario {
 	/**
 	 * @return the matricula
 	 */
-	protected String getMatricula() {
+	public String getMatricula() {
 		return matricula;
 	}
 
@@ -24,7 +27,7 @@ public class Docente extends Usuario {
 	 * @param matricula
 	 *            the matricula to set
 	 */
-	protected void setMatricula(String matricula) {
+	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
 }
