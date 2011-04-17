@@ -1,5 +1,6 @@
 package com.qin.eao.productoAcademico;
 
+import javax.ejb.Stateless;
 import javax.persistence.Query;
 
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import com.qin.eao.base.BaseEAOImpl;
 import com.qin.entity.ProductoAcademico;
 
+@Stateless
 public class ProductoAcademicoEAOImpl extends BaseEAOImpl implements
 		ProductoAcademicoEAO {
 

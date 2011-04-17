@@ -13,8 +13,6 @@ import com.qin.entity.base.BaseEntity;
 @Entity
 @Table(name = "usuario", catalog = "qin", uniqueConstraints = @UniqueConstraint(columnNames = "nombre_usuario"))
 @Inheritance(strategy = InheritanceType.JOINED)
-//@DiscriminatorColumn(name="DTYPE", discriminatorType=DiscriminatorType.STRING)
-//@DiscriminatorValue("usuario")
 public class Usuario extends BaseEntity {
 
 	@Column(name = "apellido", nullable = false)

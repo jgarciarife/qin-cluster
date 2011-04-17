@@ -7,7 +7,6 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "alumno", catalog = "qin")
-//@DiscriminatorValue("alumno")
 public class Alumno extends Usuario {
 
 	@Column(name = "padron", nullable = false)

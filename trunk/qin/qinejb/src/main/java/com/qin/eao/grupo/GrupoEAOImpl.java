@@ -1,5 +1,6 @@
 package com.qin.eao.grupo;
 
+import javax.ejb.Stateless;
 import javax.persistence.Query;
 
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import com.qin.eao.base.BaseEAOImpl;
 import com.qin.entity.Grupo;
 
+@Stateless
 public class GrupoEAOImpl extends BaseEAOImpl implements GrupoEAO {
 
 	protected static Logger logger = LoggerFactory
