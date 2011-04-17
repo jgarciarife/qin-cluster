@@ -4,12 +4,12 @@ import com.qin.entity.Usuario;
 
 public interface RegistracionManager {
 
-	void insert(Usuario usuario) throws Exception;
+	void insertUsuario(Usuario usuario) throws Exception;
 
-	void update(Usuario usuario) throws Exception;
+	void updateUsuario(Usuario usuario) throws Exception;
 
-	void delete(Usuario usuario) throws Exception;
+	void deleteUsuario(Usuario usuario) throws Exception;
 
-	Usuario findById(Long usuarioId) throws Exception;
+	Usuario findUsuarioById(Long usuarioId) throws Exception;
 
 }

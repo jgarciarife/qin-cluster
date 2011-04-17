@@ -4,7 +4,7 @@ import javax.persistence.Column;
 
 @SuppressWarnings("serial")
 // @Entity
-// @Table(name = "alumno", catalog = "qin")
+// @Table(name = "docente", catalog = "qin")
 public class Docente extends Usuario {
 
 	@Column(name = "matricula", nullable = false)

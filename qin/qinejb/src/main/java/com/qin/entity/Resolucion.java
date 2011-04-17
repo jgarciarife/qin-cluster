@@ -4,7 +4,7 @@ import com.qin.entity.base.BaseEntity;
 
 @SuppressWarnings("serial")
 //@Entity
-//@Table(name = "alumno", catalog = "qin")
+//@Table(name = "resolucion", catalog = "qin")
 public class Resolucion extends BaseEntity {
 
 }
