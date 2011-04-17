@@ -1,4 +1,4 @@
-package com.qin.eao;
+package com.qin.eao.usuario;
 
 import javax.ejb.Stateless;
 import javax.persistence.Query;
@@ -14,30 +14,18 @@ public class UsuarioEAOImpl extends BaseEAOImpl implements UsuarioEAO {
 
 	protected static Logger logger = LoggerFactory
 			.getLogger(UsuarioEAOImpl.class);
-
-	@Override
-	public void insert(Usuario usuario) throws Exception {
-		getEntityManager().persist(usuario);
+	
+	public UsuarioEAOImpl() {
 	}
 
 	@Override
-	public void update(Usuario usuario) throws Exception {
-		getEntityManager().merge(usuario);
-	}
-
-	@Override
-	public void delete(Usuario usuario) throws Exception {
-		getEntityManager().remove(usuario);
-	}
-
-	@Override
-	public Usuario findById(Usuario usuario) throws Exception {
+	public Usuario findById(Long usuarioId) throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT usuario ");
-		jpql.append("FROM UsuarioEntity usuario ");
+		jpql.append("FROM Usuario usuario ");
 		jpql.append("WHERE usuario.id = :id ");
 		Query query = getEntityManager().createQuery(jpql.toString());
-		query.setParameter("id", usuario.getId());
+		query.setParameter("id", usuarioId);
 		return (Usuario) query.getSingleResult();
 	}
 }
