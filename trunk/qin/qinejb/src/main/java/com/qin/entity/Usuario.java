@@ -1,7 +1,12 @@
 package com.qin.entity;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -10,6 +15,9 @@ import com.qin.entity.base.BaseEntity;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "usuario", catalog = "qin", uniqueConstraints = @UniqueConstraint(columnNames = "nombre_usuario"))
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name="DTYPE", discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorValue("usuario")
 public class Usuario extends BaseEntity {
 
 	@Column(name = "apellido", nullable = false)
