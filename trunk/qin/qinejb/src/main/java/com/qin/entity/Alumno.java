@@ -1,14 +1,13 @@
 package com.qin.entity;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "alumno", catalog = "qin")
-@DiscriminatorValue("alumno")
+//@DiscriminatorValue("alumno")
 public class Alumno extends Usuario {
 
 	@Column(name = "padron", nullable = false)
