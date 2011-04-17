@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.qin.entity.Usuario;
-import com.qin.manager.RegistracionManager;
+import com.qin.manager.registracion.RegistracionManager;
 
 @Stateless
 public class HelloImpl implements Hello {
