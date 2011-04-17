@@ -1,5 +1,10 @@
 package com.qin.eao.enunciado;
 
-public class EnunciadoEAO {
+import com.qin.eao.base.BaseEAO;
+import com.qin.entity.Enunciado;
+
+public interface EnunciadoEAO extends BaseEAO {
+
+	Enunciado findById(Long enunciadoId) throws Exception;
 
 }
