@@ -20,6 +20,9 @@ public class RegistracionManagerImpl extends ManagerBaseImpl implements
 
 	@EJB
 	private UsuarioEAO usuarioEAO;
+	
+	public RegistracionManagerImpl() {
+	}
 
 	@Override
 	public void insertUsuario(Usuario usuario) throws Exception {
