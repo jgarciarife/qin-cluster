@@ -13,7 +13,7 @@
         	<input type="text" id="user" name="user"/>
         	<input type="submit" value="Login (Statefull)" /> 
         </form>
-        <a href="consulta.html">Consultar nombre sin ingresar uno nuevo (Statefull)</a><br/>
+        <a href="consultar.html">Consultar nombre sin ingresar uno nuevo (Statefull)</a><br/>
         Tu sessionId:&nbsp;<%=request.getSession().getId() %><br/>
         
         Probar loguearse con un nombre de usuario cualquiera. verificar el nombre del usuario logueado y el sessionID<br/>

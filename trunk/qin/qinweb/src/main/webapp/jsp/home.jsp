@@ -8,7 +8,7 @@
 <html>
 <body>
 
-<a href="consulta.html">Consultar mi usuario de Login</a>
+<a href="consultar.html">Consultar mi usuario de Login</a>
 </body>
 </html>
 
