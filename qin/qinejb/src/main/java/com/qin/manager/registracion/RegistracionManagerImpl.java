@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.qin.eao.usuario.UsuarioEAO;
-import com.qin.entity.Alumno;
 import com.qin.entity.Usuario;
 import com.qin.manager.base.ManagerBaseImpl;
 
