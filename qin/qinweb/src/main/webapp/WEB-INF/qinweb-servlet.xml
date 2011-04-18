@@ -1,36 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="
-	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
-	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.0.xsd">
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
 
-	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-		<property name="mappings">
-			<props>
-				<prop key="/hello.html">helloController</prop>
-				<prop key="/login.html">loginController</prop>
-				<prop key="/consulta.html">consultaController</prop>
-			</props>
-		</property>
-	</bean>
-	<jee:jndi-lookup id="helloBean" jndi-name="qinear-1.0/HelloImpl/local-com.qin.Hello"
+	<jee:jndi-lookup id="registracionBean"
+		jndi-name="qinear-1.0/RegistracionImpl/local-com.qin.Registracion"
 		resource-ref="true" />
-	<jee:jndi-lookup id="registracionBean" jndi-name="qinear-1.0/RegistracionImpl/local-com.qin.Registracion"
-		resource-ref="true" />
-	<bean id="viewResolver"
+
+
+	<!-- Scans within the base package of the application for @Components to 
+		configure as beans -->
+	<!-- @Controller, @Service, @Configuration, etc. -->
+	<context:component-scan base-package="com.qin.controller" />
+
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<mvc:annotation-driven />
+
+	<!-- Resolve logical view names to .jsp resources in the /WEB-INF/views 
+		directory -->
+	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	<bean id="helloController" class="com.qin.hello.HelloController">
-		<property name="helloBean" ref="helloBean" />
-	</bean>
-	<bean id="loginController" class="com.qin.login.LoginController">
-		<property name="registracionBean" ref="registracionBean" />
-	</bean>
-	<bean id="consultaController" class="com.qin.consultas.ConsultaController">
-		<property name="registracionBean" ref="registracionBean" />
-	</bean>
+
+
 </beans>
