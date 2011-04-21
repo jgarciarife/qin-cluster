@@ -9,13 +9,13 @@ public class BusquedaTPController extends MultiActionController {
 
 	@RequestMapping(value = "/iniciar_busqueda.html")
 	protected String inicioBusquedaTPs() throws Exception {
-		return "/trabajos_practicos/buscar_tps";
+		return "tp.iniciar_busqueda";
 	}
 
 	@RequestMapping(value = "/buscar.html")
 	protected String buscarTPs() throws Exception {
 
-		return "/trabajos_practicos/resultado_busqueda_tps";
+		return "tp.resultado_busqueda";
 	}
 
 }
