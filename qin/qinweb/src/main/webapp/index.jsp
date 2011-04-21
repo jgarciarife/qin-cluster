@@ -1,23 +1,35 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
-
+"http://www.w3.org/TR/html4/loose.dtd">
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <a href="hello.html">Hola! (Stateless)</a><br/>
-        <form id="login" name="login" action="login.html">
-        	<input type="text" id="user" name="user"/>
-        	<input type="submit" value="Login (Statefull)" /> 
-        </form>
-        <a href="consultar.html">Consultar nombre sin ingresar uno nuevo (Statefull)</a><br/>
-        Tu sessionId:&nbsp;<%=request.getSession().getId() %><br/>
-        
-        Probar loguearse con un nombre de usuario cualquiera. verificar el nombre del usuario logueado y el sessionID<br/>
-        Luego cerrar el browser/borrar la info de navegacion (para que cambie el sessionID) y consultar el nombre logueado<br/>
-        Resultado: el session bean mantiene la info de usuario, a pesar de ser SessionIDs diferentes... buuuuuuuuuuuuuu
-    </body>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Login</title>
+</head>
+<body>
+<table border="1" cellpadding="2" cellspacing="2" align="left"
+	width="100%">
+	<tr>
+		<td height="30" colspan="2"><h1>Qin!</h1></td>
+	</tr>
+	<tr>
+		<td width="100%">
+		<form id="login" name="login" action="login.html">
+		<table align="center">
+			<tr>
+				<td>Usuario:</td>
+				<td><input type="text" id="user" name="user" /></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Login (Statefull)" />
+			</tr>
+		</table>
+		</form>
+		</td>
+	</tr>
+</table>
+</body>
 </html>
+
+
+
+
