@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
@@ -21,14 +23,20 @@ public class ElaboracionTPController extends MultiActionController {
 	@Autowired
 	private ColaboracionManager colaboracionManager;
 
+	@ModelAttribute("materias")
+	public List<Materia> popularMaterias() throws Exception {
+		return  colaboracionManager.findAllMaterias();
+	}
+
 	@RequestMapping(value = "/alta_tp.html")
-	public String altaTP() {
+	public String altaTP(Model model) throws Exception {
+		List<Materia> materias = colaboracionManager.findAllMaterias();
+		model.addAttribute("materia", materias.get(0).getCodigo());
 		return "tp.alta";
 	}
 
 	@RequestMapping(value = "/guardar_tp.html")
 	public String guardarTP(@RequestParam("contenido") String contenido) throws Exception {
-
 		Materia materia = new Materia();
 		materia.setId(null);
 		materia.setAnio(new Long(2011));

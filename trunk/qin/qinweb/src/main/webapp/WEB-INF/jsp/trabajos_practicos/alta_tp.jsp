@@ -1,7 +1,17 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <form action="guardar_tp.html" name="elaboracion_tp">
 <table>
 	<tr>
-		<td><h2>Nuevo TP</h2></td>
+		<td><form:select path="materia">
+			<form:option value="-" label="--Seleccione una Materia" />
+			<form:options items="${materias}" itemValue="codigo"
+				itemLabel="nombre" />
+		</form:select></td>
+	</tr>
+	<tr>
+		<td>
+		<h2>Nuevo TP</h2>
+		</td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
@@ -10,7 +20,8 @@
 		<td><b>Titulo</b></td>
 	</tr>
 	<tr>
-		<td><input type="text" name="titulo" id="titulo"  size="100" maxlength="100"/></td>
+		<td><input type="text" name="titulo" id="titulo" size="100"
+			maxlength="100" /></td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
