@@ -1,5 +1,7 @@
 package com.qin.manager.colaboracion;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -7,7 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.qin.eao.grupo.GrupoEAO;
+import com.qin.eao.materia.MateriaEAO;
 import com.qin.entity.Grupo;
+import com.qin.entity.Materia;
 import com.qin.entity.TrabajoPractico;
 import com.qin.manager.administracion.AdministracionManager;
 import com.qin.manager.trabajoPractico.TrabajoPracticoManager;
@@ -20,6 +24,9 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 
 	@EJB
 	private GrupoEAO grupoEAO;
+	
+	@EJB
+	private MateriaEAO materiaEAO;
 
 	@EJB
 	private AdministracionManager administracionManager;
@@ -69,5 +76,10 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 
 	public TrabajoPracticoManager getTrabajoPracticoManager() {
 		return trabajoPracticoManager;
+	}
+	
+	@Override
+	public List<Materia> findAllMaterias() throws Exception {
+		return materiaEAO.findAll();
 	}
 }

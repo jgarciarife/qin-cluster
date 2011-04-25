@@ -1,5 +1,7 @@
 package com.qin.eao.materia;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
@@ -27,5 +29,15 @@ public class MateriaEAOImpl extends BaseEAOImpl implements MateriaEAO {
 		Query query = getEntityManager().createQuery(jpql.toString());
 		query.setParameter("id", materiaId);
 		return (Materia) query.getSingleResult();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Materia> findAll() throws Exception {
+		StringBuffer jpql = new StringBuffer();
+		jpql.append("SELECT materia ");
+		jpql.append("FROM Materia materia ");
+		Query query = getEntityManager().createQuery(jpql.toString());
+		return (List<Materia>) query.getResultList();
 	}
 }
