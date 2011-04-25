@@ -1,6 +1,9 @@
 package com.qin.manager.colaboracion;
 
+import java.util.List;
+
 import com.qin.entity.Grupo;
+import com.qin.entity.Materia;
 import com.qin.entity.TrabajoPractico;
 
 public interface ColaboracionManager {
@@ -12,5 +15,7 @@ public interface ColaboracionManager {
 	void deleteGrupo(Grupo grupo) throws Exception;
 
 	void insertTP(TrabajoPractico tp) throws Exception;
+	
+	List<Materia> findAllMaterias() throws Exception;
 
 }
