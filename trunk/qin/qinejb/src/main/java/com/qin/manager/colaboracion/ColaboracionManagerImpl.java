@@ -54,7 +54,6 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 
 	@Override
 	public void insertTP(TrabajoPractico tp) throws Exception {
-		administracionManager.insertMateria(tp.getMateria());
 		trabajoPracticoManager.insertItemProductoAcademico(tp
 				.getItemProductoAcademicos().get(0));
 		trabajoPracticoManager.insertProductoAcademico(tp);
@@ -77,7 +76,7 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 	public TrabajoPracticoManager getTrabajoPracticoManager() {
 		return trabajoPracticoManager;
 	}
-	
+
 	@Override
 	public List<Materia> findAllMaterias() throws Exception {
 		return materiaEAO.findAll();
