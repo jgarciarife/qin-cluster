@@ -1,5 +1,7 @@
 package com.qin.eao.resolucion;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
@@ -27,5 +29,15 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 		Query query = getEntityManager().createQuery(jpql.toString());
 		query.setParameter("id", resolucionId);
 		return (Resolucion) query.getSingleResult();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Resolucion> findAll() throws Exception {
+		StringBuffer jpql = new StringBuffer();
+		jpql.append("SELECT resolucion ");
+		jpql.append("FROM Resolucion resolucion ");
+		Query query = getEntityManager().createQuery(jpql.toString());
+		return query.getResultList();
 	}
 }
