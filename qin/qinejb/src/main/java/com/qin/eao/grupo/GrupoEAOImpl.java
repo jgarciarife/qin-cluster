@@ -1,5 +1,7 @@
 package com.qin.eao.grupo;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
@@ -27,5 +29,15 @@ public class GrupoEAOImpl extends BaseEAOImpl implements GrupoEAO {
 		Query query = getEntityManager().createQuery(jpql.toString());
 		query.setParameter("id", grupoId);
 		return (Grupo) query.getSingleResult();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Grupo> findAll() throws Exception {
+		StringBuffer jpql = new StringBuffer();
+		jpql.append("SELECT grupo ");
+		jpql.append("FROM Grupo grupo ");
+		Query query = getEntityManager().createQuery(jpql.toString());
+		return query.getResultList();
 	}
 }

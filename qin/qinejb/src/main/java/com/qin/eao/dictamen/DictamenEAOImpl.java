@@ -1,5 +1,7 @@
 package com.qin.eao.dictamen;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
@@ -27,5 +29,15 @@ public class DictamenEAOImpl extends BaseEAOImpl implements DictamenEAO {
 		Query query = getEntityManager().createQuery(jpql.toString());
 		query.setParameter("id", dictamenId);
 		return (Dictamen) query.getSingleResult();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Dictamen> findAll() throws Exception {
+		StringBuffer jpql = new StringBuffer();
+		jpql.append("SELECT dictamen ");
+		jpql.append("FROM Dictamen dictamen ");
+		Query query = getEntityManager().createQuery(jpql.toString());
+		return query.getResultList();
 	}
 }
