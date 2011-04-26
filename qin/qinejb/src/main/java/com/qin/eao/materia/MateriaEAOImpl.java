@@ -38,6 +38,6 @@ public class MateriaEAOImpl extends BaseEAOImpl implements MateriaEAO {
 		jpql.append("SELECT materia ");
 		jpql.append("FROM Materia materia ");
 		Query query = getEntityManager().createQuery(jpql.toString());
-		return (List<Materia>) query.getResultList();
+		return query.getResultList();
 	}
 }
