@@ -1,5 +1,7 @@
 package com.qin.eao.usuario;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
@@ -27,5 +29,15 @@ public class UsuarioEAOImpl extends BaseEAOImpl implements UsuarioEAO {
 		Query query = getEntityManager().createQuery(jpql.toString());
 		query.setParameter("id", usuarioId);
 		return (Usuario) query.getSingleResult();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Usuario> findAll() throws Exception {
+		StringBuffer jpql = new StringBuffer();
+		jpql.append("SELECT usuario ");
+		jpql.append("FROM Usuario usuario ");
+		Query query = getEntityManager().createQuery(jpql.toString());
+		return query.getResultList();
 	}
 }
