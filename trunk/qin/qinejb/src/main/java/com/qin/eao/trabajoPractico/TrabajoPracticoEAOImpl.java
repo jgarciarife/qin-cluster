@@ -1,5 +1,7 @@
 package com.qin.eao.trabajoPractico;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
@@ -28,5 +30,15 @@ public class TrabajoPracticoEAOImpl extends BaseEAOImpl implements
 		Query query = getEntityManager().createQuery(jpql.toString());
 		query.setParameter("id", trabajoPracticoId);
 		return (TrabajoPractico) query.getSingleResult();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TrabajoPractico> findAll() throws Exception {
+		StringBuffer jpql = new StringBuffer();
+		jpql.append("SELECT trabajoPractico ");
+		jpql.append("FROM TrabajoPractico trabajoPractico ");
+		Query query = getEntityManager().createQuery(jpql.toString());
+		return query.getResultList();
 	}
 }
