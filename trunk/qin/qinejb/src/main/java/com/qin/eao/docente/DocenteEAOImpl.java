@@ -1,5 +1,7 @@
 package com.qin.eao.docente;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
@@ -27,5 +29,15 @@ public class DocenteEAOImpl extends BaseEAOImpl implements DocenteEAO {
 		Query query = getEntityManager().createQuery(jpql.toString());
 		query.setParameter("id", docenteId);
 		return (Docente) query.getSingleResult();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Docente> findAll() throws Exception {
+		StringBuffer jpql = new StringBuffer();
+		jpql.append("SELECT docente ");
+		jpql.append("FROM Docente docente ");
+		Query query = getEntityManager().createQuery(jpql.toString());
+		return query.getResultList();
 	}
 }

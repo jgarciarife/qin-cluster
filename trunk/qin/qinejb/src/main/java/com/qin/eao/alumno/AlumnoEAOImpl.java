@@ -1,5 +1,7 @@
 package com.qin.eao.alumno;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
@@ -27,5 +29,15 @@ public class AlumnoEAOImpl extends BaseEAOImpl implements AlumnoEAO {
 		Query query = getEntityManager().createQuery(jpql.toString());
 		query.setParameter("id", alumnoId);
 		return (Alumno) query.getSingleResult();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Alumno> findAll() throws Exception {
+		StringBuffer jpql = new StringBuffer();
+		jpql.append("SELECT alumno ");
+		jpql.append("FROM Alumno alumno ");
+		Query query = getEntityManager().createQuery(jpql.toString());
+		return query.getResultList();
 	}
 }
