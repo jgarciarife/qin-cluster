@@ -1,5 +1,7 @@
 package com.qin.eao.itemProductoAcademico;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
@@ -29,5 +31,16 @@ public class ItemProductoAcademicoEAOImpl extends BaseEAOImpl implements
 		Query query = getEntityManager().createQuery(jpql.toString());
 		query.setParameter("id", itemProductoAcademicoId);
 		return (ItemProductoAcademico) query.getSingleResult();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ItemProductoAcademico> findAll()
+			throws Exception {
+		StringBuffer jpql = new StringBuffer();
+		jpql.append("SELECT itemProductoAcademico ");
+		jpql.append("FROM ItemProductoAcademico itemProductoAcademico ");
+		Query query = getEntityManager().createQuery(jpql.toString());
+		return query.getResultList();
 	}
 }
