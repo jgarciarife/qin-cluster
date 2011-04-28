@@ -31,7 +31,7 @@ public class TrabajoPracticoEAOImpl extends BaseEAOImpl implements
 		query.setParameter("id", trabajoPracticoId);
 		return (TrabajoPractico) query.getSingleResult();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<TrabajoPractico> findAll() throws Exception {
@@ -40,5 +40,18 @@ public class TrabajoPracticoEAOImpl extends BaseEAOImpl implements
 		jpql.append("FROM TrabajoPractico trabajoPractico ");
 		Query query = getEntityManager().createQuery(jpql.toString());
 		return query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TrabajoPractico> findByMateriaId(Long materiaId)
+			throws Exception {
+		StringBuffer jpql = new StringBuffer();
+		jpql.append("SELECT trabajoPractico ");
+		jpql.append("FROM TrabajoPractico trabajoPractico ");
+		jpql.append("WHERE trabajoPractico.materia.id = :id ");
+		Query query = getEntityManager().createQuery(jpql.toString());
+		query.setParameter("id", materiaId);
+		return (List<TrabajoPractico>) query.getResultList();
 	}
 }

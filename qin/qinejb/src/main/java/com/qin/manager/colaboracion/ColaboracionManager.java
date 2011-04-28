@@ -16,6 +16,8 @@ public interface ColaboracionManager {
 
 	void insertTP(TrabajoPractico tp) throws Exception;
 	
+	void updateTP(TrabajoPractico tp) throws Exception;
+	
 	List<Materia> findAllMaterias() throws Exception;
 
 }
