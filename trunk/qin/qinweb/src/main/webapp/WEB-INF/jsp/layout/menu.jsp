@@ -1,17 +1,4 @@
-<table width="100%">
-	<tr>
-		<td><a href="home.html">Home</a></td>
-	</tr>
-	<tr>
-		<td><a href="iniciar_busqueda.html">Buscar</a></td>
-	</tr>
-	<tr>
-		<td><a href="buscar.html">Resultado Buscar</a></td>
-	</tr>
-	<tr>
-		<td><a href="consultar.html">Consultar</a></td>
-	</tr>
-	<tr>
-		<td><a href="alta_tp.html">Alta TP</a></td>
-	</tr>
-</table>
+<span><a href="home.html">Home</a></span>
+<span><a href="iniciar_busqueda.html">Buscar</a></span>
+<span><a href="consultar.html">Consultar</a></span>
+<span><a href="alta_tp.html">Alta TP</a></span>

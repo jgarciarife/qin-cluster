@@ -1,1 +1,1 @@
-<h1>Qin!</h1>
+<caption>Qin!</caption>
