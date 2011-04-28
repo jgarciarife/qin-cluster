@@ -24,7 +24,7 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 
 	@EJB
 	private GrupoEAO grupoEAO;
-	
+
 	@EJB
 	private MateriaEAO materiaEAO;
 
@@ -80,5 +80,12 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 	@Override
 	public List<Materia> findAllMaterias() throws Exception {
 		return materiaEAO.findAll();
+	}
+
+	@Override
+	public void updateTP(TrabajoPractico tp) throws Exception {
+		trabajoPracticoManager.updateItemProductoAcademico(tp
+				.getItemProductoAcademicos().get(0));
+		trabajoPracticoManager.updateProductoAcademico(tp);
 	}
 }

@@ -14,7 +14,9 @@ public class TrabajoPractico extends ProductoAcademico {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "dictamen_id")
 	private Dictamen dictamen;
-	
+
+	private String titulo;
+
 	public TrabajoPractico() {
 	}
 
@@ -26,9 +28,18 @@ public class TrabajoPractico extends ProductoAcademico {
 	}
 
 	/**
-	 * @param dictamen the dictamen to set
+	 * @param dictamen
+	 *            the dictamen to set
 	 */
 	public void setDictamen(Dictamen dictamen) {
 		this.dictamen = dictamen;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public String getTitulo() {
+		return titulo;
 	}
 }
