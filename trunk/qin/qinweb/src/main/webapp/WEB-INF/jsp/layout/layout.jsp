@@ -13,12 +13,12 @@
 </head>
 <body>
 <table border="1" cellpadding="2" cellspacing="2" align="left"
-	width="100%">
-	<tiles:insertAttribute name="header" />
+	width="100%" class="conbordes">
+	 <tiles:insertAttribute name="header" />
 	<tr>
-		<td width="100%" align="center"><tiles:insertAttribute name="menu" /></td>
+		<td width="100%"><tiles:insertAttribute name="menu" /></td>
 	</tr>
-	<tr>
+	<tr height="350">
 		<td width="100%" valign="top"><tiles:insertAttribute name="body" /></td>
 	</tr>
 	<tr>

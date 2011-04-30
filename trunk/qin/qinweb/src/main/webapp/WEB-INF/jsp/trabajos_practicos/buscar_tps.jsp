@@ -8,6 +8,7 @@
 		<tr>
 			<td>Materia:&nbsp;
 			<select name="materiaId">
+				<option value="-1">Todas las materias</option>
 				<c:forEach var="materia" items="${materias}" varStatus="status">
 					<option value="${materia.id}">${materia.nombre}</option>
 				</c:forEach>

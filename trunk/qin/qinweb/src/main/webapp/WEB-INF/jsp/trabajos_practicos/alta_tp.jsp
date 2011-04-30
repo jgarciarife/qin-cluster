@@ -3,7 +3,7 @@
 <%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
 
 <form:form action="guardar_tp.html" commandName="trabajoPractico">
-	<table>
+	<table class="sinbordes">
 		<tr>
 			<td>
 			<h2>Trabajo Practico</h2>
@@ -13,15 +13,9 @@
 			</td>
 		</tr>
 		<tr>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td>Materia:&nbsp;<form:select path="materia.id">
+			<td><b>Materia:</b>&nbsp;<form:select path="materia.id">
 				<form:options items="${materias}" itemValue="id" itemLabel="nombre" />
 			</form:select></td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
 		</tr>
 		<tr>
 			<td><b>Titulo</b></td>
@@ -32,17 +26,11 @@
 		<tr>
 		</tr>
 		<tr>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
 			<td><b>Contenido</b></td>
 		</tr>
 		<tr>
 			<td><form:textarea rows="15" cols="100"
 				path="itemProductoAcademicos[0].enunciado" /></td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
 		</tr>
 		<tr>
 			<c:if test="${empty trabajoPractico.id}">
