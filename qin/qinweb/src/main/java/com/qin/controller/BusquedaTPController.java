@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.qin.entity.Materia;
+import com.qin.entity.TrabajoPractico;
 import com.qin.manager.colaboracion.ColaboracionManager;
 import com.qin.manager.trabajoPractico.TrabajoPracticoManager;
 
@@ -34,8 +35,14 @@ public class BusquedaTPController extends MultiActionController {
 
 	@RequestMapping(value = "/buscar.html")
 	protected String buscarTPs(Long materiaId, Model model) throws Exception {
-		model.addAttribute("trabajos",
-				trabajoPracticoManager.findByMateriaId(materiaId));
+		List<TrabajoPractico> tps = null;		
+		if (materiaId.intValue() == -1){
+			tps = trabajoPracticoManager.findAll();
+		} else{
+			tps = trabajoPracticoManager
+			.findByMateriaId(materiaId);
+		}
+		model.addAttribute("trabajos", tps);
 		return "tp.resultado_busqueda";
 	}
 
