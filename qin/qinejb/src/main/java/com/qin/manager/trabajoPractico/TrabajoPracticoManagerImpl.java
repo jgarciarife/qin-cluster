@@ -91,4 +91,9 @@ public class TrabajoPracticoManagerImpl implements TrabajoPracticoManager {
 			throws Exception {
 		return getTrabajoPracticoEAO().findByMateriaId(materiaId);
 	}
+	
+	@Override
+	public List<TrabajoPractico> findAll() throws Exception{
+		return getTrabajoPracticoEAO().findAll();
+	}
 }

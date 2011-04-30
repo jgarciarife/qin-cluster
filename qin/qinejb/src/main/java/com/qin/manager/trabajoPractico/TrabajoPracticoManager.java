@@ -27,6 +27,8 @@ public interface TrabajoPracticoManager {
 			throws Exception;
 
 	TrabajoPractico findById(Long id) throws Exception;
-	
+
 	List<TrabajoPractico> findByMateriaId(Long materiaId) throws Exception;
+
+	List<TrabajoPractico> findAll() throws Exception;
 }
