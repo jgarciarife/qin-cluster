@@ -41,4 +41,14 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/evaluacion/evaluar_tp.jsp" />
 	</definition>
 
+	<definition name="tp.estadistica" extends="base.definition">
+		<put-attribute name="title" value="Contact Manager" />
+		<put-attribute name="body" value="/WEB-INF/jsp/estadisticas/estadistica_tp.jsp" />
+	</definition>
+	
+	<definition name="tp.ver_estadistica_tp_en_materia" extends="base.definition">
+		<put-attribute name="title" value="Contact Manager" />
+		<put-attribute name="body" value="/WEB-INF/jsp/estadisticas/ver_estadistica_tp_en_materia.jsp" />
+	</definition>
+
 </tiles-definitions>
