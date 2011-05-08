@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
-<table border="1" cellpadding="2" cellspacing="2" align="left"
+<table border="1" cellpadding="2" cellspacing="2" align="center"
 	width="100%" class="conbordes">
 	 <tiles:insertAttribute name="header" />
 	<tr>
