@@ -1,6 +1,5 @@
 package com.qin.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.qin.entity.Enunciado;
-import com.qin.entity.ItemProductoAcademico;
 import com.qin.entity.Materia;
 import com.qin.entity.TrabajoPractico;
 import com.qin.manager.colaboracion.ColaboracionManager;
@@ -36,8 +33,21 @@ public class ElaboracionTPController {
 		return colaboracionManager.findAllMaterias();
 	}
 
-	@ModelAttribute("trabajoPractico")
-	public TrabajoPractico newRequest(@RequestParam(required = false) Long id) {
+	@RequestMapping(value = "/guardar_tp.html", method = RequestMethod.POST)
+	public String guardarTP(TrabajoPractico tp, Model model) throws Exception {
+		logger.info("materia " + tp.getMateria().getId());
+		if (tp.getId() == null) {
+			colaboracionManager.insertTP(tp);
+		} else {
+			colaboracionManager.updateTP(tp);
+		}
+		model.addAttribute("id", tp.getId());
+		return "tp.alta";
+	}
+
+	@RequestMapping(value = "/alta_tp.html")
+	public String altaTP(@RequestParam(required = false) Long id, Model model)
+			throws Exception {
 		TrabajoPractico trabajoPractico = null;
 		if (id != null) {
 			try {
@@ -51,34 +61,8 @@ public class ElaboracionTPController {
 		if (trabajoPractico == null) {
 			logger.info("creando un nuevo TP");
 			trabajoPractico = new TrabajoPractico();
-			List<ItemProductoAcademico> itemProductoAcademicos = new ArrayList<ItemProductoAcademico>();
-			Enunciado punto1 = new Enunciado();
-			punto1.setId(null);
-			punto1.setPuntos(new Double(10));
-			itemProductoAcademicos.add(punto1);
-			trabajoPractico.setItemProductoAcademicos(itemProductoAcademicos);
 		}
-		return trabajoPractico;
-	}
-
-	@RequestMapping(value = "/alta_tp.html")
-	public String altaTP(Model model) throws Exception {
-		return "tp.alta";
-	}
-
-	@RequestMapping(value = "/guardar_tp.html", method = RequestMethod.POST)
-	public String guardarTP(TrabajoPractico trabajoPractico, Model model)
-			throws Exception {
-		logger.info("materia " + trabajoPractico.getMateria().getId());
-		logger.info("enunciado "
-				+ ((Enunciado) trabajoPractico.getItemProductoAcademicos().get(
-						0)).getEnunciado());
-		if (trabajoPractico.getId() == null) {
-			colaboracionManager.insertTP(trabajoPractico);
-		} else {
-			colaboracionManager.updateTP(trabajoPractico);
-		}
-		model.addAttribute("id", trabajoPractico.getId());
+		model.addAttribute("trabajoPractico", trabajoPractico);
 		return "tp.alta";
 	}
 

@@ -54,8 +54,6 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 
 	@Override
 	public void insertTP(TrabajoPractico tp) throws Exception {
-		trabajoPracticoManager.insertItemProductoAcademico(tp
-				.getItemProductoAcademicos().get(0));
 		trabajoPracticoManager.insertProductoAcademico(tp);
 	}
 
@@ -84,8 +82,6 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 
 	@Override
 	public void updateTP(TrabajoPractico tp) throws Exception {
-		trabajoPracticoManager.updateItemProductoAcademico(tp
-				.getItemProductoAcademicos().get(0));
 		trabajoPracticoManager.updateProductoAcademico(tp);
 	}
 }
