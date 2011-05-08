@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
 
-<form:form action="guardar_tp.html" commandName="trabajoPractico">
+<form:form action="guardar_tp.html"  name="trabajoPractico2" commandName="trabajoPractico">
 	<table class="sinbordes">
 		<tr>
 			<td>
@@ -29,8 +29,6 @@
 			<td><b>Contenido</b></td>
 		</tr>
 		<tr>
-			<td><form:textarea rows="15" cols="100"
-				path="itemProductoAcademicos[0].enunciado" /></td>
 		</tr>
 		<tr>
 			<c:if test="${empty trabajoPractico.id}">

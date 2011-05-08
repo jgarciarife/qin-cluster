@@ -12,7 +12,7 @@ import com.qin.entity.base.BaseEntity;
 @Entity
 @Table(name = "item_producto_academico", catalog = "qin")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class ItemProductoAcademico extends BaseEntity {
+public abstract class ItemProductoAcademico extends BaseEntity {
 
 	@Column(name = "puntos", nullable = true)
 	private Double puntos;
