@@ -20,8 +20,8 @@ import com.qin.entity.base.BaseEntity;
 public class Grupo extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "alumno_id")
-	private Alumno alumno;
+	@JoinColumn(name = "alumno_principal_id")
+	private Alumno alumnoPrincipal;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "materia_id")
@@ -30,24 +30,24 @@ public class Grupo extends BaseEntity {
 	@Column(nullable = true)
 	@JoinTable(name = "grupo_alumno", joinColumns = { @JoinColumn(name = "grupo_id") }, inverseJoinColumns = { @JoinColumn(name = "alumno_id") })
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Alumno> intergrantes;
+	private List<Alumno> alumnos;
 
 	public Grupo() {
 	}
 
 	/**
-	 * @return the alumno
+	 * @return the alumnoPrincipal
 	 */
-	public Alumno getAlumno() {
-		return alumno;
+	public Alumno getAlumnoPrincipal() {
+		return alumnoPrincipal;
 	}
 
 	/**
 	 * @param alumno
-	 *            the alumno to set
+	 *            the alumnoPrincipal to set
 	 */
-	public void setAlumno(Alumno alumno) {
-		this.alumno = alumno;
+	public void setAlumnoPrincipal(Alumno alumnoPrincipal) {
+		this.alumnoPrincipal = alumnoPrincipal;
 	}
 
 	/**
@@ -66,17 +66,16 @@ public class Grupo extends BaseEntity {
 	}
 
 	/**
-	 * @return the intergrantes
+	 * @return the alumnos
 	 */
-	public List<Alumno> getIntergrantes() {
-		return intergrantes;
+	public List<Alumno> getAlumnos() {
+		return alumnos;
 	}
 
 	/**
-	 * @param intergrantes
-	 *            the intergrantes to set
+	 * @param alumnos the alumnos to set
 	 */
-	public void setIntergrantes(List<Alumno> intergrantes) {
-		this.intergrantes = intergrantes;
+	public void setAlumnos(List<Alumno> alumnos) {
+		this.alumnos = alumnos;
 	}
 }
