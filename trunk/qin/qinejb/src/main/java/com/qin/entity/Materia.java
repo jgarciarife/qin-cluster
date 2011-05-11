@@ -2,6 +2,9 @@ package com.qin.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.qin.entity.base.BaseEntity;
@@ -11,22 +14,40 @@ import com.qin.entity.base.BaseEntity;
 @Table(name = "materia", catalog = "qin")
 public class Materia extends BaseEntity {
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "docente_id")
+	private Docente docente;
+
 	@Column(name = "anio", nullable = false)
-	public Long anio;
-	
+	private Long anio;
+
 	@Column(name = "cuatrimestre", nullable = false)
-	public Integer cuatrimestre;
-	
+	private Integer cuatrimestre;
+
 	@Column(name = "carrera", nullable = false)
-	public String carrera;
-	
+	private String carrera;
+
 	@Column(name = "codigo", nullable = false)
-	public String codigo;
-	
+	private String codigo;
+
 	@Column(name = "nombre", nullable = false)
-	public String nombre;
-	
+	private String nombre;
+
 	public Materia() {
+	}
+
+	/**
+	 * @return the docente
+	 */
+	public Docente getDocente() {
+		return docente;
+	}
+
+	/**
+	 * @param docente the docente to set
+	 */
+	public void setDocente(Docente docente) {
+		this.docente = docente;
 	}
 
 	/**

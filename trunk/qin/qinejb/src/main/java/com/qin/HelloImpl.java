@@ -1,23 +1,11 @@
 package com.qin;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.qin.entity.Alumno;
-import com.qin.entity.Dictamen;
-import com.qin.entity.Docente;
-import com.qin.entity.Enunciado;
-import com.qin.entity.Grupo;
-import com.qin.entity.ItemProductoAcademico;
-import com.qin.entity.Materia;
-import com.qin.entity.Resolucion;
-import com.qin.entity.TrabajoPractico;
 import com.qin.manager.administracion.AdministracionManager;
 import com.qin.manager.colaboracion.ColaboracionManager;
 import com.qin.manager.registracion.RegistracionManager;
@@ -42,7 +30,7 @@ public class HelloImpl implements Hello {
 
 	public String getMessage() {
 		try {
-			Docente docente = new Docente();
+			/*Docente docente = new Docente();
 			docente.setId(null);
 			docente.setMatricula("asd5680000");
 			docente.setApellido("Moreyra");
@@ -249,7 +237,7 @@ public class HelloImpl implements Hello {
 			resolucion8.setPuntos(new Double(5));
 			resolucion9.setPuntos(new Double(5));
 			resolucion10.setPuntos(new Double(5));
-			trabajoPracticoManager.updateProductoAcademico(trabajoPractico);
+			trabajoPracticoManager.updateProductoAcademico(trabajoPractico);*/
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}

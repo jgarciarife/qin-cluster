@@ -1,52 +1,75 @@
 package com.qin.entity;
 
-import javax.persistence.Column;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.qin.entity.base.BaseEntity;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "resolucion", catalog = "qin")
-public class Resolucion extends ItemProductoAcademico {
-	
-	@Column(name = "resolucion", nullable = true)
-	private String resolucion;
+public class Resolucion extends BaseEntity {
+
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "grupo_id")
+	private Grupo grupo;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
-	@JoinColumn(name = "enunciado_id")
-	private Enunciado enunciado;
-	
+	@JoinColumn(name = "trabajo_practico_id")
+	private TrabajoPractico trabajoPractico;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "resolucion")
+	private List<Respuesta> respuestas;
+
 	public Resolucion() {
 	}
 
 	/**
-	 * @return the resolucion
+	 * @return the grupo
 	 */
-	public String getResolucion() {
-		return resolucion;
+	public Grupo getGrupo() {
+		return grupo;
 	}
 
 	/**
-	 * @param resolucion the resolucion to set
+	 * @param grupo the grupo to set
 	 */
-	public void setResolucion(String resolucion) {
-		this.resolucion = resolucion;
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
 	}
 
 	/**
-	 * @return the enunciado
+	 * @return the trabajoPractico
 	 */
-	public Enunciado getEnunciado() {
-		return enunciado;
+	public TrabajoPractico getTrabajoPractico() {
+		return trabajoPractico;
 	}
 
 	/**
-	 * @param enunciado the enunciado to set
+	 * @param trabajoPractico the trabajoPractico to set
 	 */
-	public void setEnunciado(Enunciado enunciado) {
-		this.enunciado = enunciado;
+	public void setTrabajoPractico(TrabajoPractico trabajoPractico) {
+		this.trabajoPractico = trabajoPractico;
+	}
+
+	/**
+	 * @return the respuestas
+	 */
+	public List<Respuesta> getRespuestas() {
+		return respuestas;
+	}
+
+	/**
+	 * @param respuestas the respuestas to set
+	 */
+	public void setRespuestas(List<Respuesta> respuestas) {
+		this.respuestas = respuestas;
 	}
 }
