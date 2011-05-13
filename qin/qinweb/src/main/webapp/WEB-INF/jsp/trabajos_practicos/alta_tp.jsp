@@ -29,6 +29,7 @@
 			<td><b>Contenido</b></td>
 		</tr>
 		<tr>
+			<td><form:textarea path="consignas[0].consigna" /><form:hidden path="consignas[0].orden" value="1" /><form:hidden path="consignas[0].puntaje" value="1" /></td>
 		</tr>
 		<tr>
 			<c:if test="${empty trabajoPractico.id}">

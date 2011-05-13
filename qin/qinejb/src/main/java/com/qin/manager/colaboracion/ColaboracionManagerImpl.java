@@ -54,7 +54,7 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 
 	@Override
 	public void insertTP(TrabajoPractico tp) throws Exception {
-		//trabajoPracticoManager.insertProductoAcademico(tp);
+		trabajoPracticoManager.insert(tp);
 	}
 
 	public void setAdministracionManager(
