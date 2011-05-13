@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
+import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +30,9 @@ public class TrabajoPracticoEAOImpl extends BaseEAOImpl implements
 		jpql.append("WHERE trabajoPractico.id = :id ");
 		Query query = getEntityManager().createQuery(jpql.toString());
 		query.setParameter("id", trabajoPracticoId);
-		return (TrabajoPractico) query.getSingleResult();
+		TrabajoPractico singleResult = (TrabajoPractico)query.getSingleResult();
+		Hibernate.initialize(singleResult.getConsignas());
+		return  singleResult;
 	}
 
 	@SuppressWarnings("unchecked")
