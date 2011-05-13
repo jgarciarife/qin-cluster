@@ -25,11 +25,8 @@ public class TrabajoPracticoManagerImpl implements TrabajoPracticoManager {
 
 	@Override
 	public TrabajoPractico findById(Long id) throws Exception {
-		//TrabajoPractico trabajoPractico = getTrabajoPracticoEAO().findById(id);
-		//Hibernate.initialize(trabajoPractico.getMateria());
-		//Hibernate.initialize(trabajoPractico.getItemProductoAcademicos());
-		//return trabajoPractico;
-		return null;
+		TrabajoPractico trabajoPractico = getTrabajoPracticoEAO().findById(id);
+		return trabajoPractico;
 	}
 
 	public void setTrabajoPracticoEAO(TrabajoPracticoEAO trabajoPracticoEAO) {
@@ -49,5 +46,10 @@ public class TrabajoPracticoManagerImpl implements TrabajoPracticoManager {
 	@Override
 	public List<TrabajoPractico> findAll() throws Exception{
 		return getTrabajoPracticoEAO().findAll();
+	}
+
+	@Override
+	public void insert(TrabajoPractico tp) throws Exception {
+		getTrabajoPracticoEAO().insert(tp);
 	}
 }
