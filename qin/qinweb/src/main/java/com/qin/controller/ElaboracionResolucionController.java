@@ -41,13 +41,12 @@ public class ElaboracionResolucionController {
 
 	@RequestMapping(value = "/guardar_resolucion.html", method = RequestMethod.POST)
 	public String guardarTP(Resolucion resol, Model model) throws Exception {
-//		logger.info("materia " + resol.getMateria().getId());
-//		if (tp.getId() == null) {
-//			colaboracionManager.insertTP(tp);
-//		} else {
-//			colaboracionManager.updateTP(tp);
-//		}
-//		model.addAttribute("id", tp.getId());
+		if (resol.getId() == null) {
+			colaboracionManager.insertResolucion(resol);
+		} else {
+			colaboracionManager.updateResolucion(resol);
+		}
+		model.addAttribute("id", resol.getId());
 		return "resolucion.alta";
 	}
 

@@ -6,16 +6,16 @@
 	<table class="sinbordes">
 		<tr>
 			<td>
-			<h2>Trabajo Practico</h2>
+			<b>Trabajo Practico -&nbsp;<c:out value="${trabajoPractico.titulo}"/></b>
+			<c:if test="${not empty resolucion.id}">
+			    <form:hidden path="id" />
+			</c:if>
 			</td>
 		</tr>
 		<tr>
-			<td><b>Titulo</b></td>
 		</tr>
 		<tr>
-		</tr>
-		<tr>
-			<td><b>Contenido</b></td>
+			<td><b>Consignas</b></td>
 		</tr>
 		<c:forEach items="${trabajoPractico.consignas}" var="consigna">
 		<tr>
@@ -25,7 +25,7 @@
 		</tr>
 		<tr>
 			<td>
-				Aca iria un input
+				<form:textarea cols="60" rows="10" path="respuestas[${consigna.orden}].respuesta"/>
 			</td>  
 		</tr>
 		<tr>
@@ -34,5 +34,8 @@
 			</td>  
 		</tr>
 		</c:forEach>
+		<tr>
+			<td><input type="submit" value="Guardar" /></td>
+		</tr>
 	</table>
 </form:form>
