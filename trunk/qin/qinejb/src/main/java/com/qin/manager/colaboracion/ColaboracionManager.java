@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.qin.entity.Grupo;
 import com.qin.entity.Materia;
+import com.qin.entity.Resolucion;
 import com.qin.entity.TrabajoPractico;
 
 public interface ColaboracionManager {
@@ -17,6 +18,10 @@ public interface ColaboracionManager {
 	void insertTP(TrabajoPractico tp) throws Exception;
 	
 	void updateTP(TrabajoPractico tp) throws Exception;
+	
+	void insertResolucion(Resolucion res) throws Exception;
+	
+	void updateResolucion(Resolucion res) throws Exception;
 	
 	List<Materia> findAllMaterias() throws Exception;
 

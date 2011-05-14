@@ -10,8 +10,10 @@ import org.slf4j.LoggerFactory;
 
 import com.qin.eao.grupo.GrupoEAO;
 import com.qin.eao.materia.MateriaEAO;
+import com.qin.eao.resolucion.ResolucionEAO;
 import com.qin.entity.Grupo;
 import com.qin.entity.Materia;
+import com.qin.entity.Resolucion;
 import com.qin.entity.TrabajoPractico;
 import com.qin.manager.administracion.AdministracionManager;
 import com.qin.manager.trabajoPractico.TrabajoPracticoManager;
@@ -27,12 +29,16 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 
 	@EJB
 	private MateriaEAO materiaEAO;
+	
+	@EJB
+	private ResolucionEAO resolucionEAO;
 
 	@EJB
 	private AdministracionManager administracionManager;
 
 	@EJB
 	private TrabajoPracticoManager trabajoPracticoManager;
+	
 
 	public ColaboracionManagerImpl() {
 	}
@@ -82,6 +88,25 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 
 	@Override
 	public void updateTP(TrabajoPractico tp) throws Exception {
-		//trabajoPracticoManager.updateProductoAcademico(tp);
+		trabajoPracticoManager.update(tp);
+	}
+
+	public void setResolucionEAO(ResolucionEAO resolucionEAO) {
+		this.resolucionEAO = resolucionEAO;
+	}
+
+	public ResolucionEAO getResolucionEAO() {
+		return resolucionEAO;
+	}
+
+	@Override
+	public void insertResolucion(Resolucion res) throws Exception {
+		resolucionEAO.insert(res);
+		
+	}
+
+	@Override
+	public void updateResolucion(Resolucion res) throws Exception {
+		resolucionEAO.update(res);
 	}
 }
