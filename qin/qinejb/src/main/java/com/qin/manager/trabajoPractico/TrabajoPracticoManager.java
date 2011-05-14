@@ -13,4 +13,6 @@ public interface TrabajoPracticoManager {
 	List<TrabajoPractico> findAll() throws Exception;
 	
 	void insert(TrabajoPractico tp) throws Exception;
+	
+	void update(TrabajoPractico tp) throws Exception;
 }

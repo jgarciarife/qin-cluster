@@ -52,4 +52,9 @@ public class TrabajoPracticoManagerImpl implements TrabajoPracticoManager {
 	public void insert(TrabajoPractico tp) throws Exception {
 		getTrabajoPracticoEAO().insert(tp);
 	}
+
+	@Override
+	public void update(TrabajoPractico tp) throws Exception {
+		getTrabajoPracticoEAO().update(tp);
+	}
 }
