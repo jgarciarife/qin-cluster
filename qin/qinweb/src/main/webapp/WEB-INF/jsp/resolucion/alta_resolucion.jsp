@@ -13,8 +13,6 @@
 			</td>
 		</tr>
 		<tr>
-		</tr>
-		<tr>
 			<td><b>Consignas</b></td>
 		</tr>
 		<c:forEach items="${trabajoPractico.consignas}" var="consigna">
