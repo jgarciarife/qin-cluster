@@ -20,6 +20,10 @@
 	<jee:jndi-lookup id="trabajoPracticoManager"
 		jndi-name="qinear-1.0/TrabajoPracticoManagerImpl/local-com.qin.manager.trabajoPractico.TrabajoPracticoManager"
 		resource-ref="true" />
+		
+	<jee:jndi-lookup id="resolucionManager"
+		jndi-name="qinear-1.0/ResolucionManagerImpl/local-com.qin.manager.resolucion.ResolucionManager"
+		resource-ref="true" />
 
 
 	<!-- Scans within the base package of the application for @Components to 

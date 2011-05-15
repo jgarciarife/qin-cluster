@@ -5,13 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.qin.entity.TrabajoPractico;
-import com.qin.manager.trabajoPractico.TrabajoPracticoManager;
+import com.qin.entity.Resolucion;
+import com.qin.manager.resolucion.ResolucionManager;
 
 @Controller
 public class EvaluacionTPController {
@@ -19,38 +17,27 @@ public class EvaluacionTPController {
 			.getLogger(EvaluacionTPController.class);
 
 	@Autowired
-	private TrabajoPracticoManager trabajoPracticoManager;
+	private ResolucionManager resolucionManager;
 
-	@ModelAttribute("trabajoPractico")
-	public TrabajoPractico newRequest(@RequestParam(required = true) Long id) {
-		TrabajoPractico trabajoPractico = null;
-		try {
-			logger.info("id " + id);
-			trabajoPractico = trabajoPracticoManager.findById(id);
-		} catch (Exception e) {
-			logger.error("error al buscar", e);
-		}
-		return trabajoPractico;
+	@RequestMapping(value = "/evaluar_resolucion.html")
+	public String evaluarResol(Long id, Model model) throws Exception {
+		Resolucion res = resolucionManager.findById(id);
+		model.addAttribute("resolucion", res);
+		return "resolucion.evaluacion";
 	}
 
-	@RequestMapping(value = "/evaluar_tp.html")
-	public String evaluarTP(TrabajoPractico trabajoPractico, Model model)
-			throws Exception {
-		return "tp.evaluacion";
-	}
-	
-	@RequestMapping(value = "/guardar_evaluacion_tp.html", method = RequestMethod.POST)
-	public String guardarEvaluacionTP(TrabajoPractico trabajoPractico, Model model)
-			throws Exception {
-		return "tp.evaluacion";
+	@RequestMapping(value = "/guardar_evaluacion_resolucion.html", method = RequestMethod.POST)
+	public String guardarEvaluacionResolucion(Resolucion resolucion,
+			Model model) throws Exception {
+		return "resolucion.evaluacion";
 	}
 
-	public void setTrabajoPracticoManager(
-			TrabajoPracticoManager trabajoPracticoManager) {
-		this.trabajoPracticoManager = trabajoPracticoManager;
+	public void setResolucionManager(ResolucionManager resolucionManager) {
+		this.resolucionManager = resolucionManager;
 	}
 
-	public TrabajoPracticoManager getTrabajoPracticoManager() {
-		return trabajoPracticoManager;
+	public ResolucionManager getResolucionManager() {
+		return resolucionManager;
 	}
+
 }
