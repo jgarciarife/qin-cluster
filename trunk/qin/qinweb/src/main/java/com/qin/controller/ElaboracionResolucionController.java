@@ -16,6 +16,7 @@ import com.qin.entity.Materia;
 import com.qin.entity.Resolucion;
 import com.qin.entity.TrabajoPractico;
 import com.qin.manager.colaboracion.ColaboracionManager;
+import com.qin.manager.resolucion.ResolucionManager;
 import com.qin.manager.trabajoPractico.TrabajoPracticoManager;
 
 @Controller
@@ -28,6 +29,9 @@ public class ElaboracionResolucionController {
 
 	@Autowired
 	private TrabajoPracticoManager trabajoPracticoManager;
+	
+	@Autowired
+	private ResolucionManager resolucionManager;
 
 	@ModelAttribute("materias")
 	public List<Materia> popularMaterias() throws Exception {
@@ -57,7 +61,7 @@ public class ElaboracionResolucionController {
 		if (id != null) {
 			try {
 				logger.info("id " + id);
-				resolucion = null;//trabajoPracticoManager.findById(id);
+				resolucion = resolucionManager.findById(id);
 			} catch (Exception e) {
 				logger.error("error al buscar", e);
 			}
@@ -86,6 +90,14 @@ public class ElaboracionResolucionController {
 
 	public TrabajoPracticoManager getTrabajoPracticoManager() {
 		return trabajoPracticoManager;
+	}
+
+	public void setResolucionManager(ResolucionManager resolucionManager) {
+		this.resolucionManager = resolucionManager;
+	}
+
+	public ResolucionManager getResolucionManager() {
+		return resolucionManager;
 	}
 
 }

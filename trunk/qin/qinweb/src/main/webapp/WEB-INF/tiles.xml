@@ -36,11 +36,6 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/trabajos_practicos/alta_tp.jsp" />
 	</definition>
 	
-	<definition name="tp.evaluacion" extends="base.definition">
-		<put-attribute name="title" value="Contact Manager" />
-		<put-attribute name="body" value="/WEB-INF/jsp/evaluacion/evaluar_tp.jsp" />
-	</definition>
-
 	<definition name="tp.estadistica" extends="base.definition">
 		<put-attribute name="title" value="Contact Manager" />
 		<put-attribute name="body" value="/WEB-INF/jsp/estadisticas/estadistica_tp.jsp" />
@@ -54,6 +49,16 @@
 	<definition name="resolucion.alta" extends="base.definition">
 		<put-attribute name="title" value="Contact Manager" />
 		<put-attribute name="body" value="/WEB-INF/jsp/resolucion/alta_resolucion.jsp" />
+	</definition>
+	
+	<definition name="resolucion.resultado_busqueda" extends="base.definition">
+		<put-attribute name="title" value="Contact Manager" />
+		<put-attribute name="body" value="/WEB-INF/jsp/resolucion/resultado_busqueda_resoluciones.jsp" />
+	</definition>
+	
+	<definition name="resolucion.evaluacion" extends="base.definition">
+		<put-attribute name="title" value="Contact Manager" />
+		<put-attribute name="body" value="/WEB-INF/jsp/evaluacion/evaluar_resolucion.jsp" />
 	</definition>
 
 </tiles-definitions>
