@@ -40,4 +40,17 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 		Query query = getEntityManager().createQuery(jpql.toString());
 		return query.getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Resolucion> findByTPId(Long tpid)
+			throws Exception {
+		StringBuffer jpql = new StringBuffer();
+		jpql.append("SELECT resolucion ");
+		jpql.append("FROM Resolucion resolucion ");
+		jpql.append("WHERE resolucion.trabajoPractico.id = :id ");
+		Query query = getEntityManager().createQuery(jpql.toString());
+		query.setParameter("id", tpid);
+		return (List<Resolucion>) query.getResultList();
+	}
 }
