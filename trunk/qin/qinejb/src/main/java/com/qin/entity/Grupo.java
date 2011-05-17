@@ -18,10 +18,10 @@ import com.qin.entity.base.BaseEntity;
 @Entity
 @Table(name = "grupo", catalog = "qin")
 public class Grupo extends BaseEntity {
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "alumno_principal_id")
-	private Alumno alumnoPrincipal;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "resolucion_id")
+	private Resolucion resolucion;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "materia_id")
@@ -31,23 +31,22 @@ public class Grupo extends BaseEntity {
 	@JoinTable(name = "grupo_alumno", joinColumns = { @JoinColumn(name = "grupo_id") }, inverseJoinColumns = { @JoinColumn(name = "alumno_id") })
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Alumno> alumnos;
-
+	
 	public Grupo() {
 	}
 
 	/**
-	 * @return the alumnoPrincipal
+	 * @return the resolucion
 	 */
-	public Alumno getAlumnoPrincipal() {
-		return alumnoPrincipal;
+	public Resolucion getResolucion() {
+		return resolucion;
 	}
 
 	/**
-	 * @param alumno
-	 *            the alumnoPrincipal to set
+	 * @param resolucion the resolucion to set
 	 */
-	public void setAlumnoPrincipal(Alumno alumnoPrincipal) {
-		this.alumnoPrincipal = alumnoPrincipal;
+	public void setResolucion(Resolucion resolucion) {
+		this.resolucion = resolucion;
 	}
 
 	/**

@@ -13,20 +13,20 @@ import com.qin.entity.base.BaseEntity;
 @Entity
 @Table(name = "consigna", catalog = "qin")
 public class Consigna extends BaseEntity {
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "trabajoPractico_id")
+	@JoinColumn(name = "trabajo_practico_id")
 	private TrabajoPractico trabajoPractico;
-	
+
 	@Column(name = "orden", nullable = false)
 	private Integer orden;
-	
+
 	@Column(name = "consigna", nullable = false)
 	private String consigna;
-	
+
 	@Column(name = "puntaje", nullable = false)
 	private Double puntaje;
-	
+
 	public Consigna() {
 	}
 
@@ -38,7 +38,8 @@ public class Consigna extends BaseEntity {
 	}
 
 	/**
-	 * @param trabajoPractico the trabajoPractico to set
+	 * @param trabajoPractico
+	 *            the trabajoPractico to set
 	 */
 	public void setTrabajoPractico(TrabajoPractico trabajoPractico) {
 		this.trabajoPractico = trabajoPractico;
@@ -52,7 +53,8 @@ public class Consigna extends BaseEntity {
 	}
 
 	/**
-	 * @param orden the orden to set
+	 * @param orden
+	 *            the orden to set
 	 */
 	public void setOrden(Integer orden) {
 		this.orden = orden;
@@ -66,7 +68,8 @@ public class Consigna extends BaseEntity {
 	}
 
 	/**
-	 * @param consigna the consigna to set
+	 * @param consigna
+	 *            the consigna to set
 	 */
 	public void setConsigna(String consigna) {
 		this.consigna = consigna;
@@ -80,7 +83,8 @@ public class Consigna extends BaseEntity {
 	}
 
 	/**
-	 * @param puntaje the puntaje to set
+	 * @param puntaje
+	 *            the puntaje to set
 	 */
 	public void setPuntaje(Double puntaje) {
 		this.puntaje = puntaje;

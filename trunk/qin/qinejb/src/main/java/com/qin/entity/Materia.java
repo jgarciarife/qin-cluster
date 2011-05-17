@@ -11,7 +11,7 @@ import com.qin.entity.base.BaseEntity;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "materia", catalog = "qin")
+@Table(name = "materia")
 public class Materia extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)

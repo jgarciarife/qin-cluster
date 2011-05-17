@@ -18,10 +18,6 @@ import com.qin.entity.base.BaseEntity;
 public class Resolucion extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
-	@JoinColumn(name = "grupo_id")
-	private Grupo grupo;
-	
-	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "trabajo_practico_id")
 	private TrabajoPractico trabajoPractico;
 
@@ -29,20 +25,6 @@ public class Resolucion extends BaseEntity {
 	private List<Respuesta> respuestas;
 
 	public Resolucion() {
-	}
-
-	/**
-	 * @return the grupo
-	 */
-	public Grupo getGrupo() {
-		return grupo;
-	}
-
-	/**
-	 * @param grupo the grupo to set
-	 */
-	public void setGrupo(Grupo grupo) {
-		this.grupo = grupo;
 	}
 
 	/**
