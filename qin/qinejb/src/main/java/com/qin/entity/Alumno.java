@@ -23,11 +23,6 @@ public class Alumno extends Usuario {
 	@JoinTable(name = "alumno_materia", joinColumns = { @JoinColumn(name = "alumno_id") }, inverseJoinColumns = { @JoinColumn(name = "materia_id") })
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Materia> materias;
-	
-	@Column(nullable = true)
-	@JoinTable(name = "alumno_principal_grupo", joinColumns = { @JoinColumn(name = "alumno_id") }, inverseJoinColumns = { @JoinColumn(name = "grupo_id") })
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Grupo> grupos;
 
 	public Alumno() {
 	}
@@ -59,19 +54,5 @@ public class Alumno extends Usuario {
 	 */
 	public void setMaterias(List<Materia> materias) {
 		this.materias = materias;
-	}
-
-	/**
-	 * @return the grupos
-	 */
-	public List<Grupo> getGrupos() {
-		return grupos;
-	}
-
-	/**
-	 * @param grupos the grupos to set
-	 */
-	public void setGrupos(List<Grupo> grupos) {
-		this.grupos = grupos;
 	}
 }
