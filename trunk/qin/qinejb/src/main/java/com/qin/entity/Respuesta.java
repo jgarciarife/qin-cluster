@@ -6,12 +6,14 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.qin.entity.base.BaseEntity;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "respuesta", catalog = "qin")
+@Table(name = "respuesta", catalog = "qin", uniqueConstraints = { @UniqueConstraint(columnNames = {
+		"resolucion_id", "consigna_id" }) })
 public class Respuesta extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -36,7 +38,8 @@ public class Respuesta extends BaseEntity {
 	}
 
 	/**
-	 * @param resolucion the resolucion to set
+	 * @param resolucion
+	 *            the resolucion to set
 	 */
 	public void setResolucion(Resolucion resolucion) {
 		this.resolucion = resolucion;

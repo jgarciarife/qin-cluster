@@ -10,12 +10,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.qin.entity.base.BaseEntity;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "dictamen", catalog = "qin")
+@Table(name = "dictamen", catalog = "qin", uniqueConstraints = @UniqueConstraint(columnNames = "resolucion_id"))
 public class Dictamen extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -42,7 +43,8 @@ public class Dictamen extends BaseEntity {
 	}
 
 	/**
-	 * @param resolucion the resolucion to set
+	 * @param resolucion
+	 *            the resolucion to set
 	 */
 	public void setResolucion(Resolucion resolucion) {
 		this.resolucion = resolucion;
@@ -56,7 +58,8 @@ public class Dictamen extends BaseEntity {
 	}
 
 	/**
-	 * @param puntaje the puntaje to set
+	 * @param puntaje
+	 *            the puntaje to set
 	 */
 	public void setPuntaje(Double puntaje) {
 		this.puntaje = puntaje;
@@ -70,7 +73,8 @@ public class Dictamen extends BaseEntity {
 	}
 
 	/**
-	 * @param dictamen the dictamen to set
+	 * @param dictamen
+	 *            the dictamen to set
 	 */
 	public void setDictamen(String dictamen) {
 		this.dictamen = dictamen;
@@ -84,7 +88,8 @@ public class Dictamen extends BaseEntity {
 	}
 
 	/**
-	 * @param correccions the correccions to set
+	 * @param correccions
+	 *            the correccions to set
 	 */
 	public void setCorreccions(List<Correccion> correccions) {
 		this.correccions = correccions;

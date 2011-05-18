@@ -6,12 +6,14 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.qin.entity.base.BaseEntity;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "materia")
+@Table(name = "materia", catalog = "qin", uniqueConstraints = { @UniqueConstraint(columnNames = {
+		"anio", "cuatrimestre", "carrera" }) })
 public class Materia extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -44,7 +46,8 @@ public class Materia extends BaseEntity {
 	}
 
 	/**
-	 * @param docente the docente to set
+	 * @param docente
+	 *            the docente to set
 	 */
 	public void setDocente(Docente docente) {
 		this.docente = docente;
@@ -58,7 +61,8 @@ public class Materia extends BaseEntity {
 	}
 
 	/**
-	 * @param anio the anio to set
+	 * @param anio
+	 *            the anio to set
 	 */
 	public void setAnio(Long anio) {
 		this.anio = anio;
@@ -72,7 +76,8 @@ public class Materia extends BaseEntity {
 	}
 
 	/**
-	 * @param cuatrimestre the cuatrimestre to set
+	 * @param cuatrimestre
+	 *            the cuatrimestre to set
 	 */
 	public void setCuatrimestre(Integer cuatrimestre) {
 		this.cuatrimestre = cuatrimestre;
@@ -86,7 +91,8 @@ public class Materia extends BaseEntity {
 	}
 
 	/**
-	 * @param carrera the carrera to set
+	 * @param carrera
+	 *            the carrera to set
 	 */
 	public void setCarrera(String carrera) {
 		this.carrera = carrera;
@@ -100,7 +106,8 @@ public class Materia extends BaseEntity {
 	}
 
 	/**
-	 * @param codigo the codigo to set
+	 * @param codigo
+	 *            the codigo to set
 	 */
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
@@ -114,7 +121,8 @@ public class Materia extends BaseEntity {
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombre
+	 *            the nombre to set
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
