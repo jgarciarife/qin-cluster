@@ -10,17 +10,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "alumno", catalog = "qin")
+@Table(name = "alumno", catalog = "qin", uniqueConstraints = @UniqueConstraint(columnNames = "padron"))
 public class Alumno extends Usuario {
 
 	@Column(name = "padron", nullable = false)
 	private String padron;
 
 	@Column(nullable = true)
-	@JoinTable(name = "alumno_materia", joinColumns = { @JoinColumn(name = "alumno_id") }, inverseJoinColumns = { @JoinColumn(name = "materia_id") })
+	@JoinTable(name = "alumno_materia", catalog = "qin", uniqueConstraints = { @UniqueConstraint(columnNames = {
+			"alumno_id", "materia_id" }) }, joinColumns = { @JoinColumn(name = "alumno_id") }, inverseJoinColumns = { @JoinColumn(name = "materia_id") })
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Materia> materias;
 
@@ -50,7 +52,8 @@ public class Alumno extends Usuario {
 	}
 
 	/**
-	 * @param materias the materias to set
+	 * @param materias
+	 *            the materias to set
 	 */
 	public void setMaterias(List<Materia> materias) {
 		this.materias = materias;

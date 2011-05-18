@@ -11,14 +11,15 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.qin.entity.base.BaseEntity;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "grupo", catalog = "qin")
+@Table(name = "grupo", catalog = "qin", uniqueConstraints = @UniqueConstraint(columnNames = "resolucion_id"))
 public class Grupo extends BaseEntity {
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "resolucion_id")
 	private Resolucion resolucion;
@@ -28,10 +29,11 @@ public class Grupo extends BaseEntity {
 	private Materia materia;
 
 	@Column(nullable = true)
-	@JoinTable(name = "grupo_alumno", joinColumns = { @JoinColumn(name = "grupo_id") }, inverseJoinColumns = { @JoinColumn(name = "alumno_id") })
+	@JoinTable(name = "grupo_alumno", catalog = "qin", uniqueConstraints = { @UniqueConstraint(columnNames = {
+			"grupo_id", "alumno_id" }) }, joinColumns = { @JoinColumn(name = "grupo_id") }, inverseJoinColumns = { @JoinColumn(name = "alumno_id") })
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Alumno> alumnos;
-	
+
 	public Grupo() {
 	}
 
@@ -43,7 +45,8 @@ public class Grupo extends BaseEntity {
 	}
 
 	/**
-	 * @param resolucion the resolucion to set
+	 * @param resolucion
+	 *            the resolucion to set
 	 */
 	public void setResolucion(Resolucion resolucion) {
 		this.resolucion = resolucion;
@@ -72,7 +75,8 @@ public class Grupo extends BaseEntity {
 	}
 
 	/**
-	 * @param alumnos the alumnos to set
+	 * @param alumnos
+	 *            the alumnos to set
 	 */
 	public void setAlumnos(List<Alumno> alumnos) {
 		this.alumnos = alumnos;
