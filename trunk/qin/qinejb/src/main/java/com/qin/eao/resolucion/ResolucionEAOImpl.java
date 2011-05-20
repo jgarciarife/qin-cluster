@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
+import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +29,10 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 		jpql.append("WHERE resolucion.id = :id ");
 		Query query = getEntityManager().createQuery(jpql.toString());
 		query.setParameter("id", resolucionId);
-		return (Resolucion) query.getSingleResult();
+		Resolucion res = (Resolucion) query.getSingleResult();
+		Hibernate.initialize(res.getRespuestas());
+		Hibernate.initialize(res.getTrabajoPractico());
+		return res;
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -37,7 +37,7 @@ public class BaseEAOImpl implements BaseEAO {
 
 	@Override
 	public void update(BaseEntity entity) throws Exception {
-		getEntityManager().merge(entity);
+		entity = getEntityManager().merge(entity);
 	}
 
 	@Override
