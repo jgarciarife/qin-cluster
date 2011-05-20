@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.qin.entity.Consigna;
 import com.qin.entity.Materia;
 import com.qin.entity.TrabajoPractico;
 import com.qin.manager.colaboracion.ColaboracionManager;
@@ -35,13 +36,20 @@ public class ElaboracionTPController {
 
 	@RequestMapping(value = "/guardar_tp.html", method = RequestMethod.POST)
 	public String guardarTP(TrabajoPractico tp, Model model) throws Exception {
+		if (tp.getConsignas() != null) {
+			for (Consigna c : tp.getConsignas()) {
+				c.setTrabajoPractico(tp);
+			}
+		}
 		logger.info("materia " + tp.getMateria().getId());
 		if (tp.getId() == null) {
 			colaboracionManager.insertTP(tp);
 		} else {
 			colaboracionManager.updateTP(tp);
 		}
-		model.addAttribute("id", tp.getId());
+
+		model.addAttribute("trabajoPractico",
+				trabajoPracticoManager.findById(tp.getId()));
 		return "tp.alta";
 	}
 

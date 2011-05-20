@@ -162,6 +162,11 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		<dependency>
+		    <groupId>net.disy.jquery</groupId>
+		    <artifactId>jquery</artifactId>
+		    <version>1.4.2</version>
+		</dependency>
 
 
 	</dependencies>
