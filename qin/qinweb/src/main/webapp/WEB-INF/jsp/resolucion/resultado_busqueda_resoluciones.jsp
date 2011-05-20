@@ -7,6 +7,6 @@
   <display:column property="id" title="Id"/>
   <display:column title="Editar/Evaluar">
 	<a href="alta_resolucion.html?id=${row.id}" /><img alt="Editar" title="Editar" src="images/edit-icon.gif" height="20"/></a>&nbsp;
-	<a href="evaluar_resolucion.html?id=${row.id}" /><img alt="Evaluar"  title="Evaluar" src="images/search.gif" height="20"/></a>
+	<a href="evaluar_resolucion.html?id=${row.id}" />Evaluar</a>
   </display:column>
 </display:table>
