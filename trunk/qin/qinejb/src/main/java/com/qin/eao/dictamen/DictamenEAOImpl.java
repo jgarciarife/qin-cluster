@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
+import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +29,12 @@ public class DictamenEAOImpl extends BaseEAOImpl implements DictamenEAO {
 		jpql.append("WHERE dictamen.id = :id ");
 		Query query = getEntityManager().createQuery(jpql.toString());
 		query.setParameter("id", dictamenId);
-		return (Dictamen) query.getSingleResult();
+		Dictamen dic = (Dictamen) query.getSingleResult();
+		Hibernate.initialize(dic.getCorreccions());
+		Hibernate.initialize(dic.getResolucion());
+		Hibernate.initialize(dic.getResolucion().getRespuestas());
+		Hibernate.initialize(dic.getResolucion().getTrabajoPractico());
+		return dic;
 	}
 	
 	@SuppressWarnings("unchecked")
