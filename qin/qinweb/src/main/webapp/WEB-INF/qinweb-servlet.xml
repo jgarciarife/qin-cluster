@@ -24,6 +24,10 @@
 	<jee:jndi-lookup id="resolucionManager"
 		jndi-name="qinear-1.0/ResolucionManagerImpl/local-com.qin.manager.resolucion.ResolucionManager"
 		resource-ref="true" />
+		
+	<jee:jndi-lookup id="dictamenManager"
+		jndi-name="qinear-1.0/DictamenManagerImpl/local-com.qin.manager.dictamen.DictamenManager"
+		resource-ref="true" />
 
 
 	<!-- Scans within the base package of the application for @Components to 
