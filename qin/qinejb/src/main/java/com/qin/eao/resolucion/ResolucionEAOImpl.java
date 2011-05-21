@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.qin.eao.base.BaseEAOImpl;
 import com.qin.entity.Resolucion;
+import com.qin.entity.Respuesta;
 
 @Stateless
 public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
@@ -30,11 +31,16 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 		Query query = getEntityManager().createQuery(jpql.toString());
 		query.setParameter("id", resolucionId);
 		Resolucion res = (Resolucion) query.getSingleResult();
-		Hibernate.initialize(res.getRespuestas());
 		Hibernate.initialize(res.getTrabajoPractico());
+		if (res.getRespuestas() != null) {
+			Hibernate.initialize(res.getRespuestas());
+			for (Respuesta rta : res.getRespuestas()) {
+				Hibernate.initialize(rta.getConsigna());
+			}
+		}
 		return res;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Resolucion> findAll() throws Exception {
@@ -44,11 +50,10 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 		Query query = getEntityManager().createQuery(jpql.toString());
 		return query.getResultList();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Resolucion> findByTPId(Long tpid)
-			throws Exception {
+	public List<Resolucion> findByTPId(Long tpid) throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT resolucion ");
 		jpql.append("FROM Resolucion resolucion ");
