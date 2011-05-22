@@ -6,12 +6,14 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.qin.entity.base.BaseEntity;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "consigna", catalog = "qin")
+@Table(name = "consigna", catalog = "qin", uniqueConstraints = { @UniqueConstraint(columnNames = {
+		"id", "trabajo_practico_id" }) })
 public class Consigna extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
