@@ -10,4 +10,6 @@ public interface UsuarioEAO extends BaseEAO {
 	Usuario findById(Long usuarioId) throws Exception;
 	
 	List<Usuario> findAll() throws Exception;
+
+	Usuario findByName(String loginName);
 }

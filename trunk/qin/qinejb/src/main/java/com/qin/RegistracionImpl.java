@@ -1,16 +1,37 @@
 package com.qin;
 
-import javax.ejb.Stateful;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
-@Stateful
+import com.qin.eao.usuario.UsuarioEAO;
+import com.qin.entity.Usuario;
+import com.qin.manager.registracion.UsuarioIncorrectoException;
+
+@Stateless
 public class RegistracionImpl implements Registracion {
-	private String loginName = "No lo se";
 
-	public void login(String loginName) {
-		this.loginName = loginName;
+	@EJB
+	private UsuarioEAO usuarioEAO;
+
+	public Long login(String loginName) throws UsuarioIncorrectoException {
+		Usuario usuario = usuarioEAO.findByName(loginName);
+		if (usuario == null) {
+			throw new UsuarioIncorrectoException();
+		}
+		return usuario.getId();
 	}
 
-	public String getLoginName() {
-		return loginName;
+	public Usuario getUsuario(Long id) throws Exception {
+		Usuario usuario = usuarioEAO.findById(id);
+		return usuario;
 	}
+
+	public void setUsuarioEAO(UsuarioEAO usuarioEAO) {
+		this.usuarioEAO = usuarioEAO;
+	}
+
+	public UsuarioEAO getUsuarioEAO() {
+		return usuarioEAO;
+	}
+
 }

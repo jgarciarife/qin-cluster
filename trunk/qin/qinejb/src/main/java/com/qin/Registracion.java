@@ -1,9 +1,11 @@
 package com.qin;
 
+import com.qin.entity.Usuario;
+import com.qin.manager.registracion.UsuarioIncorrectoException;
+
 public interface Registracion {
 
-	public void login(String loginName);
+	public Long login(String loginName) throws UsuarioIncorrectoException;
 
-	public String getLoginName();
-
+	public Usuario getUsuario(Long id) throws Exception;
 }

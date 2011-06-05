@@ -40,4 +40,15 @@ public class UsuarioEAOImpl extends BaseEAOImpl implements UsuarioEAO {
 		Query query = getEntityManager().createQuery(jpql.toString());
 		return query.getResultList();
 	}
+
+	@Override
+	public Usuario findByName(String loginName) {
+		StringBuffer jpql = new StringBuffer();
+		jpql.append("SELECT usuario ");
+		jpql.append("FROM Usuario usuario ");
+		jpql.append("WHERE usuario.nombreUsuario = :nombreUsuario ");
+		Query query = getEntityManager().createQuery(jpql.toString());
+		query.setParameter("nombreUsuario", loginName);
+		return (Usuario) query.getSingleResult();
+	}
 }
