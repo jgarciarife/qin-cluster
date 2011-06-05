@@ -3,11 +3,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Login</title>
+<title>Qin!</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
-<table border="1" cellpadding="2" cellspacing="2" align="left"
-	width="100%">
+<table border="1" cellpadding="2" cellspacing="2" align="center"
+	width="100%" class="conbordes">
 	<tr>
 		<td height="30" colspan="2"><h1>Qin!</h1></td>
 	</tr>
@@ -20,7 +21,7 @@
 				<td><input type="text" id="user" name="user" /></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="Login (Statefull)" />
+				<td colspan="2"><input type="submit" value="Login" />
 			</tr>
 		</table>
 		</form>

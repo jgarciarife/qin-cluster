@@ -1,25 +1,29 @@
 package com.qin.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.qin.Registracion;
+import com.qin.entity.Usuario;
 
 @Controller
 public class ConsultaController {
 
-	// EJB inyectado por spring
-	// si fuera un servlet pelado con "@EJB" alcanza
 	@Autowired
 	private Registracion registracionBean;
-	
-	@RequestMapping(value = "/consultar.html")
-	protected String consultar(Model model) throws Exception {
 
-		String nombre = getRegistracionBean().getLoginName();
-		model.addAttribute("nombre", nombre);
+	@RequestMapping(value = "/consultar.html")
+	protected String consultar(Model model, HttpSession session)
+			throws Exception {
+		Long id = (Long) session.getAttribute(ControllerKeys.USER_ID);
+
+		Usuario usuario = registracionBean.getUsuario(id);
+		model.addAttribute("nombre",
+				usuario.getNombre() + " " + usuario.getApellido());
 		return "consulta";
 	}
 
