@@ -1,0 +1,1 @@
+qinDS-ds.xml => [jboss as 6 home]/server/default/deploy/qinDS-ds.xml
