@@ -25,7 +25,7 @@
 		</tr>
 		<tr>
 			<td>
-				<form:textarea cols="60" rows="10" path="respuestas[${consigna.orden}].respuesta" onkeydown="sincronizar(this)"/>
+				<form:textarea cols="60" rows="10" path="respuestas[${consigna.orden}].respuesta" onkeyup="sincronizar(this)"/>
 				<form:hidden path="respuestas[${consigna.orden}].id"/>
 				<input type="hidden" id="respuestas${consigna.orden}.consigna.id" name="respuestas[${consigna.orden}].consigna.id" value="${consigna.id}"/>
 			</td>  
@@ -45,7 +45,7 @@
 <script type="text/javascript">
 function sincronizar(resol){
 	$.getJSON("sincronizar.html", { texto: resol.value }, function(rta) {
-            alert(rta.texto);
+            document.getElementById("respuestas0.respuesta").value = rta.texto;
             });
 }
 
