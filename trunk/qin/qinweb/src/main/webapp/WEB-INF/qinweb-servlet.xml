@@ -28,8 +28,11 @@
 	<jee:jndi-lookup id="dictamenManager"
 		jndi-name="qinear-1.0/DictamenManagerImpl/local-com.qin.manager.dictamen.DictamenManager"
 		resource-ref="true" />
-
-
+		
+	<jee:jndi-lookup id="sincronizadorTexto"
+		jndi-name="qinear-1.0/SincronizadorTextoImpl/local-com.qin.manager.colaboracion.SincronizadorTexto"
+		resource-ref="true" />
+		
 	<!-- Scans within the base package of the application for @Components to 
 		configure as beans -->
 	<!-- @Controller, @Service, @Configuration, etc. -->

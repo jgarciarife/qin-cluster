@@ -2,11 +2,11 @@ package com.qin;
 
 import java.util.LinkedList;
 
+import junit.framework.TestCase;
+
 import com.qin.utils.diff_match_patch;
 import com.qin.utils.diff_match_patch.Diff;
 import com.qin.utils.diff_match_patch.Patch;
-
-import junit.framework.TestCase;
 
 public class SincronizacionTextoTest extends TestCase {
 	public void testCasoSimple() {
@@ -96,7 +96,8 @@ public class SincronizacionTextoTest extends TestCase {
 		System.out.println((String) patch_apply[0]);
 		assertEquals((String) patch_apply[0],
 				"El gundostexto pero un poco modificado");
-		//quedo bastante feo pero es esperable
+		// quedo bastante feo pero es esperable
+
 	}
 
 }
