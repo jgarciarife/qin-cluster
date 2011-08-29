@@ -31,6 +31,22 @@
 			<id>jboss-maven2</id>
 			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
 		</repository>
+		<repository>
+			<id>java</id>
+			<url>http://download.java.net/maven/2/</url>
+		</repository>
+		<repository>
+			<id>cropwiki</id>
+			<url>http://cropwiki.irri.org/m2repo/</url>
+		</repository>
+		<repository>
+			<id>julienDubois</id>
+			<url>http://julien.dubois.free.fr/maven2/</url>
+		</repository>
+		<repository>
+			<id>nuxeo</id>
+			<url>https://maven.nuxeo.org/nexus/content/groups/public/</url>
+		</repository>
 	</repositories>
 	<dependencies>
 		<!-- Hibernate dependencies -->
