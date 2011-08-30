@@ -31,6 +31,6 @@
         <driver-class>com.mysql.jdbc.Driver</driver-class>
 		<user-name>root</user-name>
 		<password>diego</password>
-        <connection-url>jdbc:mysql://192.168.1.101:3306/qin</connection-url>
+        <connection-url>jdbc:mysql://localhost:3306/qin</connection-url>
     </local-tx-datasource>
 </datasources>
