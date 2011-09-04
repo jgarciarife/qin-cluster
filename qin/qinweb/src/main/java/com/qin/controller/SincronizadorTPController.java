@@ -25,27 +25,40 @@ public class SincronizadorTPController {
 
 	@RequestMapping(value = "/sincronizar.html", method = RequestMethod.GET)
 	public @ResponseBody
-	TextoResolucion sincronizar(@RequestParam String texto, HttpSession session)
+	TextoResolucion sincronizar(@RequestParam Integer id,
+			@RequestParam String texto, HttpSession session)
 			throws JMSException {
 
 		diff_match_patch dmp = new diff_match_patch();
 
-		sincronizadorTexto.activarTp(1, texto); // TODO: tiene un if que lo hace
-												// una sola vez.. igualmente..
-												// SACAR DE ACA
+		sincronizadorTexto.activarTp(id, texto); // TODO: tiene un if que lo
+													// hace
+													// una sola vez..
+													// igualmente..
+													// SACAR DE ACA
 
-		String textoBase = (String) session.getAttribute("miTexto");
+		boolean mergear = true;
+		String resolucionEnSesison = "miTexto_" + id;
+		String textoBase = (String) session.getAttribute(resolucionEnSesison);
 		if (textoBase == null) {
-			textoBase = sincronizadorTexto.obtenerTp(1);
+			textoBase = sincronizadorTexto.obtenerTp(id);
+			if (texto.trim().equals("")) {
+				mergear = false;
+			}
 		}
 
-		LinkedList<Diff> diffs = dmp.diff_main(textoBase, texto);
-		LinkedList<Patch> patches = dmp.patch_make(diffs);
+		String textoNuevo = "";
+		if (mergear) {
+			LinkedList<Diff> diffs = dmp.diff_main(textoBase, texto);
+			LinkedList<Patch> patches = dmp.patch_make(diffs);
 
-		String textoNuevo = sincronizadorTexto.actualizarTp(1, patches);
+			textoNuevo = sincronizadorTexto.actualizarTp(id, patches);
+		} else {
+			textoNuevo = textoBase;
 
-		session.setAttribute("miTexto", textoNuevo );
-		
+		}
+		session.setAttribute(resolucionEnSesison, textoNuevo);
+
 		return new TextoResolucion(textoNuevo);
 	}
 
