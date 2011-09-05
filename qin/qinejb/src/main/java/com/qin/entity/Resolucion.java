@@ -21,7 +21,7 @@ public class Resolucion extends BaseEntity {
 	@JoinColumn(name = "trabajo_practico_id")
 	private TrabajoPractico trabajoPractico;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "resolucion")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "resolucion", fetch = FetchType.LAZY)
 	private List<Respuesta> respuestas;
 
 	public Resolucion() {
@@ -35,7 +35,8 @@ public class Resolucion extends BaseEntity {
 	}
 
 	/**
-	 * @param trabajoPractico the trabajoPractico to set
+	 * @param trabajoPractico
+	 *            the trabajoPractico to set
 	 */
 	public void setTrabajoPractico(TrabajoPractico trabajoPractico) {
 		this.trabajoPractico = trabajoPractico;
@@ -49,7 +50,8 @@ public class Resolucion extends BaseEntity {
 	}
 
 	/**
-	 * @param respuestas the respuestas to set
+	 * @param respuestas
+	 *            the respuestas to set
 	 */
 	public void setRespuestas(List<Respuesta> respuestas) {
 		this.respuestas = respuestas;

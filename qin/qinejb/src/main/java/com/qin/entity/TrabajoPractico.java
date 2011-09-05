@@ -21,11 +21,11 @@ public class TrabajoPractico extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "materia_id")
 	private Materia materia;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "trabajoPractico")
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "trabajoPractico", fetch = FetchType.LAZY)
 	private List<Consigna> consignas;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "trabajoPractico")
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "trabajoPractico", fetch = FetchType.LAZY)
 	private List<Resolucion> resolucions;
 
 	@Column(name = "titulo", nullable = false)
@@ -42,7 +42,8 @@ public class TrabajoPractico extends BaseEntity {
 	}
 
 	/**
-	 * @param materia the materia to set
+	 * @param materia
+	 *            the materia to set
 	 */
 	public void setMateria(Materia materia) {
 		this.materia = materia;
@@ -56,7 +57,8 @@ public class TrabajoPractico extends BaseEntity {
 	}
 
 	/**
-	 * @param consignas the consignas to set
+	 * @param consignas
+	 *            the consignas to set
 	 */
 	public void setConsignas(List<Consigna> consignas) {
 		this.consignas = consignas;
@@ -70,7 +72,8 @@ public class TrabajoPractico extends BaseEntity {
 	}
 
 	/**
-	 * @param resolucions the resolucions to set
+	 * @param resolucions
+	 *            the resolucions to set
 	 */
 	public void setResolucions(List<Resolucion> resolucions) {
 		this.resolucions = resolucions;
@@ -84,7 +87,8 @@ public class TrabajoPractico extends BaseEntity {
 	}
 
 	/**
-	 * @param titulo the titulo to set
+	 * @param titulo
+	 *            the titulo to set
 	 */
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;

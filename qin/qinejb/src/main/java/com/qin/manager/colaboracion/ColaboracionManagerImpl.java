@@ -1,5 +1,6 @@
 package com.qin.manager.colaboracion;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -16,6 +17,7 @@ import com.qin.entity.Materia;
 import com.qin.entity.Resolucion;
 import com.qin.entity.TrabajoPractico;
 import com.qin.manager.administracion.AdministracionManager;
+import com.qin.manager.dictamen.DictamenManager;
 import com.qin.manager.trabajoPractico.TrabajoPracticoManager;
 
 @Stateless
@@ -29,7 +31,7 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 
 	@EJB
 	private MateriaEAO materiaEAO;
-	
+
 	@EJB
 	private ResolucionEAO resolucionEAO;
 
@@ -38,7 +40,9 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 
 	@EJB
 	private TrabajoPracticoManager trabajoPracticoManager;
-	
+
+	@EJB
+	private DictamenManager dictamenManager;
 
 	public ColaboracionManagerImpl() {
 	}
@@ -102,11 +106,28 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 	@Override
 	public void insertResolucion(Resolucion res) throws Exception {
 		resolucionEAO.insert(res);
-		
+
 	}
 
 	@Override
 	public void updateResolucion(Resolucion res) throws Exception {
 		resolucionEAO.update(res);
 	}
+
+	@Override
+	public HashMap<Integer, String> findAllTPNotaByMateria() throws Exception {
+		//HashMap<Integer, String> retorno = new HashMap<Integer, String>();
+		return dictamenManager.findAllTPNotaByMateria();
+		/*
+		 * retorno.put(new Integer(0), "0"); retorno.put(new Integer(1),
+		 * "10000"); retorno.put(new Integer(2), "20000"); retorno.put(new
+		 * Integer(3), "30000"); retorno.put(new Integer(4), "40000");
+		 * retorno.put(new Integer(5), "50000"); retorno.put(new Integer(6),
+		 * "60000"); retorno.put(new Integer(7), "70000"); retorno.put(new
+		 * Integer(8), "80000"); retorno.put(new Integer(9), "90000");
+		 * retorno.put(new Integer(10), "100000");
+		 */
+		//return retorno;
+	}
+
 }
