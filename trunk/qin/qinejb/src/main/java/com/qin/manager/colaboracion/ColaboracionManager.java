@@ -1,5 +1,6 @@
 package com.qin.manager.colaboracion;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.qin.entity.Grupo;
@@ -24,5 +25,7 @@ public interface ColaboracionManager {
 	void updateResolucion(Resolucion res) throws Exception;
 	
 	List<Materia> findAllMaterias() throws Exception;
+	
+	HashMap<Integer, String> findAllTPNotaByMateria() throws Exception;
 
 }

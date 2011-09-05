@@ -29,7 +29,7 @@ public class Dictamen extends BaseEntity {
 	@Column(name = "dictamen", nullable = false)
 	private String dictamen;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "dictamen")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "dictamen", fetch = FetchType.LAZY)
 	private List<Correccion> correccions;
 
 	public Dictamen() {

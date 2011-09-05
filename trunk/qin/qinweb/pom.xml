@@ -33,6 +33,12 @@
 			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/
 			</url>
 		</repository>
+		<repository>
+			<id>mvnrepository</id>
+			<url>http://mvnrepository.com/artifact/
+			</url>
+		</repository>
+		
 	</repositories>
 	<properties>
 		<org.springframework.version>3.0.5.RELEASE
@@ -173,7 +179,12 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.6.4</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+		</dependency>
 
 	</dependencies>
 

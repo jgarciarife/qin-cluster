@@ -5,13 +5,11 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
-import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.qin.eao.base.BaseEAOImpl;
 import com.qin.entity.Resolucion;
-import com.qin.entity.Respuesta;
 
 @Stateless
 public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
@@ -31,13 +29,12 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 		Query query = getEntityManager().createQuery(jpql.toString());
 		query.setParameter("id", resolucionId);
 		Resolucion res = (Resolucion) query.getSingleResult();
-		Hibernate.initialize(res.getTrabajoPractico());
-		if (res.getRespuestas() != null) {
-			Hibernate.initialize(res.getRespuestas());
-			for (Respuesta rta : res.getRespuestas()) {
-				Hibernate.initialize(rta.getConsigna());
-			}
-		}
+		/*
+		 * Hibernate.initialize(res.getTrabajoPractico()); if
+		 * (res.getRespuestas() != null) {
+		 * Hibernate.initialize(res.getRespuestas()); for (Respuesta rta :
+		 * res.getRespuestas()) { Hibernate.initialize(rta.getConsigna()); } }
+		 */
 		return res;
 	}
 

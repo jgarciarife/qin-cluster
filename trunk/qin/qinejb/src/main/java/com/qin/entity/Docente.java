@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -17,7 +18,7 @@ public class Docente extends Usuario {
 	@Column(name = "matricula", nullable = false)
 	private String matricula; // ????????????????????????
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "docente")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "docente", fetch = FetchType.LAZY)
 	private List<Materia> materias;
 
 	public Docente() {

@@ -25,6 +25,7 @@ public class SincronizadorTextoImpl implements SincronizadorTexto {
 
 	private Map<Integer, String> tpsActivos = new HashMap<Integer, String>();
 
+	@Override
 	@Lock(LockType.READ)
 	public void activarTp(Integer id, String texto) {
 		if (tpsActivos.get(id) == null) {
@@ -32,11 +33,13 @@ public class SincronizadorTextoImpl implements SincronizadorTexto {
 		}
 	}
 
+	@Override
 	@Lock(LockType.WRITE)
 	public void desactivarTp(Integer id) {
 		tpsActivos.remove(id);
 	}
 
+	@Override
 	@Lock(LockType.WRITE)
 	public String actualizarTp(Integer id, LinkedList<Patch> patches) {
 		String textoBase = tpsActivos.get(id);
@@ -47,6 +50,7 @@ public class SincronizadorTextoImpl implements SincronizadorTexto {
 		return nuevoTexto;
 	}
 
+	@Override
 	@Lock(LockType.READ)
 	public String obtenerTp(Integer id) {
 		return tpsActivos.get(id);
