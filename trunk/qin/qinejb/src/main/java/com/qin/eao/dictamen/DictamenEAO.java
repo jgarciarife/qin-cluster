@@ -10,7 +10,8 @@ public interface DictamenEAO extends BaseEAO {
 	Dictamen findById(Long dictamenId) throws Exception;
 
 	List<Dictamen> findAll() throws Exception;
-	
-	List<Object[]> findAllDictamenByMateriaGroupByNota() throws Exception;
+
+	List<Object[]> findAllDictamenByMateriaGroupByNota(Long materiaId)
+			throws Exception;
 
 }

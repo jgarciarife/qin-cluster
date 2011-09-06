@@ -44,9 +44,9 @@ public class DictamenManagerImpl implements DictamenManager {
 	}
 
 	@Override
-	public HashMap<Integer, String> findAllTPNotaByMateria() throws Exception {
+	public HashMap<Integer, String> findAllTPNotaByMateria(Long materiaId) throws Exception {
 		List<Object[]> resultado = getDictamenEAO()
-				.findAllDictamenByMateriaGroupByNota();
+				.findAllDictamenByMateriaGroupByNota(materiaId);
 		if ((resultado == null)
 				|| ((resultado != null) && (resultado.isEmpty()))) {
 			return new HashMap<Integer, String>();

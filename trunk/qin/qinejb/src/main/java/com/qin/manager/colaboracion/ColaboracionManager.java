@@ -17,15 +17,16 @@ public interface ColaboracionManager {
 	void deleteGrupo(Grupo grupo) throws Exception;
 
 	void insertTP(TrabajoPractico tp) throws Exception;
-	
+
 	void updateTP(TrabajoPractico tp) throws Exception;
-	
+
 	void insertResolucion(Resolucion res) throws Exception;
-	
+
 	void updateResolucion(Resolucion res) throws Exception;
-	
+
 	List<Materia> findAllMaterias() throws Exception;
-	
-	HashMap<Integer, String> findAllTPNotaByMateria() throws Exception;
+
+	HashMap<Integer, String> findAllTPNotaByMateria(Long materiaId)
+			throws Exception;
 
 }

@@ -50,16 +50,17 @@ public class DictamenEAOImpl extends BaseEAOImpl implements DictamenEAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Object[]> findAllDictamenByMateriaGroupByNota() throws Exception {
+	public List<Object[]> findAllDictamenByMateriaGroupByNota(Long materiaId) throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT dictamen.puntaje, ");
 		jpql.append("       COUNT(*) ");
 		jpql.append("FROM Dictamen dictamen ");
 		jpql
-				.append("WHERE dictamen.resolucion.trabajoPractico.materia.id = 1 ");
+				.append("WHERE dictamen.resolucion.trabajoPractico.materia.id = :materiaId ");
 		jpql.append("GROUP BY dictamen.puntaje ");
 		jpql.append("ORDER BY dictamen.puntaje ASC ");
 		Query query = getEntityManager().createQuery(jpql.toString());
+		query.setParameter("materiaId", materiaId);
 		return query.getResultList();
 	}
 }

@@ -115,9 +115,9 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 	}
 
 	@Override
-	public HashMap<Integer, String> findAllTPNotaByMateria() throws Exception {
+	public HashMap<Integer, String> findAllTPNotaByMateria(Long materiaId) throws Exception {
 		//HashMap<Integer, String> retorno = new HashMap<Integer, String>();
-		return dictamenManager.findAllTPNotaByMateria();
+		return dictamenManager.findAllTPNotaByMateria(materiaId);
 		/*
 		 * retorno.put(new Integer(0), "0"); retorno.put(new Integer(1),
 		 * "10000"); retorno.put(new Integer(2), "20000"); retorno.put(new

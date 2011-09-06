@@ -14,7 +14,7 @@
 							"caption" :	"Cantidad de trabajos prácticos de la materia elegida, por nota",
 										"xAxisName" : "Nota",
 										"yAxisName" : "Cantidad de trabajos prácticos de la materia elegida",
-										"numberPrefix" : "tps: "
+										"numberPrefix" : "Cant. TPs: "
 						},
 			"data" :	[
 							<%= request.getAttribute("tabla") %>
