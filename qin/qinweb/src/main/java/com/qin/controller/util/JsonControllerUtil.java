@@ -25,7 +25,7 @@ public class JsonControllerUtil {
 	private JsonControllerUtil() {
 	}
 
-	public static void sendObjectToClient(HashMap<Integer, String> obj,
+	public static void sendChartToClient(HashMap<Integer, String> obj,
 			HttpServletRequest request) throws Exception {
 		JSONObject json = new JSONObject();
 		StringBuffer buffer = new StringBuffer();

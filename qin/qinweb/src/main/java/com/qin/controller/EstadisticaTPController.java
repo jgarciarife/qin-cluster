@@ -39,8 +39,8 @@ public class EstadisticaTPController {
 	protected String buscarTPs(Long materiaId, HttpServletRequest request)
 			throws Exception {
 		HashMap<Integer, String> obj = colaboracionManager
-				.findAllTPNotaByMateria();
-		JsonControllerUtil.sendObjectToClient(obj, request);
+				.findAllTPNotaByMateria(materiaId);
+		JsonControllerUtil.sendChartToClient(obj, request);
 		return "tp.ver_estadistica_tp_en_materia";
 	}
 

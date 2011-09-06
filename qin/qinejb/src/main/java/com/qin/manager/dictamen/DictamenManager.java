@@ -14,6 +14,7 @@ public interface DictamenManager {
 	void insert(Dictamen tp) throws Exception;
 
 	void update(Dictamen tp) throws Exception;
-	
-	HashMap<Integer, String> findAllTPNotaByMateria() throws Exception;
+
+	HashMap<Integer, String> findAllTPNotaByMateria(Long materiaId)
+			throws Exception;
 }
