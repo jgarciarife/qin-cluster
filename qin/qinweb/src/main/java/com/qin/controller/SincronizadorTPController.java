@@ -29,19 +29,25 @@ public class SincronizadorTPController {
 			@RequestParam String texto, HttpSession session)
 			throws JMSException {
 
+		String codigo = (String) session
+				.getAttribute(ElaboracionResolucionController.CODIGO_RESOLUCION_COMPARTIDA);
+
 		diff_match_patch dmp = new diff_match_patch();
 
-		sincronizadorTexto.activarTp(id, texto); // TODO: tiene un if que lo
-													// hace
-													// una sola vez..
-													// igualmente..
-													// SACAR DE ACA
+		String idTextoCompartido = codigo + id;
+		sincronizadorTexto.activarTp(idTextoCompartido, texto); // TODO: tiene
+																// un if
+		// que lo
+		// hace
+		// una sola vez..
+		// igualmente..
+		// SACAR DE ACA
 
 		boolean mergear = true;
-		String resolucionEnSesison = "miTexto_" + id;
+		String resolucionEnSesison = "miTexto_" + codigo + "_" + id;
 		String textoBase = (String) session.getAttribute(resolucionEnSesison);
 		if (textoBase == null) {
-			textoBase = sincronizadorTexto.obtenerTp(id);
+			textoBase = sincronizadorTexto.obtenerTp(idTextoCompartido);
 			if (texto.trim().equals("")) {
 				mergear = false;
 			}
@@ -52,7 +58,8 @@ public class SincronizadorTPController {
 			LinkedList<Diff> diffs = dmp.diff_main(textoBase, texto);
 			LinkedList<Patch> patches = dmp.patch_make(diffs);
 
-			textoNuevo = sincronizadorTexto.actualizarTp(id, patches);
+			textoNuevo = sincronizadorTexto.actualizarTp(idTextoCompartido,
+					patches);
 		} else {
 			textoNuevo = textoBase;
 
