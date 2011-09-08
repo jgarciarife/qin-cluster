@@ -5,13 +5,12 @@ import java.util.LinkedList;
 import com.qin.utils.diff_match_patch.Patch;
 
 public interface SincronizadorTexto {
+	public void activarTp(String id, String texto);
 
-	void activarTp(Integer id, String texto);
+	public void desactivarTp(String id);
 
-	void desactivarTp(Integer id);
+	public String actualizarTp(String id, LinkedList<Patch> patches);
 
-	String actualizarTp(Integer id, LinkedList<Patch> patches);
-
-	String obtenerTp(Integer id);
+	public String obtenerTp(String id);
 
 }

@@ -7,19 +7,18 @@
 <div id="chartContainer">Cantidad de trabajos prácticos de la materia elegida, por nota</div>
 
 <script type="text/javascript">
-	var myChart = new FusionCharts("Charts/Column3D.swf", "myChartId", "600", "400", "0", "1");
-	myChart.setJSONData(
-		{
-			"chart":	{
-							"caption" :	"Cantidad de trabajos prácticos de la materia elegida, por nota",
-										"xAxisName" : "Nota",
-										"yAxisName" : "Cantidad de trabajos prácticos de la materia elegida",
-										"numberPrefix" : "Cant. TPs: "
-						},
-			"data" :	[
-							<%= request.getAttribute("tabla") %>
-						]
-		}
-	);
-	myChart.render("chartContainer");
+function mostrarGrafico(){
+	var grf;
+	$.getJSON("actualizar_estadistica.html", { materiaId:  ${materiaId} }, function(rta) {
+		var myChart = new FusionCharts("Charts/Column3D.swf", "myChartId", "600", "400", "0", "1");
+		myChart.setJSONData(rta);
+		myChart.render("chartContainer");
+    });
+	
+	
+}
+
+setInterval( function(){
+				mostrarGrafico()
+			}, 5000) ;
 </script>

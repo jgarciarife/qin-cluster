@@ -14,6 +14,8 @@
 </script>
 
 
+<b>Codigo para resolución compartida:&nbsp;${codigo}</b>
+
 <form:form action="guardar_resolucion.html"  name="resolucion2" commandName="resolucion" method="post">
 	<input type="hidden" name="tpId" value="${trabajoPractico.id}"/>
 	<input type="hidden" id="trabajoPractico.id" name="trabajoPractico.id" value="${trabajoPractico.id}"/>

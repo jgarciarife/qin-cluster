@@ -9,5 +9,6 @@
 	<a href="alta_tp.html?id=${row.id}" /><img alt="Editar" title="Editar" src="images/edit-icon.gif" height="20"/></a>&nbsp;
 	<a href="buscar_resoluciones.html?tpId=${row.id}" /><img alt="Buscar Resoluciones"  title="Buscar Resoluciones" src="images/search.gif" height="20"/></a>&nbsp;
 	<a href="alta_resolucion.html?tpId=${row.id}" />Resolver</a>
+	<a href="unirse_resolucion.html?tpId=${row.id}" />Unirse a resolucion</a>
   </display:column>
 </display:table>

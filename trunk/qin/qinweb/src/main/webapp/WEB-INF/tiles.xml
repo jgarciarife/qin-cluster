@@ -49,6 +49,11 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/estadisticas/ver_estadistica_tp_en_materia.jsp" />
 	</definition>
 
+	<definition name="tp.unirse_resolucion" extends="base.definition">
+		<put-attribute name="title" value="Contact Manager" />
+		<put-attribute name="body" value="/WEB-INF/jsp/resolucion/unirse_resolucion.jsp" />
+	</definition>
+	
 	<definition name="resolucion.alta" extends="base.definition">
 		<put-attribute name="title" value="Qin Cluster" />
 		<put-attribute name="body" value="/WEB-INF/jsp/resolucion/alta_resolucion.jsp" />

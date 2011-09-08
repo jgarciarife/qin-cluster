@@ -2,6 +2,8 @@ package com.qin.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ import com.qin.manager.trabajoPractico.TrabajoPracticoManager;
 public class ElaboracionResolucionController {
 	protected static Logger logger = LoggerFactory
 			.getLogger(ElaboracionResolucionController.class);
+
+	public static final String CODIGO_RESOLUCION_COMPARTIDA = "codigo";
 
 	@Autowired
 	private ColaboracionManager colaboracionManager;
@@ -58,10 +62,27 @@ public class ElaboracionResolucionController {
 		return "resolucion.alta";
 	}
 
+	@RequestMapping(value = "/unirse_resolucion_codigo.html")
+	protected String unirseAResolucionTPs(
+			@RequestParam(value = "codigo", required = true) String codigo,
+			@RequestParam(value = "tpId", required = true) Long tpId,
+			Model model, HttpSession session) throws Exception {
+
+		return altaTP(null, tpId, codigo, model, session);
+	}
+
 	@RequestMapping(value = "/alta_resolucion.html")
 	public String altaTP(@RequestParam(value = "id", required = false) Long id,
 			@RequestParam(value = "tpId", required = false) Long tpId,
-			Model model) throws Exception {
+			@RequestParam(value = "codigo", required = false) String codigo,
+			Model model, HttpSession session) throws Exception {
+
+		if (codigo == null) {
+			codigo = String.valueOf(Math.round(Math.random() * 1000));
+		}
+
+		session.setAttribute(CODIGO_RESOLUCION_COMPARTIDA, codigo);
+
 		Resolucion resolucion = null;
 		TrabajoPractico tp = null;
 		if (id != null) {
@@ -87,6 +108,8 @@ public class ElaboracionResolucionController {
 
 		model.addAttribute("trabajoPractico", tp);
 		model.addAttribute("resolucion", resolucion);
+		model.addAttribute("codigo", codigo);
+
 		return "resolucion.alta";
 	}
 

@@ -44,7 +44,8 @@ public class DictamenManagerImpl implements DictamenManager {
 	}
 
 	@Override
-	public HashMap<Integer, String> findAllTPNotaByMateria(Long materiaId) throws Exception {
+	public HashMap<Integer, String> findAllTPNotaByMateria(Long materiaId)
+			throws Exception {
 		List<Object[]> resultado = getDictamenEAO()
 				.findAllDictamenByMateriaGroupByNota(materiaId);
 		if ((resultado == null)
@@ -61,39 +62,7 @@ public class DictamenManagerImpl implements DictamenManager {
 				nota = (Double) registro[0];
 				cantidad = (Long) registro[1];
 				if (nota != null) {
-					if ((9.5 < nota.floatValue()) && (nota.floatValue() <= 10)) {
-						key = new Integer(10);
-					} else if ((8.5 < nota.floatValue())
-							&& (nota.floatValue() <= 9.5)) {
-						key = new Integer(9);
-					} else if ((7.5 < nota.floatValue())
-							&& (nota.floatValue() <= 8.5)) {
-						key = new Integer(8);
-					} else if ((6.5 < nota.floatValue())
-							&& (nota.floatValue() <= 7.5)) {
-						key = new Integer(7);
-					} else if ((5.5 < nota.floatValue())
-							&& (nota.floatValue() <= 6.5)) {
-						key = new Integer(6);
-					} else if ((4.5 < nota.floatValue())
-							&& (nota.floatValue() <= 5.5)) {
-						key = new Integer(5);
-					} else if ((3.5 < nota.floatValue())
-							&& (nota.floatValue() <= 4.5)) {
-						key = new Integer(4);
-					} else if ((2.5 < nota.floatValue())
-							&& (nota.floatValue() <= 3.5)) {
-						key = new Integer(3);
-					} else if ((1.5 < nota.floatValue())
-							&& (nota.floatValue() <= 2.5)) {
-						key = new Integer(2);
-					} else if ((0.5 < nota.floatValue())
-							&& (nota.floatValue() <= 1.5)) {
-						key = new Integer(1);
-					} else if ((0 <= nota.floatValue())
-							&& (nota.floatValue() <= 0.5)) {
-						key = new Integer(0);
-					}
+					key = Long.valueOf(Math.round(nota)).intValue();
 					if (retorno.containsKey(key)) {
 						cantidadOriginal = new Long(retorno.get(key));
 					} else {
