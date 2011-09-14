@@ -36,3 +36,7 @@ INSERT INTO qin.dictamen (id, dictamen, puntaje, resolucion_id) VALUES (NULL, 'T
 INSERT INTO qin.trabajo_practico (id, titulo, materia_id) VALUES (7, 'TP 7', '1');
 INSERT INTO qin.resolucion (id, trabajo_practico_id) VALUES (7, 7);
 INSERT INTO qin.dictamen (id, dictamen, puntaje, resolucion_id) VALUES (NULL, 'Todo Ok', 3, 7);
+
+INSERT INTO qin.trabajo_practico (id, titulo, materia_id) VALUES (8, 'TP 8', '1');
+INSERT INTO qin.resolucion (id, trabajo_practico_id) VALUES (8, 8);
+INSERT INTO qin.dictamen (id, dictamen, puntaje, resolucion_id) VALUES (NULL, 'Todo Ok', 10, 8);
