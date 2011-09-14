@@ -1,0 +1,10 @@
+Colocar qinDS-ds.xml correctamente bien configurado en [jboss6]/server/all/deploy
+Colocar qinear-1.0.ear en [jboss6]/server/all/deploy
+Colocar el connector de mysql en [jboss6]/server/all/lib
+Revisar [jboss6]/server/all/deploy/jbossweb.sar/server.xml y comprobar que el puerto es el adecuado
+
+En PC 1
+./run.sh -c all -g qin -b pc1 -Djboss.messaging.ServerPeerID=1
+ 
+En PC 2
+./run.sh -c all -g qin -b pc2 -Djboss.messaging.ServerPeerID=2
