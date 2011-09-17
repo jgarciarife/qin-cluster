@@ -6,12 +6,11 @@ package com.qin.controller.util;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.sf.json.JSONObject;
+import org.codehaus.jettison.json.JSONObject;
 
 /**
  * @author diego

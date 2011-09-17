@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.qin.Registracion;
+import com.qin.entity.Usuario;
 
 @Controller
 public class LoginController {
@@ -21,8 +22,8 @@ public class LoginController {
 	protected String home(@RequestParam("user") String user, HttpSession session) {
 
 		try {
-			Long id = registracionBean.login(user);
-			session.setAttribute(ControllerKeys.USER_ID, id);
+			Usuario usuario = registracionBean.login(user);
+			session.setAttribute(ControllerKeys.USUARIO, usuario);
 		} catch (Exception e) {
 			return "error_logueo";
 		}

@@ -17,7 +17,7 @@ function mostrarGrafico(){
 	
 	
 }
-
+mostrarGrafico();
 setInterval( function(){
 				mostrarGrafico()
 			}, 5000) ;

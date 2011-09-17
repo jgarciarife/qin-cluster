@@ -13,12 +13,12 @@ public class RegistracionImpl implements Registracion {
 	@EJB
 	private UsuarioEAO usuarioEAO;
 
-	public Long login(String loginName) throws UsuarioIncorrectoException {
+	public Usuario login(String loginName) throws UsuarioIncorrectoException {
 		Usuario usuario = usuarioEAO.findByName(loginName);
 		if (usuario == null) {
 			throw new UsuarioIncorrectoException();
 		}
-		return usuario.getId();
+		return usuario;
 	}
 
 	public Usuario getUsuario(Long id) throws Exception {
