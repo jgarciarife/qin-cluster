@@ -53,4 +53,9 @@ public class Docente extends Usuario {
 	public void setMaterias(List<Materia> materias) {
 		this.materias = materias;
 	}
+
+	@Override
+	public boolean isEvaluador() {
+		return true;
+	}
 }

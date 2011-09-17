@@ -13,7 +13,7 @@ import com.qin.entity.base.BaseEntity;
 @Entity
 @Table(name = "usuario", catalog = "qin", uniqueConstraints = @UniqueConstraint(columnNames = "nombre_usuario"))
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Usuario extends BaseEntity {
+public abstract class Usuario extends BaseEntity {
 
 	@Column(name = "apellido", nullable = false)
 	private String apellido;
@@ -89,4 +89,6 @@ public class Usuario extends BaseEntity {
 	public void setContraseniaUsuario(String contraseniaUsuario) {
 		this.contraseniaUsuario = contraseniaUsuario;
 	}
+
+	public abstract boolean isEvaluador();
 }

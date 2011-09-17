@@ -19,9 +19,9 @@ public class ConsultaController {
 	@RequestMapping(value = "/consultar.html")
 	protected String consultar(Model model, HttpSession session)
 			throws Exception {
-		Long id = (Long) session.getAttribute(ControllerKeys.USER_ID);
+		Usuario usuario = (Usuario) session
+				.getAttribute(ControllerKeys.USUARIO);
 
-		Usuario usuario = registracionBean.getUsuario(id);
 		model.addAttribute("nombre",
 				usuario.getNombre() + " " + usuario.getApellido());
 		return "consulta";
