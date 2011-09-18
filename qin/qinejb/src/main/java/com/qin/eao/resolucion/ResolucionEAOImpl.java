@@ -23,18 +23,12 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 	@Override
 	public Resolucion findById(Long resolucionId) throws Exception {
 		StringBuffer jpql = new StringBuffer();
-		jpql.append("SELECT resolucion ");
-		jpql.append("FROM Resolucion resolucion ");
+		jpql.append("SELECT resolucion FROM Resolucion resolucion  join fetch resolucion.respuestas r join fetch r.consigna c ");
+		jpql.append("join fetch c.trabajoPractico ");
 		jpql.append("WHERE resolucion.id = :id ");
 		Query query = getEntityManager().createQuery(jpql.toString());
 		query.setParameter("id", resolucionId);
 		Resolucion res = (Resolucion) query.getSingleResult();
-		/*
-		 * Hibernate.initialize(res.getTrabajoPractico()); if
-		 * (res.getRespuestas() != null) {
-		 * Hibernate.initialize(res.getRespuestas()); for (Respuesta rta :
-		 * res.getRespuestas()) { Hibernate.initialize(rta.getConsigna()); } }
-		 */
 		return res;
 	}
 

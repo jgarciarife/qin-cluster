@@ -25,16 +25,24 @@ public class DictamenEAOImpl extends BaseEAOImpl implements DictamenEAO {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT dictamen ");
 		jpql.append("FROM Dictamen dictamen ");
+		jpql.append("join fetch dictamen.resolucion r ");
+		jpql.append("join fetch r.respuestas ");
+		jpql.append("join fetch r.trabajoPractico ");
 		jpql.append("WHERE dictamen.id = :id ");
 		Query query = getEntityManager().createQuery(jpql.toString());
 		query.setParameter("id", dictamenId);
+
+		StringBuffer jpql2 = new StringBuffer();
+		jpql2.append("SELECT dictamen ");
+		jpql2.append("FROM Dictamen dictamen ");
+		jpql2.append("join fetch dictamen.correccions c ");
+		jpql2.append("join fetch c.respuesta ");
+		jpql2.append("WHERE dictamen.id = :id ");
+		Query query2 = getEntityManager().createQuery(jpql2.toString());
+		query2.setParameter("id", dictamenId);
 		Dictamen dic = (Dictamen) query.getSingleResult();
-		/*
-		 * Hibernate.initialize(dic.getCorreccions());
-		 * Hibernate.initialize(dic.getResolucion());
-		 * Hibernate.initialize(dic.getResolucion().getRespuestas());
-		 * Hibernate.initialize(dic.getResolucion().getTrabajoPractico());
-		 */
+		Dictamen dic2 = (Dictamen) query2.getSingleResult();
+		dic.setCorreccions(dic2.getCorreccions());
 		return dic;
 	}
 
@@ -50,17 +58,21 @@ public class DictamenEAOImpl extends BaseEAOImpl implements DictamenEAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Object[]> findAllDictamenByMateriaGroupByNota(Long materiaId) throws Exception {
+	public List<Object[]> findAllDictamenByMateriaGroupByNota(Long materiaId)
+			throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT dictamen.puntaje, ");
 		jpql.append("       COUNT(*) ");
 		jpql.append("FROM Dictamen dictamen ");
-		jpql
-				.append("WHERE dictamen.resolucion.trabajoPractico.materia.id = :materiaId ");
+		if (materiaId != null && materiaId.intValue() != -1) {
+			jpql.append("WHERE dictamen.resolucion.trabajoPractico.materia.id = :materiaId ");
+		}
 		jpql.append("GROUP BY dictamen.puntaje ");
 		jpql.append("ORDER BY dictamen.puntaje ASC ");
 		Query query = getEntityManager().createQuery(jpql.toString());
-		query.setParameter("materiaId", materiaId);
+		if (materiaId != null && materiaId.intValue() != -1) {
+			query.setParameter("materiaId", materiaId);
+		}
 		return query.getResultList();
 	}
 }
