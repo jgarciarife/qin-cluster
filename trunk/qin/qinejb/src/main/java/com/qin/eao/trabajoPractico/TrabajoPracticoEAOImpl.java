@@ -32,8 +32,6 @@ public class TrabajoPracticoEAOImpl extends BaseEAOImpl implements
 		query.setParameter("id", trabajoPracticoId);
 		TrabajoPractico singleResult = (TrabajoPractico) query
 				.getSingleResult();
-		// Hibernate.initialize(singleResult.getConsignas());
-		// Hibernate.initialize(singleResult.getMateria());
 		return singleResult;
 	}
 
