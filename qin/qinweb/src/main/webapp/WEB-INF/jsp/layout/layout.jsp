@@ -15,16 +15,20 @@
 </head>
 <body>
 <table border="1" cellpadding="2" cellspacing="2" align="center"
-	width="100%" class="conbordes">
+	width="100%" class="principal">
 	 <tiles:insertAttribute name="header" />
 	<tr>
-		<td width="100%"><tiles:insertAttribute name="menu" /></td>
-	</tr>
-	<tr height="350">
-		<td width="100%" valign="top"><tiles:insertAttribute name="body" /></td>
-	</tr>
-	<tr>
-		<td height="30" c><tiles:insertAttribute name="footer" /></td>
+		<td>
+			<table border="1" cellpadding="2" cellspacing="2" align="center"
+			width="90%" class="principal">
+			<tr>
+				<td width="100%" class="topnav"><tiles:insertAttribute name="menu" /></td>
+			</tr>
+			<tr height="350">
+				<td width="100%" valign="top"><tiles:insertAttribute name="body" /></td>
+			</tr>
+			</table>
+		</td>
 	</tr>
 </table>
 </body>
