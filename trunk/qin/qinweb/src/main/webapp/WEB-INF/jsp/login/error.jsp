@@ -10,7 +10,7 @@
 </head>
 <body>
 <table border="1" cellpadding="2" cellspacing="2" align="center"
-	width="100%" class="conbordes">
+	width="100%" class="sinbordes">
 	<tr>
 		<td width="100%">Error de logueo!!</td>
 	</tr>

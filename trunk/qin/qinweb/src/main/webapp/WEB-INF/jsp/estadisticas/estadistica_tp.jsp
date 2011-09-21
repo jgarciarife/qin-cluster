@@ -5,7 +5,7 @@
 <form action="ver_estadistica.html">
 	<table>
 		<tr>
-			<td><h2>Ver Estadistica de TP segun materia</h2></td>
+			<td><h1>Ver Estadistica de TP segun materia</h1></td>
 		</tr>
 		<tr>
 			<td>Materia:&nbsp;

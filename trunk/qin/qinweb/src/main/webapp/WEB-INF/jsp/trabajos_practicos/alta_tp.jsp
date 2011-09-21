@@ -6,7 +6,7 @@
 <table id="table_alta_tp" class="sinbordes">
 		<tr>
 			<td>
-			<h2>Trabajo Practico</h2>
+			<h1>Trabajo Practico</h1>
 			<c:if test="${not empty trabajoPractico.id}">
 			    <form:hidden path="id" />
 			</c:if>

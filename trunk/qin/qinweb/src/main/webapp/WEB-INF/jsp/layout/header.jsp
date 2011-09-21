@@ -1,1 +1,1 @@
-<caption>Qin!</caption>
+<caption><b>Qin!</b></caption>
