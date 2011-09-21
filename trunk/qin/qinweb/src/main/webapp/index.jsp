@@ -8,9 +8,9 @@
 </head>
 <body>
 <table border="1" cellpadding="2" cellspacing="2" align="center"
-	width="100%" class="conbordes">
+	width="100%" class="sinbordes">
 	<tr>
-		<td height="30" colspan="2"><h1>Qin!</h1></td>
+		<td height="30" colspan="2"><span style="font: 1.8em/1.8em Arial, Helvetica, sans-serif"><b>Qin!</b></span></td>
 	</tr>
 	<tr>
 		<td width="100%">
