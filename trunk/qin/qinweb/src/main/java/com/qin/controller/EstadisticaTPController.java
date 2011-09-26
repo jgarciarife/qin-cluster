@@ -3,8 +3,8 @@ package com.qin.controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,7 +49,7 @@ public class EstadisticaTPController {
 	@RequestMapping(value = "/actualizar_estadistica.html", method = RequestMethod.GET)
 	protected @ResponseBody
 	Grafico actualizarGraficoTPs(Long materiaId) throws Exception {
-		HashMap<Integer, String> itemsMap = colaboracionManager
+		Map<Integer, String> itemsMap = colaboracionManager
 				.findAllTPNotaByMateria(materiaId);
 		Grafico grafico = new Grafico();
 		List<ItemGrafico> itemsGrafico = mapear(itemsMap);
@@ -57,7 +57,7 @@ public class EstadisticaTPController {
 		return grafico;
 	}
 
-	private List<ItemGrafico> mapear(HashMap<Integer, String> itemsMap) {
+	private List<ItemGrafico> mapear(Map<Integer, String> itemsMap) {
 		List<ItemGrafico> items = new ArrayList<ItemGrafico>();
 		if (itemsMap != null) {
 			for (Integer materia : itemsMap.keySet()) {

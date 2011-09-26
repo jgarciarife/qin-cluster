@@ -24,10 +24,6 @@ public class Grupo extends BaseEntity {
 	@JoinColumn(name = "resolucion_id")
 	private Resolucion resolucion;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "materia_id")
-	private Materia materia;
-
 	@Column(nullable = true)
 	@JoinTable(name = "grupo_alumno", catalog = "qin", uniqueConstraints = { @UniqueConstraint(columnNames = {
 			"grupo_id", "alumno_id" }) }, joinColumns = { @JoinColumn(name = "grupo_id") }, inverseJoinColumns = { @JoinColumn(name = "alumno_id") })
@@ -50,21 +46,6 @@ public class Grupo extends BaseEntity {
 	 */
 	public void setResolucion(Resolucion resolucion) {
 		this.resolucion = resolucion;
-	}
-
-	/**
-	 * @return the materia
-	 */
-	public Materia getMateria() {
-		return materia;
-	}
-
-	/**
-	 * @param materia
-	 *            the materia to set
-	 */
-	public void setMateria(Materia materia) {
-		this.materia = materia;
 	}
 
 	/**

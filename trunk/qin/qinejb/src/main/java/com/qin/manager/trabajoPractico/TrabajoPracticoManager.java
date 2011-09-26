@@ -2,6 +2,7 @@ package com.qin.manager.trabajoPractico;
 
 import java.util.List;
 
+import com.qin.entity.Alumno;
 import com.qin.entity.TrabajoPractico;
 
 public interface TrabajoPracticoManager {
@@ -15,4 +16,6 @@ public interface TrabajoPracticoManager {
 	void insert(TrabajoPractico tp) throws Exception;
 	
 	void update(TrabajoPractico tp) throws Exception;
+	
+	List<TrabajoPractico> findAllByAlumno(Alumno alumno) throws Exception;
 }

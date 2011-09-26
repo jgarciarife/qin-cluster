@@ -2,6 +2,7 @@ package com.qin.manager.dictamen;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -44,7 +45,7 @@ public class DictamenManagerImpl implements DictamenManager {
 	}
 
 	@Override
-	public HashMap<Integer, String> findAllTPNotaByMateria(Long materiaId)
+	public Map<Integer, String> findAllTPNotaByMateria(Long materiaId)
 			throws Exception {
 		List<Object[]> resultado = getDictamenEAO()
 				.findAllDictamenByMateriaGroupByNota(materiaId);
@@ -52,7 +53,7 @@ public class DictamenManagerImpl implements DictamenManager {
 				|| ((resultado != null) && (resultado.isEmpty()))) {
 			return new HashMap<Integer, String>();
 		}
-		HashMap<Integer, String> retorno = new HashMap<Integer, String>();
+		Map<Integer, String> retorno = new HashMap<Integer, String>();
 		Double nota = null;
 		Long cantidad = null;
 		Integer key = null;
