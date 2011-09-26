@@ -12,4 +12,8 @@ public interface ResolucionEAO extends BaseEAO {
 	List<Resolucion> findAll() throws Exception;
 
 	List<Resolucion> findByTPId(Long tpId) throws Exception;
+
+	Resolucion findByTrabajoPracticoIdAndCodigoResolucionCompartida(
+			Long trabajoPracticoId, String codigoResolucionCompartida)
+			throws Exception;
 }
