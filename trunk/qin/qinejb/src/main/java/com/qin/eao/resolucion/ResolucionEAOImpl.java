@@ -23,7 +23,8 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 	@Override
 	public Resolucion findById(Long resolucionId) throws Exception {
 		StringBuffer jpql = new StringBuffer();
-		jpql.append("SELECT resolucion FROM Resolucion resolucion  join fetch resolucion.respuestas r join fetch r.consigna c ");
+		jpql
+				.append("SELECT resolucion FROM Resolucion resolucion  join fetch resolucion.respuestas r join fetch r.consigna c ");
 		jpql.append("join fetch c.trabajoPractico ");
 		jpql.append("WHERE resolucion.id = :id ");
 		Query query = getEntityManager().createQuery(jpql.toString());
@@ -52,5 +53,21 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 		Query query = getEntityManager().createQuery(jpql.toString());
 		query.setParameter("id", tpid);
 		return (List<Resolucion>) query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Resolucion findByTrabajoPracticoIdAndCodigoResolucionCompartida(
+			Long trabajoPracticoId, String codigoResolucionCompartida)
+			throws Exception {
+		StringBuffer jpql = new StringBuffer();
+		jpql.append("SELECT resolucion ");
+		jpql.append("FROM Resolucion resolucion ");
+		jpql.append("WHERE resolucion.trabajoPractico.id = :trabajoPracticoId ");
+		jpql.append("AND   resolucion.codigoResolucionCompartida = :codigoResolucionCompartida ");
+		Query query = getEntityManager().createQuery(jpql.toString());
+		query.setParameter("trabajoPracticoId", trabajoPracticoId);
+		query.setParameter("codigoResolucionCompartida", codigoResolucionCompartida);
+		return (Resolucion) query.getSingleResult();
 	}
 }
