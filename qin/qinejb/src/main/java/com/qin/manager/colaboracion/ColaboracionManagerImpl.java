@@ -1,7 +1,7 @@
 package com.qin.manager.colaboracion;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -12,9 +12,11 @@ import org.slf4j.LoggerFactory;
 import com.qin.eao.grupo.GrupoEAO;
 import com.qin.eao.materia.MateriaEAO;
 import com.qin.eao.resolucion.ResolucionEAO;
+import com.qin.eao.respuesta.RespuestaEAO;
 import com.qin.entity.Grupo;
 import com.qin.entity.Materia;
 import com.qin.entity.Resolucion;
+import com.qin.entity.Respuesta;
 import com.qin.entity.TrabajoPractico;
 import com.qin.manager.administracion.AdministracionManager;
 import com.qin.manager.dictamen.DictamenManager;
@@ -34,6 +36,9 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 
 	@EJB
 	private ResolucionEAO resolucionEAO;
+
+	@EJB
+	private RespuestaEAO respuestaEAO;
 
 	@EJB
 	private AdministracionManager administracionManager;
@@ -95,6 +100,20 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 		trabajoPracticoManager.update(tp);
 	}
 
+	@Override
+	public void saveResolucion(Resolucion res) throws Exception {
+		if (res.getRespuestas() != null) {
+			for (Respuesta r : res.getRespuestas()) {
+				r.setResolucion(res);
+			}
+		}
+		if (res.getId() == null) {
+			insertResolucion(res);
+		} else {
+			updateResolucion(res);
+		}
+	}
+
 	public void setResolucionEAO(ResolucionEAO resolucionEAO) {
 		this.resolucionEAO = resolucionEAO;
 	}
@@ -103,31 +122,22 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 		return resolucionEAO;
 	}
 
-	@Override
 	public void insertResolucion(Resolucion res) throws Exception {
 		resolucionEAO.insert(res);
-
 	}
 
-	@Override
 	public void updateResolucion(Resolucion res) throws Exception {
 		resolucionEAO.update(res);
 	}
 
 	@Override
-	public HashMap<Integer, String> findAllTPNotaByMateria(Long materiaId) throws Exception {
-		//HashMap<Integer, String> retorno = new HashMap<Integer, String>();
+	public Map<Integer, String> findAllTPNotaByMateria(Long materiaId)
+			throws Exception {
 		return dictamenManager.findAllTPNotaByMateria(materiaId);
-		/*
-		 * retorno.put(new Integer(0), "0"); retorno.put(new Integer(1),
-		 * "10000"); retorno.put(new Integer(2), "20000"); retorno.put(new
-		 * Integer(3), "30000"); retorno.put(new Integer(4), "40000");
-		 * retorno.put(new Integer(5), "50000"); retorno.put(new Integer(6),
-		 * "60000"); retorno.put(new Integer(7), "70000"); retorno.put(new
-		 * Integer(8), "80000"); retorno.put(new Integer(9), "90000");
-		 * retorno.put(new Integer(10), "100000");
-		 */
-		//return retorno;
 	}
-
+	
+	@Override
+	public String generateCodigoResolucionCompartida() throws Exception {
+		return String.valueOf(Math.round(Math.random() * 1000));
+	}
 }

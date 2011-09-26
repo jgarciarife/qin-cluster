@@ -3,6 +3,7 @@ package com.qin.eao.grupo;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.qin.eao.base.BaseEAOImpl;
 import com.qin.entity.Grupo;
+import com.qin.entity.Resolucion;
 
 @Stateless
 public class GrupoEAOImpl extends BaseEAOImpl implements GrupoEAO {
@@ -30,7 +32,7 @@ public class GrupoEAOImpl extends BaseEAOImpl implements GrupoEAO {
 		query.setParameter("id", grupoId);
 		return (Grupo) query.getSingleResult();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Grupo> findAll() throws Exception {
@@ -39,5 +41,20 @@ public class GrupoEAOImpl extends BaseEAOImpl implements GrupoEAO {
 		jpql.append("FROM Grupo grupo ");
 		Query query = getEntityManager().createQuery(jpql.toString());
 		return query.getResultList();
+	}
+
+	@Override
+	public Grupo findByResolucion(Resolucion resolucion) throws Exception {
+		try {
+			StringBuffer jpql = new StringBuffer();
+			jpql.append("SELECT grupo ");
+			jpql.append("FROM Grupo grupo ");
+			jpql.append("WHERE grupo.resolucion = :resolucion ");
+			Query query = getEntityManager().createQuery(jpql.toString());
+			query.setParameter("resolucion", resolucion);
+			return (Grupo) query.getSingleResult();
+		} catch (NonUniqueResultException e) {
+			return null;
+		}
 	}
 }

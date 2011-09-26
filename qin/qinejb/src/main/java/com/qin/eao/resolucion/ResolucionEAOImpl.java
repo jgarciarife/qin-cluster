@@ -3,13 +3,16 @@ package com.qin.eao.resolucion;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.qin.eao.base.BaseEAOImpl;
+import com.qin.entity.Alumno;
 import com.qin.entity.Resolucion;
+import com.qin.entity.TrabajoPractico;
 
 @Stateless
 public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
@@ -55,19 +58,50 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 		return (List<Resolucion>) query.getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Resolucion findByTrabajoPracticoIdAndCodigoResolucionCompartida(
 			Long trabajoPracticoId, String codigoResolucionCompartida)
 			throws Exception {
-		StringBuffer jpql = new StringBuffer();
-		jpql.append("SELECT resolucion ");
-		jpql.append("FROM Resolucion resolucion ");
-		jpql.append("WHERE resolucion.trabajoPractico.id = :trabajoPracticoId ");
-		jpql.append("AND   resolucion.codigoResolucionCompartida = :codigoResolucionCompartida ");
-		Query query = getEntityManager().createQuery(jpql.toString());
-		query.setParameter("trabajoPracticoId", trabajoPracticoId);
-		query.setParameter("codigoResolucionCompartida", codigoResolucionCompartida);
-		return (Resolucion) query.getSingleResult();
+		try {
+			if ((codigoResolucionCompartida != null)
+					&& (!codigoResolucionCompartida.trim().equals(""))) {
+				StringBuffer jpql = new StringBuffer();
+				jpql.append("SELECT resolucion ");
+				jpql.append("FROM Resolucion resolucion ");
+				jpql
+						.append("WHERE resolucion.trabajoPractico.id = :trabajoPracticoId ");
+				jpql
+						.append("AND   resolucion.codigoResolucionCompartida = :codigoResolucionCompartida ");
+				Query query = getEntityManager().createQuery(jpql.toString());
+				query.setParameter("trabajoPracticoId", trabajoPracticoId);
+				query.setParameter("codigoResolucionCompartida",
+						codigoResolucionCompartida);
+				return (Resolucion) query.getSingleResult();
+			} else {
+				return null;
+			}
+		} catch (NonUniqueResultException e) {
+			return null;
+		}
+	}
+
+	@Override
+	public Resolucion findByTrabajoPracticoAndAlumno(
+			TrabajoPractico trabajoPractico, Alumno alumno) throws Exception {
+		try {
+			StringBuffer jpql = new StringBuffer();
+			jpql.append("SELECT resolucion ");
+			jpql.append("FROM Resolucion resolucion, ");
+			jpql.append("     GrupoAlumno grupoAlumno ");
+			jpql.append("WHERE resolucion.trabajoPractico = :trabajoPractico ");
+			jpql.append("AND   resolucion.grupo = grupoAlumno.grupo ");
+			jpql.append("AND   grupoAlumno.alumno = :alumno ");
+			Query query = getEntityManager().createQuery(jpql.toString());
+			query.setParameter("trabajoPractico", trabajoPractico);
+			query.setParameter("alumno", alumno);
+			return (Resolucion) query.getSingleResult();
+		} catch (NonUniqueResultException e) {
+			return null;
+		}
 	}
 }

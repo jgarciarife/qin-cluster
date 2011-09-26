@@ -27,11 +27,6 @@ public class Resolucion extends BaseEntity {
 
 	@Column(name = "codigo_resolucion_compartida", nullable = false)
 	private String codigoResolucionCompartida;
-
-	@ManyToOne(fetch = FetchType.LAZY, optional = true)
-	@JoinColumn(name = "grupo_id")
-	private Grupo grupo;
-
 	
 	public Resolucion() {
 	}
@@ -79,19 +74,5 @@ public class Resolucion extends BaseEntity {
 	 */
 	public void setCodigoResolucionCompartida(String codigoResolucionCompartida) {
 		this.codigoResolucionCompartida = codigoResolucionCompartida;
-	}
-
-	/**
-	 * @return the grupo
-	 */
-	public Grupo getGrupo() {
-		return grupo;
-	}
-
-	/**
-	 * @param grupo the grupo to set
-	 */
-	public void setGrupo(Grupo grupo) {
-		this.grupo = grupo;
 	}
 }

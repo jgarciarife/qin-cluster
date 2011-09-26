@@ -1,7 +1,7 @@
 package com.qin.manager.dictamen;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.qin.entity.Dictamen;
 
@@ -15,6 +15,6 @@ public interface DictamenManager {
 
 	void update(Dictamen tp) throws Exception;
 
-	HashMap<Integer, String> findAllTPNotaByMateria(Long materiaId)
+	Map<Integer, String> findAllTPNotaByMateria(Long materiaId)
 			throws Exception;
 }

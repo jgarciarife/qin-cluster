@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.qin.eao.trabajoPractico.TrabajoPracticoEAO;
+import com.qin.entity.Alumno;
 import com.qin.entity.TrabajoPractico;
 
 @Stateless
@@ -56,5 +57,10 @@ public class TrabajoPracticoManagerImpl implements TrabajoPracticoManager {
 	@Override
 	public void update(TrabajoPractico tp) throws Exception {
 		getTrabajoPracticoEAO().update(tp);
+	}
+	
+	@Override
+	public List<TrabajoPractico> findAllByAlumno(Alumno alumno) throws Exception {
+		return getTrabajoPracticoEAO().findAllByAlumno(alumno);
 	}
 }

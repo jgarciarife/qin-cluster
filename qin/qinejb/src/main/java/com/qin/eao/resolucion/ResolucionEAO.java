@@ -3,7 +3,9 @@ package com.qin.eao.resolucion;
 import java.util.List;
 
 import com.qin.eao.base.BaseEAO;
+import com.qin.entity.Alumno;
 import com.qin.entity.Resolucion;
+import com.qin.entity.TrabajoPractico;
 
 public interface ResolucionEAO extends BaseEAO {
 
@@ -16,4 +18,7 @@ public interface ResolucionEAO extends BaseEAO {
 	Resolucion findByTrabajoPracticoIdAndCodigoResolucionCompartida(
 			Long trabajoPracticoId, String codigoResolucionCompartida)
 			throws Exception;
+
+	Resolucion findByTrabajoPracticoAndAlumno(TrabajoPractico trabajoPractico,
+			Alumno alumno) throws Exception;
 }

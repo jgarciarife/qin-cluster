@@ -1,7 +1,7 @@
 package com.qin.manager.colaboracion;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.qin.entity.Grupo;
 import com.qin.entity.Materia;
@@ -20,13 +20,13 @@ public interface ColaboracionManager {
 
 	void updateTP(TrabajoPractico tp) throws Exception;
 
-	void insertResolucion(Resolucion res) throws Exception;
-
-	void updateResolucion(Resolucion res) throws Exception;
+	void saveResolucion(Resolucion res) throws Exception;
 
 	List<Materia> findAllMaterias() throws Exception;
 
-	HashMap<Integer, String> findAllTPNotaByMateria(Long materiaId)
+	Map<Integer, String> findAllTPNotaByMateria(Long materiaId)
 			throws Exception;
+	
+	String generateCodigoResolucionCompartida() throws Exception;
 
 }
