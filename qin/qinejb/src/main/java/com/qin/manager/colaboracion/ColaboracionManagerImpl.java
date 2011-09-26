@@ -1,7 +1,10 @@
 package com.qin.manager.colaboracion;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -102,14 +105,78 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 
 	@Override
 	public void saveResolucion(Resolucion res) throws Exception {
-		if (res.getRespuestas() != null) {
-			for (Respuesta r : res.getRespuestas()) {
-				r.setResolucion(res);
-			}
-		}
 		if (res.getId() == null) {
-			insertResolucion(res);
+			Resolucion original = resolucionEAO
+					.findByTrabajoPracticoIdAndCodigoResolucionCompartida(res
+							.getTrabajoPractico().getId(), res
+							.getCodigoResolucionCompartida());
+			if (original != null) {
+				Map<Long, Respuesta> insertar = new HashMap<Long, Respuesta>();
+				Map<Long, Respuesta> actualizar = new HashMap<Long, Respuesta>();
+				Map<Long, Respuesta> borrar = new HashMap<Long, Respuesta>();
+				Set<Long> nuevas = new HashSet<Long>();
+				for (Respuesta r : res.getRespuestas()) {
+					if (r.getId() == null) {
+						r.setResolucion(res);
+						respuestaEAO.insert(r);
+					}
+					nuevas.add(r.getId());
+				}
+				Set<Long> originales = new HashSet<Long>();
+				for (Respuesta r : original.getRespuestas()) {
+					if (nuevas.contains(r.getId())) {
+						actualizar.put(r.getId(), r);
+					} else {
+						borrar.put(r.getId(), r);
+					}
+					originales.add(r.getId());
+				}
+				for (Respuesta r : res.getRespuestas()) {
+					if (!originales.contains(r.getId())) {
+						r.setResolucion(res);
+						insertar.put(r.getId(), r);
+					}
+				}
+				Respuesta r = null;
+				for (Map.Entry<Long, Respuesta> entrada : insertar.entrySet()) {
+					r = entrada.getValue();
+					r.setResolucion(original);
+					if (r.getId() != null) {
+						respuestaEAO.update(r);
+					} else {
+						respuestaEAO.insert(r);
+					}
+				}
+				for (Map.Entry<Long, Respuesta> entrada : actualizar.entrySet()) {
+					r = entrada.getValue();
+					r.setResolucion(original);
+					if (r.getId() != null) {
+						respuestaEAO.update(r);
+					} else {
+						respuestaEAO.insert(r);
+					}
+				}
+				for (Map.Entry<Long, Respuesta> entrada : borrar.entrySet()) {
+					r = entrada.getValue();
+					if (r.getId() != null) {
+						respuestaEAO.delete(r);
+					}
+				}
+				original = null;
+				res = (Resolucion) resolucionEAO
+						.findByTrabajoPracticoIdAndCodigoResolucionCompartida(
+								res.getTrabajoPractico().getId(), res
+										.getCodigoResolucionCompartida());
+				updateResolucion(res);
+			} else {
+				insertResolucion(res);
+			}
 		} else {
+			if (res.getRespuestas() != null) {
+				for (Respuesta r : res.getRespuestas()) {
+					r.setResolucion(res);
+				}
+			}
 			updateResolucion(res);
 		}
 	}
@@ -135,7 +202,7 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 			throws Exception {
 		return dictamenManager.findAllTPNotaByMateria(materiaId);
 	}
-	
+
 	@Override
 	public String generateCodigoResolucionCompartida() throws Exception {
 		return String.valueOf(Math.round(Math.random() * 1000));
