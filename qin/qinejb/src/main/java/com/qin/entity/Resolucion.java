@@ -3,6 +3,7 @@ package com.qin.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -24,6 +25,14 @@ public class Resolucion extends BaseEntity {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "resolucion", fetch = FetchType.LAZY)
 	private List<Respuesta> respuestas;
 
+	@Column(name = "codigo_resolucion_compartida", nullable = false)
+	private String codigoResolucionCompartida;
+
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "grupo_id")
+	private Grupo grupo;
+
+	
 	public Resolucion() {
 	}
 
@@ -55,5 +64,34 @@ public class Resolucion extends BaseEntity {
 	 */
 	public void setRespuestas(List<Respuesta> respuestas) {
 		this.respuestas = respuestas;
+	}
+
+	/**
+	 * @return the codigoResolucionCompartida
+	 */
+	public String getCodigoResolucionCompartida() {
+		return codigoResolucionCompartida;
+	}
+
+	/**
+	 * @param codigoResolucionCompartida
+	 *            the codigoResolucionCompartida to set
+	 */
+	public void setCodigoResolucionCompartida(String codigoResolucionCompartida) {
+		this.codigoResolucionCompartida = codigoResolucionCompartida;
+	}
+
+	/**
+	 * @return the grupo
+	 */
+	public Grupo getGrupo() {
+		return grupo;
+	}
+
+	/**
+	 * @param grupo the grupo to set
+	 */
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
 	}
 }
