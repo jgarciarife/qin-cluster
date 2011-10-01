@@ -73,7 +73,7 @@ public class ElaboracionResolucionController {
 			Model model, HttpSession session) throws Exception {
 		Usuario usuario = (Usuario) session
 				.getAttribute(ControllerKeys.USUARIO);
-		Alumno alumno = administracionManager.findAlumnoByUsuario(usuario);
+		Alumno alumno = getAdministracionManager().findAlumnoByUsuario(usuario);
 		TrabajoPractico trabajoPractico = null;
 		Resolucion resolucion = null;
 		if (id != null) {
@@ -119,5 +119,13 @@ public class ElaboracionResolucionController {
 
 	public ResolucionManager getResolucionManager() {
 		return resolucionManager;
+	}
+
+	public void setAdministracionManager(AdministracionManager administracionManager) {
+		this.administracionManager = administracionManager;
+	}
+
+	public AdministracionManager getAdministracionManager() {
+		return administracionManager;
 	}
 }
