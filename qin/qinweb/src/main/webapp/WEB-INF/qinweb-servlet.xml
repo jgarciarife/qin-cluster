@@ -33,6 +33,10 @@
 		jndi-name="qinear-1.0/SincronizadorTextoImpl/local-com.qin.manager.colaboracion.SincronizadorTexto"
 		resource-ref="true" />
 		
+	<jee:jndi-lookup id="administracionManager"
+		jndi-name="qinear-1.0/AdministracionManagerImpl/local-com.qin.manager.administracion.AdministracionManager"
+		resource-ref="true" />
+		
 	<!-- Scans within the base package of the application for @Components to 
 		configure as beans -->
 	<!-- @Controller, @Service, @Configuration, etc. -->
