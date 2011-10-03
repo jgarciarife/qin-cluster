@@ -3,6 +3,7 @@ package com.qin.eao.resolucion;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 
@@ -90,17 +91,20 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 			TrabajoPractico trabajoPractico, Alumno alumno) throws Exception {
 		try {
 			StringBuffer jpql = new StringBuffer();
-			jpql.append("SELECT resolucion ");
-			jpql.append("FROM Resolucion resolucion, ");
-			jpql.append("     GrupoAlumno grupoAlumno ");
-			jpql.append("WHERE resolucion.trabajoPractico = :trabajoPractico ");
-			jpql.append("AND   resolucion.grupo = grupoAlumno.grupo ");
-			jpql.append("AND   grupoAlumno.alumno = :alumno ");
+			jpql.append("SELECT grupo.resolucion ");
+			jpql.append("FROM Grupo grupo ");
+			jpql.append("         JOIN grupo.alumnos alu ");
+			jpql.append("WHERE grupo.resolucion.trabajoPractico = :trabajoPractico ");
+			jpql.append("AND   alu = :alumno ");
 			Query query = getEntityManager().createQuery(jpql.toString());
 			query.setParameter("trabajoPractico", trabajoPractico);
 			query.setParameter("alumno", alumno);
 			return (Resolucion) query.getSingleResult();
 		} catch (NonUniqueResultException e) {
+			return null;
+		} catch (NoResultException e) {
+			return null;
+		} catch (Exception e) {
 			return null;
 		}
 	}
