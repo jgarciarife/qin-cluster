@@ -83,6 +83,8 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 			}
 		} catch (NonUniqueResultException e) {
 			return null;
+		} catch (NoResultException e) {
+			return null;
 		}
 	}
 
@@ -103,8 +105,6 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 		} catch (NonUniqueResultException e) {
 			return null;
 		} catch (NoResultException e) {
-			return null;
-		} catch (Exception e) {
 			return null;
 		}
 	}
