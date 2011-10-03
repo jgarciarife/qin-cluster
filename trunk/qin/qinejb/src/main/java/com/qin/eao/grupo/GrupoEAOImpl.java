@@ -3,6 +3,7 @@ package com.qin.eao.grupo;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 
@@ -54,6 +55,8 @@ public class GrupoEAOImpl extends BaseEAOImpl implements GrupoEAO {
 			query.setParameter("resolucion", resolucion);
 			return (Grupo) query.getSingleResult();
 		} catch (NonUniqueResultException e) {
+			return null;
+		} catch (NoResultException e) {
 			return null;
 		}
 	}
