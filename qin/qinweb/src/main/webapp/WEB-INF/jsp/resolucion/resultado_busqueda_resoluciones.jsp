@@ -4,14 +4,14 @@
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 
 
-<display:table name="resoluciones" id="row" class="sinbordes">
-  <display:column property="id" title="Id"/>
+<display:table name="grupos" id="row" class="sinbordes">
+  <display:column property="resolucion.id" title="Id"/>
   <display:column title="Editar/Evaluar">
   	<% if (!((Usuario)session.getAttribute("usuarioEnSession")).isEvaluador()){ %>
-	<a href="alta_resolucion.html?id=${row.id}" /><img alt="Editar" title="Editar" src="images/edit-icon.gif" height="15"/></a>&nbsp;
+	<a href="alta_resolucion.html?id=${row.resolucion.id}" /><img alt="Editar" title="Editar" src="images/edit-icon.gif" height="15"/></a>&nbsp;
 	<% } %>
 	<% if (((Usuario)session.getAttribute("usuarioEnSession")).isEvaluador()){ %>
-	<a href="evaluar_resolucion.html?id=${row.id}" />Evaluar</a>
+	<a href="evaluar_resolucion.html?id=${row.resolucion.id}" />Evaluar</a>
 	<% } %>
   </display:column>
 </display:table>
