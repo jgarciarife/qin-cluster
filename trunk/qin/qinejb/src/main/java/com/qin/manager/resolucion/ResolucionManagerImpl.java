@@ -43,8 +43,19 @@ public class ResolucionManagerImpl implements ResolucionManager {
 	}
 
 	@Override
+	public List<Grupo> findByTrabajoPracticoIdWithGroup(Long tpId)
+			throws Exception {
+		return resolucionEAO.findByTPIdWithGrupo(tpId);
+	}
+
+	@Override
 	public List<Resolucion> findAll() throws Exception {
 		return resolucionEAO.findAll();
+	}
+
+	@Override
+	public List<Grupo> findAllWithGrupo() throws Exception {
+		return resolucionEAO.findAllWithGrupo();
 	}
 
 	@Override
@@ -75,8 +86,7 @@ public class ResolucionManagerImpl implements ResolucionManager {
 	}
 
 	@Override
-	public Grupo createGrupo(Resolucion resolucion)
-			throws Exception {
+	public Grupo createGrupo(Resolucion resolucion) throws Exception {
 		Grupo grupo = new Grupo();
 		grupo.setResolucion(resolucion);
 		return grupo;

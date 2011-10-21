@@ -27,4 +27,9 @@ public interface ResolucionManager {
 			String codigoResolucionCompartida) throws Exception;
 
 	Grupo createGrupo(Resolucion resolucion) throws Exception;
+
+	public List<Grupo> findByTrabajoPracticoIdWithGroup(Long tpId)
+			throws Exception;
+
+	public List<Grupo> findAllWithGrupo() throws Exception;
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.qin.eao.base.BaseEAO;
 import com.qin.entity.Alumno;
+import com.qin.entity.Grupo;
 import com.qin.entity.Resolucion;
 import com.qin.entity.TrabajoPractico;
 
@@ -21,4 +22,9 @@ public interface ResolucionEAO extends BaseEAO {
 
 	Resolucion findByTrabajoPracticoAndAlumno(TrabajoPractico trabajoPractico,
 			Alumno alumno) throws Exception;
+
+	public List<Grupo> findByTPIdWithGrupo(Long tpid) throws Exception;
+
+	public List<Grupo> findAllWithGrupo() throws Exception;
+
 }
