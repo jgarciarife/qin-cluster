@@ -53,8 +53,8 @@ public class ElaboracionResolucionController {
 		colaboracionManager.saveResolucion(resol);
 		model.addAttribute("trabajoPractico", trabajoPracticoManager
 				.findById(resol.getTrabajoPractico().getId()));
-		model.addAttribute("resolucion", resolucionManager.findById(resol
-				.getId()));
+		model.addAttribute("resolucion",
+				resolucionManager.findById(resol.getId()));
 		return "resolucion.alta";
 	}
 
@@ -82,14 +82,20 @@ public class ElaboracionResolucionController {
 					.getTrabajoPractico().getId());
 		} else if (id == null && tpId != null) {
 			trabajoPractico = trabajoPracticoManager.findById(tpId);
-			if (codigo == null) {
-				codigo = colaboracionManager
-						.generateCodigoResolucionCompartida();
-			}
-			session.setAttribute(CODIGO_RESOLUCION_COMPARTIDA, codigo);
+		}
+		if (codigo == null) {
+			codigo = colaboracionManager.generateCodigoResolucionCompartida();
 		}
 		resolucion = resolucionManager.joinResolucion(resolucion,
 				trabajoPractico, alumno, codigo);
+
+		if (resolucion != null
+				&& resolucion.getCodigoResolucionCompartida() != null
+				&& !resolucion.getCodigoResolucionCompartida().equals(codigo)) {
+			codigo = resolucion.getCodigoResolucionCompartida();
+		}
+
+		session.setAttribute(CODIGO_RESOLUCION_COMPARTIDA, codigo);
 		model.addAttribute("trabajoPractico", trabajoPractico);
 		model.addAttribute("resolucion", resolucion);
 		model.addAttribute("codigo", codigo);
@@ -121,7 +127,8 @@ public class ElaboracionResolucionController {
 		return resolucionManager;
 	}
 
-	public void setAdministracionManager(AdministracionManager administracionManager) {
+	public void setAdministracionManager(
+			AdministracionManager administracionManager) {
 		this.administracionManager = administracionManager;
 	}
 

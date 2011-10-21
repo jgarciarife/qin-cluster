@@ -26,6 +26,7 @@
 			<c:if test="${not empty resolucion.id}">
 			    <form:hidden path="id" />
 			</c:if>
+			<form:hidden path="codigoResolucionCompartida" />
 			</td>
 		</tr>
 		<tr>
