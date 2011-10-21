@@ -27,8 +27,7 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 	@Override
 	public Resolucion findById(Long resolucionId) throws Exception {
 		StringBuffer jpql = new StringBuffer();
-		jpql
-				.append("SELECT resolucion FROM Resolucion resolucion  join fetch resolucion.respuestas r join fetch r.consigna c ");
+		jpql.append("SELECT resolucion FROM Resolucion resolucion  join fetch resolucion.respuestas r join fetch r.consigna c ");
 		jpql.append("join fetch c.trabajoPractico ");
 		jpql.append("WHERE resolucion.id = :id ");
 		Query query = getEntityManager().createQuery(jpql.toString());
@@ -69,15 +68,15 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 				StringBuffer jpql = new StringBuffer();
 				jpql.append("SELECT resolucion ");
 				jpql.append("FROM Resolucion resolucion ");
-				jpql
-						.append("WHERE resolucion.trabajoPractico.id = :trabajoPracticoId ");
-				jpql
-						.append("AND   resolucion.codigoResolucionCompartida = :codigoResolucionCompartida ");
+				jpql.append("WHERE resolucion.trabajoPractico.id = :trabajoPracticoId ");
+				jpql.append("AND   resolucion.codigoResolucionCompartida = :codigoResolucionCompartida ");
 				Query query = getEntityManager().createQuery(jpql.toString());
 				query.setParameter("trabajoPracticoId", trabajoPracticoId);
 				query.setParameter("codigoResolucionCompartida",
 						codigoResolucionCompartida);
-				return (Resolucion) query.getSingleResult();
+				Resolucion res = (Resolucion) query.getSingleResult();
+				Resolucion resComppleta = findById(res.getId());
+				return resComppleta;
 			} else {
 				return null;
 			}
@@ -101,7 +100,9 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 			Query query = getEntityManager().createQuery(jpql.toString());
 			query.setParameter("trabajoPractico", trabajoPractico);
 			query.setParameter("alumno", alumno);
-			return (Resolucion) query.getSingleResult();
+			Resolucion res = (Resolucion) query.getSingleResult();
+			Resolucion resComppleta = findById(res.getId());
+			return resComppleta;
 		} catch (NonUniqueResultException e) {
 			return null;
 		} catch (NoResultException e) {
