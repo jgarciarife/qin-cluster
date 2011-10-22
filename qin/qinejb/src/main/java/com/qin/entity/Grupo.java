@@ -26,7 +26,7 @@ public class Grupo extends BaseEntity {
 
 	@Column(nullable = true)
 	@JoinTable(name = "grupo_alumno", catalog = "qin", uniqueConstraints = { @UniqueConstraint(columnNames = {
-			"grupo_id", "alumno_id" }) }, joinColumns = { @JoinColumn(name = "grupo_id") }, inverseJoinColumns = { @JoinColumn(name = "alumno_id") })
+			"grupo_id", "alumno_id" }) }, joinColumns = { @JoinColumn(name = "grupo_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "alumno_id", referencedColumnName = "id") })
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Alumno> alumnos;
 
@@ -61,5 +61,22 @@ public class Grupo extends BaseEntity {
 	 */
 	public void setAlumnos(List<Alumno> alumnos) {
 		this.alumnos = alumnos;
+	}
+
+	/**
+	 * 
+	 * @return String Los apellidos de lo mimbros del grupo separados por coma
+	 */
+	public String getAutores() {
+		StringBuilder autores = new StringBuilder();
+		if (alumnos != null) {
+			for (Alumno al : alumnos) {
+				autores.append(al.getApellido());
+				if (!alumnos.get(alumnos.size() - 1).equals(al)) {
+					autores.append(", ");
+				}
+			}
+		}
+		return autores.toString();
 	}
 }

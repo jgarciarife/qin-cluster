@@ -24,32 +24,35 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 
 	public ResolucionEAOImpl() {
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Grupo> findByTPIdWithGrupo(Long tpid) throws Exception {
 		StringBuffer jpql = new StringBuffer();
-		jpql.append("SELECT grupo ");
+		jpql.append("SELECT distinct grupo ");
 		jpql.append("FROM Grupo grupo ");
-		jpql.append("         join fetch grupo.resolucion r ");
+		jpql.append(" join fetch grupo.resolucion r "
+				+ " join fetch r.trabajoPractico tp"
+				+ " join fetch grupo.alumnos al ");
 		jpql.append("WHERE grupo.resolucion.trabajoPractico.id = :id ");
 		Query query = getEntityManager().createQuery(jpql.toString());
 		query.setParameter("id", tpid);
 		return (List<Grupo>) query.getResultList();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Grupo> findAllWithGrupo() throws Exception {
 		StringBuffer jpql = new StringBuffer();
-		jpql.append("SELECT grupo ");
+		jpql.append("SELECT distinct grupo ");
 		jpql.append("FROM Grupo grupo ");
-		jpql.append("         join fetch grupo.resolucion r ");
+		jpql.append(" join fetch grupo.resolucion r "
+				+ " join fetch r.trabajoPractico tp"
+				+ " join fetch grupo.alumnos al");
 		Query query = getEntityManager().createQuery(jpql.toString());
 		return query.getResultList();
 	}
 
-	
 	@Override
 	public Resolucion findById(Long resolucionId) throws Exception {
 		StringBuffer jpql = new StringBuffer();
