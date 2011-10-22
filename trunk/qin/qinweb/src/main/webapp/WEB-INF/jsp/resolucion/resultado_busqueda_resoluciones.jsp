@@ -5,7 +5,8 @@
 
 
 <display:table name="grupos" id="row" class="sinbordes">
-  <display:column property="resolucion.id" title="Id"/>
+  <display:column property="resolucion.trabajoPractico.titulo" title="Tp"/>
+  <display:column property="autores" title="Autores"/>
   <display:column title="Editar/Evaluar">
   	<% if (!((Usuario)session.getAttribute("usuarioEnSession")).isEvaluador()){ %>
 	<a href="alta_resolucion.html?id=${row.resolucion.id}" /><img alt="Editar" title="Editar" src="images/edit-icon.gif" height="15"/></a>&nbsp;
