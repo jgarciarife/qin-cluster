@@ -75,4 +75,30 @@ public class DictamenEAOImpl extends BaseEAOImpl implements DictamenEAO {
 		}
 		return query.getResultList();
 	}
+
+	@Override
+	public Dictamen findByResolucionId(Long resId) throws Exception {
+		StringBuffer jpql = new StringBuffer();
+		jpql.append("SELECT dictamen ");
+		jpql.append("FROM Dictamen dictamen ");
+		jpql.append("join fetch dictamen.resolucion r ");
+		jpql.append("join fetch r.respuestas ");
+		jpql.append("join fetch r.trabajoPractico ");
+		jpql.append("WHERE r.id = :id ");
+		Query query = getEntityManager().createQuery(jpql.toString());
+		query.setParameter("id", resId);
+		Dictamen dic = (Dictamen) query.getSingleResult();
+
+		StringBuffer jpql2 = new StringBuffer();
+		jpql2.append("SELECT dictamen ");
+		jpql2.append("FROM Dictamen dictamen ");
+		jpql2.append("join fetch dictamen.correccions c ");
+		jpql2.append("join fetch c.respuesta ");
+		jpql2.append("WHERE dictamen.id = :id ");
+		Query query2 = getEntityManager().createQuery(jpql2.toString());
+		query2.setParameter("id", dic.getId());
+		Dictamen dic2 = (Dictamen) query2.getSingleResult();
+		dic.setCorreccions(dic2.getCorreccions());
+		return dic;
+	}
 }

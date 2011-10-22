@@ -37,7 +37,7 @@ public class EvaluacionTPController {
 		if (id != null) {
 			try {
 				logger.info("id " + id);
-				dictamen = getDictamenManager().findById(id);
+				dictamen = getDictamenManager().findByResolucionId(id);
 			} catch (Exception e) {
 				logger.error("error al buscar", e);
 			}

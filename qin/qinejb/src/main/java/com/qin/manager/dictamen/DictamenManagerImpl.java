@@ -20,6 +20,12 @@ public class DictamenManagerImpl implements DictamenManager {
 		Dictamen dic = getDictamenEAO().findById(id);
 		return dic;
 	}
+	
+	@Override
+	public Dictamen findByResolucionId(Long id) throws Exception {
+		Dictamen dic = getDictamenEAO().findByResolucionId(id);
+		return dic;
+	}
 
 	public void setDictamenEAO(DictamenEAO dictamenEAO) {
 		this.dictamenEAO = dictamenEAO;
