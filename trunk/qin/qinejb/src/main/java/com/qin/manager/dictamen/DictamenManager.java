@@ -17,4 +17,6 @@ public interface DictamenManager {
 
 	Map<Integer, String> findAllTPNotaByMateria(Long materiaId)
 			throws Exception;
+
+	public Dictamen findByResolucionId(Long id) throws Exception;
 }
