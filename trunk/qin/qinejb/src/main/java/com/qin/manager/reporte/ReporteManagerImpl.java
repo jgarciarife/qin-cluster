@@ -1,5 +1,8 @@
 package com.qin.manager.reporte;
 
-public class ReporteManagerImpl {
+public class ReporteManagerImpl implements ReporteManager {
 
+	public ReporteManagerImpl() {
+	}
+	
 }
