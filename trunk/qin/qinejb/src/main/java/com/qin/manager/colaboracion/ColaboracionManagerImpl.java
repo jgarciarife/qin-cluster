@@ -1,10 +1,7 @@
 package com.qin.manager.colaboracion;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -111,7 +108,30 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 							.getTrabajoPractico().getId(), res
 							.getCodigoResolucionCompartida());
 			if (original != null) {
-				Map<Long, Respuesta> insertar = new HashMap<Long, Respuesta>();
+				if ((original.getRespuestas() != null) && (original.getRespuestas().size() > 0)) {
+					Respuesta resp = null;
+					for (Respuesta r : original.getRespuestas()) {
+						for (int i = 0; i < res.getRespuestas().size(); i++) {
+							resp = res.getRespuestas().get(i);
+							if ((resp != null) && (r.getConsigna().getId().longValue() == resp.getConsigna().getId().longValue())) {
+								r.setRespuesta(resp.getRespuesta());
+								r.setResolucion(original);
+								respuestaEAO.update(r);
+								if (resp.getId() != null) {
+									res.getRespuestas().remove(i);
+									respuestaEAO.delete(resp);
+								}
+							}
+						}
+					}
+				}
+				for (Respuesta r : res.getRespuestas()) {
+					r.setResolucion(original);
+					respuestaEAO.insert(r);
+				}
+				updateResolucion(original);
+				// -------------------------------------------------------------
+				/*Map<Long, Respuesta> insertar = new HashMap<Long, Respuesta>();
 				Map<Long, Respuesta> actualizar = new HashMap<Long, Respuesta>();
 				Map<Long, Respuesta> borrar = new HashMap<Long, Respuesta>();
 				Set<Long> nuevas = new HashSet<Long>();
@@ -167,8 +187,13 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 						.findByTrabajoPracticoIdAndCodigoResolucionCompartida(
 								res.getTrabajoPractico().getId(), res
 										.getCodigoResolucionCompartida());
-				updateResolucion(res);
+				updateResolucion(res);*/
 			} else {
+				if (res.getRespuestas() != null) {
+					for (Respuesta r : res.getRespuestas()) {
+						r.setResolucion(res);
+					}
+				}
 				insertResolucion(res);
 			}
 		} else {
