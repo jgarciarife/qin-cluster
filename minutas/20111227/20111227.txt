@@ -1,0 +1,16 @@
+- Poner la prueba de contexto normal antes que todo
+- Definir contexto de funcionamiento para cada caso
+- Prueba del balanceador de carga: podría estar de más, porque es un problema centrado en el balanceador de carga; ojo
+- Casos copados: los del caché, y aquel en que se reenvía el request al nodo que se desconecta, es inaceptable que el usuario se quede afuera
+
+- Hacer foco más en la estructura del cluster; no lucir tanto la aplicación
+
+- Pensar en los EJB?
+
+- Sumar particularidades específicas de JBoss y de Terracotta; ubicar características que tienen ambos; ver las diferencias
+
+- Dejar la aplicación, y enfocar en la arquitectura
+
+- Destacar el análisis de los clusters; apéndices, capítulos; finalmente se presenta tremendo mamotreto, así que la verdad es lo mismo; llevar la aplicación a un apéndice o algo así
+
+- Separar el balanceador de carga
