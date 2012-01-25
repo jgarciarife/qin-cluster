@@ -2,7 +2,7 @@ Pasos:
 
 Previo: tener dos instalaciones de tomcat que se puedan levantar al mismo tiempo (modificando el <instalacion tomcat>/conf/server.xml)
 
-1) Bajar e instalar la version OPEN SOURCE de terracotta.
+1) Bajar e instalar la version OPEN SOURCE de terracotta. http://terracotta.org/downloads/open-source/catalog (yo estoy usando el "Terracotta Installer Binary")
 2) ir a <carpeta de instalacion de terracotta>/ehcache/samples/colorcache/bin/
 3) iniciar el servidor de terracotta ./start-sample-server.sh 
 (debo verificar este paso, ya que me baso en el servidor de la app de ejemplo original, pero no se si esta tiene configuracion especifica necesaria para correr el ejemplo)
