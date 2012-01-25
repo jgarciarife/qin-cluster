@@ -1,0 +1,139 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.terracotta</groupId>
+	<artifactId>test</artifactId>
+	<packaging>war</packaging>
+	<version>1.0</version>
+	<name>qinweb Webapp</name>
+	<url>http://localhost:8080/qinweb</url>
+	<repositories>
+		<repository>
+			<id>terracotta-repository</id>
+			<url>http://www.terracotta.org/download/reflector/releases</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+	</repositories>
+
+	<properties>
+		<tc-maven-plugin.version>1.8.0</tc-maven-plugin.version>
+		<terracotta-session.version>1.2.0</terracotta-session.version>
+		<ehcache-core.version>2.5.0</ehcache-core.version>
+		<ehcache-terracotta.version>2.5.0</ehcache-terracotta.version>
+	</properties>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<!-- The Terracotta Toolkit is required for running a client. The API version 
+			for this Toolkit is 1.1. -->
+		<dependency>
+			<groupId>org.terracotta</groupId>
+			<artifactId>terracotta-toolkit-1.4-runtime</artifactId>
+			<version>4.0.0</version>
+		</dependency>
+
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.terracotta.session</groupId> -->
+<!-- 			<artifactId>terracotta-session</artifactId> -->
+<!-- 			<version>${terracotta-session.version}</version> -->
+<!-- 		</dependency> -->
+
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>${ehcache-core.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-terracotta</artifactId>
+			<version>${ehcache-terracotta.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.15</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<filtering>false</filtering>
+				<directory>src/test/java</directory>
+				<includes>
+					<include>**</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</testResource>
+		</testResources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+		<finalName>test</finalName>
+	</build>
+</project>
