@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<project name="build-common" xmlns:antelope="antlib:ise.antelope.tasks">
+	<property name="project.dir" value="." />
+
+	<property environment="env" />
+
+	<property name="env.COMPUTERNAME" value="${env.HOST}" />
+	<property name="env.COMPUTERNAME" value="${env.HOSTNAME}" />
+
+	<property file="${project.dir}/app.server.properties" />
+	<property name="war.file.dest" value="${app.server.tomcat.deploy.dir}" />
+	<property name="war.file" value="${app.server.tomcat.portal.warfile}" />
+	<property name="war.file.deployed" value="${app.server.tomcat.portal.dir}" />
+
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+		<classpath>
+			<pathelement location="development/ant-contrib.jar" />
+		</classpath>
+	</taskdef>
+
+	<target name="deploy-fast">
+		<copy todir="${app.server.tomcat.portal.dir}">
+			<fileset dir="src/main/webapp">
+				<include name="**/*.css" />
+				<include name="**/*.dtd" />
+				<include name="**/*.gif" />
+				<include name="**/*.jar" />
+				<include name="**/*.jpg" />
+				<include name="**/*.js" />
+				<include name="**/*.jsp" />
+				<include name="**/*.jspf" />
+				<include name="**/*.png" />
+				<include name="**/*.properties" />
+				<include name="**/*.tld" />
+				<include name="**/*.vm" />
+				<include name="**/*.xml" />
+			</fileset>
+		</copy>
+	</target>
+
+
+	<target name="deploy-war">
+		<if>
+			<available file="${war.file.deployed}" type="dir" />
+			<then>
+				<delete dir="${war.file.deployed}" />
+			</then>
+		</if>
+
+		<if>
+			<available file="${war.file}" type="file" />
+			<then>
+				<delete file="${war.file}" />
+			</then>
+		</if>
+		<copy todir="${war.file.dest}">
+			<fileset dir="target">
+				<include name="portalempresas.war" />
+			</fileset>
+		</copy>
+	</target>
+</project>
