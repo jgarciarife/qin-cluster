@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans 
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                    http://www.springframework.org/schema/security 
+                    http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<security:http use-expressions="true">
+		<security:intercept-url pattern="/index.jsp" access="permitAll" />
+		<security:intercept-url pattern="/resources/**" access="permitAll" />
+		<security:intercept-url pattern="/css/**" access="permitAll" />
+		<security:intercept-url pattern="/jquery/**" access="permitAll" />
+		<security:intercept-url pattern="/images/**" access="permitAll" />
+		<security:intercept-url pattern="/secure/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/**" access="denyAll" />
+		<security:form-login default-target-url="/secure/welcome.do" login-page="/index.jsp" authentication-failure-url="/index.jsp" />
+	</security:http>
+
+	<security:global-method-security
+		secured-annotations="enabled" />
+
+	<security:authentication-manager>
+	<security:authentication-provider>
+		<security:jdbc-user-service
+			data-source-ref="dataSource"
+			 users-by-username-query="
+		      select username,password, true from Usuario where username=?" 
+ 
+		   authorities-by-username-query="
+		      select u.username, ur.authority from Usuario u, Authority ur 
+		      where u.id = ur.usuario_fk and u.username =?  " />
+	</security:authentication-provider>
+</security:authentication-manager>
+</beans:beans>   
