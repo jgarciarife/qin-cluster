@@ -1,0 +1,10 @@
+<projectDescription>
+  <name>qinear</name>
+  <comment>NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
+  <projects>
+    <project>qinejb</project>
+    <project>qinweb</project>
+  </projects>
+  <buildSpec/>
+  <natures/>
+</projectDescription>

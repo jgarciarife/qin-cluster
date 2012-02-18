@@ -1,0 +1,29 @@
+<project>
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.qin</groupId>
+   <version>1.0</version>
+   <artifactId>qinjboss</artifactId>
+   <packaging>pom</packaging>
+   <name>qinjboss</name>
+   <modules>
+      <module>qinweb</module>
+      <module>qinejb</module>
+      <module>qinear</module>
+   </modules>
+   <dependencyManagement>
+      <dependencies>
+         <dependency>
+            <groupId>com.qin.qinjboss</groupId>
+            <artifactId>qinweb</artifactId>
+            <version>1.0</version>
+            <type>war</type>
+         </dependency>
+         <dependency>
+            <groupId>com.qin.qinjboss</groupId>
+            <artifactId>qinejb</artifactId>
+            <version>1.0</version>
+            <type>ejb</type>
+         </dependency>
+      </dependencies>
+   </dependencyManagement>
+</project>

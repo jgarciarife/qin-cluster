@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="base.definition" template="/WEB-INF/jsp/layout/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/WEB-INF/jsp/layout/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/layout/menu.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/layout/footer.jsp" />
+	</definition>
+
+	<definition name="home" extends="base.definition">
+		<put-attribute name="title" value="Qin Cluster" />
+		<put-attribute name="body" value="/WEB-INF/jsp/home.jsp" />
+	</definition>
+
+	<definition name="error_logueo" template="/WEB-INF/jsp/login/error.jsp">
+	</definition>
+
+	<definition name="tp.resultado_busqueda" extends="base.definition">
+		<put-attribute name="title" value="Qin Cluster" />
+		<put-attribute name="body" value="/WEB-INF/jsp/trabajos_practicos/resultado_busqueda_tps.jsp" />
+	</definition>
+	
+	<definition name="tp.iniciar_busqueda" extends="base.definition">
+		<put-attribute name="title" value="Qin Cluster" />
+		<put-attribute name="body" value="/WEB-INF/jsp/trabajos_practicos/buscar_tps.jsp" />
+	</definition>
+
+	<definition name="consulta" extends="base.definition">
+		<put-attribute name="title" value="Qin Cluster" />
+		<put-attribute name="body" value="/WEB-INF/jsp/consulta.jsp" />
+	</definition>
+
+	<definition name="tp.alta" extends="base.definition">
+		<put-attribute name="title" value="Qin Cluster" />
+		<put-attribute name="body" value="/WEB-INF/jsp/trabajos_practicos/alta_tp.jsp" />
+	</definition>
+	
+	<definition name="tp.estadistica" extends="base.definition">
+		<put-attribute name="title" value="Qin Cluster" />
+		<put-attribute name="body" value="/WEB-INF/jsp/estadisticas/estadistica_tp.jsp" />
+	</definition>
+	
+	<definition name="tp.ver_estadistica_tp_en_materia" extends="base.definition">
+		<put-attribute name="title" value="Qin Cluster" />
+		<put-attribute name="body" value="/WEB-INF/jsp/estadisticas/ver_estadistica_tp_en_materia.jsp" />
+	</definition>
+
+	<definition name="tp.unirse_resolucion" extends="base.definition">
+		<put-attribute name="title" value="Contact Manager" />
+		<put-attribute name="body" value="/WEB-INF/jsp/resolucion/unirse_resolucion.jsp" />
+	</definition>
+	
+	<definition name="resolucion.alta" extends="base.definition">
+		<put-attribute name="title" value="Qin Cluster" />
+		<put-attribute name="body" value="/WEB-INF/jsp/resolucion/alta_resolucion.jsp" />
+	</definition>
+	
+	<definition name="resolucion.resultado_busqueda" extends="base.definition">
+		<put-attribute name="title" value="Qin Cluster" />
+		<put-attribute name="body" value="/WEB-INF/jsp/resolucion/resultado_busqueda_resoluciones.jsp" />
+	</definition>
+	
+	<definition name="resolucion.evaluacion" extends="base.definition">
+		<put-attribute name="title" value="Qin Cluster" />
+		<put-attribute name="body" value="/WEB-INF/jsp/evaluacion/evaluar_resolucion.jsp" />
+	</definition>
+
+</tiles-definitions>
