@@ -52,7 +52,7 @@ public class GrupoEAOImpl extends BaseEAOImpl implements GrupoEAO {
 		try {
 			StringBuffer jpql = new StringBuffer();
 			jpql.append("SELECT grupo ");
-			jpql.append("FROM Grupo grupo ");
+			jpql.append("FROM Grupo grupo left join fetch grupo.alumnos a ");
 			jpql.append("WHERE grupo.resolucion = :resolucion ");
 			Query query = sessionFactory.getCurrentSession().createQuery(jpql.toString());
 			query.setParameter("resolucion", resolucion);
