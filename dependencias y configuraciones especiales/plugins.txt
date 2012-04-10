@@ -3,5 +3,6 @@ Helios
 - m2e extras	http://m2eclipse.sonatype.org/sites/m2e-extras
 - JBoss Tools	http://download.jboss.org/jbosstools/updates/stable/helios/
 				http://download.jboss.org/jbosstools/updates/stable/galileo/
+				ESTE: http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=121986
 - Subclipse		http://subclipse.tigris.org/update_1.6.x/
 - WTP
