@@ -2,6 +2,7 @@
 --------------------------------------------------------------------------------
 
 - Topología de clústers
+
 [qin-cluster]/recursos/Manning.JBoss.in.Action.Jan.2009.pdf
 12.1.2 Cluster topology and makeup (página 325; página 356 para el Acrobat Reader/Sumatra/Document Viewer/Evince/etc)
 (en realidad de este punto en adelante es todo muy interesante)
@@ -70,3 +71,10 @@ up route add -net 224.0.0.0/4 dev eth0
   -b : ip al que se enlaza el servidor
   -Djboss.messaging.ServerPeerID : nombre del canal de comunicación
   -Djboss.service.binding.set : juego de puertos a tomar
+  
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+Debugear remotamente
+
+http://oreilly.com/java/archive/eclipse-jboss-remote-debug.html?page=6
