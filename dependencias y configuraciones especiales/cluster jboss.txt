@@ -37,17 +37,17 @@ http://blog.mafr.de/2011/07/10/jboss-multiple-instances/
 
 http://docs.jboss.org/jbossclustering/cluster_guide/5.1/html-single/
 
-- Backupear los archivos:
+01.- Backupear los archivos:
 	- [jboss as 6]/server/all/deploy/qinear-1.0.ear
 	- [jboss as 6]/server/all/deploy/jbossweb.sar/server.xml
 	- [jboss as 6]/server/all/lib/mysql-connector-java-5.1.12.jar
-- Ubicar el instalador de JBoss AS 6: jboss-as-distribution-6.0.0.Final.zip (http://download.jboss.org/jbossas/6.1/jboss-as-distribution-6.1.0.Final.zip)
-- Eliminar la instalación de JBoss AS 6
-- Reinstalar JBoss AS 6
-- Copiar los backups de qinear-1.0.ear, server.xml y mysql-connector-java-5.1.12.jar a sus ubicaciones originales
-- Copiar [jboss as 6]/server/all a otra carpeta DENTRO de [jboss as 6]/server/; se asume que esa otra carpeta, es [jboss as 6]/server/all2
-- Editar [jboss as 6]/server/all2/deploy/jbossweb.sar/server.xml, y en la línea 12 colocar otro puerto. Se recomienda [puerto original] + 100
-- Ejecutar el siguiente comando:
+02.- Ubicar el instalador de JBoss AS 6: jboss-as-distribution-6.0.0.Final.zip (http://download.jboss.org/jbossas/6.1/jboss-as-distribution-6.1.0.Final.zip)
+03.- Eliminar la instalación de JBoss AS 6
+04.- Reinstalar JBoss AS 6
+05.- Copiar los backups de qinear-1.0.ear, server.xml y mysql-connector-java-5.1.12.jar a sus ubicaciones originales
+06.- Copiar [jboss as 6]/server/all a otra carpeta DENTRO de [jboss as 6]/server/; se asume que esa otra carpeta, es [jboss as 6]/server/all2
+07.- Editar [jboss as 6]/server/all2/deploy/jbossweb.sar/server.xml, y en la línea 12 colocar otro puerto. Se recomienda [puerto original] + 100
+08.- Ejecutar el siguiente comando:
 
 sudo route add -net 224.0.0.0/4 dev eth0
 
@@ -60,11 +60,11 @@ up route add -net 224.0.0.0/4 dev eth0
 
 ... se puede evitar ejecutar este comando una y otra vez
 		
-- Nodo 1: ./run.sh -c all -g qin -u 239.1.2.3 -b [ip de la computadora] -Djboss.messaging.ServerPeerID=1 -Djboss.service.binding.set=ports-default
+09.- Nodo 1: ./run.sh -c all -g qin -u 239.1.2.3 -b [ip de la computadora] -Djboss.messaging.ServerPeerID=1 -Djboss.service.binding.set=ports-default
 
-- Nodo 2: ./run.sh -c all2 -g qin -u 239.1.2.3 -b [ip de la computadora; mismo que en el caso anterior] -Djboss.messaging.ServerPeerID=2 -Djboss.service.binding.set=ports-01
+10.- Nodo 2: ./run.sh -c all2 -g qin -u 239.1.2.3 -b [ip de la computadora; mismo que en el caso anterior] -Djboss.messaging.ServerPeerID=2 -Djboss.service.binding.set=ports-01
 
-- Referencias:
+11.- Referencias:
   -c : configuración/contexto; en un caso all, en el otro all2
   -g : nombre del cluster; en todos los casos el nombre es "qin"
   -u : dirección de multicast interno al cluster, asociada con la ruta 224.0.0.0/4 que se agregó a la tabla de ruteo; en todos los casos debe ir el mismo IP
