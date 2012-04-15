@@ -67,10 +67,10 @@ up route add -net 224.0.0.0/4 dev eth0
 - Referencias:
   -c : configuración/contexto; en un caso all, en el otro all2
   -g : nombre del cluster; en todos los casos el nombre es "qin"
-  -u : dirección de multicast interno al cluster, asociada con la ruta 224.0.0.0/4 que se agregó a la tabla de ruteo
-  -b : ip al que se enlaza el servidor
-  -Djboss.messaging.ServerPeerID : nombre del canal de comunicación
-  -Djboss.service.binding.set : juego de puertos a tomar
+  -u : dirección de multicast interno al cluster, asociada con la ruta 224.0.0.0/4 que se agregó a la tabla de ruteo; en todos los casos debe ir el mismo IP
+  -b : ip al que se enlaza el servidor; en este caso de todos los nodos en el mismo servidor sin virtualizar el sistema operativo, debe ir el mismo IP
+  -Djboss.messaging.ServerPeerID : nombre del canal de comunicación; en cada caso un número distinto
+  -Djboss.service.binding.set : juego de puertos a tomar; en cada caso un juego distinto (ports-01, ports-02, ports-03, etc)
   
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -78,3 +78,10 @@ up route add -net 224.0.0.0/4 dev eth0
 Debugear remotamente
 
 http://oreilly.com/java/archive/eclipse-jboss-remote-debug.html?page=6
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+JBoss 7 ?
+
+http://download.jboss.org/jbossas/7.1/jboss-as-7.1.1.Final/jboss-as-7.1.1.Final.tar.gz
