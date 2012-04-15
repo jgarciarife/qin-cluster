@@ -8,3 +8,46 @@ En PC 1
  
 En PC 2
 ./run.sh -c all -g qin -b pc2 -Djboss.messaging.ServerPeerID=2
+
+- Copiar la configuración a otra carpeta
+	Ejemplo:
+		run –c all
+		run –c all2 => copiar all a all2
+		
+- http://blog.mafr.de/2011/07/10/jboss-multiple-instances/
+
+En PC 1
+./run.sh -c all -g qin -b [ip pc1] -Djboss.messaging.ServerPeerID=1
+ 
+En PC 2
+./run.sh -c all2 -Djboss.service.binding.set=ports-01 -g qin -b [ip pc2] -Djboss.messaging.ServerPeerID=2
+
+- Topología de clústers
+[qin-cluster]/recursos/Manning.JBoss.in.Action.Jan.2009.pdf
+12.1.2 Cluster topology and makeup (página 325; página 356 para el Acrobat Reader/Sumatra/Document Viewer/Evince/etc)
+(en realidad de este punto en adelante es todo muy interesante)
+
+- Múltiples JBoss en la misma PC
+(práctico para probar)
+[qin-cluster]/recursos/Manning.JBoss.in.Action.Jan.2009.pdf
+15.2 Collocating multiple application server instances (página 414; página 445 para el Acrobat Reader/Sumatra/Document Viewer/Evince/etc)
+
+- Copiar la configuración a otra carpeta
+	Ejemplo:
+		run –c all
+		run –c all2 => copiar all a all2
+		
+- Editar [jboss]/server/all2/deploy/jbossweb.sar/server.xml, cambiar la línea 12
+
+<Connector protocol="HTTP/1.1" port="8099" address="${jboss.bind.address}" => poner otro puerto, no sé 8199
+		
+- http://blog.mafr.de/2011/07/10/jboss-multiple-instances/
+
+En PC 1
+./run.sh -c all -g qin -b [ip pc1] -Djboss.messaging.ServerPeerID=1
+ 
+En PC 2
+./run.sh -Djboss.service.binding.set=ports-01 -c all2 -g qin -b [ip pc2] -Djboss.messaging.ServerPeerID=2
+
+./run.sh -c all -g qin -b 192.168.1.100 -Djboss.messaging.ServerPeerID=1
+./run.sh -Djboss.service.binding.set=ports-01 -c all2 -g qin -b 192.168.1.100 -Djboss.messaging.ServerPeerID=2
