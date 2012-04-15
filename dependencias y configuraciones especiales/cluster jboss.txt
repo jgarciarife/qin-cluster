@@ -1,3 +1,16 @@
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+- Topología de clústers
+[qin-cluster]/recursos/Manning.JBoss.in.Action.Jan.2009.pdf
+12.1.2 Cluster topology and makeup (página 325; página 356 para el Acrobat Reader/Sumatra/Document Viewer/Evince/etc)
+(en realidad de este punto en adelante es todo muy interesante)
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+Cluster - Un nodo por cada servidor
+
 Colocar qinDS-ds.xml correctamente bien configurado en [jboss6]/server/all/deploy
 Colocar qinear-1.0.ear en [jboss6]/server/all/deploy
 Colocar el connector de mysql en [jboss6]/server/all/lib
@@ -9,45 +22,51 @@ En PC 1
 En PC 2
 ./run.sh -c all -g qin -b pc2 -Djboss.messaging.ServerPeerID=2
 
-- Copiar la configuración a otra carpeta
-	Ejemplo:
-		run –c all
-		run –c all2 => copiar all a all2
-		
-- http://blog.mafr.de/2011/07/10/jboss-multiple-instances/
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
-En PC 1
-./run.sh -c all -g qin -b [ip pc1] -Djboss.messaging.ServerPeerID=1
- 
-En PC 2
-./run.sh -c all2 -Djboss.service.binding.set=ports-01 -g qin -b [ip pc2] -Djboss.messaging.ServerPeerID=2
-
-- Topología de clústers
-[qin-cluster]/recursos/Manning.JBoss.in.Action.Jan.2009.pdf
-12.1.2 Cluster topology and makeup (página 325; página 356 para el Acrobat Reader/Sumatra/Document Viewer/Evince/etc)
-(en realidad de este punto en adelante es todo muy interesante)
+Cluster - Varios nodos en el mismo servidor, sin virtualizar SO
 
 - Múltiples JBoss en la misma PC
 (práctico para probar)
 [qin-cluster]/recursos/Manning.JBoss.in.Action.Jan.2009.pdf
 15.2 Collocating multiple application server instances (página 414; página 445 para el Acrobat Reader/Sumatra/Document Viewer/Evince/etc)
 
-- Copiar la configuración a otra carpeta
-	Ejemplo:
-		run –c all
-		run –c all2 => copiar all a all2
+http://blog.mafr.de/2011/07/10/jboss-multiple-instances/
+
+http://docs.jboss.org/jbossclustering/cluster_guide/5.1/html-single/
+
+- Backupear los archivos:
+	- [jboss as 6]/server/all/deploy/qinear-1.0.ear
+	- [jboss as 6]/server/all/deploy/jbossweb.sar/server.xml
+	- [jboss as 6]/server/all/lib/mysql-connector-java-5.1.12.jar
+- Ubicar el instalador de JBoss AS 6: jboss-as-distribution-6.0.0.Final.zip (http://download.jboss.org/jbossas/6.1/jboss-as-distribution-6.1.0.Final.zip)
+- Eliminar la instalación de JBoss AS 6
+- Reinstalar JBoss AS 6
+- Copiar los backups de qinear-1.0.ear, server.xml y mysql-connector-java-5.1.12.jar a sus ubicaciones originales
+- Copiar [jboss as 6]/server/all a otra carpeta DENTRO de [jboss as 6]/server/; se asume que esa otra carpeta, es [jboss as 6]/server/all2
+- Editar [jboss as 6]/server/all2/deploy/jbossweb.sar/server.xml, y en la línea 12 colocar otro puerto. Se recomienda [puerto original] + 100
+- Ejecutar el siguiente comando:
+
+sudo route add -net 224.0.0.0/4 dev eth0
+
+... para agregar ruta de multicast dentro de la misma computadora, es decir, independientemente de la LAN o WAN a la que se pertenezca. Esto debe hacerse cada vez que se reinicie la computadora y se deba utilizar una estructura de cluster dentro de la misma computadora.
+
+  Si se edita el archivo /etc/network/interfaces y se agrega:
+
+# static route
+up route add -net 224.0.0.0/4 dev eth0
+
+... se puede evitar ejecutar este comando una y otra vez
 		
-- Editar [jboss]/server/all2/deploy/jbossweb.sar/server.xml, cambiar la línea 12
+- Nodo 1: ./run.sh -c all -g qin -u 239.1.2.3 -b [ip de la computadora] -Djboss.messaging.ServerPeerID=1 -Djboss.service.binding.set=ports-default
 
-<Connector protocol="HTTP/1.1" port="8099" address="${jboss.bind.address}" => poner otro puerto, no sé 8199
-		
-- http://blog.mafr.de/2011/07/10/jboss-multiple-instances/
+- Nodo 2: ./run.sh -c all2 -g qin -u 239.1.2.3 -b [ip de la computadora; mismo que en el caso anterior] -Djboss.messaging.ServerPeerID=2 -Djboss.service.binding.set=ports-01
 
-En PC 1
-./run.sh -c all -g qin -b [ip pc1] -Djboss.messaging.ServerPeerID=1
- 
-En PC 2
-./run.sh -Djboss.service.binding.set=ports-01 -c all2 -g qin -b [ip pc2] -Djboss.messaging.ServerPeerID=2
-
-./run.sh -c all -g qin -b 192.168.1.100 -Djboss.messaging.ServerPeerID=1
-./run.sh -Djboss.service.binding.set=ports-01 -c all2 -g qin -b 192.168.1.100 -Djboss.messaging.ServerPeerID=2
+- Referencias:
+  -c : configuración/contexto; en un caso all, en el otro all2
+  -g : nombre del cluster; en todos los casos el nombre es "qin"
+  -u : dirección de multicast, asociada con la ruta 224.0.0.0/4 que se agregó a la tabla de ruteo
+  -b : ip al que se enlaza el servidor
+  -Djboss.messaging.ServerPeerID : nombre del canal de comunicación
+  -Djboss.service.binding.set : juego de puertos a tomar
