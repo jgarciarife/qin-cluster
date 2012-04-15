@@ -66,7 +66,7 @@ up route add -net 224.0.0.0/4 dev eth0
 - Referencias:
   -c : configuración/contexto; en un caso all, en el otro all2
   -g : nombre del cluster; en todos los casos el nombre es "qin"
-  -u : dirección de multicast, asociada con la ruta 224.0.0.0/4 que se agregó a la tabla de ruteo
+  -u : dirección de multicast interno al cluster, asociada con la ruta 224.0.0.0/4 que se agregó a la tabla de ruteo
   -b : ip al que se enlaza el servidor
   -Djboss.messaging.ServerPeerID : nombre del canal de comunicación
   -Djboss.service.binding.set : juego de puertos a tomar
