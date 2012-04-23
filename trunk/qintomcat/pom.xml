@@ -258,6 +258,13 @@
 			<artifactId>ehcache-terracotta</artifactId>
 			<version>${ehcache-terracotta.version}</version>
 		</dependency>
+		
+	<dependency>
+      <groupId>org.terracotta.session</groupId>
+      <artifactId>terracotta-session</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+        
 	</dependencies>
 
 	<build>
