@@ -6,7 +6,7 @@ Terracotta:
 Tomcat:
 	http://tomcat.apache.org/
 
-JBoss:
+Jboss:
 	http://jboss.org/
 
 Sesiones Web:
@@ -15,7 +15,6 @@ Sesiones Web:
 Cache distribuida:
 	http://www.terracotta.org/ehcache/ehcache-dx
 	http://jboss.org/jbosscache
-	http://bigdatanerd.wordpress.com/tag/nosql/
 
 Clusterización:
 	http://docs.jboss.org/jbossas/jboss4guide/r4/html/cluster.chapt.html

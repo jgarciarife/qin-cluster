@@ -62,7 +62,11 @@ up route add -net 224.0.0.0/4 dev eth0
 		
 09.- Nodo 1: ./run.sh -c all -g qin -u 239.1.2.3 -b [ip de la computadora] -Djboss.messaging.ServerPeerID=1 -Djboss.service.binding.set=ports-default
 
+./run.sh -c all -g qin -u 239.1.2.3 -b 192.168.1.100 -Djboss.messaging.ServerPeerID=1 -Djboss.service.binding.set=ports-default
+
 10.- Nodo 2: ./run.sh -c all2 -g qin -u 239.1.2.3 -b [ip de la computadora; mismo que en el caso anterior] -Djboss.messaging.ServerPeerID=2 -Djboss.service.binding.set=ports-01
+
+./run.sh -c all -g qin -u 239.1.2.3 -b 192.168.1.100 -Djboss.messaging.ServerPeerID=2 -Djboss.service.binding.set=ports-01
 
 11.- Referencias:
   -c : configuración/contexto; en un caso all, en el otro all2
