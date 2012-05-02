@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<server>
+	<mbean name="qinejb:service=PojoCacheManager-Controller"
+		code="org.jboss.ha.singleton.HASingletonController">
+		<depends>qinejb:service=PojoCacheManager</depends>
+		<attribute name="HAPartition">
+			<inject bean="HAPartition" />
+		</attribute>
+		<attribute name="TargetName">qinejb:service=PojoCacheManager</attribute>
+		<attribute name="TargetStartMethod">startSingleton</attribute>
+		<attribute name="TargetStopMethod">stopSingleton</attribute>
+	</mbean>
+</server>
