@@ -47,6 +47,10 @@
 			<id>nuxeo</id>
 			<url>https://maven.nuxeo.org/nexus/content/groups/public/</url>
 		</repository>
+		<repository>
+			<id>jboss-maven3</id>
+			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+		</repository>
 	</repositories>
 	<dependencies>
 		<!-- Hibernate dependencies -->
@@ -112,21 +116,45 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.5.11</version>
+			<exclusions> 
+				<exclusion>
+					<groupId>com.sun.jmx</groupId>
+					<artifactId>jmxri</artifactId>
+				</exclusion>
+			</exclusions> 
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.5.11</version>
+			<exclusions> 
+				<exclusion>
+					<groupId>com.sun.jmx</groupId>
+					<artifactId>jmxri</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.15</version>
+			<exclusions> 
+				<exclusion>
+					<groupId>com.sun.jmx</groupId>
+					<artifactId>jmxri</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>1.1.1</version>
+			<exclusions> 
+				<exclusion>
+					<groupId>com.sun.jmx</groupId>
+					<artifactId>jmxri</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!--  JUNIT DEPENDENCY FOR TESTING -->
 		<dependency>
@@ -151,6 +179,12 @@
 			<artifactId>jboss-as-ejb3</artifactId>
 			<version>6.0.0.20101110-CR1</version>
 			<scope>provided</scope>
+			<exclusions> 
+				<exclusion>
+					<groupId>com.sun.jmx</groupId>
+					<artifactId>jmxri</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 	<build>
