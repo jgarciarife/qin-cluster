@@ -86,6 +86,15 @@ http://oreilly.com/java/archive/eclipse-jboss-remote-debug.html?page=6
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+Clusterizar sesion http
+
+http://docs.jboss.org/jbossas/docs/Clustering_Guide/5/html_single/#clustering-http-app
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
 JBoss 7 ?
 
 http://download.jboss.org/jbossas/7.1/jboss-as-7.1.1.Final/jboss-as-7.1.1.Final.tar.gz
+
+
