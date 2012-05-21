@@ -79,6 +79,14 @@ up route add -net 224.0.0.0/4 dev eth0
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+HA Clustered Singleton Service
+
+https://community.jboss.org/wiki/WritingAClusteredHASingletonService?_sscc=t
+http://docs.jboss.org/jbossclustering/cluster_guide/5.1/html/deployment.chapt.html
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
 Debugear remotamente
 
 http://oreilly.com/java/archive/eclipse-jboss-remote-debug.html?page=6
@@ -89,6 +97,8 @@ http://oreilly.com/java/archive/eclipse-jboss-remote-debug.html?page=6
 Clusterizar sesion http
 
 http://docs.jboss.org/jbossas/docs/Clustering_Guide/5/html_single/#clustering-http-app
+http://docs.jboss.org/jbossclustering/cluster_guide/5.1/html/clustering-http.html#clustering-http-state
+http://docs.jboss.org/jbossclustering/cluster_guide/5.1/html/clustering-http.html#clustering-http-app
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
