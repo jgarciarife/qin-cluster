@@ -18,4 +18,5 @@
 		<servlet-name>qinweb</servlet-name>
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
+	<distributable/>
 </web-app>
