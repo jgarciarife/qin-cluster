@@ -23,3 +23,13 @@ mvn install:install-file -DgroupId=woodstox -DartifactId=wstx-asl -Dversion=3.2.
 mvn install:install-file -DgroupId=com.sun.istack -DartifactId=istack-commons-runtime -Dversion=1.1 -Dpackaging=jar -Dfile=/home/diego/workspace/qin-cluster/"dependencias y configuraciones especiales"/istack-commons-runtime-1.1.jar
 
 mvn install:install-file -DgroupId=com.sun.istack -DartifactId=istack-commons-runtime -Dversion=1.1-SNAPSHOT -Dpackaging=jar -Dfile=/home/diego/workspace/qin-cluster/"dependencias y configuraciones especiales"/istack-commons-runtime-1.1-SNAPSHOT.jar
+
+--------------------------------------------------------------------------------
+
+ERROR en gNewSense !
+
+mvn install:install-file -DgroupId=org.jboss.jbossas -DartifactId=jboss-as-ejb3 -Dversion=6.0.0.20101110-CR1 -Dpackaging=jar -Dfile=/home/diego/tmp/jboss-as-ejb3-6.0.0.20101110-CR1.jar 
+
+
+
+
