@@ -41,7 +41,7 @@
 				<artifactId>jboss-maven-plugin</artifactId>
 				<version>1.5.0</version>
 				<configuration>
-					<jbossHome>/opt/jboss-6.0.0.Final</jbossHome>
+					<jbossHome>/opt/jboss-6.1.0.Final</jbossHome>
 					<serverName>default</serverName>
 					<fileName>target/qinear-1.0.ear</fileName>
 				</configuration>
