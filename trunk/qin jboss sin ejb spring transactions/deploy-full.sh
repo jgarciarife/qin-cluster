@@ -94,6 +94,10 @@ debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - cd .."
 
 cd ..
 
+debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - mvn clean install"
+
+mvn clean install
+
 debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - rm /opt/jboss-6.1.0.Final/server/all/deploy/qinear-1.0.ear"
 
 rm "/opt/jboss-6.1.0.Final/server/all/deploy/qinear-1.0.ear"
