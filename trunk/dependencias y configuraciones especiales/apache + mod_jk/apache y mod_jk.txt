@@ -1,0 +1,25 @@
+Requisitos:
+- configure
+- automake
+- gcc
+- make
+- apache2 (versión 2.2.22-1ubuntu1) será instalado
+  - apache2-mpm-worker (versión 2.2.22-1ubuntu1) será instalado
+  - apache2-utils (versión 2.2.22-1ubuntu1) será instalado
+  - apache2.2-bin (versión 2.2.22-1ubuntu1) será instalado
+  - apache2.2-common (versión 2.2.22-1ubuntu1) será instalado
+  - libapr1-dev
+  - libaprutil1-dev
+  - libaprutil1-dbd-sqlite3 (versión 1.3.12+dfsg-3) será instalado
+  - libaprutil1-ldap (versión 1.3.12+dfsg-3) será instalado
+- libapache2-mod-jk (versión 1:1.2.32-1) será instalado
+
+Referencias:
+- https://help.ubuntu.com/12.04/serverguide/httpd.html
+- http://www.tritux.com/blog/2010/10/23/load-balancing-jboss-and-apache2-mod_jk/8/1
+
+Editar archivos
+- /etc/apache2/httpd.conf
+- /etc/libapache2-mod-jk/workers.properties
+- /etc/apache2/mods-available/jk.conf
+- /etc/apache2/mods-enabled son softlinks a mods-available
