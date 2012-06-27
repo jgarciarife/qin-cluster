@@ -5,7 +5,7 @@
 # apacheModjk.sh
 # apacheModjk.sh reset
 
-./cancelarApacheModjk.sh
+/home/diego/workspace/qin-cluster/dependencias\ y\ configuraciones\ especiales/apache\ +\ mod_jk/cancelarApacheModJk.sh
 
 echo " "
 echo "apacheModjk.sh"
@@ -57,6 +57,8 @@ function instalarDependencias() {
 	sudo apt-get update > /dev/null
 	sudo apt-get upgrade > /dev/null
 	sudo apt-get dist-upgrade > /dev/null
+	sudo chmod 777 -R /etc/apache2
+	sudo chmod 777 -R /etc/libapache2-mod-jk
 }
 
 function configurarServidorVirtual() {
@@ -281,8 +283,6 @@ virtualHostName
 echo "Reiniciar mysql..."
 sudo /etc/init.d/mysql restart
 
-# nmap $ip
-
 if [ "$reset" != "" ]; then
 	echo "Reseteando jboss's..."
 	rm -R -f /home/diego/opt/jboss-6.1.0.Final/server/all/data/hornetq/*
@@ -292,6 +292,8 @@ fi
 
 echo "Incorporar entrada de ruteo..."
 sudo route add -net 224.0.0.0/4 dev eth2
+sudo route add -net 224.0.0.0/4 dev eth1
+sudo route add -net 224.0.0.0/4 dev eth0
 
 echo "Compilar y deployar el proyecto..."
 directorioActual="$pwd"
@@ -305,19 +307,18 @@ jdbc.username=$user
 jdbc.password=$pass" > "/home/diego/workspace qin jboss sin ejb spring transactions/qin jboss sin ejb spring transactions/qinweb/src/main/resources/jdbc.properties"
 fi
 ./deploy-full.sh
-echo "Esperar 120 segundos..."
 sudo chmod 777 -R "/home/diego/workspace qin jboss sin ejb spring transactions"
 
 echo "Levantar JBoss 1 / Worker 1..."
-/opt/jboss-6.1.0.Final/bin/run.sh -c all -g qin -u 239.1.2.3 -b 192.168.53.128 -Djboss.messaging.ServerPeerID=1 -Djboss.service.binding.set=ports-default &
+/opt/jboss-6.1.0.Final/bin/run.sh -c all -g qin -u 239.1.2.3 -b "$ip" -Djboss.messaging.ServerPeerID=1 -Djboss.service.binding.set=ports-default &
 echo "Esperar 120 segundos..."
 sleep 120
 echo "Levantar JBoss 2 / Worker 2..."
-/opt/jboss-6.1.0.Final.2/bin/run.sh -c all -g qin -u 239.1.2.3 -b 192.168.53.128 -Djboss.messaging.ServerPeerID=2 -Djboss.service.binding.set=ports-01 &
+/opt/jboss-6.1.0.Final.2/bin/run.sh -c all -g qin -u 239.1.2.3 -b "$ip" -Djboss.messaging.ServerPeerID=2 -Djboss.service.binding.set=ports-01 &
 echo "Esperar 120 segundos..."
 sleep 120
 echo "Levantar JBoss 3 / Worker 3..."
-/opt/jboss-6.1.0.Final.3/bin/run.sh -c all -g qin -u 239.1.2.3 -b 192.168.53.128 -Djboss.messaging.ServerPeerID=3 -Djboss.service.binding.set=ports-02 &
+/opt/jboss-6.1.0.Final.3/bin/run.sh -c all -g qin -u 239.1.2.3 -b "$ip" -Djboss.messaging.ServerPeerID=3 -Djboss.service.binding.set=ports-02 &
 echo "Esperar 120 segundos..."
 sleep 120
 
@@ -325,6 +326,8 @@ echo "Bajar apache y refrescar configuracion..."
 sudo /etc/init.d/apache2 stop && sudo /etc/init.d/apache2 reload && sudo /usr/sbin/apache2ctl configtest
 echo "Levantar apache..."
 sudo /etc/init.d/apache2 start
+
+nmap $ip
 
 echo "Proceso terminado"
 cd "$directorioActual"
