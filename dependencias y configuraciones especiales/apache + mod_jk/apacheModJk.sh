@@ -5,18 +5,37 @@
 # apacheModjk.sh
 # apacheModjk.sh reset
 
-/home/diego/workspace/qin-cluster/dependencias\ y\ configuraciones\ especiales/apache\ +\ mod_jk/cancelarApacheModJk.sh
+"$HOME"/workspace/qin-cluster/dependencias\ y\ configuraciones\ especiales/apache\ +\ mod_jk/cancelarApacheModJk.sh
 
 echo " "
 echo "apacheModjk.sh"
 
 reset="$1"
+
 ip=`ifconfig eth2 | grep "inet dirección" | awk -F: '{print $2}' | awk '{print $1}' 2> /dev/null`
 if [ "$ip" == "" ]; then
 	ip=`ifconfig eth1 | grep "inet dirección" | awk -F: '{print $2}' | awk '{print $1}' 2> /dev/null`
 fi
 if [ "$ip" == "" ]; then
 	ip=`ifconfig eth0 | grep "inet dirección" | awk -F: '{print $2}' | awk '{print $1}' 2> /dev/null`
+fi
+if [ "$ip" == "" ]; then
+	ip=`ifconfig eth2 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}' 2> /dev/null`
+fi
+if [ "$ip" == "" ]; then
+	ip=`ifconfig eth1 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}' 2> /dev/null`
+fi
+if [ "$ip" == "" ]; then
+	ip=`ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}' 2> /dev/null`
+fi
+if [ "$ip" == "" ]; then
+	ip=`ifconfig eth2 | grep "Direc. inet" | awk -F: '{print $2}' | awk '{print $1}' 2> /dev/null`
+fi
+if [ "$ip" == "" ]; then
+	ip=`ifconfig eth1 | grep "Direc. inet" | awk -F: '{print $2}' | awk '{print $1}' 2> /dev/null`
+fi
+if [ "$ip" == "" ]; then
+	ip=`ifconfig eth0 | grep "Direc. inet" | awk -F: '{print $2}' | awk '{print $1}' 2> /dev/null`
 fi
 echo "$ip"
 project="qinweb"
@@ -36,6 +55,7 @@ function instalarDependencias() {
 	sudo apt-get update > /dev/null
 	sudo apt-get upgrade > /dev/null
 	sudo apt-get dist-upgrade > /dev/null
+	sudo dpkg --configure -a > /dev/null
 	echo "automake"
 	sudo apt-get install automake > /dev/null
 	echo "gcc"
@@ -57,8 +77,12 @@ function instalarDependencias() {
 	sudo apt-get update > /dev/null
 	sudo apt-get upgrade > /dev/null
 	sudo apt-get dist-upgrade > /dev/null
+	sudo dpkg --configure -a > /dev/null
 	sudo chmod 777 -R /etc/apache2
 	sudo chmod 777 -R /etc/libapache2-mod-jk
+	sudo chmod 777 -R /opt/jboss-6.1.0.Final
+	sudo chmod 777 -R /opt/jboss-6.1.0.Final.2
+	sudo chmod 777 -R /opt/jboss-6.1.0.Final.3
 }
 
 function configurarServidorVirtual() {
@@ -67,7 +91,28 @@ function configurarServidorVirtual() {
 		sudo cp -f /etc/apache2/httpd.conf /etc/apache2/httpd.conf.anterior
 		sudo chmod 777 -R /etc/apache2
 		sudo chmod 777 -R /etc/libapache2-mod-jk
-		echo "ServerName $ip" > /etc/apache2/httpd.conf.nuevo
+		if [ "$esGNewSense" == "1" ]; then
+			echo "ServerName $ip
+LoadModule jk_module /usr/lib/apache2/modules/mod_jk.so
+JkWorkersFile /etc/libapache2-mod-jk/workers.properties
+JkLogFile logs/mod_jk.log
+JkLogLevel debug
+JkLogStampFormat \"[%a %b %d %H:%M:%S %Y]\"
+JkOptions +ForwardKeySize +ForwardURICompatUnparsed -ForwardDirectories
+JkRequestLogFormat \"%w %V %T\"
+JkMount /$project/* loadbalancer
+JkUnMount /$project/images/* loadbalancer
+JkMountFile conf/uriworkermap.properties
+JkShmFile run/jk.shm
+<Location /jkstatus>
+	JkMount status
+	Order deny,allow
+	Deny from all
+	Allow from $ip
+</Location>" > /etc/apache2/httpd.conf.nuevo
+		else
+			echo "ServerName $ip" > /etc/apache2/httpd.conf.nuevo
+		fi
 # <VirtualHost *:80>
 # 	ServerName $ip
 # 	# Send servlet for context / jsp-examples to worker named domain1
@@ -178,36 +223,36 @@ function configurarJk() {
 		sudo mkdir /etc/apache2/run
 	fi
 	if [ "$esGNewSense" == "1" ]; then
-		if [ ! -f "/etc/apache2/mods-available/jk.load.anterior" ]; then
-			sudo cp -f /etc/apache2/mods-available/jk.load /etc/apache2/mods-available/jk.load.anterior
-			sudo chmod 777 -R /etc/apache2
-			sudo chmod 777 -R /etc/libapache2-mod-jk
-			echo "LoadModule jk_module /usr/lib/apache2/modules/mod_jk.so
-JkWorkersFile /etc/libapache2-mod-jk/workers.properties
-JkLogFile logs/mod_jk.log
-JkLogLevel debug
-JkLogStampFormat \"[%a %b %d %H:%M:%S %Y]\"
-JkOptions +ForwardKeySize +ForwardURICompatUnparsed -ForwardDirectories
-JkRequestLogFormat \"%w %V %T\"
-JkMount /$project/* loadbalancer
-JkUnMount /$project/images/* loadbalancer
-JkMountFile conf/uriworkermap.properties
-JkShmFile run/jk.shm
-<Location /jkstatus>
-	JkMount status
-	Order deny,allow
-	Deny from all
-	Allow from $ip
-</Location>" > /etc/apache2/mods-available/jk.load.nuevo
-			sudo mv -f /etc/apache2/mods-available/jk.load.nuevo /etc/apache2/mods-available/jk.load
-		fi
+		echo "es gNewSense"
+#		if [ ! -f "/etc/apache2/mods-available/jk.load.anterior" ]; then
+#			sudo cp -f /etc/apache2/mods-available/jk.load /etc/apache2/mods-available/jk.load.anterior
+#			sudo chmod 777 -R /etc/apache2
+#			sudo chmod 777 -R /etc/libapache2-mod-jk
+#			echo "LoadModule jk_module /usr/lib/apache2/modules/mod_jk.so
+#JkWorkersFile /etc/libapache2-mod-jk/workers.properties
+#JkLogFile logs/mod_jk.log
+#JkLogLevel debug
+#JkLogStampFormat \"[%a %b %d %H:%M:%S %Y]\"
+#JkOptions +ForwardKeySize +ForwardURICompatUnparsed -ForwardDirectories
+#JkRequestLogFormat \"%w %V %T\"
+#JkMount /$project/* loadbalancer
+#JkUnMount /$project/images/* loadbalancer
+#JkMountFile conf/uriworkermap.properties
+#JkShmFile run/jk.shm
+#<Location /jkstatus>
+#	JkMount status
+#	Order deny,allow
+#	Deny from all
+#	Allow from $ip
+#</Location>" > /etc/apache2/mods-available/jk.load.nuevo
+#			sudo mv -f /etc/apache2/mods-available/jk.load.nuevo /etc/apache2/mods-available/jk.load
+#		fi
 	else
 		if [ ! -f "/etc/apache2/mods-available/jk.conf.anterior" ]; then
 			sudo cp -f /etc/apache2/mods-available/jk.conf /etc/apache2/mods-available/jk.conf.anterior
 			sudo chmod 777 -R /etc/apache2
 			sudo chmod 777 -R /etc/libapache2-mod-jk
-			echo "LoadModule jk_module /usr/lib/apache2/modules/mod_jk.so
-JkWorkersFile /etc/libapache2-mod-jk/workers.properties
+			echo "JkWorkersFile /etc/libapache2-mod-jk/workers.properties
 JkLogFile logs/mod_jk.log
 JkLogLevel debug
 JkLogStampFormat \"[%a %b %d %H:%M:%S %Y]\"
@@ -229,8 +274,8 @@ JkShmFile run/jk.shm
 }
 
 function virtualHostName() {
+	echo "virtualHostName"
 	if [ "$esGNewSense" == "1" ]; then
-		echo "virtualHostName"
 		if [ ! -f "/etc/apache2/sites-available/default.anterior" ]; then
 			sudo cp -f /etc/apache2/sites-available/default /etc/apache2/sites-available/default.anterior
 			sudo chmod 777 -R /etc/apache2
@@ -285,6 +330,60 @@ function virtualHostName() {
 </VirtualHost>" > /etc/apache2/sites-available/default.nuevo
 			sudo mv -f /etc/apache2/sites-available/default.nuevo /etc/apache2/sites-available/default
 		fi
+	else
+		if [ ! -f "/etc/apache2/sites-available/default.anterior" ]; then
+			sudo cp -f /etc/apache2/sites-available/default /etc/apache2/sites-available/default.anterior
+			sudo chmod 777 -R /etc/apache2
+			sudo chmod 777 -R /etc/libapache2-mod-jk
+			echo "<VirtualHost *:80>
+	ServerAdmin webmaster@localhost
+
+	ServerName $ip
+	# Send servlet for context / jsp-examples to worker named domain1
+	JkMount / loadbalancer
+	# Send JSPs for context /jsp-examples/* to worker named domain1
+	JkMount /* loadbalancer
+
+	DocumentRoot /var/www
+	<Directory />
+		Options FollowSymLinks
+		AllowOverride None
+	</Directory>
+	<Directory /var/www/>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride None
+		Order allow,deny
+		allow from all
+	</Directory>
+
+	ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+	<Directory \"/usr/lib/cgi-bin\">
+		AllowOverride None
+		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+		Order allow,deny
+		Allow from all
+	</Directory>
+
+	ErrorLog /var/log/apache2/error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+
+	CustomLog /var/log/apache2/access.log combined
+
+	Alias /doc/ \"/usr/share/doc/\"
+	<Directory \"/usr/share/doc/\">
+		Options Indexes MultiViews FollowSymLinks
+		AllowOverride None
+		Order deny,allow
+		Deny from all
+		Allow from 127.0.0.0/255.0.0.0 ::1/128
+</Directory>
+
+</VirtualHost>" > /etc/apache2/sites-available/default.nuevo
+			sudo mv -f /etc/apache2/sites-available/default.nuevo /etc/apache2/sites-available/default
+		fi
 	fi
 }
 
@@ -301,13 +400,20 @@ configurarJk
 virtualHostName
 
 echo "Reiniciar mysql..."
-sudo /etc/init.d/mysql restart
+if [ "$esGNewSense" == "1" ]; then
+	sudo /etc/init.d/mysql restart
+else
+	sudo service mysql restart
+fi
 
 if [ "$reset" != "" ]; then
 	echo "Reseteando jboss's..."
-	rm -R -f /home/diego/opt/jboss-6.1.0.Final/server/all/data/hornetq/*
-	rm -R -f /home/diego/opt/jboss-6.1.0.Final.2/server/all/data/hornetq/*
-	rm -R -f /home/diego/opt/jboss-6.1.0.Final.3/server/all/data/hornetq/*
+	sudo chmod 777 -R /opt/jboss-6.1.0.Final
+	sudo chmod 777 -R /opt/jboss-6.1.0.Final.2
+	sudo chmod 777 -R /opt/jboss-6.1.0.Final.3
+	rm -R -f "$HOME"/opt/jboss-6.1.0.Final/server/all/data/hornetq/*
+	rm -R -f "$HOME"/opt/jboss-6.1.0.Final.2/server/all/data/hornetq/*
+	rm -R -f "$HOME"/opt/jboss-6.1.0.Final.3/server/all/data/hornetq/*
 fi
 
 echo "Incorporar entrada de ruteo..."
@@ -317,17 +423,17 @@ sudo route add -net 224.0.0.0/4 dev eth0
 
 echo "Compilar y deployar el proyecto..."
 directorioActual="$pwd"
-cd "/home/diego/workspace qin jboss sin ejb spring transactions/qin jboss sin ejb spring transactions"
-sudo chmod 777 -R "/home/diego/workspace qin jboss sin ejb spring transactions"
-editarJdbcProperties=`cat "/home/diego/workspace qin jboss sin ejb spring transactions/qin jboss sin ejb spring transactions/qinweb/src/main/resources/jdbc.properties" | grep "jdbc.url=jdbc:mysql://$ip:3306/qin"`
+cd ""$HOME"/workspace qin jboss sin ejb spring transactions/qin jboss sin ejb spring transactions"
+sudo chmod 777 -R ""$HOME"/workspace qin jboss sin ejb spring transactions"
+editarJdbcProperties=`cat ""$HOME"/workspace qin jboss sin ejb spring transactions/qin jboss sin ejb spring transactions/qinweb/src/main/resources/jdbc.properties" | grep "jdbc.url=jdbc:mysql://$ip:3306/qin"`
 if [ "$editarJdbcProperties" != "" ]; then
 	echo "jdbc.driverClassName=com.mysql.jdbc.Driver
 jdbc.url=jdbc:mysql://$ip:3306/qin
 jdbc.username=$user
-jdbc.password=$pass" > "/home/diego/workspace qin jboss sin ejb spring transactions/qin jboss sin ejb spring transactions/qinweb/src/main/resources/jdbc.properties"
+jdbc.password=$pass" > ""$HOME"/workspace qin jboss sin ejb spring transactions/qin jboss sin ejb spring transactions/qinweb/src/main/resources/jdbc.properties"
 fi
 ./deploy-full.sh
-sudo chmod 777 -R "/home/diego/workspace qin jboss sin ejb spring transactions"
+sudo chmod 777 -R ""$HOME"/workspace qin jboss sin ejb spring transactions"
 
 echo "Levantar JBoss 1 / Worker 1..."
 /opt/jboss-6.1.0.Final/bin/run.sh -c all -g qin -u 239.1.2.3 -b "$ip" -Djboss.messaging.ServerPeerID=1 -Djboss.service.binding.set=ports-default &
@@ -343,14 +449,27 @@ echo "Esperar 120 segundos..."
 sleep 120
 
 echo "Bajar apache y refrescar configuracion..."
-sudo /etc/init.d/apache2 stop && sudo /etc/init.d/apache2 reload && sudo /usr/sbin/apache2ctl configtest
+if [ "$esGNewSense" == "1" ]; then
+	sudo /etc/init.d/apache2 stop && sudo /etc/init.d/apache2 reload
+else
+	sudo service apache2 stop && sudo service apache2 reload
+fi
+sudo /usr/sbin/apache2ctl configtest
 echo "Levantar apache..."
+if [ "$esGNewSense" == "1" ]; then
+sudo service apache2 start
+else
 sudo /etc/init.d/apache2 start
+fi
 
 nmap $ip
 
 sudo chmod 777 -R /etc/apache2
 sudo chmod 777 -R /etc/libapache2-mod-jk
+sudo chmod 777 -R /opt/jboss-6.1.0.Final
+sudo chmod 777 -R /opt/jboss-6.1.0.Final.2
+sudo chmod 777 -R /opt/jboss-6.1.0.Final.3
+sudo chmod 777 -R "$HOME"/"workspace qin jboss sin ejb spring transactions"
 
 echo "-------------------------------------------------------------------------"
 echo "-------------------------------------------------------------------------"
