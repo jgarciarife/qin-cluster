@@ -67,14 +67,14 @@ function configurarServidorVirtual() {
 		sudo cp -f /etc/apache2/httpd.conf /etc/apache2/httpd.conf.anterior
 		sudo chmod 777 -R /etc/apache2
 		sudo chmod 777 -R /etc/libapache2-mod-jk
-		echo "ServerName $ip
-<VirtualHost *:80>
-	ServerName $ip
-	# Send servlet for context / jsp-examples to worker named domain1
-	JkMount / loadbalancer
-	# Send JSPs for context /jsp-examples/* to worker named domain1
-	JkMount /* loadbalancer
-</VirtualHost>" > /etc/apache2/httpd.conf.nuevo
+		echo "ServerName $ip" > /etc/apache2/httpd.conf.nuevo
+# <VirtualHost *:80>
+# 	ServerName $ip
+# 	# Send servlet for context / jsp-examples to worker named domain1
+# 	JkMount / loadbalancer
+# 	# Send JSPs for context /jsp-examples/* to worker named domain1
+# 	JkMount /* loadbalancer
+# </VirtualHost>" > /etc/apache2/httpd.conf.nuevo
 # Include conf/mod_jk.conf
 		sudo mv -f /etc/apache2/httpd.conf.nuevo /etc/apache2/httpd.conf
 	fi
@@ -238,6 +238,12 @@ function virtualHostName() {
 			echo "<VirtualHost *:80>
 	ServerAdmin webmaster@localhost
 
+	ServerName $ip
+	# Send servlet for context / jsp-examples to worker named domain1
+	JkMount / loadbalancer
+	# Send JSPs for context /jsp-examples/* to worker named domain1
+	JkMount /* loadbalancer
+
 	DocumentRoot /var/www/
 	<Directory />
 		Options FollowSymLinks
@@ -346,7 +352,15 @@ nmap $ip
 sudo chmod 777 -R /etc/apache2
 sudo chmod 777 -R /etc/libapache2-mod-jk
 
+echo "-------------------------------------------------------------------------"
+echo "-------------------------------------------------------------------------"
+echo "-------------------------------------------------------------------------"
+echo "-------------------------------------------------------------------------"
 echo "Proceso terminado"
+echo "-------------------------------------------------------------------------"
+echo "-------------------------------------------------------------------------"
+echo "-------------------------------------------------------------------------"
+echo "-------------------------------------------------------------------------"
 cd "$directorioActual"
 
 exit 0
