@@ -271,9 +271,11 @@ sudo route add -net 224.0.0.0/4 dev eth2
 echo "Compilar y deployar el proyecto..."
 directorioActual="$pwd"
 cd "/home/diego/workspace qin jboss sin ejb spring transactions/qin jboss sin ejb spring transactions"
-./deploy-full.sh &
+sudo chmod 777 -R "/home/diego/workspace qin jboss sin ejb spring transactions"
+./deploy-full.sh
 echo "Esperar 120 segundos..."
 sleep 120
+sudo chmod 777 -R "/home/diego/workspace qin jboss sin ejb spring transactions"
 
 echo "Levantar JBoss 1 / Worker 1..."
 /opt/jboss-6.1.0.Final/bin/run.sh -c all -g qin -u 239.1.2.3 -b 192.168.53.128 -Djboss.messaging.ServerPeerID=1 -Djboss.service.binding.set=ports-default &
