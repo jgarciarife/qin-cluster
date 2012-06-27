@@ -11,6 +11,8 @@ echo " "
 echo "$ip"
 project="qinweb"
 echo "$project"
+user="root"
+pass="diego"
 
 esGNewSense=`cat /etc/*-release | grep 'gNewSense'`
 if [ "$esGNewSense" != "" ]; then
@@ -49,8 +51,9 @@ function instalarDependencias() {
 
 function configurarServidorVirtual() {
 	echo "configurarServidorVirtual"
-	cp -f /etc/apache2/httpd.conf /etc/apache2/httpd.conf.anterior
-	echo "ServerName $ip
+	if [ ! -f "/etc/apache2/httpd.conf /etc/apache2/httpd.conf.anterior" ]; then
+		cp -f /etc/apache2/httpd.conf /etc/apache2/httpd.conf.anterior
+		echo "ServerName $ip
 <VirtualHost *:80>
 	ServerName $ip
 	# Send servlet for context / jsp-examples to worker named domain1
@@ -59,14 +62,16 @@ function configurarServidorVirtual() {
 	JkMount /* loadbalancer
 </VirtualHost>" > /etc/apache2/httpd.conf.nuevo
 # Include conf/mod_jk.conf
-	mv -f /etc/apache2/httpd.conf.nuevo /etc/apache2/httpd.conf
+		mv -f /etc/apache2/httpd.conf.nuevo /etc/apache2/httpd.conf
+	fi
 }
 
 function configurarWorkers() {
 	echo "configurarWorkers"
-	cp -f /etc/libapache2-mod-jk/workers.properties /etc/libapache2-mod-jk/workers.properties.anterior
-	if [ "$esGNewSense" == "1" ]; then
-		echo "worker.list=loadbalancer,status
+	if [ ! -f "/etc/libapache2-mod-jk/workers.properties.anterior" ]; then
+		cp -f /etc/libapache2-mod-jk/workers.properties /etc/libapache2-mod-jk/workers.properties.anterior
+		if [ "$esGNewSense" == "1" ]; then
+			echo "worker.list=loadbalancer,status
 worker.worker1.port=8009
 worker.worker1.host=$ip
 worker.worker1.type=ajp13
@@ -91,8 +96,8 @@ worker.worker3.connect_timeout=10000 #Not required if using ping_mode=A
 worker.loadbalancer.type=lb
 worker.loadbalancer.balance_workers=worker1,worker2,worker3
 worker.status.type=status" > /etc/libapache2-mod-jk/workers.properties.nuevo
-	else
-		echo "worker.list=loadbalancer,status
+		else
+			echo "worker.list=loadbalancer,status
 worker.worker1.port=8009
 worker.worker1.host=$ip
 worker.worker1.type=ajp13
@@ -117,8 +122,9 @@ worker.worker3.ping_mode=A #As of mod_jk 1.2.27
 worker.loadbalancer.type=lb
 worker.loadbalancer.balance_workers=worker1,worker2,worker3
 worker.status.type=status" > /etc/libapache2-mod-jk/workers.properties.nuevo
+		fi
+		mv -f /etc/libapache2-mod-jk/workers.properties.nuevo /etc/libapache2-mod-jk/workers.properties
 	fi
-	mv -f /etc/libapache2-mod-jk/workers.properties.nuevo /etc/libapache2-mod-jk/workers.properties
 }
 
 function configurarUriworkermapProperties() {
@@ -126,10 +132,11 @@ function configurarUriworkermapProperties() {
 	if [ ! -d "/etc/apache2/conf" ]; then
 		mkdir /etc/apache2/conf
 	fi
-	if [ -f "/etc/apache2/conf/uriworkermap.properties" ]; then
-		cp -f /etc/apache2/conf/uriworkermap.properties /etc/apache2/conf/uriworkermap.properties.anterior
-	fi
-	echo "/jmx-console=loadbalancer
+	if [ ! -f "/etc/apache2/conf/uriworkermap.properties.anterior" ]; then
+		if [ -f "/etc/apache2/conf/uriworkermap.properties" ]; then
+			cp -f /etc/apache2/conf/uriworkermap.properties /etc/apache2/conf/uriworkermap.properties.anterior
+		fi
+		echo "/jmx-console=loadbalancer
 /jmx-console/*=loadbalancer
 /web-console=loadbalancer
 /web-console/*=loadbalancer
@@ -138,12 +145,12 @@ function configurarUriworkermapProperties() {
 /$project=loadbalancer
 /$project/*=loadbalancer
 $project=loadbalancer" > /etc/apache2/conf/uriworkermap.properties.nuevo
-	mv -f /etc/apache2/conf/uriworkermap.properties.nuevo /etc/apache2/conf/uriworkermap.properties
+		mv -f /etc/apache2/conf/uriworkermap.properties.nuevo /etc/apache2/conf/uriworkermap.properties
+	fi
 }
 
 function configurarJk() {
 	echo "configurarJk"
-	cp -f /etc/apache2/mods-available/jk.load /etc/apache2/mods-available/jk.load.anterior
 	if [ ! -d "/etc/apache2/logs" ]; then
 		mkdir /etc/apache2/logs
 	fi
@@ -151,7 +158,9 @@ function configurarJk() {
 		mkdir /etc/apache2/run
 	fi
 	if [ "$esGNewSense" == "1" ]; then
-		echo "LoadModule jk_module /usr/lib/apache2/modules/mod_jk.so
+		if [ ! -f "/etc/apache2/mods-available/jk.load.anterior" ]; then
+			cp -f /etc/apache2/mods-available/jk.load /etc/apache2/mods-available/jk.load.anterior
+			echo "LoadModule jk_module /usr/lib/apache2/modules/mod_jk.so
 JkWorkersFile /etc/libapache2-mod-jk/workers.properties
 JkLogFile logs/mod_jk.log
 JkLogLevel debug
@@ -168,9 +177,12 @@ JkShmFile run/jk.shm
 	Deny from all
 	Allow from $ip
 </Location>" > /etc/apache2/mods-available/jk.load.nuevo
-		mv -f /etc/apache2/mods-available/jk.load.nuevo /etc/apache2/mods-available/jk.load
+			mv -f /etc/apache2/mods-available/jk.load.nuevo /etc/apache2/mods-available/jk.load
+		fi
 	else
-		echo "LoadModule jk_module /usr/lib/apache2/modules/mod_jk.so
+		if [ ! -f "/etc/apache2/mods-available/jk.conf.anterior" ]; then
+			cp -f /etc/apache2/mods-available/jk.conf /etc/apache2/mods-available/jk.conf.anterior
+			echo "LoadModule jk_module /usr/lib/apache2/modules/mod_jk.so
 JkWorkersFile /etc/libapache2-mod-jk/workers.properties
 JkLogFile logs/mod_jk.log
 JkLogLevel debug
@@ -187,15 +199,17 @@ JkShmFile run/jk.shm
 	Deny from all
 	Allow from $ip
 </Location>" > /etc/apache2/mods-available/jk.conf.nuevo
-		mv -f /etc/apache2/mods-available/jk.conf.nuevo /etc/apache2/mods-available/jk.conf
+			mv -f /etc/apache2/mods-available/jk.conf.nuevo /etc/apache2/mods-available/jk.conf
+		fi
 	fi
 }
 
 function virtualHostName() {
 	if [ "$esGNewSense" == "1" ]; then
 		echo "virtualHostName"
-		cp -f /etc/apache2/sites-available/default /etc/apache2/sites-available/default.anterior
-		echo "<VirtualHost *:80>
+		if [ ! -f "/etc/apache2/sites-available/default.anterior" ]; then
+			cp -f /etc/apache2/sites-available/default /etc/apache2/sites-available/default.anterior
+			echo "<VirtualHost *:80>
 	ServerAdmin webmaster@localhost
 
 	DocumentRoot /var/www/
@@ -237,7 +251,8 @@ function virtualHostName() {
 	</Directory>
 
 </VirtualHost>" > /etc/apache2/sites-available/default.nuevo
-		mv -f /etc/apache2/sites-available/default.nuevo /etc/apache2/sites-available/default
+			mv -f /etc/apache2/sites-available/default.nuevo /etc/apache2/sites-available/default
+		fi
 	fi
 }
 
@@ -272,9 +287,15 @@ echo "Compilar y deployar el proyecto..."
 directorioActual="$pwd"
 cd "/home/diego/workspace qin jboss sin ejb spring transactions/qin jboss sin ejb spring transactions"
 sudo chmod 777 -R "/home/diego/workspace qin jboss sin ejb spring transactions"
+editarJdbcProperties=`cat "/home/diego/workspace qin jboss sin ejb spring transactions/qin jboss sin ejb spring transactions/qinweb/src/main/resources/jdbc.properties" | grep "jdbc.url=jdbc:mysql://$ip:3306/qin"`
+if [ "$editarJdbcProperties" != "" ]; then
+	echo "jdbc.driverClassName=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://$ip:3306/qin
+jdbc.username=$user
+jdbc.password=$pass" > "/home/diego/workspace qin jboss sin ejb spring transactions/qin jboss sin ejb spring transactions/qinweb/src/main/resources/jdbc.properties"
+fi
 ./deploy-full.sh
 echo "Esperar 120 segundos..."
-sleep 120
 sudo chmod 777 -R "/home/diego/workspace qin jboss sin ejb spring transactions"
 
 echo "Levantar JBoss 1 / Worker 1..."
