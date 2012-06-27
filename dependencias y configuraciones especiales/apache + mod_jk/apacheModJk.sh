@@ -65,7 +65,9 @@ function configurarServidorVirtual() {
 	echo "configurarServidorVirtual"
 	if [ ! -f "/etc/apache2/httpd.conf /etc/apache2/httpd.conf.anterior" ]; then
 		sudo cp -f /etc/apache2/httpd.conf /etc/apache2/httpd.conf.anterior
-		sudo echo "ServerName $ip
+		sudo chmod 777 -R /etc/apache2
+		sudo chmod 777 -R /etc/libapache2-mod-jk
+		echo "ServerName $ip
 <VirtualHost *:80>
 	ServerName $ip
 	# Send servlet for context / jsp-examples to worker named domain1
@@ -83,7 +85,9 @@ function configurarWorkers() {
 	if [ ! -f "/etc/libapache2-mod-jk/workers.properties.anterior" ]; then
 		sudo cp -f /etc/libapache2-mod-jk/workers.properties /etc/libapache2-mod-jk/workers.properties.anterior
 		if [ "$esGNewSense" == "1" ]; then
-			sudo echo "worker.list=loadbalancer,status
+			sudo chmod 777 -R /etc/apache2
+			sudo chmod 777 -R /etc/libapache2-mod-jk
+			echo "worker.list=loadbalancer,status
 worker.worker1.port=8009
 worker.worker1.host=$ip
 worker.worker1.type=ajp13
@@ -109,7 +113,9 @@ worker.loadbalancer.type=lb
 worker.loadbalancer.balance_workers=worker1,worker2,worker3
 worker.status.type=status" > /etc/libapache2-mod-jk/workers.properties.nuevo
 		else
-			sudo echo "worker.list=loadbalancer,status
+			sudo chmod 777 -R /etc/apache2
+			sudo chmod 777 -R /etc/libapache2-mod-jk
+			echo "worker.list=loadbalancer,status
 worker.worker1.port=8009
 worker.worker1.host=$ip
 worker.worker1.type=ajp13
@@ -148,7 +154,9 @@ function configurarUriworkermapProperties() {
 		if [ -f "/etc/apache2/conf/uriworkermap.properties" ]; then
 			sudo cp -f /etc/apache2/conf/uriworkermap.properties /etc/apache2/conf/uriworkermap.properties.anterior
 		fi
-		sudo echo "/jmx-console=loadbalancer
+		sudo chmod 777 -R /etc/apache2
+		sudo chmod 777 -R /etc/libapache2-mod-jk
+		echo "/jmx-console=loadbalancer
 /jmx-console/*=loadbalancer
 /web-console=loadbalancer
 /web-console/*=loadbalancer
@@ -172,7 +180,9 @@ function configurarJk() {
 	if [ "$esGNewSense" == "1" ]; then
 		if [ ! -f "/etc/apache2/mods-available/jk.load.anterior" ]; then
 			sudo cp -f /etc/apache2/mods-available/jk.load /etc/apache2/mods-available/jk.load.anterior
-			sudo echo "LoadModule jk_module /usr/lib/apache2/modules/mod_jk.so
+			sudo chmod 777 -R /etc/apache2
+			sudo chmod 777 -R /etc/libapache2-mod-jk
+			echo "LoadModule jk_module /usr/lib/apache2/modules/mod_jk.so
 JkWorkersFile /etc/libapache2-mod-jk/workers.properties
 JkLogFile logs/mod_jk.log
 JkLogLevel debug
@@ -194,7 +204,9 @@ JkShmFile run/jk.shm
 	else
 		if [ ! -f "/etc/apache2/mods-available/jk.conf.anterior" ]; then
 			sudo cp -f /etc/apache2/mods-available/jk.conf /etc/apache2/mods-available/jk.conf.anterior
-			sudo echo "LoadModule jk_module /usr/lib/apache2/modules/mod_jk.so
+			sudo chmod 777 -R /etc/apache2
+			sudo chmod 777 -R /etc/libapache2-mod-jk
+			echo "LoadModule jk_module /usr/lib/apache2/modules/mod_jk.so
 JkWorkersFile /etc/libapache2-mod-jk/workers.properties
 JkLogFile logs/mod_jk.log
 JkLogLevel debug
@@ -221,7 +233,9 @@ function virtualHostName() {
 		echo "virtualHostName"
 		if [ ! -f "/etc/apache2/sites-available/default.anterior" ]; then
 			sudo cp -f /etc/apache2/sites-available/default /etc/apache2/sites-available/default.anterior
-			sudo echo "<VirtualHost *:80>
+			sudo chmod 777 -R /etc/apache2
+			sudo chmod 777 -R /etc/libapache2-mod-jk
+			echo "<VirtualHost *:80>
 	ServerAdmin webmaster@localhost
 
 	DocumentRoot /var/www/
@@ -328,6 +342,9 @@ echo "Levantar apache..."
 sudo /etc/init.d/apache2 start
 
 nmap $ip
+
+sudo chmod 777 -R /etc/apache2
+sudo chmod 777 -R /etc/libapache2-mod-jk
 
 echo "Proceso terminado"
 cd "$directorioActual"
