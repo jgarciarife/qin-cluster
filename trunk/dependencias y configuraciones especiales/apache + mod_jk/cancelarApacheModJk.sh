@@ -60,16 +60,10 @@ sudo /etc/init.d/apache2 start
 
 echo "Bajar JBoss 1 / Worker 1..."
 /opt/jboss-6.1.0.Final/bin/shutdown.sh -o $ip -r 1090 2> /dev/null
-echo "Esperar 60 segundos..."
-sleep 60
 echo "Bajar JBoss 2 / Worker 2..."
 /opt/jboss-6.1.0.Final.2/bin/shutdown.sh -o $ip -r 1190 2> /dev/null
-echo "Esperar 60 segundos..."
-sleep 60
 echo "Bajar JBoss 3 / Worker 3..."
 /opt/jboss-6.1.0.Final.3/bin/shutdown.sh -o $ip -r 1290 2> /dev/null
-echo "Esperar 60 segundos..."
-sleep 60
 
 echo "Ver servicios levantados"
 nmap $ip
