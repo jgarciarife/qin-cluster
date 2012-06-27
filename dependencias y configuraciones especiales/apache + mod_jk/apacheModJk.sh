@@ -5,9 +5,13 @@
 # sudo apacheModjk.sh
 # sudo apacheModjk.sh reset
 
+./cancelarApacheModjk.sh
+
+echo " "
+echo "apacheModjk.sh"
+
 reset="$1"
 ip=`ifconfig eth2 | grep "inet dirección" | awk -F: '{print $2}' | awk '{print $1}'`
-echo " "
 echo "$ip"
 project="qinweb"
 echo "$project"

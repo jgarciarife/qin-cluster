@@ -4,8 +4,10 @@
 
 # sudo cancelarApacheModjk.sh
 
-ip=`ifconfig eth2 | grep "inet dirección" | awk -F: '{print $2}' | awk '{print $1}'`
 echo " "
+echo "cancelarApacheModjk.sh"
+
+ip=`ifconfig eth2 | grep "inet dirección" | awk -F: '{print $2}' | awk '{print $1}'`
 echo "$ip"
 
 esGNewSense=`cat /etc/*-release | grep 'gNewSense'`
@@ -59,11 +61,11 @@ echo "Iniciar apache..."
 sudo /etc/init.d/apache2 start
 
 echo "Bajar JBoss 1 / Worker 1..."
-/opt/jboss-6.1.0.Final/bin/shutdown.sh -o $ip -r 1090 2> /dev/null
+/opt/jboss-6.1.0.Final/bin/shutdown.sh -o $ip -r 1090 & 2> /dev/null
 echo "Bajar JBoss 2 / Worker 2..."
-/opt/jboss-6.1.0.Final.2/bin/shutdown.sh -o $ip -r 1190 2> /dev/null
+/opt/jboss-6.1.0.Final.2/bin/shutdown.sh -o $ip -r 1190 & 2> /dev/null
 echo "Bajar JBoss 3 / Worker 3..."
-/opt/jboss-6.1.0.Final.3/bin/shutdown.sh -o $ip -r 1290 2> /dev/null
+/opt/jboss-6.1.0.Final.3/bin/shutdown.sh -o $ip -r 1290 & 2> /dev/null
 
 echo "Ver servicios levantados"
 nmap $ip
