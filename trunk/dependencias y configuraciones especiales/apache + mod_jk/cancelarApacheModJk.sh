@@ -2,12 +2,19 @@
 
 # Estructura de invocación
 
-# sudo cancelarApacheModjk.sh
+# cancelarApacheModjk.sh
 
 echo " "
 echo "cancelarApacheModjk.sh"
 
-ip=`ifconfig eth2 | grep "inet dirección" | awk -F: '{print $2}' | awk '{print $1}'`
+ip=`ifconfig eth2 | grep "inet dirección" | awk -F: '{print $2}' | awk '{print $1}' 2> /dev/null`
+if [ "$ip" == "" ]; then
+	ip=`ifconfig eth1 | grep "inet dirección" | awk -F: '{print $2}' | awk '{print $1}' 2> /dev/null`
+fi
+if [ "$ip" == "" ]; then
+	ip=`ifconfig eth0 | grep "inet dirección" | awk -F: '{print $2}' | awk '{print $1}' 2> /dev/null`
+fi
+echo "$ip"
 echo "$ip"
 
 esGNewSense=`cat /etc/*-release | grep 'gNewSense'`
@@ -19,36 +26,36 @@ fi
 echo "Recuperar archivos originales..."
 echo "Recuperar /etc/apache2/httpd.conf..."
 if [ -f "/etc/apache2/httpd.conf.anterior" ]; then
-	mv -f /etc/apache2/httpd.conf.anterior /etc/apache2/httpd.conf 2> /dev/null
+	sudo mv -f /etc/apache2/httpd.conf.anterior /etc/apache2/httpd.conf 2> /dev/null
 fi
 echo "Recuperar /etc/libapache2-mod-jk/workers.properties..."
 if [ -f "/etc/libapache2-mod-jk/workers.properties.anterior" ]; then
-	mv -f /etc/libapache2-mod-jk/workers.properties.anterior /etc/libapache2-mod-jk/workers.properties 2> /dev/null
+	sudo mv -f /etc/libapache2-mod-jk/workers.properties.anterior /etc/libapache2-mod-jk/workers.properties 2> /dev/null
 fi
 if [ "$esGNewSense" == "1" ]; then
 	echo "Recuperar /etc/apache2/mods-available/jk.load..."
 	if [ -f "/etc/apache2/mods-available/jk.load.anterior" ]; then
-		mv -f /etc/apache2/mods-available/jk.load.anterior /etc/apache2/mods-available/jk.load 2> /dev/null
+		sudo mv -f /etc/apache2/mods-available/jk.load.anterior /etc/apache2/mods-available/jk.load 2> /dev/null
 	fi
 else
 	echo "Recuperar /etc/apache2/mods-available/jk.conf..."
 	if [ -f "/etc/apache2/mods-available/jk.conf.anterior" ]; then
-		mv -f /etc/apache2/mods-available/jk.conf.anterior /etc/apache2/mods-available/jk.conf 2> /dev/null
+		sudo mv -f /etc/apache2/mods-available/jk.conf.anterior /etc/apache2/mods-available/jk.conf 2> /dev/null
 	fi
 fi
 if [ "$esGNewSense" == "1" ]; then
 	echo "Recuperar /etc/apache2/sites-available/default..."
 	if [ -f "/etc/apache2/sites-available/default.anterior" ]; then
-		mv -f /etc/apache2/sites-available/default.anterior /etc/apache2/sites-available/default 2> /dev/null
+		sudo mv -f /etc/apache2/sites-available/default.anterior /etc/apache2/sites-available/default 2> /dev/null
 	fi
 fi
 echo "Eliminar directorios..."
 echo "Eliminar /etc/apache2/conf..."
-rm -R -f /etc/apache2/conf 2> /dev/null
+sudo rm -R -f /etc/apache2/conf 2> /dev/null
 echo "Eliminar /etc/apache2/logs..."
-rm -R -f /etc/apache2/logs 2> /dev/null
+sudo rm -R -f /etc/apache2/logs 2> /dev/null
 echo "Eliminar /etc/apache2/run..."
-rm -R -f /etc/apache2/run 2> /dev/null
+sudo rm -R -f /etc/apache2/run 2> /dev/null
 
 echo "Reiniciar mysql..."
 sudo /etc/init.d/mysql restart
