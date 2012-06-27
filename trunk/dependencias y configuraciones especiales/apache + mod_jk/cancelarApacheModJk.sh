@@ -7,6 +7,9 @@
 echo " "
 echo "cancelarApacheModjk.sh"
 
+sudo chmod 777 -R /etc/apache2
+sudo chmod 777 -R /etc/libapache2-mod-jk
+
 ip=`ifconfig eth2 | grep "inet dirección" | awk -F: '{print $2}' | awk '{print $1}' 2> /dev/null`
 if [ "$ip" == "" ]; then
 	ip=`ifconfig eth1 | grep "inet dirección" | awk -F: '{print $2}' | awk '{print $1}' 2> /dev/null`
@@ -73,6 +76,7 @@ echo "Bajar JBoss 2 / Worker 2..."
 echo "Bajar JBoss 3 / Worker 3..."
 /opt/jboss-6.1.0.Final.3/bin/shutdown.sh -o $ip -r 1290 & 2> /dev/null
 
+sleep 120
 echo "Ver servicios levantados"
 nmap $ip
 
