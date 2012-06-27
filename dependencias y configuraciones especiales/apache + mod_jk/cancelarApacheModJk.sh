@@ -15,7 +15,6 @@ if [ "$ip" == "" ]; then
 	ip=`ifconfig eth0 | grep "inet dirección" | awk -F: '{print $2}' | awk '{print $1}' 2> /dev/null`
 fi
 echo "$ip"
-echo "$ip"
 
 esGNewSense=`cat /etc/*-release | grep 'gNewSense'`
 if [ "$esGNewSense" != "" ""]; then
