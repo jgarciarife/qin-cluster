@@ -147,7 +147,7 @@ worker.worker2.lbfactor=1
 worker.worker2.prepost_timeout=10000 #Not required if using ping_mode=A
 worker.worker2.connect_timeout=10000 #Not required if using ping_mode=A
 # worker.worker2.ping_mode=A #As of mod_jk 1.2.27
-worker.worker3.port=8109
+worker.worker3.port=8209
 worker.worker3.host=$ip
 worker.worker3.type=ajp13
 worker.worker3.lbfactor=1
@@ -175,7 +175,7 @@ worker.worker2.lbfactor=1
 worker.worker2.prepost_timeout=10000 #Not required if using ping_mode=A
 worker.worker2.connect_timeout=10000 #Not required if using ping_mode=A
 worker.worker2.ping_mode=A #As of mod_jk 1.2.27
-worker.worker3.port=8109
+worker.worker3.port=8209
 worker.worker3.host=$ip
 worker.worker3.type=ajp13
 worker.worker3.lbfactor=1
@@ -457,9 +457,9 @@ fi
 sudo /usr/sbin/apache2ctl configtest
 echo "Levantar apache..."
 if [ "$esGNewSense" == "1" ]; then
-sudo service apache2 start
+	sudo service apache2 start
 else
-sudo /etc/init.d/apache2 start
+	sudo /etc/init.d/apache2 start
 fi
 
 nmap $ip
