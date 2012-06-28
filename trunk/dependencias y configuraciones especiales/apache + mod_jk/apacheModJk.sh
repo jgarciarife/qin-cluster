@@ -482,5 +482,9 @@ echo "-------------------------------------------------------------------------"
 echo "-------------------------------------------------------------------------"
 cd "$directorioActual"
 
+# tail -f /home/diego/opt/jboss-6.1.0.Final/server/all/log
+# tail -f /home/diego/opt/jboss-6.1.0.Final.2/server/all/log
+# tail -f /home/diego/opt/jboss-6.1.0.Final.3/server/all/log
+
 exit 0
 
