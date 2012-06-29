@@ -37,6 +37,9 @@ fi
 if [ "$ip" == "" ]; then
 	ip=`ifconfig eth0 | grep "Direc. inet" | awk -F: '{print $2}' | awk '{print $1}' 2> /dev/null`
 fi
+if [ "$ip" == "" ]; then
+	ip=`ifconfig wlan0 | grep "Direc. inet" | awk -F: '{print $2}' | awk '{print $1}' 2> /dev/null`
+fi
 echo "$ip"
 project="qinweb"
 echo "$project"
@@ -51,7 +54,7 @@ fi
 echo " "
 
 function instalarDependencias() {
-#	echo "instalarDependencias"
+	echo "instalarDependencias"
 #	sudo apt-get update > /dev/null
 #	sudo apt-get upgrade > /dev/null
 #	sudo apt-get dist-upgrade > /dev/null
@@ -482,9 +485,9 @@ echo "-------------------------------------------------------------------------"
 echo "-------------------------------------------------------------------------"
 cd "$directorioActual"
 
-# tail -f /home/diego/opt/jboss-6.1.0.Final/server/all/log
-# tail -f /home/diego/opt/jboss-6.1.0.Final.2/server/all/log
-# tail -f /home/diego/opt/jboss-6.1.0.Final.3/server/all/log
+# tail -f /home/diego/opt/jboss-6.1.0.Final/server/all/log/server.log
+# tail -f /home/diego/opt/jboss-6.1.0.Final.2/server/all/log/server.log
+# tail -f /home/diego/opt/jboss-6.1.0.Final.3/server/all/log/server.log
 
 exit 0
 
