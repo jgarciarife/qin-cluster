@@ -38,6 +38,9 @@ fi
 if [ "$ip" == "" ]; then
 	ip=`ifconfig eth0 | grep "Direc. inet" | awk -F: '{print $2}' | awk '{print $1}' 2> /dev/null`
 fi
+if [ "$ip" == "" ]; then
+	ip=`ifconfig wlan0 | grep "Direc. inet" | awk -F: '{print $2}' | awk '{print $1}' 2> /dev/null`
+fi
 echo "$ip"
 
 esGNewSense=`cat /etc/*-release | grep 'gNewSense'`
