@@ -25,3 +25,10 @@ Clusterización:
 Performance:
 	http://www.theserverside.com/news/1363731/Performance-Engineering-a-Practitioners-Approach-to-Performance-Testing
 	http://blackanvil.blogspot.com/2006/06/shootout-load-runner-vs-grinder-vs.html
+
+JMeter
+	http://www.javaworld.com/javaworld/jw-07-2005/jw-0711-jmeter.html?page=1
+
+Arquitectura de aplicaciones web
+	http://msdn.microsoft.com/en-us/library/bb924372
+	http://msdn.microsoft.com/en-us/library/bb924374
