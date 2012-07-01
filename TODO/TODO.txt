@@ -1,0 +1,2 @@
+QINWEB
+- Mostrar nombre de usuario y sessionId en todas las pantallas, como en un encabezado o algo así
