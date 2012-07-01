@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import javax.jms.JMSException;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,9 @@ import com.qin.utils.diff_match_patch.Patch;
 
 @Controller
 public class SincronizadorTPController {
+	
+	private static Logger logger = LoggerFactory
+			.getLogger(SincronizadorTPController.class);
 
 	@Autowired
 	private SincronizadorTexto sincronizadorTexto;
@@ -55,11 +60,24 @@ public class SincronizadorTPController {
 
 		String textoNuevo = "";
 		if (mergear) {
-			LinkedList<Diff> diffs = dmp.diff_main(textoBase, texto);
-			LinkedList<Patch> patches = dmp.patch_make(diffs);
-
-			textoNuevo = sincronizadorTexto.actualizarTp(idTextoCompartido,
-					patches);
+			LinkedList<Diff> diffs = null;
+			try {
+				diffs = dmp.diff_main(textoBase, texto);
+			} catch (Throwable t) {
+				logger.debug("Excepcion de diff");
+			}
+			LinkedList<Patch> patches = null;
+			try {
+				patches = dmp.patch_make(diffs);
+			} catch (Throwable t) {
+				logger.debug("Excepcion de diff");
+			}
+			try {
+				textoNuevo = sincronizadorTexto.actualizarTp(idTextoCompartido,
+						patches);
+			} catch (Throwable t) {
+				logger.debug("Excepcion de diff");
+			}
 		} else {
 			textoNuevo = textoBase;
 
