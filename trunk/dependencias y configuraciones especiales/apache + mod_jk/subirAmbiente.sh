@@ -19,18 +19,17 @@ posicion="$PWD"
 source "$posicion"/bajarAmbiente.sh
 #source "$posicion"/instalarPaquetes.sh
 source "$posicion"/backupearArchivosConfiguracion.sh
-#ipInstancia1=""
-#puertoInstancia1=""
-#ipInstancia2=""
-#puertoInstancia2=""
-#ipInstancia3=""
-#puertoInstancia3=""
-entorno="jboss"
+#ipInstancia1="worker1"
+#puertoInstancia1="8009"
+#ipInstancia2="worker2"
+#puertoInstancia2="8109"
+#ipInstancia3="worker3"
+#puertoInstancia3="8209"
 source "$posicion"/editarArchivosConfiguracion.sh
 source "$posicion"/recargarConfiguracionApache.sh
 source "$posicion"/subirMysql.sh
 source "$posicion"/agregarEntradaEnRouter.sh
-#ipBaseDatos=""
+#ipBaseDatos="basededatos"
 source "$posicion"/compilarYDeployarQinweb.sh
 if [ "$reset" == "1" ]; then
 	rm -R -f "$HOME"/opt/jboss-6.1.0.Final/server/all/data/hornetq/*

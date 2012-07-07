@@ -16,19 +16,17 @@ fi
 if [ "$pass" == "" ]; then
 	pass="$4"
 fi
-
 if [ "$editarPersistencia" == "" ]; then
 	editarPersistencia="1"
 fi
 if [ "$ipBaseDatos" == "" ]; then
-	source "$posicion"/detectarIpConexion.sh
-	ipBaseDatos="$ip"
+	ipBaseDatos="basededatos"
 fi
 if [ "$user" == "" ]; then
-	user="root"
+	user="qinweb"
 fi
 if [ "$pass" == "" ]; then
-	pass="diego"
+	pass="qinweb"
 fi
 
 directorioActual="$PWD"

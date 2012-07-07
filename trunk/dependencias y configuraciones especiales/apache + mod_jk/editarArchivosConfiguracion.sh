@@ -47,37 +47,28 @@ if [ "$instancias" == "" ]; then
 	instancias="2"
 fi
 if [ "$ipApache" == "" ]; then
-	source "$posicion"/detectarIpConexion.sh
-	ipApache="$ip"
+	ipApache="apache"
 fi
 if [ "$sticky_session" == "" ]; then
 	sticky_session="1"
 fi
 if [ "$ipInstancia1" == "" ]; then
-	ipInstancia1="$ipApache"
+	ipInstancia1="worker1"
 fi
 if [ "$puertoInstancia1" == "" ]; then
 	puertoInstancia1="8009"
 fi
 if [ "$ipInstancia2" == "" ]; then
-	ipInstancia2="$ipApache"
+	ipInstancia2="worker2"
 fi
 if [ "$puertoInstancia2" == "" ]; then
-	if [ "$ipInstancia1" == "$ipInstancia2" ]; then
-		puertoInstancia2="8109"
-	else
-		puertoInstancia2="8009"
-	fi
+	puertoInstancia2="8109"
 fi
 if [ "$ipInstancia3" == "" ]; then
-	ipInstancia3="$ipApache"
+	ipInstancia3="worker3"
 fi
 if [ "$puertoInstancia3" == "" ]; then
-	if [ "$ipInstancia2" == "$ipInstancia3" ]; then
-		puertoInstancia3="8209"
-	else
-		puertoInstancia3="8009"
-	fi
+	puertoInstancia3="8209"
 fi
 
 project="qinweb"
