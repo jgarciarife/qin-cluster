@@ -9,5 +9,5 @@
       overflowToDisk="false">
       <terracotta/>
     </defaultCache>
-  <terracottaConfig url="localhost:9510"/>
+  <terracottaConfig url="terracotta:9510"/>
 </ehcache>

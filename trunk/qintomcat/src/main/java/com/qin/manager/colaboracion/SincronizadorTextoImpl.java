@@ -20,7 +20,7 @@ public class SincronizadorTextoImpl implements SincronizadorTexto {
 	private static Map<String, String> tpsActivos;
 	
 	static {
-		tpsActivos = new TerracottaClient("localhost:9510").getToolkit().getMap(
+		tpsActivos = new TerracottaClient("terracotta:9510").getToolkit().getMap(
 				"myStaticMap");
 	}
 
