@@ -7,8 +7,8 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.hbm2ddl.auto">update</property>
-		<property name="hibernate.show_sql">true</property>
-		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.show_sql">false</property>
+		<property name="hibernate.format_sql">false</property>
 		<property name="hibernate.connection.pool_size">5</property>
 		<property name="hibernate.cache.provider_class">net.sf.ehcache.hibernate.EhCacheProvider</property>
 		<property name="hibernate.cache.use_query_cache">true</property>

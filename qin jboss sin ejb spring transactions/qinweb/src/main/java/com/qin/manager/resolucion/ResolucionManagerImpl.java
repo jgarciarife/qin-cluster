@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.qin.eao.grupo.GrupoEAO;
 import com.qin.eao.resolucion.ResolucionEAO;
@@ -94,6 +95,7 @@ public class ResolucionManagerImpl implements ResolucionManager {
 	// el codigo de resolucion compartida viene de afuera solo para probar
 	// se debería generar dentro de este método
 	@Override
+	@Transactional
 	public Resolucion joinResolucion(Resolucion verificacion,
 			TrabajoPractico trabajoPractico, Alumno alumno,
 			String codigoResolucionCompartida) throws Exception {

@@ -39,6 +39,7 @@ public class MateriaEAOImpl extends BaseEAOImpl implements MateriaEAO {
 		jpql.append("SELECT materia ");
 		jpql.append("FROM Materia materia ");
 		Query query = sessionFactory.getCurrentSession().createQuery(jpql.toString());
+//		query.setCacheable(true);
 		return query.list();
 	}
 }
