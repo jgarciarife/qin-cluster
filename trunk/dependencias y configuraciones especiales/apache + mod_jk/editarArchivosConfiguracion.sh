@@ -7,7 +7,7 @@ posicion="$PWD"
 source "$posicion"/manejarPermisos.sh
 
 if [ "$1" == "-h" ]; then
-	echo "editarArchivosConfiguracion.sh esGNewSense instancias ipApache ipInstancia1 ipInstancia2 ipInstancia3"
+	echo "editarArchivosConfiguracion.sh esGNewSense instancias ipApache stickysession ipInstancia1 puertoInstancia1 ipInstancia2 puertoInstancia2 ipInstancia3 puertoInstancia3"
 fi
 
 if [ "$esGNewSense" == "" ]; then
@@ -19,14 +19,26 @@ fi
 if [ "$ipApache" == "" ]; then
 	ipApache="$3"
 fi
+if [ "$sticky_session" == "" ]; then
+	sticky_session="$4"
+fi
 if [ "$ipInstancia1" == "" ]; then
-	ipInstancia1="$3"
+	ipInstancia1="$5"
+fi
+if [ "$puertoInstancia1" == "" ]; then
+	puertoInstancia1="$6"
 fi
 if [ "$ipInstancia2" == "" ]; then
-	ipInstancia2="$3"
+	ipInstancia2="$7"
+fi
+if [ "$puertoInstancia2" == "" ]; then
+	puertoInstancia2="$8"
 fi
 if [ "$ipInstancia3" == "" ]; then
-	ipInstancia3="$3"
+	ipInstancia3="$9"
+fi
+if [ "$puertoInstancia3" == "" ]; then
+	puertoInstancia3="$10"
 fi
 if [ "$esGNewSense" == "" ]; then
 	source "$posicion"/detectarSO.sh
@@ -38,14 +50,34 @@ if [ "$ipApache" == "" ]; then
 	source "$posicion"/detectarIpConexion.sh
 	ipApache="$ip"
 fi
+if [ "$sticky_session" == "" ]; then
+	sticky_session="1"
+fi
 if [ "$ipInstancia1" == "" ]; then
 	ipInstancia1="$ipApache"
+fi
+if [ "$puertoInstancia1" == "" ]; then
+	puertoInstancia1="8009"
 fi
 if [ "$ipInstancia2" == "" ]; then
 	ipInstancia2="$ipApache"
 fi
+if [ "$puertoInstancia2" == "" ]; then
+	if [ "$ipInstancia1" == "$ipInstancia2" ]; then
+		puertoInstancia2="8109"
+	else
+		puertoInstancia2="8009"
+	fi
+fi
 if [ "$ipInstancia3" == "" ]; then
 	ipInstancia3="$ipApache"
+fi
+if [ "$puertoInstancia3" == "" ]; then
+	if [ "$ipInstancia2" == "$ipInstancia3" ]; then
+		puertoInstancia3="8209"
+	else
+		puertoInstancia3="8009"
+	fi
 fi
 
 project="qinweb"
@@ -377,21 +409,21 @@ if [ -f "/etc/libapache2-mod-jk/workers.properties.anterior" ]; then
 	if [ "$esGNewSense" == "1" ]; then
 		if [ "$instancias" == "1" ]; then
 			echo "worker.list=loadbalancer,status
-worker.worker1.port=8009
+worker.worker1.port=$puertoInstancia1
 worker.worker1.host=$ipInstancia1
 worker.worker1.type=ajp13
 worker.worker1.lbfactor=1
 worker.worker1.prepost_timeout=10000 #Not required if using ping_mode=A
 worker.worker1.connect_timeout=10000 #Not required if using ping_mode=A
 # worker.worker1.ping_mode=A #As of mod_jk 1.2.27
-#worker.worker2.port=8109
+#worker.worker2.port=$puertoInstancia2
 #worker.worker2.host=$ipInstancia2
 #worker.worker2.type=ajp13
 #worker.worker2.lbfactor=1
 #worker.worker2.prepost_timeout=10000 #Not required if using ping_mode=A
 #worker.worker2.connect_timeout=10000 #Not required if using ping_mode=A
 # worker.worker2.ping_mode=A #As of mod_jk 1.2.27
-#worker.worker3.port=8209
+#worker.worker3.port=$puertoInstancia3
 #worker.worker3.host=$ipInstancia3
 #worker.worker3.type=ajp13
 #worker.worker3.lbfactor=1
@@ -402,25 +434,26 @@ worker.loadbalancer.type=lb
 #worker.loadbalancer.balance_workers=worker1,worker2,worker3
 #worker.loadbalancer.balance_workers=worker1,worker2
 worker.loadbalancer.balance_workers=worker1
+worker.loadbalancer.sticky_session=$sticky_session
 worker.status.type=status" > /etc/libapache2-mod-jk/workers.properties.nuevo
 		fi
 		if [ "$instancias" == "2" ]; then
 			echo "worker.list=loadbalancer,status
-worker.worker1.port=8009
+worker.worker1.port=$puertoInstancia1
 worker.worker1.host=$ipInstancia1
 worker.worker1.type=ajp13
 worker.worker1.lbfactor=1
 worker.worker1.prepost_timeout=10000 #Not required if using ping_mode=A
 worker.worker1.connect_timeout=10000 #Not required if using ping_mode=A
 # worker.worker1.ping_mode=A #As of mod_jk 1.2.27
-worker.worker2.port=8109
+worker.worker2.port=$puertoInstancia2
 worker.worker2.host=$ipInstancia2
 worker.worker2.type=ajp13
 worker.worker2.lbfactor=1
 worker.worker2.prepost_timeout=10000 #Not required if using ping_mode=A
 worker.worker2.connect_timeout=10000 #Not required if using ping_mode=A
 # worker.worker2.ping_mode=A #As of mod_jk 1.2.27
-#worker.worker3.port=8209
+#worker.worker3.port=$puertoInstancia3
 #worker.worker3.host=$ipInstancia3
 #worker.worker3.type=ajp13
 #worker.worker3.lbfactor=1
@@ -431,25 +464,26 @@ worker.loadbalancer.type=lb
 #worker.loadbalancer.balance_workers=worker1,worker2,worker3
 worker.loadbalancer.balance_workers=worker1,worker2
 #worker.loadbalancer.balance_workers=worker1
+worker.loadbalancer.sticky_session=$sticky_session
 worker.status.type=status" > /etc/libapache2-mod-jk/workers.properties.nuevo
 		fi
 		if [ "$instancias" == "3" ]; then
 			echo "worker.list=loadbalancer,status
-worker.worker1.port=8009
+worker.worker1.port=$puertoInstancia1
 worker.worker1.host=$ipInstancia1
 worker.worker1.type=ajp13
 worker.worker1.lbfactor=1
 worker.worker1.prepost_timeout=10000 #Not required if using ping_mode=A
 worker.worker1.connect_timeout=10000 #Not required if using ping_mode=A
 # worker.worker1.ping_mode=A #As of mod_jk 1.2.27
-worker.worker2.port=8109
+worker.worker2.port=$puertoInstancia2
 worker.worker2.host=$ipInstancia2
 worker.worker2.type=ajp13
 worker.worker2.lbfactor=1
 worker.worker2.prepost_timeout=10000 #Not required if using ping_mode=A
 worker.worker2.connect_timeout=10000 #Not required if using ping_mode=A
 # worker.worker2.ping_mode=A #As of mod_jk 1.2.27
-worker.worker3.port=8209
+worker.worker3.port=$puertoInstancia
 worker.worker3.host=$ipInstancia3
 worker.worker3.type=ajp13
 worker.worker3.lbfactor=1
@@ -460,26 +494,27 @@ worker.loadbalancer.type=lb
 worker.loadbalancer.balance_workers=worker1,worker2,worker3
 #worker.loadbalancer.balance_workers=worker1,worker2
 #worker.loadbalancer.balance_workers=worker1
+worker.loadbalancer.sticky_session=$sticky_session
 worker.status.type=status" > /etc/libapache2-mod-jk/workers.properties.nuevo
 		fi
 	else
 		if [ "$instancias" == "1" ]; then
 			echo "worker.list=loadbalancer,status
-worker.worker1.port=8009
+worker.worker1.port=$puertoInstancia1
 worker.worker1.host=$ipInstancia1
 worker.worker1.type=ajp13
 worker.worker1.lbfactor=1
 worker.worker1.prepost_timeout=10000 #Not required if using ping_mode=A
 worker.worker1.connect_timeout=10000 #Not required if using ping_mode=A
 worker.worker1.ping_mode=A #As of mod_jk 1.2.27
-#worker.worker2.port=8109
+#worker.worker2.port=$puertoInstancia2
 #worker.worker2.host=$ipInstancia2
 #worker.worker2.type=ajp13
 #worker.worker2.lbfactor=1
 #worker.worker2.prepost_timeout=10000 #Not required if using ping_mode=A
 #worker.worker2.connect_timeout=10000 #Not required if using ping_mode=A
 #worker.worker2.ping_mode=A #As of mod_jk 1.2.27
-#worker.worker3.port=8209
+#worker.worker3.port=$puertoInstancia3
 #worker.worker3.host=$ipInstancia3
 #worker.worker3.type=ajp13
 #worker.worker3.lbfactor=1
@@ -490,25 +525,26 @@ worker.loadbalancer.type=lb
 #worker.loadbalancer.balance_workers=worker1,worker2,worker3
 #worker.loadbalancer.balance_workers=worker1,worker2
 worker.loadbalancer.balance_workers=worker1
+worker.loadbalancer.sticky_session=$sticky_session
 worker.status.type=status" > /etc/libapache2-mod-jk/workers.properties.nuevo
 		fi
 		if [ "$instancias" == "2" ]; then
 			echo "worker.list=loadbalancer,status
-worker.worker1.port=8009
+worker.worker1.port=$puertoInstancia1
 worker.worker1.host=$ipInstancia1
 worker.worker1.type=ajp13
 worker.worker1.lbfactor=1
 worker.worker1.prepost_timeout=10000 #Not required if using ping_mode=A
 worker.worker1.connect_timeout=10000 #Not required if using ping_mode=A
 worker.worker1.ping_mode=A #As of mod_jk 1.2.27
-worker.worker2.port=8109
+worker.worker2.port=$puertoInstancia2
 worker.worker2.host=$ipInstancia2
 worker.worker2.type=ajp13
 worker.worker2.lbfactor=1
 worker.worker2.prepost_timeout=10000 #Not required if using ping_mode=A
 worker.worker2.connect_timeout=10000 #Not required if using ping_mode=A
 worker.worker2.ping_mode=A #As of mod_jk 1.2.27
-#worker.worker3.port=8209
+#worker.worker3.port=$puertoInstancia3
 #worker.worker3.host=$ipInstancia3
 #worker.worker3.type=ajp13
 #worker.worker3.lbfactor=1
@@ -519,25 +555,26 @@ worker.loadbalancer.type=lb
 #worker.loadbalancer.balance_workers=worker1,worker2,worker3
 worker.loadbalancer.balance_workers=worker1,worker2
 #worker.loadbalancer.balance_workers=worker1
+worker.loadbalancer.sticky_session=$sticky_session
 worker.status.type=status" > /etc/libapache2-mod-jk/workers.properties.nuevo
 		fi
 		if [ "$instancias" == "3" ]; then
 			echo "worker.list=loadbalancer,status
-worker.worker1.port=8009
+worker.worker1.port=$puertoInstancia1
 worker.worker1.host=$ipInstancia1
 worker.worker1.type=ajp13
 worker.worker1.lbfactor=1
 worker.worker1.prepost_timeout=10000 #Not required if using ping_mode=A
 worker.worker1.connect_timeout=10000 #Not required if using ping_mode=A
 worker.worker1.ping_mode=A #As of mod_jk 1.2.27
-worker.worker2.port=8109
+worker.worker2.port=$puertoInstancia2
 worker.worker2.host=$ipInstancia2
 worker.worker2.type=ajp13
 worker.worker2.lbfactor=1
 worker.worker2.prepost_timeout=10000 #Not required if using ping_mode=A
 worker.worker2.connect_timeout=10000 #Not required if using ping_mode=A
 worker.worker2.ping_mode=A #As of mod_jk 1.2.27
-worker.worker3.port=8209
+worker.worker3.port=$puertoInstancia3
 worker.worker3.host=$ipInstancia3
 worker.worker3.type=ajp13
 worker.worker3.lbfactor=1
@@ -548,6 +585,7 @@ worker.loadbalancer.type=lb
 worker.loadbalancer.balance_workers=worker1,worker2,worker3
 #worker.loadbalancer.balance_workers=worker1,worker2
 #worker.loadbalancer.balance_workers=worker1
+worker.loadbalancer.sticky_session=$sticky_session
 worker.status.type=status" > /etc/libapache2-mod-jk/workers.properties.nuevo
 		fi
 	fi

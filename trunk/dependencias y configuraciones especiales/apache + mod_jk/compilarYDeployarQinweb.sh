@@ -7,8 +7,8 @@ posicion="$PWD"
 if [ "$editarPersistencia" == "" ]; then
 	editarPersistencia="$1"
 fi
-if [ "$ip" == "" ]; then
-	ip="$2"
+if [ "$ipBaseDatos" == "" ]; then
+	ipBaseDatos="$2"
 fi
 if [ "$user" == "" ]; then
 	user="$3"
@@ -20,8 +20,9 @@ fi
 if [ "$editarPersistencia" == "" ]; then
 	editarPersistencia="1"
 fi
-if [ "$ip" == "" ]; then
+if [ "$ipBaseDatos" == "" ]; then
 	source "$posicion"/detectarIpConexion.sh
+	ipBaseDatos="$ip"
 fi
 if [ "$user" == "" ]; then
 	user="root"
@@ -34,10 +35,10 @@ directorioActual="$PWD"
 echo "cd $HOME/workspace qin jboss sin ejb spring transactions/qin jboss sin ejb spring transactions"
 cd "$HOME"/"workspace qin jboss sin ejb spring transactions/qin jboss sin ejb spring transactions"
 if [ "$editarPersistencia" == "1" ]; then
-	editarJdbcProperties=`cat "$HOME"/"workspace qin jboss sin ejb spring transactions/qin jboss sin ejb spring transactions/qinweb/src/main/resources/jdbc.properties" | grep "jdbc.url=jdbc:mysql://$ip:3306/qin"`
+	editarJdbcProperties=`cat "$HOME"/"workspace qin jboss sin ejb spring transactions/qin jboss sin ejb spring transactions/qinweb/src/main/resources/jdbc.properties" | grep "jdbc.url=jdbc:mysql://$ipBaseDatos:3306/qin"`
 	if [ "$editarJdbcProperties" != "" ]; then
 		echo "jdbc.driverClassName=com.mysql.jdbc.Driver
-jdbc.url=jdbc:mysql://$ip:3306/qin
+jdbc.url=jdbc:mysql://$ipBaseDatos:3306/qin
 jdbc.username=$user
 jdbc.password=$pass" > "$HOME"/"workspace qin jboss sin ejb spring transactions/qin jboss sin ejb spring transactions/qinweb/src/main/resources/jdbc.properties"
 	fi
