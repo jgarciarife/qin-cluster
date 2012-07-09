@@ -36,7 +36,6 @@ if [ "$reset" == "1" ]; then
 	rm -R -f "$HOME"/opt/jboss-6.1.0.Final.2/server/all/data/hornetq/*
 	rm -R -f "$HOME"/opt/jboss-6.1.0.Final.3/server/all/data/hornetq/*
 fi
-ipAnterior="$ip"
 #instancia1
 instancia="1"
 source "$posicion"/subirJboss.sh
