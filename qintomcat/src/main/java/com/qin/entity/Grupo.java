@@ -19,6 +19,10 @@ import com.qin.entity.base.BaseEntity;
 @Entity
 @Table(name = "grupo", catalog = "qintomcat", uniqueConstraints = @UniqueConstraint(columnNames = "resolucion_id"))
 public class Grupo extends BaseEntity {
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "materia_id")
+	private Materia materia;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "resolucion_id")
@@ -31,6 +35,20 @@ public class Grupo extends BaseEntity {
 	private List<Alumno> alumnos;
 
 	public Grupo() {
+	}
+
+	/**
+	 * @return the materia
+	 */
+	public Materia getMateria() {
+		return materia;
+	}
+
+	/**
+	 * @param materia the materia to set
+	 */
+	public void setMateria(Materia materia) {
+		this.materia = materia;
 	}
 
 	/**
