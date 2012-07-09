@@ -84,7 +84,8 @@ public class ElaboracionResolucionController {
 			trabajoPractico = trabajoPracticoManager.findById(tpId);
 		}
 		if (codigo == null) {
-			codigo = colaboracionManager.generateCodigoResolucionCompartida();
+			codigo = colaboracionManager
+					.generateCodigoResolucionCompartida(usuario);
 		}
 		resolucion = resolucionManager.joinResolucion(resolucion,
 				trabajoPractico, alumno, codigo);
