@@ -4,9 +4,7 @@ echo "bajarAmbiente.sh"
 
 posicion="$PWD"
 
-source "$posicion"/bajarApache.sh
-source "$posicion"/reestablecerArchivosConfiguracion.sh
-source "$posicion"/recargarConfiguracionApache.sh
+source "$posicion"/bajarApacheCompleto.sh
 # instancia 1
 source "$posicion"/bajarJboss.sh
 # instancia 2
