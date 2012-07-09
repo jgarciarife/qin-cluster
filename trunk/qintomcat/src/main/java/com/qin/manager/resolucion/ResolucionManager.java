@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.qin.entity.Alumno;
 import com.qin.entity.Grupo;
+import com.qin.entity.Materia;
 import com.qin.entity.Resolucion;
 import com.qin.entity.TrabajoPractico;
 
@@ -29,7 +30,7 @@ public interface ResolucionManager {
 	Resolucion createResolucion(TrabajoPractico trabajoPractico,
 			String codigoResolucionCompartida) throws Exception;
 
-	Grupo createGrupo(Resolucion resolucion) throws Exception;
+	Grupo createGrupo(Resolucion resolucion, Materia materia) throws Exception;
 
 	public List<Grupo> findByTrabajoPracticoIdWithGroup(Long tpId)
 			throws Exception;

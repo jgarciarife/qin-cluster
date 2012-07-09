@@ -13,6 +13,7 @@ import com.qin.eao.grupo.GrupoEAO;
 import com.qin.eao.resolucion.ResolucionEAO;
 import com.qin.entity.Alumno;
 import com.qin.entity.Grupo;
+import com.qin.entity.Materia;
 import com.qin.entity.Resolucion;
 import com.qin.entity.TrabajoPractico;
 
@@ -86,9 +87,10 @@ public class ResolucionManagerImpl implements ResolucionManager {
 	}
 
 	@Override
-	public Grupo createGrupo(Resolucion resolucion) throws Exception {
+	public Grupo createGrupo(Resolucion resolucion, Materia materia) throws Exception {
 		Grupo grupo = new Grupo();
 		grupo.setResolucion(resolucion);
+		grupo.setMateria(materia);
 		return grupo;
 	}
 
@@ -112,7 +114,7 @@ public class ResolucionManagerImpl implements ResolucionManager {
 			}
 			Grupo grupo = grupoEAO.findByResolucion(resolucion);
 			if (grupo == null) {
-				grupo = createGrupo(resolucion);
+				grupo = createGrupo(resolucion, trabajoPractico.getMateria());
 				grupoEAO.insert(grupo);
 			}
 			if (grupo.getAlumnos() == null) {
