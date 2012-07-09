@@ -193,6 +193,7 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 
 	@Override
 	public String generateCodigoResolucionCompartida() throws Exception {
-		return String.valueOf(Math.round(Math.random() * 1000));
+//		return String.valueOf(Math.round(Math.random() * 1000));
+		return "000";
 	}
 }
