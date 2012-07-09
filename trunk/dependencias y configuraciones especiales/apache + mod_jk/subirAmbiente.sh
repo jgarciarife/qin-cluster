@@ -25,12 +25,10 @@ source "$posicion"/backupearArchivosConfiguracion.sh
 #puertoInstancia2="8109"
 #ipInstancia3="worker3"
 #puertoInstancia3="8209"
-source "$posicion"/editarArchivosConfiguracion.sh
-source "$posicion"/recargarConfiguracionApache.sh
 source "$posicion"/subirMysql.sh
 source "$posicion"/agregarEntradaEnRouter.sh
 #ipBaseDatos="basededatos"
-source "$posicion"/compilarYDeployarQinweb.sh
+#source "$posicion"/compilarYDeployarQinweb.sh
 if [ "$reset" == "1" ]; then
 	rm -R -f "$HOME"/opt/jboss-6.1.0.Final/server/all/data/hornetq/*
 	rm -R -f "$HOME"/opt/jboss-6.1.0.Final.2/server/all/data/hornetq/*
@@ -41,15 +39,16 @@ instancia="1"
 source "$posicion"/subirJboss.sh
 if [ "$instancias" == "2" ] || [ "$instancias" == "3" ]; then
 	#instancia2
-	instancia="2"
-	subirJboss
+	#instancia="2"
+	#subirJboss
+	echo "hola"
 fi
 if [ "$instancias" == "3" ]; then
 	#instancia3
 	instancia="3"
 	subirJboss
 fi
-source "$posicion"/subirApache.sh
+source "$posicion"/subirApacheCompleto.sh
 source "$posicion"/manejarPermisos.sh
 exit 0
 
