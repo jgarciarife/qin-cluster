@@ -17,6 +17,7 @@ import com.qin.entity.Materia;
 import com.qin.entity.Resolucion;
 import com.qin.entity.Respuesta;
 import com.qin.entity.TrabajoPractico;
+import com.qin.entity.Usuario;
 import com.qin.manager.administracion.AdministracionManager;
 import com.qin.manager.dictamen.DictamenManager;
 import com.qin.manager.trabajoPractico.TrabajoPracticoManager;
@@ -192,8 +193,8 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 	}
 
 	@Override
-	public String generateCodigoResolucionCompartida() throws Exception {
+	public String generateCodigoResolucionCompartida(Usuario usuario) throws Exception {
 //		return String.valueOf(Math.round(Math.random() * 1000));
-		return "000";
+		return "000-" + usuario.getId();
 	}
 }
