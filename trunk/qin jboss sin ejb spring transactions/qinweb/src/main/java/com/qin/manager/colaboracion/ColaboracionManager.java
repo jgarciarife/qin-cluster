@@ -7,6 +7,7 @@ import com.qin.entity.Grupo;
 import com.qin.entity.Materia;
 import com.qin.entity.Resolucion;
 import com.qin.entity.TrabajoPractico;
+import com.qin.entity.Usuario;
 
 public interface ColaboracionManager {
 
@@ -27,6 +28,6 @@ public interface ColaboracionManager {
 	Map<Integer, String> findAllTPNotaByMateria(Long materiaId)
 			throws Exception;
 	
-	String generateCodigoResolucionCompartida() throws Exception;
+	String generateCodigoResolucionCompartida(Usuario usuario) throws Exception;
 
 }
