@@ -45,7 +45,7 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">apache</stringProp>
           <stringProp name="HTTPSampler.port">80</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -82,7 +82,7 @@
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://localhost:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
@@ -123,7 +123,7 @@ rrfr</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">apache</stringProp>
           <stringProp name="HTTPSampler.port">80</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -160,7 +160,7 @@ rrfr</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://localhost:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
@@ -201,7 +201,7 @@ rrfr</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">apache</stringProp>
           <stringProp name="HTTPSampler.port">80</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -238,7 +238,7 @@ rrfr</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://localhost:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
@@ -279,7 +279,7 @@ rrfr</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">apache</stringProp>
           <stringProp name="HTTPSampler.port">80</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -316,7 +316,7 @@ rrfr</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://localhost:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
@@ -359,7 +359,7 @@ asd</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">apache</stringProp>
           <stringProp name="HTTPSampler.port">80</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -396,7 +396,7 @@ asd</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://localhost:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
@@ -439,7 +439,7 @@ asd</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">apache</stringProp>
           <stringProp name="HTTPSampler.port">80</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -476,7 +476,7 @@ asd</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://localhost:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
@@ -517,7 +517,7 @@ rrfr</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">apache</stringProp>
           <stringProp name="HTTPSampler.port">80</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -554,7 +554,7 @@ rrfr</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://localhost:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
@@ -595,7 +595,7 @@ rrfr</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">apache</stringProp>
           <stringProp name="HTTPSampler.port">80</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -632,7 +632,7 @@ rrfr</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://localhost:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
@@ -675,7 +675,7 @@ asd</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">apache</stringProp>
           <stringProp name="HTTPSampler.port">80</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -712,7 +712,7 @@ asd</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://localhost:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
@@ -755,7 +755,7 @@ asd</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">apache</stringProp>
           <stringProp name="HTTPSampler.port">80</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -792,7 +792,7 @@ asd</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://localhost:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
@@ -835,7 +835,7 @@ asd</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">apache</stringProp>
           <stringProp name="HTTPSampler.port">80</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -872,7 +872,7 @@ asd</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://localhost:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
