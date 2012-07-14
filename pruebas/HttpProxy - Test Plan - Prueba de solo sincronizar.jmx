@@ -15,276 +15,17 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">2</stringProp>
+          <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">1500</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">90</stringProp>
-        <longProp name="ThreadGroup.start_time">1335238003000</longProp>
-        <longProp name="ThreadGroup.end_time">1335238003000</longProp>
+        <stringProp name="ThreadGroup.num_threads">550</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">60</stringProp>
+        <longProp name="ThreadGroup.start_time">1341850933000</longProp>
+        <longProp name="ThreadGroup.end_time">1341850933000</longProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/qinweb/login.html" enabled="true">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="user" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.name">user</stringProp>
-                <stringProp name="Argument.value">${usuario_nombre}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">apache</stringProp>
-          <stringProp name="HTTPSampler.port">80</stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/qinweb/login.html</stringProp>
-          <stringProp name="HTTPSampler.method">GET</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.implementation">Java</stringProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-            <collectionProp name="HeaderManager.headers">
-              <elementProp name="Accept-Language" elementType="Header">
-                <stringProp name="Header.name">Accept-Language</stringProp>
-                <stringProp name="Header.value">en-us,en;q=0.5</stringProp>
-              </elementProp>
-              <elementProp name="Accept" elementType="Header">
-                <stringProp name="Header.name">Accept</stringProp>
-                <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</stringProp>
-              </elementProp>
-              <elementProp name="User-Agent" elementType="Header">
-                <stringProp name="Header.name">User-Agent</stringProp>
-                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:11.0) Gecko/20100101 Firefox/11.0</stringProp>
-              </elementProp>
-              <elementProp name="Referer" elementType="Header">
-                <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://apache:80/qinweb/</stringProp>
-              </elementProp>
-              <elementProp name="Accept-Encoding" elementType="Header">
-                <stringProp name="Header.name">Accept-Encoding</stringProp>
-                <stringProp name="Header.value">gzip, deflate</stringProp>
-              </elementProp>
-            </collectionProp>
-          </HeaderManager>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/qinweb/consultar.html" enabled="true">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">apache</stringProp>
-          <stringProp name="HTTPSampler.port">80</stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/qinweb/consultar.html</stringProp>
-          <stringProp name="HTTPSampler.method">GET</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.implementation">Java</stringProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-            <collectionProp name="HeaderManager.headers">
-              <elementProp name="Accept-Language" elementType="Header">
-                <stringProp name="Header.name">Accept-Language</stringProp>
-                <stringProp name="Header.value">en-us,en;q=0.5</stringProp>
-              </elementProp>
-              <elementProp name="Accept" elementType="Header">
-                <stringProp name="Header.name">Accept</stringProp>
-                <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</stringProp>
-              </elementProp>
-              <elementProp name="User-Agent" elementType="Header">
-                <stringProp name="Header.name">User-Agent</stringProp>
-                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:11.0) Gecko/20100101 Firefox/11.0</stringProp>
-              </elementProp>
-              <elementProp name="Referer" elementType="Header">
-                <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://apache:80/qinweb/login.html?user=martomj</stringProp>
-              </elementProp>
-              <elementProp name="Accept-Encoding" elementType="Header">
-                <stringProp name="Header.name">Accept-Encoding</stringProp>
-                <stringProp name="Header.value">gzip, deflate</stringProp>
-              </elementProp>
-            </collectionProp>
-          </HeaderManager>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/qinweb/iniciar_busqueda.html" enabled="true">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">apache</stringProp>
-          <stringProp name="HTTPSampler.port">80</stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/qinweb/iniciar_busqueda.html</stringProp>
-          <stringProp name="HTTPSampler.method">GET</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.implementation">Java</stringProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-            <collectionProp name="HeaderManager.headers">
-              <elementProp name="Accept-Language" elementType="Header">
-                <stringProp name="Header.name">Accept-Language</stringProp>
-                <stringProp name="Header.value">en-us,en;q=0.5</stringProp>
-              </elementProp>
-              <elementProp name="Accept" elementType="Header">
-                <stringProp name="Header.name">Accept</stringProp>
-                <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</stringProp>
-              </elementProp>
-              <elementProp name="User-Agent" elementType="Header">
-                <stringProp name="Header.name">User-Agent</stringProp>
-                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:11.0) Gecko/20100101 Firefox/11.0</stringProp>
-              </elementProp>
-              <elementProp name="Referer" elementType="Header">
-                <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://apache:80/qinweb/consultar.html</stringProp>
-              </elementProp>
-              <elementProp name="Accept-Encoding" elementType="Header">
-                <stringProp name="Header.name">Accept-Encoding</stringProp>
-                <stringProp name="Header.value">gzip, deflate</stringProp>
-              </elementProp>
-            </collectionProp>
-          </HeaderManager>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/qinweb/buscar.html" enabled="true">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="materiaId" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.name">materiaId</stringProp>
-                <stringProp name="Argument.value">-1</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">apache</stringProp>
-          <stringProp name="HTTPSampler.port">80</stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/qinweb/buscar.html</stringProp>
-          <stringProp name="HTTPSampler.method">GET</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.implementation">Java</stringProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-            <collectionProp name="HeaderManager.headers">
-              <elementProp name="Accept-Language" elementType="Header">
-                <stringProp name="Header.name">Accept-Language</stringProp>
-                <stringProp name="Header.value">en-us,en;q=0.5</stringProp>
-              </elementProp>
-              <elementProp name="Accept" elementType="Header">
-                <stringProp name="Header.name">Accept</stringProp>
-                <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</stringProp>
-              </elementProp>
-              <elementProp name="User-Agent" elementType="Header">
-                <stringProp name="Header.name">User-Agent</stringProp>
-                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:11.0) Gecko/20100101 Firefox/11.0</stringProp>
-              </elementProp>
-              <elementProp name="Referer" elementType="Header">
-                <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://apache:80/qinweb/iniciar_busqueda.html</stringProp>
-              </elementProp>
-              <elementProp name="Accept-Encoding" elementType="Header">
-                <stringProp name="Header.name">Accept-Encoding</stringProp>
-                <stringProp name="Header.value">gzip, deflate</stringProp>
-              </elementProp>
-            </collectionProp>
-          </HeaderManager>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/qinweb/alta_resolucion.html" enabled="true">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="tpId" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.name">tpId</stringProp>
-                <stringProp name="Argument.value">1</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">apache</stringProp>
-          <stringProp name="HTTPSampler.port">80</stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/qinweb/alta_resolucion.html</stringProp>
-          <stringProp name="HTTPSampler.method">GET</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.implementation">Java</stringProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-            <collectionProp name="HeaderManager.headers">
-              <elementProp name="Accept-Language" elementType="Header">
-                <stringProp name="Header.name">Accept-Language</stringProp>
-                <stringProp name="Header.value">en-us,en;q=0.5</stringProp>
-              </elementProp>
-              <elementProp name="Accept" elementType="Header">
-                <stringProp name="Header.name">Accept</stringProp>
-                <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</stringProp>
-              </elementProp>
-              <elementProp name="User-Agent" elementType="Header">
-                <stringProp name="Header.name">User-Agent</stringProp>
-                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:11.0) Gecko/20100101 Firefox/11.0</stringProp>
-              </elementProp>
-              <elementProp name="Referer" elementType="Header">
-                <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://apache:80/qinweb/buscar.html?materiaId=-1</stringProp>
-              </elementProp>
-              <elementProp name="Accept-Encoding" elementType="Header">
-                <stringProp name="Header.name">Accept-Encoding</stringProp>
-                <stringProp name="Header.value">gzip, deflate</stringProp>
-              </elementProp>
-            </collectionProp>
-          </HeaderManager>
-          <hashTree/>
-        </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/qinweb/sincronizar.html" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -293,14 +34,12 @@
                 <stringProp name="Argument.name">id</stringProp>
                 <stringProp name="Argument.value">1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
               <elementProp name="texto" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.name">texto</stringProp>
-                <stringProp name="Argument.value">sadssadadwdeweer%0Aer%0Aer%0A%0Aasdmisad%0A%0Afsd%0Asdf%0Arrfr</stringProp>
+                <stringProp name="Argument.value">Resolucion+1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -329,7 +68,7 @@
               </elementProp>
               <elementProp name="Accept-Language" elementType="Header">
                 <stringProp name="Header.name">Accept-Language</stringProp>
-                <stringProp name="Header.value">en-us,en;q=0.5</stringProp>
+                <stringProp name="Header.value">es-ar,es;q=0.8,en-us;q=0.5,en;q=0.3</stringProp>
               </elementProp>
               <elementProp name="Accept" elementType="Header">
                 <stringProp name="Header.name">Accept</stringProp>
@@ -337,15 +76,19 @@
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
-                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:11.0) Gecko/20100101 Firefox/11.0</stringProp>
+                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:13.0) Gecko/20100101 Firefox/13.0.1</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache/qinweb/alta_resolucion.html?tpId=1</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
                 <stringProp name="Header.value">XMLHttpRequest</stringProp>
+              </elementProp>
+              <elementProp name="DNT" elementType="Header">
+                <stringProp name="Header.name">DNT</stringProp>
+                <stringProp name="Header.value">1</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -363,22 +106,12 @@
                 <stringProp name="Argument.name">id</stringProp>
                 <stringProp name="Argument.value">1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
               <elementProp name="texto" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.name">texto</stringProp>
-                <stringProp name="Argument.value">sadssadadwdeweer
-er
-er
-
-asdmisad
-
-fsd
-sdf
-rrfr</stringProp>
+                <stringProp name="Argument.value">Resolucion+1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -387,7 +120,7 @@ rrfr</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/qinweb/sincronizar.html</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -407,7 +140,7 @@ rrfr</stringProp>
               </elementProp>
               <elementProp name="Accept-Language" elementType="Header">
                 <stringProp name="Header.name">Accept-Language</stringProp>
-                <stringProp name="Header.value">en-us,en;q=0.5</stringProp>
+                <stringProp name="Header.value">es-ar,es;q=0.8,en-us;q=0.5,en;q=0.3</stringProp>
               </elementProp>
               <elementProp name="Accept" elementType="Header">
                 <stringProp name="Header.name">Accept</stringProp>
@@ -415,15 +148,19 @@ rrfr</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
-                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:11.0) Gecko/20100101 Firefox/11.0</stringProp>
+                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:13.0) Gecko/20100101 Firefox/13.0.1</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache/qinweb/alta_resolucion.html?tpId=1</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
                 <stringProp name="Header.value">XMLHttpRequest</stringProp>
+              </elementProp>
+              <elementProp name="DNT" elementType="Header">
+                <stringProp name="Header.name">DNT</stringProp>
+                <stringProp name="Header.value">1</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -441,22 +178,12 @@ rrfr</stringProp>
                 <stringProp name="Argument.name">id</stringProp>
                 <stringProp name="Argument.value">1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
               <elementProp name="texto" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.name">texto</stringProp>
-                <stringProp name="Argument.value">sadssadadwdeweer
-er
-er
-
-asdmisad
-
-fsd
-sdf
-rrfr</stringProp>
+                <stringProp name="Argument.value">Resolucion+1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -465,7 +192,7 @@ rrfr</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/qinweb/sincronizar.html</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -485,7 +212,7 @@ rrfr</stringProp>
               </elementProp>
               <elementProp name="Accept-Language" elementType="Header">
                 <stringProp name="Header.name">Accept-Language</stringProp>
-                <stringProp name="Header.value">en-us,en;q=0.5</stringProp>
+                <stringProp name="Header.value">es-ar,es;q=0.8,en-us;q=0.5,en;q=0.3</stringProp>
               </elementProp>
               <elementProp name="Accept" elementType="Header">
                 <stringProp name="Header.name">Accept</stringProp>
@@ -493,15 +220,19 @@ rrfr</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
-                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:11.0) Gecko/20100101 Firefox/11.0</stringProp>
+                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:13.0) Gecko/20100101 Firefox/13.0.1</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache/qinweb/alta_resolucion.html?tpId=1</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
                 <stringProp name="Header.value">XMLHttpRequest</stringProp>
+              </elementProp>
+              <elementProp name="DNT" elementType="Header">
+                <stringProp name="Header.name">DNT</stringProp>
+                <stringProp name="Header.value">1</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -519,22 +250,12 @@ rrfr</stringProp>
                 <stringProp name="Argument.name">id</stringProp>
                 <stringProp name="Argument.value">1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
               <elementProp name="texto" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.name">texto</stringProp>
-                <stringProp name="Argument.value">sadssadadwdeweer
-er
-er
-
-asdmisad
-
-fsd
-sdf3
-rrfr</stringProp>
+                <stringProp name="Argument.value">Resolucion+1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -543,7 +264,7 @@ rrfr</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/qinweb/sincronizar.html</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -563,7 +284,7 @@ rrfr</stringProp>
               </elementProp>
               <elementProp name="Accept-Language" elementType="Header">
                 <stringProp name="Header.name">Accept-Language</stringProp>
-                <stringProp name="Header.value">en-us,en;q=0.5</stringProp>
+                <stringProp name="Header.value">es-ar,es;q=0.8,en-us;q=0.5,en;q=0.3</stringProp>
               </elementProp>
               <elementProp name="Accept" elementType="Header">
                 <stringProp name="Header.name">Accept</stringProp>
@@ -571,15 +292,19 @@ rrfr</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
-                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:11.0) Gecko/20100101 Firefox/11.0</stringProp>
+                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:13.0) Gecko/20100101 Firefox/13.0.1</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache/qinweb/alta_resolucion.html?tpId=1</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
                 <stringProp name="Header.value">XMLHttpRequest</stringProp>
+              </elementProp>
+              <elementProp name="DNT" elementType="Header">
+                <stringProp name="Header.name">DNT</stringProp>
+                <stringProp name="Header.value">1</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -597,24 +322,12 @@ rrfr</stringProp>
                 <stringProp name="Argument.name">id</stringProp>
                 <stringProp name="Argument.value">1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
               <elementProp name="texto" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.name">texto</stringProp>
-                <stringProp name="Argument.value">sadssadadwdeweer
-er
-er
-
-asdmisad
-
-fsd
-sdf
-rrfr  sdfswfdsfdsfsdfd
-
-asd</stringProp>
+                <stringProp name="Argument.value">Resolucion+1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -623,7 +336,7 @@ asd</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/qinweb/sincronizar.html</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -643,7 +356,7 @@ asd</stringProp>
               </elementProp>
               <elementProp name="Accept-Language" elementType="Header">
                 <stringProp name="Header.name">Accept-Language</stringProp>
-                <stringProp name="Header.value">en-us,en;q=0.5</stringProp>
+                <stringProp name="Header.value">es-ar,es;q=0.8,en-us;q=0.5,en;q=0.3</stringProp>
               </elementProp>
               <elementProp name="Accept" elementType="Header">
                 <stringProp name="Header.name">Accept</stringProp>
@@ -651,15 +364,19 @@ asd</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
-                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:11.0) Gecko/20100101 Firefox/11.0</stringProp>
+                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:13.0) Gecko/20100101 Firefox/13.0.1</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache/qinweb/alta_resolucion.html?tpId=1</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
                 <stringProp name="Header.value">XMLHttpRequest</stringProp>
+              </elementProp>
+              <elementProp name="DNT" elementType="Header">
+                <stringProp name="Header.name">DNT</stringProp>
+                <stringProp name="Header.value">1</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -677,24 +394,12 @@ asd</stringProp>
                 <stringProp name="Argument.name">id</stringProp>
                 <stringProp name="Argument.value">1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
               <elementProp name="texto" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.name">texto</stringProp>
-                <stringProp name="Argument.value">sadssadadwdeweer
-er
-er
-
-asdmisad
-
-fsd
-sdf
-rrfr  sdfswfdsfdsfsdfd
-
-asd</stringProp>
+                <stringProp name="Argument.value">Resolucion+1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -703,7 +408,7 @@ asd</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/qinweb/sincronizar.html</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -723,7 +428,7 @@ asd</stringProp>
               </elementProp>
               <elementProp name="Accept-Language" elementType="Header">
                 <stringProp name="Header.name">Accept-Language</stringProp>
-                <stringProp name="Header.value">en-us,en;q=0.5</stringProp>
+                <stringProp name="Header.value">es-ar,es;q=0.8,en-us;q=0.5,en;q=0.3</stringProp>
               </elementProp>
               <elementProp name="Accept" elementType="Header">
                 <stringProp name="Header.name">Accept</stringProp>
@@ -731,15 +436,19 @@ asd</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
-                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:11.0) Gecko/20100101 Firefox/11.0</stringProp>
+                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:13.0) Gecko/20100101 Firefox/13.0.1</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache/qinweb/alta_resolucion.html?tpId=1</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
                 <stringProp name="Header.value">XMLHttpRequest</stringProp>
+              </elementProp>
+              <elementProp name="DNT" elementType="Header">
+                <stringProp name="Header.name">DNT</stringProp>
+                <stringProp name="Header.value">1</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -757,22 +466,12 @@ asd</stringProp>
                 <stringProp name="Argument.name">id</stringProp>
                 <stringProp name="Argument.value">1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
               <elementProp name="texto" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.name">texto</stringProp>
-                <stringProp name="Argument.value">sadssadadwdeweer
-er
-er
-
-asdmisad
-
-fsd
-sdf3
-rrfr</stringProp>
+                <stringProp name="Argument.value">Resolucion+1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -781,7 +480,7 @@ rrfr</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/qinweb/sincronizar.html</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -801,7 +500,7 @@ rrfr</stringProp>
               </elementProp>
               <elementProp name="Accept-Language" elementType="Header">
                 <stringProp name="Header.name">Accept-Language</stringProp>
-                <stringProp name="Header.value">en-us,en;q=0.5</stringProp>
+                <stringProp name="Header.value">es-ar,es;q=0.8,en-us;q=0.5,en;q=0.3</stringProp>
               </elementProp>
               <elementProp name="Accept" elementType="Header">
                 <stringProp name="Header.name">Accept</stringProp>
@@ -809,15 +508,19 @@ rrfr</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
-                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:11.0) Gecko/20100101 Firefox/11.0</stringProp>
+                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:13.0) Gecko/20100101 Firefox/13.0.1</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache/qinweb/alta_resolucion.html?tpId=1</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
                 <stringProp name="Header.value">XMLHttpRequest</stringProp>
+              </elementProp>
+              <elementProp name="DNT" elementType="Header">
+                <stringProp name="Header.name">DNT</stringProp>
+                <stringProp name="Header.value">1</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -835,22 +538,12 @@ rrfr</stringProp>
                 <stringProp name="Argument.name">id</stringProp>
                 <stringProp name="Argument.value">1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
               <elementProp name="texto" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.name">texto</stringProp>
-                <stringProp name="Argument.value">sadssadadwdeweer
-er
-er
-
-asdmisad
-
-fsd
-sdf3
-rrfr</stringProp>
+                <stringProp name="Argument.value">Resolucion+1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -859,7 +552,7 @@ rrfr</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/qinweb/sincronizar.html</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -879,7 +572,7 @@ rrfr</stringProp>
               </elementProp>
               <elementProp name="Accept-Language" elementType="Header">
                 <stringProp name="Header.name">Accept-Language</stringProp>
-                <stringProp name="Header.value">en-us,en;q=0.5</stringProp>
+                <stringProp name="Header.value">es-ar,es;q=0.8,en-us;q=0.5,en;q=0.3</stringProp>
               </elementProp>
               <elementProp name="Accept" elementType="Header">
                 <stringProp name="Header.name">Accept</stringProp>
@@ -887,15 +580,19 @@ rrfr</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
-                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:11.0) Gecko/20100101 Firefox/11.0</stringProp>
+                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:13.0) Gecko/20100101 Firefox/13.0.1</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache/qinweb/alta_resolucion.html?tpId=1</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
                 <stringProp name="Header.value">XMLHttpRequest</stringProp>
+              </elementProp>
+              <elementProp name="DNT" elementType="Header">
+                <stringProp name="Header.name">DNT</stringProp>
+                <stringProp name="Header.value">1</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -913,24 +610,12 @@ rrfr</stringProp>
                 <stringProp name="Argument.name">id</stringProp>
                 <stringProp name="Argument.value">1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
               <elementProp name="texto" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.name">texto</stringProp>
-                <stringProp name="Argument.value">sadssadadwdeweer
-er
-er
-
-asdmisad
-
-fsd
-sdf
-rrfr  sdfswfdsfdsfsdfd
-
-asd</stringProp>
+                <stringProp name="Argument.value">Resolucion+1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -939,7 +624,7 @@ asd</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/qinweb/sincronizar.html</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -959,7 +644,7 @@ asd</stringProp>
               </elementProp>
               <elementProp name="Accept-Language" elementType="Header">
                 <stringProp name="Header.name">Accept-Language</stringProp>
-                <stringProp name="Header.value">en-us,en;q=0.5</stringProp>
+                <stringProp name="Header.value">es-ar,es;q=0.8,en-us;q=0.5,en;q=0.3</stringProp>
               </elementProp>
               <elementProp name="Accept" elementType="Header">
                 <stringProp name="Header.name">Accept</stringProp>
@@ -967,15 +652,19 @@ asd</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
-                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:11.0) Gecko/20100101 Firefox/11.0</stringProp>
+                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:13.0) Gecko/20100101 Firefox/13.0.1</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache/qinweb/alta_resolucion.html?tpId=1</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
                 <stringProp name="Header.value">XMLHttpRequest</stringProp>
+              </elementProp>
+              <elementProp name="DNT" elementType="Header">
+                <stringProp name="Header.name">DNT</stringProp>
+                <stringProp name="Header.value">1</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -993,24 +682,12 @@ asd</stringProp>
                 <stringProp name="Argument.name">id</stringProp>
                 <stringProp name="Argument.value">1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
               <elementProp name="texto" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.name">texto</stringProp>
-                <stringProp name="Argument.value">sadssadadwdeweer
-er
-er
-
-asdmisad
-
-fsd
-sdf
-rrfr  sdfswfdsfdsfsdfd
-
-asd</stringProp>
+                <stringProp name="Argument.value">Resolucion+1</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -1019,7 +696,7 @@ asd</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/qinweb/sincronizar.html</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1039,7 +716,7 @@ asd</stringProp>
               </elementProp>
               <elementProp name="Accept-Language" elementType="Header">
                 <stringProp name="Header.name">Accept-Language</stringProp>
-                <stringProp name="Header.value">en-us,en;q=0.5</stringProp>
+                <stringProp name="Header.value">es-ar,es;q=0.8,en-us;q=0.5,en;q=0.3</stringProp>
               </elementProp>
               <elementProp name="Accept" elementType="Header">
                 <stringProp name="Header.name">Accept</stringProp>
@@ -1047,95 +724,19 @@ asd</stringProp>
               </elementProp>
               <elementProp name="User-Agent" elementType="Header">
                 <stringProp name="Header.name">User-Agent</stringProp>
-                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:11.0) Gecko/20100101 Firefox/11.0</stringProp>
+                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:13.0) Gecko/20100101 Firefox/13.0.1</stringProp>
               </elementProp>
               <elementProp name="Referer" elementType="Header">
                 <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
+                <stringProp name="Header.value">http://apache/qinweb/alta_resolucion.html?tpId=1</stringProp>
               </elementProp>
               <elementProp name="X-Requested-With" elementType="Header">
                 <stringProp name="Header.name">X-Requested-With</stringProp>
                 <stringProp name="Header.value">XMLHttpRequest</stringProp>
               </elementProp>
-              <elementProp name="Accept-Encoding" elementType="Header">
-                <stringProp name="Header.name">Accept-Encoding</stringProp>
-                <stringProp name="Header.value">gzip, deflate</stringProp>
-              </elementProp>
-            </collectionProp>
-          </HeaderManager>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/qinweb/sincronizar.html" enabled="true">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="id" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.name">id</stringProp>
-                <stringProp name="Argument.value">1</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="texto" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">texto</stringProp>
-                <stringProp name="Argument.value">sadssadadwdeweer
-er
-er
-
-asdmisad
-
-fsd
-sdf
-rrfr  sdfswfdsfdsfsdfd
-
-asd</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">apache</stringProp>
-          <stringProp name="HTTPSampler.port">80</stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-          <stringProp name="HTTPSampler.path">/qinweb/sincronizar.html</stringProp>
-          <stringProp name="HTTPSampler.method">GET</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.implementation">Java</stringProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-            <collectionProp name="HeaderManager.headers">
-              <elementProp name="Content-Type" elementType="Header">
-                <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/x-www-form-urlencoded</stringProp>
-              </elementProp>
-              <elementProp name="Accept-Language" elementType="Header">
-                <stringProp name="Header.name">Accept-Language</stringProp>
-                <stringProp name="Header.value">en-us,en;q=0.5</stringProp>
-              </elementProp>
-              <elementProp name="Accept" elementType="Header">
-                <stringProp name="Header.name">Accept</stringProp>
-                <stringProp name="Header.value">application/json, text/javascript, */*</stringProp>
-              </elementProp>
-              <elementProp name="User-Agent" elementType="Header">
-                <stringProp name="Header.name">User-Agent</stringProp>
-                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:11.0) Gecko/20100101 Firefox/11.0</stringProp>
-              </elementProp>
-              <elementProp name="Referer" elementType="Header">
-                <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://apache:80/qinweb/alta_resolucion.html?tpId=3</stringProp>
-              </elementProp>
-              <elementProp name="X-Requested-With" elementType="Header">
-                <stringProp name="Header.name">X-Requested-With</stringProp>
-                <stringProp name="Header.value">XMLHttpRequest</stringProp>
+              <elementProp name="DNT" elementType="Header">
+                <stringProp name="Header.name">DNT</stringProp>
+                <stringProp name="Header.value">1</stringProp>
               </elementProp>
               <elementProp name="Accept-Encoding" elementType="Header">
                 <stringProp name="Header.name">Accept-Encoding</stringProp>
@@ -1145,85 +746,6 @@ asd</stringProp>
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/qinweb/consultar.html" enabled="true">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">apache</stringProp>
-          <stringProp name="HTTPSampler.port">80</stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding">ISO-8859-1</stringProp>
-          <stringProp name="HTTPSampler.path">/qinweb/consultar.html</stringProp>
-          <stringProp name="HTTPSampler.method">GET</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.implementation">Java</stringProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-            <collectionProp name="HeaderManager.headers">
-              <elementProp name="Accept-Language" elementType="Header">
-                <stringProp name="Header.name">Accept-Language</stringProp>
-                <stringProp name="Header.value">en-us,en;q=0.5</stringProp>
-              </elementProp>
-              <elementProp name="Accept" elementType="Header">
-                <stringProp name="Header.name">Accept</stringProp>
-                <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</stringProp>
-              </elementProp>
-              <elementProp name="User-Agent" elementType="Header">
-                <stringProp name="Header.name">User-Agent</stringProp>
-                <stringProp name="Header.value">Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:11.0) Gecko/20100101 Firefox/11.0</stringProp>
-              </elementProp>
-              <elementProp name="Referer" elementType="Header">
-                <stringProp name="Header.name">Referer</stringProp>
-                <stringProp name="Header.value">http://apache:80/qinweb/guardar_resolucion.html</stringProp>
-              </elementProp>
-              <elementProp name="Accept-Encoding" elementType="Header">
-                <stringProp name="Header.name">Accept-Encoding</stringProp>
-                <stringProp name="Header.value">gzip, deflate</stringProp>
-              </elementProp>
-            </collectionProp>
-          </HeaderManager>
-          <hashTree/>
-        </hashTree>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
-          <boolProp name="ResultCollector.error_logging">false</boolProp>
-          <objProp>
-            <name>saveConfig</name>
-            <value class="SampleSaveConfiguration">
-              <time>true</time>
-              <latency>true</latency>
-              <timestamp>true</timestamp>
-              <success>true</success>
-              <label>true</label>
-              <code>true</code>
-              <message>true</message>
-              <threadName>true</threadName>
-              <dataType>true</dataType>
-              <encoding>false</encoding>
-              <assertions>true</assertions>
-              <subresults>true</subresults>
-              <responseData>false</responseData>
-              <samplerData>false</samplerData>
-              <xml>true</xml>
-              <fieldNames>false</fieldNames>
-              <responseHeaders>false</responseHeaders>
-              <requestHeaders>false</requestHeaders>
-              <responseDataOnError>false</responseDataOnError>
-              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
-              <assertionsResultsToSave>0</assertionsResultsToSave>
-              <bytes>true</bytes>
-            </value>
-          </objProp>
-          <stringProp name="filename"></stringProp>
-        </ResultCollector>
-        <hashTree/>
         <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
@@ -1256,27 +778,58 @@ asd</stringProp>
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
-          <collectionProp name="CookieManager.cookies"/>
-          <boolProp name="CookieManager.clearEachIteration">false</boolProp>
-        </CookieManager>
-        <hashTree/>
-        <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
-          <collectionProp name="UserParameters.names">
-            <stringProp name="1424886266">usuario_nombre</stringProp>
-          </collectionProp>
-          <collectionProp name="UserParameters.thread_values">
-            <collectionProp name="-1005184448">
-              <stringProp name="2113062340">${_StringFromFile(/opt/usuarios.dat)}</stringProp>
-            </collectionProp>
-          </collectionProp>
-          <boolProp name="UserParameters.per_iteration">false</boolProp>
-        </UserParameters>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>true</xml>
+              <fieldNames>false</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
         <hashTree/>
         <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="true">
           <stringProp name="ConstantTimer.delay">7000</stringProp>
           <stringProp name="RandomTimer.range">3000</stringProp>
         </GaussianRandomTimer>
+        <hashTree/>
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+          <collectionProp name="CookieManager.cookies"/>
+          <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+        </CookieManager>
+        <hashTree/>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Configuración del CSV Data Set" enabled="true">
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="filename">/opt/usuarios.csv</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <stringProp name="shareMode">Todos los hilos</stringProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="variableNames">usuario_nombre,usuario_id</stringProp>
+        </CSVDataSet>
         <hashTree/>
       </hashTree>
     </hashTree>
