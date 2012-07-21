@@ -60,7 +60,6 @@ if [ "$instancias" == "3" ]; then
 	instancia="3"
 	subirJboss
 fi
-modJk="0"
 source "$posicion"/subirApacheCompleto.sh
 source "$posicion"/manejarPermisos.sh
 exit 0
