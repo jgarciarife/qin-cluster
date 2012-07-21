@@ -413,7 +413,8 @@ LoadModule status_module /usr/lib/apache2/modules/mod_status.so
 	$textoWorkers3
 </Proxy>
 <Location /qinweb>
-	ProxyPass balancer://ajpCluster/qinweb stickysession=JSESSIONID
+	ProxyPass /APP balancer://ajpCluster/qinweb stickysession=JSESSIONID
+	#ProxyPassReverse /APP balancer://ajpCluster/qinweb
 </Location>" > /etc/apache2/httpd.conf.nuevo
 		fi
 	else
@@ -444,6 +445,7 @@ LoadModule status_module /usr/lib/apache2/modules/mod_status.so
 </Proxy>
 <Location /qinweb>
 	ProxyPass balancer://ajpCluster/qinweb stickysession=JSESSIONID
+	#ProxyPassReverse /APP balancer://ajpCluster/qinweb
 </Location>" > /etc/apache2/httpd.conf.nuevo
 		fi
 	fi
