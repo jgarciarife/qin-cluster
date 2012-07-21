@@ -81,6 +81,11 @@ project="qinweb"
 
 if [ "$modJk" == "0" ]; then
 	sudo rm /etc/apache2/mods-enabled/jk.*
+	sudo ln -s /etc/apache2/mods-available/proxy.load /etc/apache2/mods-enabled/proxy.load
+	sudo ln -s /etc/apache2/mods-available/proxy.conf /etc/apache2/mods-enabled/proxy.conf
+	sudo ln -s /etc/apache2/mods-available/proxy_ajp.load /etc/apache2/mods-enabled/proxy_ajp.load
+	sudo ln -s /etc/apache2/mods-available/proxy_balancer.load /etc/apache2/mods-enabled/proxy_balancer.load
+	sudo ln -s /etc/apache2/mods-available/proxy_balancer.conf /etc/apache2/mods-enabled/proxy_balancer.conf
 fi
 
 if [ ! -d "/etc/apache2/conf" ]; then
@@ -404,10 +409,10 @@ JkShmFile run/jk.shm
 				textoWorkers3="	BalancerMember ajp://$ipInstancia3:$puertoInstancia3 route=worker3"
 			fi
 			echo "ServerName $ipApache
-LoadModule proxy_module /usr/lib/apache2/modules/mod_proxy.so
-LoadModule proxy_ajp_module /usr/lib/apache2/modules/mod_proxy_ajp.so
-LoadModule proxy_balancer_module /usr/lib/apache2/modules/mod_proxy_balancer.so
-LoadModule status_module /usr/lib/apache2/modules/mod_status.so
+#LoadModule proxy_module /usr/lib/apache2/modules/mod_proxy.so
+#LoadModule proxy_ajp_module /usr/lib/apache2/modules/mod_proxy_ajp.so
+#LoadModule proxy_balancer_module /usr/lib/apache2/modules/mod_proxy_balancer.so
+#LoadModule status_module /usr/lib/apache2/modules/mod_status.so
 <Location /balancer-manager>
 	SetHandler balancer-manager
 </Location>
@@ -435,10 +440,10 @@ LoadModule status_module /usr/lib/apache2/modules/mod_status.so
 				textoWorkers3="	BalancerMember ajp://$ipInstancia3:$puertoInstancia3 route=worker3"
 			fi
 			echo "ServerName $ipApache
-LoadModule proxy_module /usr/lib/apache2/modules/mod_proxy.so
-LoadModule proxy_ajp_module /usr/lib/apache2/modules/mod_proxy_ajp.so
-LoadModule proxy_balancer_module /usr/lib/apache2/modules/mod_proxy_balancer.so
-LoadModule status_module /usr/lib/apache2/modules/mod_status.so
+#LoadModule proxy_module /usr/lib/apache2/modules/mod_proxy.so
+#LoadModule proxy_ajp_module /usr/lib/apache2/modules/mod_proxy_ajp.so
+#LoadModule proxy_balancer_module /usr/lib/apache2/modules/mod_proxy_balancer.so
+#LoadModule status_module /usr/lib/apache2/modules/mod_status.so
 <Location /balancer-manager>
 	SetHandler balancer-manager
 </Location>
