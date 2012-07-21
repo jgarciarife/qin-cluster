@@ -79,6 +79,10 @@ fi
 
 project="qinweb"
 
+if [ "$modJk" == "0" ]; then
+	sudo rm /etc/apache2/mods-enabled/jk.*
+fi
+
 if [ ! -d "/etc/apache2/conf" ]; then
 	echo "sudo mkdir /etc/apache2/conf"
 	sudo mkdir /etc/apache2/conf
