@@ -38,6 +38,12 @@ if [ -f "/etc/apache2/mods-available/proxy_balancer.conf.anterior" ]; then
 	echo "sudo mv -f /etc/apache2/mods-available/proxy_balancer.anterior /etc/apache2/mods-available/proxy_balancer.conf 2> /dev/null"
 	sudo mv -f /etc/apache2/mods-available/proxy_balancer.conf.anterior /etc/apache2/mods-available/proxy_balancer.conf 2> /dev/null
 fi
+if [ ! -f "/etc/apache2/mods-enabled/jk.load" ]; then
+	sudo ln -s /etc/apache2/mods-available/jk.load /etc/apache2/mods-enabled/jk.load
+fi
+if [ ! -f "/etc/apache2/mods-enabled/jk.conf" ]; then
+	sudo ln -s /etc/apache2/mods-available/jk.conf /etc/apache2/mods-enabled/jk.conf
+fi
 echo "sudo rm -R -f /etc/apache2/conf 2> /dev/null"
 sudo rm -R -f /etc/apache2/conf 2> /dev/null
 echo "sudo rm -R -f /etc/apache2/logs 2> /dev/null"
