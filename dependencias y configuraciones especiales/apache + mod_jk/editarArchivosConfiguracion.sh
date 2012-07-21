@@ -47,7 +47,7 @@ if [ "$esGNewSense" == "" ]; then
 	source "$posicion"/detectarSO.sh
 fi
 if [ "$modJk" == "" ]; then
-	modJk="1"
+	modJk="0"
 fi
 if [ "$instancias" == "" ]; then
 	instancias="2"
