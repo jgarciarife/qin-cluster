@@ -44,6 +44,21 @@ fi
 if [ ! -f "/etc/apache2/mods-enabled/jk.conf" ]; then
 	sudo ln -s /etc/apache2/mods-available/jk.conf /etc/apache2/mods-enabled/jk.conf
 fi
+if [ -f "/etc/apache2/mods-enabled/proxy.load" ]; then
+	sudo rm /etc/apache2/mods-enabled/proxy.load
+fi
+if [ -f "/etc/apache2/mods-enabled/proxy.conf" ]; then
+	sudo rm /etc/apache2/mods-enabled/proxy.conf
+fi
+if [ -f "/etc/apache2/mods-enabled/proxy_ajp.load" ]; then
+	sudo rm /etc/apache2/mods-enabled/proxy_ajp.load
+fi
+if [ -f "/etc/apache2/mods-enabled/proxy_balancer.load" ]; then
+	sudo rm /etc/apache2/mods-enabled/proxy_balancer.load
+fi
+if [ -f "/etc/apache2/mods-enabled/proxy_balancer.conf" ]; then
+	sudo rm /etc/apache2/mods-enabled/proxy_balancer.conf
+fi
 echo "sudo rm -R -f /etc/apache2/conf 2> /dev/null"
 sudo rm -R -f /etc/apache2/conf 2> /dev/null
 echo "sudo rm -R -f /etc/apache2/logs 2> /dev/null"
