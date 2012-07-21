@@ -25,7 +25,7 @@ source "$posicion"/backupearArchivosConfiguracion.sh
 #puertoInstancia2="8109"
 #ipInstancia3="worker3"
 #puertoInstancia3="8209"
-#source "$posicion"/subirMysql.sh
+source "$posicion"/subirMysql.sh
 echo "RESETEAR LA BASE DE DATOS: ingresar 3 veces la contraseña qinweb"
 source "$posicion"/resetearBaseDeDatos.sh
 #source "$posicion"/agregarEntradaEnRouter.sh
@@ -60,7 +60,7 @@ if [ "$instancias" == "3" ]; then
 	instancia="3"
 	subirJboss
 fi
-modJk="1"
+modJk="0"
 source "$posicion"/subirApacheCompleto.sh
 source "$posicion"/manejarPermisos.sh
 exit 0
