@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.qin.eao.base.BaseEAOImpl;
+import com.qin.entity.Correccion;
 import com.qin.entity.Dictamen;
 @Repository
 public class DictamenEAOImpl extends BaseEAOImpl implements DictamenEAO {
@@ -91,17 +92,21 @@ public class DictamenEAOImpl extends BaseEAOImpl implements DictamenEAO {
 		Query query = sessionFactory.getCurrentSession().createQuery(jpql.toString());
 		query.setParameter("id", resId);
 		Dictamen dic = (Dictamen) query.uniqueResult();
-
-		StringBuffer jpql2 = new StringBuffer();
-		jpql2.append("SELECT dictamen ");
-		jpql2.append("FROM Dictamen dictamen ");
-		jpql2.append("join fetch dictamen.correccions c ");
-		jpql2.append("join fetch c.respuesta ");
-		jpql2.append("WHERE dictamen.id = :id ");
-		Query query2 = sessionFactory.getCurrentSession().createQuery(jpql2.toString());
-		query2.setParameter("id", dic.getId());
-		Dictamen dic2 = (Dictamen) query2.uniqueResult();
-		dic.setCorreccions(dic2.getCorreccions());
+		if (dic != null && dic.getCorreccions() != null){
+			for (Correccion c : dic.getCorreccions()){
+				c.getRespuesta();
+			}
+		}
+//		StringBuffer jpql2 = new StringBuffer();
+//		jpql2.append("SELECT dictamen ");
+//		jpql2.append("FROM Dictamen dictamen ");
+//		jpql2.append("join fetch dictamen.correccions c ");
+//		jpql2.append("join fetch c.respuesta ");
+//		jpql2.append("WHERE dictamen.id = :id ");
+//		Query query2 = sessionFactory.getCurrentSession().createQuery(jpql2.toString());
+//		query2.setParameter("id", dic.getId());
+//		Dictamen dic2 = (Dictamen) query2.uniqueResult();
+//		dic.setCorreccions(dic2.getCorreccions());
 		return dic;
 	}
 }
