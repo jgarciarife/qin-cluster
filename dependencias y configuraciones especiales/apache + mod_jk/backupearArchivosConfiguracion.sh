@@ -29,4 +29,10 @@ fi
 if [ ! -f "/etc/apache2/sites-available/default.anterior" ]; then
 	sudo cp -f /etc/apache2/sites-available/default /etc/apache2/sites-available/default.anterior
 fi
+if [ ! -f "/etc/apache2/mods-available/status.conf.anterior" ]; then
+	sudo cp -f /etc/apache2/mods-available/status.conf /etc/apache2/mods-available/status.conf.anterior
+fi
+if [ ! -f "/etc/apache2/mods-available/proxy_balancer.conf.anterior" ]; then
+	sudo cp -f /etc/apache2/mods-available/proxy_balancer.conf /etc/apache2/mods-available/proxy_balancer.conf.anterior
+fi
 source "$posicion"/manejarPermisos.sh

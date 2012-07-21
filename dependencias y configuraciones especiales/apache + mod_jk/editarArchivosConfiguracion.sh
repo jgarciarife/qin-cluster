@@ -7,41 +7,47 @@ posicion="$PWD"
 source "$posicion"/manejarPermisos.sh
 
 if [ "$1" == "-h" ]; then
-	echo "editarArchivosConfiguracion.sh esGNewSense instancias ipApache stickysession ipInstancia1 puertoInstancia1 ipInstancia2 puertoInstancia2 ipInstancia3 puertoInstancia3"
+	echo "editarArchivosConfiguracion.sh esGNewSense mod_jk instancias ipApache stickysession ipInstancia1 puertoInstancia1 ipInstancia2 puertoInstancia2 ipInstancia3 puertoInstancia3"
 fi
 
 if [ "$esGNewSense" == "" ]; then
 	esGNewSense="$1"
 fi
+if [ "$modJk" == "" ]; then
+	modJk="$2"
+fi
 if [ "$instancias" == "" ]; then
-	instancias="$2"
+	instancias="$3"
 fi
 if [ "$ipApache" == "" ]; then
-	ipApache="$3"
+	ipApache="$4"
 fi
 if [ "$sticky_session" == "" ]; then
-	sticky_session="$4"
+	sticky_session="$5"
 fi
 if [ "$ipInstancia1" == "" ]; then
-	ipInstancia1="$5"
+	ipInstancia1="$6"
 fi
 if [ "$puertoInstancia1" == "" ]; then
-	puertoInstancia1="$6"
+	puertoInstancia1="$7"
 fi
 if [ "$ipInstancia2" == "" ]; then
-	ipInstancia2="$7"
+	ipInstancia2="$8"
 fi
 if [ "$puertoInstancia2" == "" ]; then
-	puertoInstancia2="$8"
+	puertoInstancia2="$9"
 fi
 if [ "$ipInstancia3" == "" ]; then
-	ipInstancia3="$9"
+	ipInstancia3="$10"
 fi
 if [ "$puertoInstancia3" == "" ]; then
-	puertoInstancia3="$10"
+	puertoInstancia3="$11"
 fi
 if [ "$esGNewSense" == "" ]; then
 	source "$posicion"/detectarSO.sh
+fi
+if [ "$modJk" == "" ]; then
+	modJk="1"
 fi
 if [ "$instancias" == "" ]; then
 	instancias="2"
@@ -327,7 +333,7 @@ ErrorLog \${APACHE_LOG_DIR}/error.log
 # Possible values include: debug, info, notice, warn, error, crit,
 # alert, emerg.
 #
-LogLevel warn
+LogLevel error
 
 # Include module configuration:
 Include mods-enabled/*.load
@@ -364,11 +370,12 @@ fi
 
 if [ -f "/etc/apache2/httpd.conf.anterior" ]; then
 	if [ "$esGNewSense" == "1" ]; then
-		echo "ServerName $ipApache
+		if [ "$modJk" == "1" ]; then
+			echo "ServerName $ipApache
 LoadModule jk_module /usr/lib/apache2/modules/mod_jk.so
 JkWorkersFile /etc/libapache2-mod-jk/workers.properties
 JkLogFile logs/mod_jk.log
-JkLogLevel debug
+JkLogLevel error
 JkLogStampFormat \"[%a %b %d %H:%M:%S %Y]\"
 JkOptions +ForwardKeySize +ForwardURICompatUnparsed -ForwardDirectories
 JkRequestLogFormat \"%w %V %T\"
@@ -382,8 +389,63 @@ JkShmFile run/jk.shm
 	Deny from all
 	Allow from $ipApache
 </Location>" > /etc/apache2/httpd.conf.nuevo
+		else
+			if [ "$instancias" -ge "1" ]; then
+				textoWorkers1="	BalancerMember ajp://$ipInstancia1:$puertoInstancia1 route=worker1"
+			fi
+			if [ "$instancias" -ge "2" ]; then
+				textoWorkers2="	BalancerMember ajp://$ipInstancia2:$puertoInstancia2 route=worker2"
+			fi
+			if [ "$instancias" == "3" ]; then
+				textoWorkers3="	BalancerMember ajp://$ipInstancia3:$puertoInstancia3 route=worker3"
+			fi
+			echo "ServerName $ipApache
+LoadModule proxy_module /usr/lib/apache2/modules/mod_proxy.so
+LoadModule proxy_ajp_module /usr/lib/apache2/modules/mod_proxy_ajp.so
+LoadModule proxy_balancer_module /usr/lib/apache2/modules/mod_proxy_balancer.so
+LoadModule status_module /usr/lib/apache2/modules/mod_status.so
+<Location /balancer-manager>
+	SetHandler balancer-manager
+</Location>
+<Proxy balancer://ajpCluster>
+	$textoWorkers1
+	$textoWorkers2
+	$textoWorkers3
+</Proxy>
+<Location /qinweb>
+	ProxyPass balancer://ajpCluster/qinweb stickysession=JSESSIONID
+</Location>" > /etc/apache2/httpd.conf.nuevo
+		fi
 	else
-		echo "ServerName $ipApache" > /etc/apache2/httpd.conf.nuevo
+		if [ "$modJk" == "1" ]; then
+			echo "ServerName $ipApache" > /etc/apache2/httpd.conf.nuevo
+		else
+			if [ "$instancias" -ge "1" ]; then
+				textoWorkers1="	BalancerMember ajp://$ipInstancia1:$puertoInstancia1 route=worker1"
+			fi
+			if [ "$instancias" -ge "2" ]; then
+				textoWorkers2="	BalancerMember ajp://$ipInstancia2:$puertoInstancia2 route=worker2"
+			fi
+			if [ "$instancias" == "3" ]; then
+				textoWorkers3="	BalancerMember ajp://$ipInstancia3:$puertoInstancia3 route=worker3"
+			fi
+			echo "ServerName $ipApache
+LoadModule proxy_module /usr/lib/apache2/modules/mod_proxy.so
+LoadModule proxy_ajp_module /usr/lib/apache2/modules/mod_proxy_ajp.so
+LoadModule proxy_balancer_module /usr/lib/apache2/modules/mod_proxy_balancer.so
+LoadModule status_module /usr/lib/apache2/modules/mod_status.so
+<Location /balancer-manager>
+	SetHandler balancer-manager
+</Location>
+<Proxy balancer://ajpCluster>
+	$textoWorkers1
+	$textoWorkers2
+	$textoWorkers3
+</Proxy>
+<Location /qinweb>
+	ProxyPass balancer://ajpCluster/qinweb stickysession=JSESSIONID
+</Location>" > /etc/apache2/httpd.conf.nuevo
+		fi
 	fi
 	sudo mv -f /etc/apache2/httpd.conf.nuevo /etc/apache2/httpd.conf
 fi
@@ -396,10 +458,56 @@ fi
 # </VirtualHost>" > /etc/apache2/httpd.conf.nuevo
 # Include conf/mod_jk.conf
 
-if [ -f "/etc/libapache2-mod-jk/workers.properties.anterior" ]; then
-	if [ "$esGNewSense" == "1" ]; then
-		if [ "$instancias" == "1" ]; then
-			echo "worker.list=loadbalancer,status
+if [ "$modJk" == "0" ]; then
+	if [ -f "/etc/apache2/mods-available/status.conf.anterior" ]; then
+		echo "<IfModule mod_status.c>
+# Allow server status reports generated by mod_status,
+# with the URL of http://servername/server-status
+# Uncomment and change the \"192.0.2.0/24\" to allow access from other hosts.
+	<Location /server-status>
+		SetHandler server-status
+		Order deny,allow
+		Deny from all
+		Allow from $ipApache
+		Satisfy all
+	</Location>
+	# Keep track of extended status information for each request
+	ExtendedStatus On
+	# Determine if mod_status displays the first 63 characters of a request or
+	# the last 63, assuming the request itself is greater than 63 chars.
+	# Default: Off
+	#SeeRequestTail On
+	<IfModule mod_proxy.c>
+		# Show Proxy LoadBalancer status in mod_status
+		ProxyStatus On
+	</IfModule>
+</IfModule>" > /etc/apache2/mods-available/status.conf
+	fi
+	if [ -f "/etc/apache2/mods-available/proxy_balancer.conf.anterior" ]; then
+		echo "
+<IfModule mod_proxy_balancer.c>
+# Balancer manager enables dynamic update of balancer members
+# (needs mod_status). Uncomment to enable.
+	<IfModule mod_status.c>
+		<Location /balancer-manager>
+			SetHandler balancer-manager
+			Order deny,allow
+			Deny from all
+			Allow from $ipApache
+			Satisfy all
+		</Location>
+	</IfModule>
+</IfModule>
+" > /etc/apache2/mods-available/proxy_balancer.conf
+	fi
+fi
+
+if [ "$modJk" == "1" ]; then
+	if [ -f "/etc/libapache2-mod-jk/workers.properties.anterior" ]; then
+		if [ "$esGNewSense" == "1" ]; then
+			if [ "$instancias" == "1" ]; then
+				#echo "worker.list=loadbalancer,status
+				echo "worker.list=loadbalancer
 worker.worker1.port=$puertoInstancia1
 worker.worker1.host=$ipInstancia1
 worker.worker1.type=ajp13
@@ -427,9 +535,10 @@ worker.loadbalancer.type=lb
 worker.loadbalancer.balance_workers=worker1
 worker.loadbalancer.sticky_session=$sticky_session
 worker.status.type=status" > /etc/libapache2-mod-jk/workers.properties.nuevo
-		fi
-		if [ "$instancias" == "2" ]; then
-			echo "worker.list=loadbalancer,status
+			fi
+			if [ "$instancias" == "2" ]; then
+				#echo "worker.list=loadbalancer,status
+				echo "worker.list=loadbalancer
 worker.worker1.port=$puertoInstancia1
 worker.worker1.host=$ipInstancia1
 worker.worker1.type=ajp13
@@ -457,9 +566,10 @@ worker.loadbalancer.balance_workers=worker1,worker2
 #worker.loadbalancer.balance_workers=worker1
 worker.loadbalancer.sticky_session=$sticky_session
 worker.status.type=status" > /etc/libapache2-mod-jk/workers.properties.nuevo
-		fi
-		if [ "$instancias" == "3" ]; then
-			echo "worker.list=loadbalancer,status
+			fi
+			if [ "$instancias" == "3" ]; then
+				#echo "worker.list=loadbalancer,status
+				echo "worker.list=loadbalancer
 worker.worker1.port=$puertoInstancia1
 worker.worker1.host=$ipInstancia1
 worker.worker1.type=ajp13
@@ -487,10 +597,11 @@ worker.loadbalancer.balance_workers=worker1,worker2,worker3
 #worker.loadbalancer.balance_workers=worker1
 worker.loadbalancer.sticky_session=$sticky_session
 worker.status.type=status" > /etc/libapache2-mod-jk/workers.properties.nuevo
-		fi
-	else
-		if [ "$instancias" == "1" ]; then
-			echo "worker.list=loadbalancer,status
+			fi
+		else
+			if [ "$instancias" == "1" ]; then
+				#echo "worker.list=loadbalancer,status
+				echo "worker.list=loadbalancer
 worker.worker1.port=$puertoInstancia1
 worker.worker1.host=$ipInstancia1
 worker.worker1.type=ajp13
@@ -518,9 +629,10 @@ worker.loadbalancer.type=lb
 worker.loadbalancer.balance_workers=worker1
 worker.loadbalancer.sticky_session=$sticky_session
 worker.status.type=status" > /etc/libapache2-mod-jk/workers.properties.nuevo
-		fi
-		if [ "$instancias" == "2" ]; then
-			echo "worker.list=loadbalancer,status
+			fi
+			if [ "$instancias" == "2" ]; then
+				#echo "worker.list=loadbalancer,status
+				echo "worker.list=loadbalancer
 worker.worker1.port=$puertoInstancia1
 worker.worker1.host=$ipInstancia1
 worker.worker1.type=ajp13
@@ -548,9 +660,10 @@ worker.loadbalancer.balance_workers=worker1,worker2
 #worker.loadbalancer.balance_workers=worker1
 worker.loadbalancer.sticky_session=$sticky_session
 worker.status.type=status" > /etc/libapache2-mod-jk/workers.properties.nuevo
-		fi
-		if [ "$instancias" == "3" ]; then
-			echo "worker.list=loadbalancer,status
+			fi
+			if [ "$instancias" == "3" ]; then
+				#echo "worker.list=loadbalancer,status
+				echo "worker.list=loadbalancer
 worker.worker1.port=$puertoInstancia1
 worker.worker1.host=$ipInstancia1
 worker.worker1.type=ajp13
@@ -578,12 +691,11 @@ worker.loadbalancer.balance_workers=worker1,worker2,worker3
 #worker.loadbalancer.balance_workers=worker1
 worker.loadbalancer.sticky_session=$sticky_session
 worker.status.type=status" > /etc/libapache2-mod-jk/workers.properties.nuevo
+			fi
 		fi
+		sudo mv -f /etc/libapache2-mod-jk/workers.properties.nuevo /etc/libapache2-mod-jk/workers.properties
 	fi
-	sudo mv -f /etc/libapache2-mod-jk/workers.properties.nuevo /etc/libapache2-mod-jk/workers.properties
-fi
-
-echo "/jmx-console=loadbalancer
+	echo "/jmx-console=loadbalancer
 /jmx-console/*=loadbalancer
 /web-console=loadbalancer
 /web-console/*=loadbalancer
@@ -592,13 +704,12 @@ echo "/jmx-console=loadbalancer
 /$project=loadbalancer
 /$project/*=loadbalancer
 $project=loadbalancer" > /etc/apache2/conf/uriworkermap.properties.nuevo
-sudo mv -f /etc/apache2/conf/uriworkermap.properties.nuevo /etc/apache2/conf/uriworkermap.properties
-
-if [ -f "/etc/apache2/mods-available/jk.conf.anterior" ]; then
-	if [ "$esGNewSense" != "1" ]; then
-		echo "JkWorkersFile /etc/libapache2-mod-jk/workers.properties
+	sudo mv -f /etc/apache2/conf/uriworkermap.properties.nuevo /etc/apache2/conf/uriworkermap.properties
+	if [ -f "/etc/apache2/mods-available/jk.conf.anterior" ]; then
+		if [ "$esGNewSense" != "1" ]; then
+			echo "JkWorkersFile /etc/libapache2-mod-jk/workers.properties
 JkLogFile logs/mod_jk.log
-JkLogLevel debug
+JkLogLevel error
 JkLogStampFormat \"[%a %b %d %H:%M:%S %Y]\"
 JkOptions +ForwardKeySize +ForwardURICompatUnparsed -ForwardDirectories
 JkRequestLogFormat \"%w %V %T\"
@@ -612,13 +723,12 @@ JkShmFile run/jk.shm
 	Deny from all
 	Allow from $ipApache
 </Location>" > /etc/apache2/mods-available/jk.conf.nuevo
-		sudo mv -f /etc/apache2/mods-available/jk.conf.nuevo /etc/apache2/mods-available/jk.conf
+			sudo mv -f /etc/apache2/mods-available/jk.conf.nuevo /etc/apache2/mods-available/jk.conf
+		fi
 	fi
-fi
-
-if [ -f "/etc/apache2/sites-available/default.anterior" ]; then
-	if [ "$esGNewSense" == "1" ]; then
-		echo "<VirtualHost *:80>
+	if [ -f "/etc/apache2/sites-available/default.anterior" ]; then
+		if [ "$esGNewSense" == "1" ]; then
+			echo "<VirtualHost *:80>
 	ServerAdmin webmaster@localhost
 
 	ServerName $ipApache
@@ -651,7 +761,7 @@ if [ -f "/etc/apache2/sites-available/default.anterior" ]; then
 
 	# Possible values include: debug, info, notice, warn, error, crit,
 	# alert, emerg.
-	LogLevel warn
+	LogLevel error
 
 	CustomLog \${APACHE_LOG_DIR}/access.log combined
 	ServerSignature On
@@ -666,9 +776,9 @@ if [ -f "/etc/apache2/sites-available/default.anterior" ]; then
 	</Directory>
 
 </VirtualHost>" > /etc/apache2/sites-available/default.nuevo
-		sudo mv -f /etc/apache2/sites-available/default.nuevo /etc/apache2/sites-available/default
-	else
-		echo "<VirtualHost *:80>
+			sudo mv -f /etc/apache2/sites-available/default.nuevo /etc/apache2/sites-available/default
+		else
+			echo "<VirtualHost *:80>
 	ServerAdmin webmaster@localhost
 
 	ServerName $ipApache
@@ -701,7 +811,7 @@ if [ -f "/etc/apache2/sites-available/default.anterior" ]; then
 
 	# Possible values include: debug, info, notice, warn, error, crit,
 	# alert, emerg.
-	LogLevel warn
+	LogLevel error
 
 	CustomLog \${APACHE_LOG_DIR}/access.log combined
 
@@ -715,7 +825,9 @@ if [ -f "/etc/apache2/sites-available/default.anterior" ]; then
 </Directory>
 
 </VirtualHost>" > /etc/apache2/sites-available/default.nuevo
-		sudo mv -f /etc/apache2/sites-available/default.nuevo /etc/apache2/sites-available/default
+			sudo mv -f /etc/apache2/sites-available/default.nuevo /etc/apache2/sites-available/default
+		fi
 	fi
 fi
+
 source "$posicion"/manejarPermisos.sh
