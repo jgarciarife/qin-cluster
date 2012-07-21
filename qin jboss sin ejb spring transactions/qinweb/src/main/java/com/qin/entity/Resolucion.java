@@ -15,7 +15,8 @@ import com.qin.entity.base.BaseEntity;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "resolucion", catalog = "qin")
+@Table(name = "resolucion", catalog = "qin", uniqueConstraints = { @UniqueConstraint(columnNames = {
+		"trabajo_practico_id", "codigo_resolucion_compartida" }) })
 public class Resolucion extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
