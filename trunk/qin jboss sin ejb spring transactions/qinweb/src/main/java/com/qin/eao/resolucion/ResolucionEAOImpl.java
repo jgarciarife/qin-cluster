@@ -114,7 +114,7 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 					&& (!codigoResolucionCompartida.trim().equals(""))) {
 				StringBuffer jpql = new StringBuffer();
 				jpql.append("SELECT resolucion ");
-				jpql.append("FROM Resolucion resolucion ");
+				jpql.append("FROM Resolucion resolucion left join fetch resolucion.respuestas rtas left join fetch rtas.consigna c ");
 				jpql.append("WHERE resolucion.trabajoPractico.id = :trabajoPracticoId ");
 				jpql.append("AND   resolucion.codigoResolucionCompartida = :codigoResolucionCompartida ");
 				Query query = sessionFactory.getCurrentSession().createQuery(
