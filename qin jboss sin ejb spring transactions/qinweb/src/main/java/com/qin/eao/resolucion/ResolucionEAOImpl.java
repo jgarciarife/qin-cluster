@@ -125,9 +125,13 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 				Resolucion res = (Resolucion) query.uniqueResult();
 				if (res == null){
 					return null;
-				}
-				
+				}			
 				Resolucion resComppleta = findById(res.getId());
+				if (resComppleta != null) {
+					if (resComppleta.getTrabajoPractico() != null) {
+						resComppleta.getTrabajoPractico().getTitulo();
+					}
+				}
 				return resComppleta;
 			} else {
 				return null;
@@ -159,6 +163,11 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 				return null;
 			}
 			Resolucion resComppleta = findById(res.getId());
+			if (resComppleta != null) {
+				if (resComppleta.getTrabajoPractico() != null) {
+					resComppleta.getTrabajoPractico().getTitulo();
+				}
+			}
 			return resComppleta;
 		} catch (NonUniqueResultException e) {
 			return null;
