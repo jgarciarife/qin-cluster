@@ -30,7 +30,7 @@ echo "RESETEAR LA BASE DE DATOS: ingresar 3 veces la contraseña qinweb"
 source "$posicion"/resetearBaseDeDatos.sh
 #source "$posicion"/agregarEntradaEnRouter.sh
 #ipBaseDatos="basededatos"
-source "$posicion"/compilarYDeployarQinweb.sh
+#source "$posicion"/compilarYDeployarQinweb.sh
 if [ "$reset" == "1" ]; then
 	rm -R -f /opt/jboss-6.1.0.Final/server/all/data/hornetq/*
 	rm -R -f /opt/jboss-6.1.0.Final.2/server/all/data/hornetq/*
