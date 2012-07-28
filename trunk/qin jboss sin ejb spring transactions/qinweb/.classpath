@@ -281,7 +281,7 @@
   <classpathentry kind="var" path="M2_REPO/org/jboss/ejb3/proxy/proxy-reflect/1.0.0-alpha-1/proxy-reflect-1.0.0-alpha-1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jboss/ejb3/proxy/proxy-spi/1.0.0-alpha-1/proxy-spi-1.0.0-alpha-1.jar"/>
   <classpathentry kind="var" path="M2_REPO/qdox/qdox/1.6.1/qdox-1.6.1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/qin/qinjboss/qinejb/1.0/qinejb-1.0.jar"/>
+  <classpathentry kind="src" path="/qinejb"/>
   <classpathentry kind="var" path="M2_REPO/org/quartz-scheduler/quartz/1.8.3/quartz-1.8.3.jar"/>
   <classpathentry kind="var" path="M2_REPO/regexp/regexp/1.2/regexp-1.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/sun/org/apache/xml/internal/resolver/20050927/resolver-20050927.jar"/>
@@ -323,5 +323,5 @@
   <classpathentry kind="var" path="M2_REPO/apache-xerces/xml-apis/2.9.1/xml-apis-2.9.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/xmlsec/1.4.3/xmlsec-1.4.3.jar"/>
-  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 </classpath>

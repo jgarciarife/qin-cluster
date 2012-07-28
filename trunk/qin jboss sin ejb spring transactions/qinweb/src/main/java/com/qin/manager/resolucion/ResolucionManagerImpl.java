@@ -34,13 +34,7 @@ public class ResolucionManagerImpl implements ResolucionManager {
 
 	@Override
 	public Resolucion findById(Long id) throws Exception {
-		Resolucion resol = resolucionEAO.findById(id);
-		if (resol != null) {
-			if (resol.getTrabajoPractico() != null) {
-				resol.getTrabajoPractico().getTitulo();
-			}
-		}
-		return resol;
+		return resolucionEAO.findById(id);
 	}
 
 	@Override
