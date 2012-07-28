@@ -13,5 +13,5 @@ bajarInstancia
 # instancia 3
 instancia="3"
 bajarInstancia
-source "$posicion"/bajarMysql.sh
+#source "$posicion"/bajarMysql.sh
 source "$posicion"/manejarPermisos.sh
