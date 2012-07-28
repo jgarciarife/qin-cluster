@@ -60,7 +60,7 @@ public class DictamenEAOImpl extends BaseEAOImpl implements DictamenEAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
+	@Transactional(readOnly=true)
 	public List<Object[]> findAllDictamenByMateriaGroupByNota(Long materiaId)
 			throws Exception {
 		StringBuffer jpql = new StringBuffer();
