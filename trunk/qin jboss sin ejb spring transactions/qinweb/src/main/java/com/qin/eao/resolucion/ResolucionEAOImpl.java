@@ -70,6 +70,11 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 				jpql.toString());
 		query.setParameter("id", resolucionId);
 		Resolucion res = (Resolucion) query.uniqueResult();
+		if (res != null) {
+			if (res.getTrabajoPractico() != null) {
+				res.getTrabajoPractico().getTitulo();
+			}
+		}
 		return res;
 	}
 
