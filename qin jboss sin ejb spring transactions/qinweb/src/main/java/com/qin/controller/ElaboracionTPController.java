@@ -48,8 +48,9 @@ public class ElaboracionTPController {
 			colaboracionManager.updateTP(tp);
 		}
 
-		model.addAttribute("trabajoPractico",
-				trabajoPracticoManager.findById(tp.getId()));
+		// model.addAttribute("trabajoPractico",
+		// 		trabajoPracticoManager.findById(tp.getId()));
+		model.addAttribute("trabajoPractico", tp);
 		return "tp.alta";
 	}
 
