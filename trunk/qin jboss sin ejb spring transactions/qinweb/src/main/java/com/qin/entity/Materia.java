@@ -8,12 +8,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.qin.entity.base.BaseEntity;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "materia", catalog = "qin", uniqueConstraints = { @UniqueConstraint(columnNames = {
 		"anio", "cuatrimestre", "carrera" }) })
+@Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
 public class Materia extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
