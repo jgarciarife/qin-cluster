@@ -23,6 +23,7 @@ import com.qin.manager.administracion.AdministracionManager;
 import com.qin.manager.colaboracion.ColaboracionManager;
 import com.qin.manager.resolucion.ResolucionManager;
 import com.qin.manager.trabajoPractico.TrabajoPracticoManager;
+import com.qin.utils.ProfilingUtils;
 
 @Controller
 public class ElaboracionResolucionController {
@@ -45,16 +46,24 @@ public class ElaboracionResolucionController {
 
 	@ModelAttribute("materias")
 	public List<Materia> popularMaterias() throws Exception {
-		return colaboracionManager.findAllMaterias();
+		long inicio = ProfilingUtils.iniciar();
+		List<Materia> retorno = colaboracionManager.findAllMaterias();
+		ProfilingUtils
+				.logear(inicio,
+						"com.qin.controller.ElaboracionResolucionController.popularMaterias");
+		return retorno;
 	}
 
 	@RequestMapping(value = "/guardar_resolucion.html", method = RequestMethod.POST)
 	public String guardarTP(Resolucion resol, Model model) throws Exception {
+		long inicio = ProfilingUtils.iniciar();
 		colaboracionManager.saveResolucion(resol);
 		model.addAttribute("trabajoPractico", trabajoPracticoManager
 				.findById(resol.getTrabajoPractico().getId()));
 		model.addAttribute("resolucion",
 				resolucionManager.findById(resol.getId()));
+		ProfilingUtils.logear(inicio,
+				"com.qin.controller.ElaboracionResolucionController.guardarTP");
 		return "resolucion.alta";
 	}
 
@@ -63,7 +72,11 @@ public class ElaboracionResolucionController {
 			@RequestParam(value = "codigo", required = true) String codigo,
 			@RequestParam(value = "tpId", required = true) Long tpId,
 			Model model, HttpSession session) throws Exception {
-		return altaTP(null, tpId, codigo, model, session);
+		long inicio = ProfilingUtils.iniciar();
+		String retorno = altaTP(null, tpId, codigo, model, session);
+		ProfilingUtils.logear(inicio,
+				"com.qin.controller.ElaboracionResolucionController.unirseAResolucionTPs");
+		return retorno;
 	}
 
 	@RequestMapping(value = "/alta_resolucion.html")
@@ -71,6 +84,7 @@ public class ElaboracionResolucionController {
 			@RequestParam(value = "tpId", required = false) Long tpId,
 			@RequestParam(value = "codigo", required = false) String codigo,
 			Model model, HttpSession session) throws Exception {
+		long inicio = ProfilingUtils.iniciar();
 		Usuario usuario = (Usuario) session
 				.getAttribute(ControllerKeys.USUARIO);
 		Alumno alumno = getAdministracionManager().findAlumnoByUsuario(usuario);
@@ -100,6 +114,8 @@ public class ElaboracionResolucionController {
 		model.addAttribute("trabajoPractico", trabajoPractico);
 		model.addAttribute("resolucion", resolucion);
 		model.addAttribute("codigo", codigo);
+		ProfilingUtils.logear(inicio,
+				"com.qin.controller.ElaboracionResolucionController.altaTP");
 		return "resolucion.alta";
 	}
 

@@ -21,7 +21,6 @@ public class UsuarioEAOImpl extends BaseEAOImpl implements UsuarioEAO {
 	}
 
 	@Override
-	@Transactional
 	public Usuario findById(Long usuarioId) throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT usuario ");
@@ -35,7 +34,6 @@ public class UsuarioEAOImpl extends BaseEAOImpl implements UsuarioEAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<Usuario> findAll() throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT usuario ");
@@ -46,7 +44,6 @@ public class UsuarioEAOImpl extends BaseEAOImpl implements UsuarioEAO {
 	}
 
 	@Override
-	@Transactional
 	public Usuario findByName(String loginName) {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT usuario ");

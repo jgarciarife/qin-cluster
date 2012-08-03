@@ -33,37 +33,44 @@ public class ResolucionManagerImpl implements ResolucionManager {
 	}
 
 	@Override
+	@Transactional
 	public Resolucion findById(Long id) throws Exception {
 		return resolucionEAO.findById(id);
 	}
 
 	@Override
+	@Transactional
 	public List<Resolucion> findByTrabajoPracticoId(Long tpId) throws Exception {
 		return resolucionEAO.findByTPId(tpId);
 	}
 
 	@Override
+	@Transactional
 	public List<Grupo> findByTrabajoPracticoIdWithGroup(Long tpId)
 			throws Exception {
 		return resolucionEAO.findByTPIdWithGrupo(tpId);
 	}
 
 	@Override
+	@Transactional
 	public List<Resolucion> findAll() throws Exception {
 		return resolucionEAO.findAll();
 	}
 
 	@Override
+	@Transactional
 	public List<Grupo> findAllWithGrupo() throws Exception {
 		return resolucionEAO.findAllWithGrupo();
 	}
 
 	@Override
+	@Transactional
 	public void insert(Resolucion tp) throws Exception {
 		resolucionEAO.insert(tp);
 	}
 
 	@Override
+	@Transactional
 	public void update(Resolucion tp) throws Exception {
 		resolucionEAO.update(tp);
 	}
@@ -77,6 +84,7 @@ public class ResolucionManagerImpl implements ResolucionManager {
 	}
 
 	@Override
+	@Transactional
 	public Resolucion createResolucion(TrabajoPractico trabajoPractico,
 			String codigoResolucionCompartida) throws Exception {
 		Resolucion resolucion = new Resolucion();
@@ -86,6 +94,7 @@ public class ResolucionManagerImpl implements ResolucionManager {
 	}
 
 	@Override
+	@Transactional
 	public Grupo createGrupo(Resolucion resolucion, Materia materia) throws Exception {
 		Grupo grupo = new Grupo();
 		grupo.setResolucion(resolucion);

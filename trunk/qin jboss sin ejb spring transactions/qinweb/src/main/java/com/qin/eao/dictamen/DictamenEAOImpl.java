@@ -21,7 +21,6 @@ public class DictamenEAOImpl extends BaseEAOImpl implements DictamenEAO {
 	}
 
 	@Override
-	@Transactional
 	public Dictamen findById(Long dictamenId) throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT dictamen ");
@@ -49,7 +48,6 @@ public class DictamenEAOImpl extends BaseEAOImpl implements DictamenEAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<Dictamen> findAll() throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT dictamen ");
@@ -60,7 +58,6 @@ public class DictamenEAOImpl extends BaseEAOImpl implements DictamenEAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional(readOnly=true)
 	public List<Object[]> findAllDictamenByMateriaGroupByNota(Long materiaId)
 			throws Exception {
 		StringBuffer jpql = new StringBuffer();
@@ -80,7 +77,6 @@ public class DictamenEAOImpl extends BaseEAOImpl implements DictamenEAO {
 	}
 
 	@Override
-	@Transactional
 	public Dictamen findByResolucionId(Long resId) throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT dictamen ");

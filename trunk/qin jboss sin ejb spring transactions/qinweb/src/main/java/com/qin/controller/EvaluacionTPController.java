@@ -14,6 +14,7 @@ import com.qin.entity.Dictamen;
 import com.qin.entity.Resolucion;
 import com.qin.manager.dictamen.DictamenManager;
 import com.qin.manager.resolucion.ResolucionManager;
+import com.qin.utils.ProfilingUtils;
 
 @Controller
 public class EvaluacionTPController {
@@ -30,6 +31,7 @@ public class EvaluacionTPController {
 	public String evaluarResol(
 			@RequestParam(value = "id", required = false) Long id, Model model)
 			throws Exception {
+		long inicio = ProfilingUtils.iniciar();
 		Resolucion res = resolucionManager.findById(id);
 		model.addAttribute("resolucion", res);
 
@@ -49,12 +51,15 @@ public class EvaluacionTPController {
 		}
 
 		model.addAttribute("dictamen", dictamen);
+		ProfilingUtils.logear(inicio,
+				"com.qin.controller.EvaluacionTPController.evaluarResol");
 		return "resolucion.evaluacion";
 	}
 
 	@RequestMapping(value = "/guardar_evaluacion_resolucion.html", method = RequestMethod.POST)
 	public String guardarEvaluacionResolucion(Dictamen dictamen, Model model)
 			throws Exception {
+		long inicio = ProfilingUtils.iniciar();
 		Double total = 0D;
 		if (dictamen.getCorreccions() != null) {
 			for (Correccion r : dictamen.getCorreccions()) {
@@ -74,6 +79,9 @@ public class EvaluacionTPController {
 		Resolucion res = resolucionManager.findById(dictamen.getResolucion()
 				.getId());
 		model.addAttribute("resolucion", res);
+		ProfilingUtils
+				.logear(inicio,
+						"com.qin.controller.EvaluacionTPController.guardarEvaluacionResolucion");
 		return "resolucion.evaluacion";
 	}
 

@@ -24,15 +24,6 @@ public class SincronizadorTextoImpl implements SincronizadorTexto {
 	protected static Logger logger = LoggerFactory
 			.getLogger(SincronizadorTextoImpl.class);
 
-	// private Map<String, String> tpsActivos = new HashMap<String, String>();
-
-	// @Lock(LockType.READ)
-	// public void activarTp(String id, String texto) {
-	// if (tpsActivos.get(id) == null) {
-	// tpsActivos.put(id, texto);
-	// }
-	// }
-
 	@Lock(LockType.READ)
 	public void activarTp(String id, String texto) {
 		try {
@@ -47,11 +38,6 @@ public class SincronizadorTextoImpl implements SincronizadorTexto {
 		}
 	}
 
-	// @Lock(LockType.WRITE)
-	// public void desactivarTp(String id) {
-	// tpsActivos.remove(id);
-	// }
-
 	@Lock(LockType.WRITE)
 	public void desactivarTp(String id) {
 		try {
@@ -63,16 +49,6 @@ public class SincronizadorTextoImpl implements SincronizadorTexto {
 			logger.error(t.getMessage());
 		}
 	}
-
-	// @Lock(LockType.WRITE)
-	// public String actualizarTp(String id, LinkedList<Patch> patches) {
-	// String textoBase = tpsActivos.get(id);
-	// diff_match_patch dmp = new diff_match_patch();
-	// Object[] patch_apply = dmp.patch_apply(patches, textoBase);
-	// String nuevoTexto = (String) patch_apply[0];
-	// tpsActivos.put(id, nuevoTexto);
-	// return nuevoTexto;
-	// }
 
 	@Lock(LockType.WRITE)
 	public String actualizarTp(String id, LinkedList<Patch> patches) {
@@ -103,17 +79,13 @@ public class SincronizadorTextoImpl implements SincronizadorTexto {
 		}
 	}
 
-	// @Lock(LockType.READ)
-	// public String obtenerTp(String id) {
-	// return tpsActivos.get(id);
-	// }
-
 	@Lock(LockType.READ)
 	public String obtenerTp(String id) {
 		try {
 			PojoCacheManager pojoCacheManager = (PojoCacheManager) HAUtils
 					.lookup(PojoCacheManagerImpl.JNDI_NAME);
-			return pojoCacheManager.getValue(id);
+			String resultado = pojoCacheManager.getValue(id);
+			return resultado;
 		} catch (Throwable t) {
 			t.printStackTrace();
 			logger.error(t.getMessage());

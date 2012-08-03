@@ -53,21 +53,25 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 	}
 
 	@Override
+	@Transactional
 	public void insertGrupo(Grupo grupo) throws Exception {
 		grupoEAO.insert(grupo);
 	}
 
 	@Override
+	@Transactional
 	public void updateGrupo(Grupo grupo) throws Exception {
 		grupoEAO.update(grupo);
 	}
 
 	@Override
+	@Transactional
 	public void deleteGrupo(Grupo grupo) throws Exception {
 		grupoEAO.delete(grupo);
 	}
 
 	@Override
+	@Transactional
 	public void insertTP(TrabajoPractico tp) throws Exception {
 		trabajoPracticoManager.insert(tp);
 	}
@@ -91,11 +95,13 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 	}
 
 	@Override
+	@Transactional
 	public List<Materia> findAllMaterias() throws Exception {
 		return materiaEAO.findAll();
 	}
 
 	@Override
+	@Transactional
 	public void updateTP(TrabajoPractico tp) throws Exception {
 		trabajoPracticoManager.update(tp);
 	}
@@ -150,15 +156,18 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 		return resolucionEAO;
 	}
 
+	@Transactional
 	public void insertResolucion(Resolucion res) throws Exception {
 		resolucionEAO.insert(res);
 	}
 
+	@Transactional
 	public void updateResolucion(Resolucion res) throws Exception {
 		resolucionEAO.update(res);
 	}
 
 	@Override
+	@Transactional
 	public Map<Integer, String> findAllTPNotaByMateria(Long materiaId)
 			throws Exception {
 		return dictamenManager.findAllTPNotaByMateria(materiaId);

@@ -20,7 +20,6 @@ public class DocenteEAOImpl extends BaseEAOImpl implements DocenteEAO {
 	}
 
 	@Override
-	@Transactional
 	public Docente findById(Long docenteId) throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT docente ");
@@ -33,7 +32,6 @@ public class DocenteEAOImpl extends BaseEAOImpl implements DocenteEAO {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<Docente> findAll() throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT docente ");

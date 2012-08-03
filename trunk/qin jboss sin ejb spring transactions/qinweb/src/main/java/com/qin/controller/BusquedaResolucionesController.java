@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import com.qin.entity.Grupo;
 import com.qin.manager.colaboracion.ColaboracionManager;
 import com.qin.manager.resolucion.ResolucionManager;
+import com.qin.utils.ProfilingUtils;
 
 @Controller
 public class BusquedaResolucionesController extends MultiActionController {
@@ -24,6 +25,7 @@ public class BusquedaResolucionesController extends MultiActionController {
 	@RequestMapping(value = "/buscar_resoluciones.html")
 	protected String buscarResoluciones(Long tpId, Model model)
 			throws Exception {
+		long inicio = ProfilingUtils.iniciar();
 		List<Grupo> tps = null;
 		if (tpId == null) {
 			tps = resolucionManager.findAllWithGrupo();
@@ -32,6 +34,7 @@ public class BusquedaResolucionesController extends MultiActionController {
 			tps = resolucionManager.findByTrabajoPracticoIdWithGroup(tpId);
 		}
 		model.addAttribute("grupos", tps);
+		ProfilingUtils.logear(inicio, "com.qin.controller.BusquedaResolucionesController.buscarResoluciones");
 		return "resolucion.resultado_busqueda";
 	}
 

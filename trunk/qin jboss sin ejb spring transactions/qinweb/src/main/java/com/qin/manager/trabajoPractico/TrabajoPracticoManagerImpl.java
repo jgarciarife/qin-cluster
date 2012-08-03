@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.qin.eao.trabajoPractico.TrabajoPracticoEAO;
 import com.qin.entity.Alumno;
@@ -23,6 +24,7 @@ public class TrabajoPracticoManagerImpl implements TrabajoPracticoManager {
 	}
 
 	@Override
+	@Transactional
 	public TrabajoPractico findById(Long id) throws Exception {
 		TrabajoPractico trabajoPractico = getTrabajoPracticoEAO().findById(id);
 		return trabajoPractico;
@@ -37,27 +39,32 @@ public class TrabajoPracticoManagerImpl implements TrabajoPracticoManager {
 	}
 
 	@Override
+	@Transactional
 	public List<TrabajoPractico> findByMateriaId(Long materiaId)
 			throws Exception {
 		return getTrabajoPracticoEAO().findByMateriaId(materiaId);
 	}
 	
 	@Override
+	@Transactional
 	public List<TrabajoPractico> findAll() throws Exception{
 		return getTrabajoPracticoEAO().findAll();
 	}
 
 	@Override
+	@Transactional
 	public void insert(TrabajoPractico tp) throws Exception {
 		getTrabajoPracticoEAO().insert(tp);
 	}
 
 	@Override
+	@Transactional
 	public void update(TrabajoPractico tp) throws Exception {
 		getTrabajoPracticoEAO().update(tp);
 	}
 	
 	@Override
+	@Transactional
 	public List<TrabajoPractico> findAllByAlumno(Alumno alumno) throws Exception {
 		return getTrabajoPracticoEAO().findAllByAlumno(alumno);
 	}

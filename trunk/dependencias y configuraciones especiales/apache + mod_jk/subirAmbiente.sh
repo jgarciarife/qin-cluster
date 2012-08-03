@@ -5,7 +5,7 @@ echo "subirAmbiente.sh"
 instancias="$1"
 
 if [ "$instancias" == "" ]; then
-	instancias="2"
+	instancias="1"
 fi
 
 reset="$2"
