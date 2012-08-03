@@ -23,7 +23,6 @@ public class TrabajoPracticoEAOImpl extends BaseEAOImpl implements
 	}
 
 	@Override
-	@Transactional
 	public TrabajoPractico findById(Long trabajoPracticoId) throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT trabajoPractico ");
@@ -39,7 +38,6 @@ public class TrabajoPracticoEAOImpl extends BaseEAOImpl implements
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<TrabajoPractico> findAll() throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT trabajoPractico ");
@@ -52,7 +50,6 @@ public class TrabajoPracticoEAOImpl extends BaseEAOImpl implements
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<TrabajoPractico> findByMateriaId(Long materiaId)
 			throws Exception {
 		StringBuffer jpql = new StringBuffer();
@@ -67,7 +64,6 @@ public class TrabajoPracticoEAOImpl extends BaseEAOImpl implements
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<TrabajoPractico> findAllByAlumno(Alumno alumno)
 			throws Exception {
 		StringBuffer jpql = new StringBuffer();

@@ -13,6 +13,7 @@ import com.qin.entity.Materia;
 import com.qin.entity.TrabajoPractico;
 import com.qin.manager.colaboracion.ColaboracionManager;
 import com.qin.manager.trabajoPractico.TrabajoPracticoManager;
+import com.qin.utils.ProfilingUtils;
 
 @Controller
 public class BusquedaTPController extends MultiActionController {
@@ -35,6 +36,7 @@ public class BusquedaTPController extends MultiActionController {
 
 	@RequestMapping(value = "/buscar.html")
 	protected String buscarTPs(Long materiaId, Model model) throws Exception {
+		long inicio = ProfilingUtils.iniciar();
 		List<TrabajoPractico> tps = null;		
 		if (materiaId.intValue() == -1){
 			tps = trabajoPracticoManager.findAll();
@@ -43,6 +45,8 @@ public class BusquedaTPController extends MultiActionController {
 			.findByMateriaId(materiaId);
 		}
 		model.addAttribute("trabajos", tps);
+		ProfilingUtils.logear(inicio,
+				"com.qin.controller.BusquedaTPController.buscarTPs");
 		return "tp.resultado_busqueda";
 	}
 

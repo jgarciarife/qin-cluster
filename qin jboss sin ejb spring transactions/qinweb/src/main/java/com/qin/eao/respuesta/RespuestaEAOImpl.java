@@ -21,7 +21,6 @@ public class RespuestaEAOImpl extends BaseEAOImpl implements RespuestaEAO {
 	}
 
 	@Override
-	@Transactional
 	public Respuesta findById(Long respuestaId) throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT respuesta ");
@@ -35,7 +34,6 @@ public class RespuestaEAOImpl extends BaseEAOImpl implements RespuestaEAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<Respuesta> findAll() throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT respuesta ");

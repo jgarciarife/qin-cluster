@@ -21,7 +21,6 @@ public class CorreccionEAOImpl extends BaseEAOImpl implements CorreccionEAO {
 	}
 
 	@Override
-	@Transactional
 	public Correccion findById(Long correccionId) throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT correccion ");
@@ -35,7 +34,6 @@ public class CorreccionEAOImpl extends BaseEAOImpl implements CorreccionEAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<Correccion> findAll() throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT correccion ");

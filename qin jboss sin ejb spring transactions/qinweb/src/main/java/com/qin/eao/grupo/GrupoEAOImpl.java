@@ -24,7 +24,6 @@ public class GrupoEAOImpl extends BaseEAOImpl implements GrupoEAO {
 	}
 
 	@Override
-	@Transactional
 	public Grupo findById(Long grupoId) throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT grupo ");
@@ -37,7 +36,6 @@ public class GrupoEAOImpl extends BaseEAOImpl implements GrupoEAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<Grupo> findAll() throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT grupo ");
@@ -47,7 +45,6 @@ public class GrupoEAOImpl extends BaseEAOImpl implements GrupoEAO {
 	}
 
 	@Override
-	@Transactional
 	public Grupo findByResolucion(Resolucion resolucion) throws Exception {
 		try {
 			StringBuffer jpql = new StringBuffer();

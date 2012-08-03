@@ -1,0 +1,9 @@
+metodo	tiempo [milisegundos]	tiempo [segundos]
+com.qin.controller.LoginController.home	218.0	0.218
+com.qin.controller.ConsultaController.consultar	1.0	0.001
+com.qin.controller.BusquedaTPController.buscarTPs	30.0	0.03
+com.qin.controller.ElaboracionResolucionController.popularMaterias	12.0	0.012
+com.qin.controller.ElaboracionResolucionController.altaTP	284.0	0.284
+com.qin.controller.SincronizadorTPController.sincronizar	296.0	0.296
+com.qin.controller.SincronizadorTPController.sincronizar	6.0	0.006
+com.qin.controller.SincronizadorTPController.sincronizar	12.0	0.012

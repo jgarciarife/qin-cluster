@@ -28,7 +28,6 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<Grupo> findByTPIdWithGrupo(Long tpid) throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT distinct grupo ");
@@ -45,7 +44,6 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<Grupo> findAllWithGrupo() throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT distinct grupo ");
@@ -59,7 +57,6 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 	}
 
 	@Override
-	@Transactional
 	public Resolucion findById(Long resolucionId) throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT resolucion FROM Resolucion resolucion  left outer join fetch resolucion.respuestas r "
@@ -80,7 +77,6 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<Resolucion> findAll() throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT resolucion ");
@@ -92,7 +88,6 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<Resolucion> findByTPId(Long tpid) throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT resolucion ");
@@ -105,7 +100,6 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 	}
 
 	@Override
-	@Transactional
 	public Resolucion findByTrabajoPracticoIdAndCodigoResolucionCompartida(
 			Long trabajoPracticoId, String codigoResolucionCompartida)
 			throws Exception {
@@ -144,7 +138,6 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 	}
 
 	@Override
-	@Transactional
 	public Resolucion findByTrabajoPracticoAndAlumno(
 			TrabajoPractico trabajoPractico, Alumno alumno) throws Exception {
 		try {

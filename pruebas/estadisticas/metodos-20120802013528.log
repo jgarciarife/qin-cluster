@@ -1,0 +1,7 @@
+indice	metodo	cantidad de invocaciones	suma total de tiempo [milisegundos]	suma total de tiempo [segundos]	promedio de tiempo [milisegundos]	promedio de tiempo [segundos]
+3.0	com.qin.controller.BusquedaTPController.buscarTPs	1.0	30.0	0.03	30.0	0.03
+2.0	com.qin.controller.ConsultaController.consultar	1.0	1.0	0.001	1.0	0.001
+5.0	com.qin.controller.ElaboracionResolucionController.altaTP	1.0	284.0	0.284	284.0	0.284
+4.0	com.qin.controller.ElaboracionResolucionController.popularMaterias	1.0	12.0	0.012	12.0	0.012
+1.0	com.qin.controller.LoginController.home	1.0	218.0	0.218	218.0	0.218
+6.0	com.qin.controller.SincronizadorTPController.sincronizar	3.0	314.0	0.314	104.66666666666667	0.10466666666666667
