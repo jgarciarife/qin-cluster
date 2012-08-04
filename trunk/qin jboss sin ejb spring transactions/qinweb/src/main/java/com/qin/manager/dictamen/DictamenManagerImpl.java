@@ -56,7 +56,7 @@ public class DictamenManagerImpl implements DictamenManager {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public Map<Integer, String> findAllTPNotaByMateria(Long materiaId)
 			throws Exception {
 		List<Object[]> resultado = getDictamenEAO()

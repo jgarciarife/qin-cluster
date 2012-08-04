@@ -37,18 +37,9 @@ public class SincronizadorTPController {
 		long inicio = ProfilingUtils.iniciar();
 		String codigo = (String) session
 				.getAttribute(ElaboracionResolucionController.CODIGO_RESOLUCION_COMPARTIDA);
-
 		diff_match_patch dmp = new diff_match_patch();
-
 		String idTextoCompartido = codigo + id;
-		sincronizadorTexto.activarTp(idTextoCompartido, texto); // TODO: tiene
-																// un if
-		// que lo
-		// hace
-		// una sola vez..
-		// igualmente..
-		// SACAR DE ACA
-
+		sincronizadorTexto.activarTp(idTextoCompartido, texto);
 		boolean mergear = true;
 		String resolucionEnSesison = "miTexto_" + codigo + "_" + id;
 		String textoBase = (String) session.getAttribute(resolucionEnSesison);
@@ -58,7 +49,6 @@ public class SincronizadorTPController {
 				mergear = false;
 			}
 		}
-
 		String textoNuevo = "";
 		if (mergear) {
 			LinkedList<Diff> diffs = null;

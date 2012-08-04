@@ -71,7 +71,6 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 	}
 
 	@Override
-	@Transactional
 	public void insertTP(TrabajoPractico tp) throws Exception {
 		trabajoPracticoManager.insert(tp);
 	}
@@ -101,7 +100,6 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 	}
 
 	@Override
-	@Transactional
 	public void updateTP(TrabajoPractico tp) throws Exception {
 		trabajoPracticoManager.update(tp);
 	}
@@ -167,7 +165,6 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 	}
 
 	@Override
-	@Transactional
 	public Map<Integer, String> findAllTPNotaByMateria(Long materiaId)
 			throws Exception {
 		return dictamenManager.findAllTPNotaByMateria(materiaId);
