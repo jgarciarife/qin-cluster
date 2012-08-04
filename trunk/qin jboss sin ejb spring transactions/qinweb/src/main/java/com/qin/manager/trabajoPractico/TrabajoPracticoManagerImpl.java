@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.qin.eao.trabajoPractico.TrabajoPracticoEAO;
@@ -24,7 +25,7 @@ public class TrabajoPracticoManagerImpl implements TrabajoPracticoManager {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public TrabajoPractico findById(Long id) throws Exception {
 		TrabajoPractico trabajoPractico = getTrabajoPracticoEAO().findById(id);
 		return trabajoPractico;
@@ -39,14 +40,14 @@ public class TrabajoPracticoManagerImpl implements TrabajoPracticoManager {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public List<TrabajoPractico> findByMateriaId(Long materiaId)
 			throws Exception {
 		return getTrabajoPracticoEAO().findByMateriaId(materiaId);
 	}
 	
 	@Override
-	@Transactional
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public List<TrabajoPractico> findAll() throws Exception{
 		return getTrabajoPracticoEAO().findAll();
 	}
@@ -64,7 +65,7 @@ public class TrabajoPracticoManagerImpl implements TrabajoPracticoManager {
 	}
 	
 	@Override
-	@Transactional
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public List<TrabajoPractico> findAllByAlumno(Alumno alumno) throws Exception {
 		return getTrabajoPracticoEAO().findAllByAlumno(alumno);
 	}

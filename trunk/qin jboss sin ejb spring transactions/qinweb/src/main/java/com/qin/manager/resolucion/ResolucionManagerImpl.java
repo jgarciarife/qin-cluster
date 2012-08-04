@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.qin.eao.grupo.GrupoEAO;
@@ -33,32 +34,32 @@ public class ResolucionManagerImpl implements ResolucionManager {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public Resolucion findById(Long id) throws Exception {
 		return resolucionEAO.findById(id);
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public List<Resolucion> findByTrabajoPracticoId(Long tpId) throws Exception {
 		return resolucionEAO.findByTPId(tpId);
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public List<Grupo> findByTrabajoPracticoIdWithGroup(Long tpId)
 			throws Exception {
 		return resolucionEAO.findByTPIdWithGrupo(tpId);
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public List<Resolucion> findAll() throws Exception {
 		return resolucionEAO.findAll();
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public List<Grupo> findAllWithGrupo() throws Exception {
 		return resolucionEAO.findAllWithGrupo();
 	}
@@ -95,7 +96,8 @@ public class ResolucionManagerImpl implements ResolucionManager {
 
 	@Override
 	@Transactional
-	public Grupo createGrupo(Resolucion resolucion, Materia materia) throws Exception {
+	public Grupo createGrupo(Resolucion resolucion, Materia materia)
+			throws Exception {
 		Grupo grupo = new Grupo();
 		grupo.setResolucion(resolucion);
 		grupo.setMateria(materia);
