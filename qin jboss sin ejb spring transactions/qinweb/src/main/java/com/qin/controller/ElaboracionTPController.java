@@ -47,11 +47,21 @@ public class ElaboracionTPController {
 				c.setTrabajoPractico(tp);
 			}
 		}
+		ProfilingUtils
+				.logear(inicio,
+						"com.qin.controller.ElaboracionTPController.guardarTP: setearle a las consignas el trabajo práctico");
+		long inicio2 = ProfilingUtils.iniciar();
 		logger.info("materia " + tp.getMateria().getId());
 		if (tp.getId() == null) {
 			colaboracionManager.insertTP(tp);
+			ProfilingUtils
+					.logear(inicio2,
+							"com.qin.controller.ElaboracionTPController.guardarTP: colaboracionManager.insertTP(tp)");
 		} else {
 			colaboracionManager.updateTP(tp);
+			ProfilingUtils
+					.logear(inicio2,
+							"com.qin.controller.ElaboracionTPController.guardarTP: colaboracionManager.updateTP(tp)");
 		}
 
 		model.addAttribute("trabajoPractico", tp);

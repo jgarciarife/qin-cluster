@@ -130,8 +130,7 @@ public class ProfilingUtils {
 				}
 				TreeSet<String> keys = new TreeSet<String>(
 						metodosEstadisticas.keySet());
-				escritorMetodos.write("indice" + "\t"
-						+ "metodo" + "\t"
+				escritorMetodos.write("indice" + "\t" + "metodo" + "\t"
 						+ "cantidad de invocaciones" + "\t"
 						+ "suma total de tiempo [milisegundos]" + "\t"
 						+ "suma total de tiempo [segundos]" + "\t"
@@ -187,6 +186,7 @@ public class ProfilingUtils {
 				long fin = new Date().getTime();
 				double diferenciaMilisegundos = fin - inicio;
 				double diferenciaSegundos = diferenciaMilisegundos / 1000;
+				nombreMetodo = nombreMetodo.replaceAll("\\.", " ");
 				escritorSalida.write(nombreMetodo + "\t"
 						+ Double.toString(diferenciaMilisegundos) + "\t"
 						+ Double.toString(diferenciaSegundos) + "\n");
