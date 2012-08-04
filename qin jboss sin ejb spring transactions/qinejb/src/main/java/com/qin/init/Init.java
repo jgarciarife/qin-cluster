@@ -43,7 +43,7 @@ public class Init implements ServletContextListener {
 	public final void contextInitialized(
 			final ServletContextEvent servletContextEvent) {
 		try {
-			ProfilingUtils.setActivo();
+			ProfilingUtils.setInactivo();
 			ProfilingUtils.inicializar();
 		} catch (Throwable t) {
 			ProfilingUtils.cerrar();

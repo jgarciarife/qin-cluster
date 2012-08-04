@@ -177,7 +177,10 @@ public class ProfilingUtils {
 	}
 
 	public static long iniciar() {
-		return new Date().getTime();
+		if (activo) {
+			return new Date().getTime();
+		}
+		return 0;
 	}
 
 	public static void logear(long inicio, String nombreMetodo) {
