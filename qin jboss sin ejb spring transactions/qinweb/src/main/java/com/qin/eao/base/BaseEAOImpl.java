@@ -18,12 +18,14 @@ public class BaseEAOImpl implements BaseEAO {
 
 	@Override
 	public void insert(BaseEntity entity) throws Exception {
-		sessionFactory.getCurrentSession().persist(entity);
+		//sessionFactory.getCurrentSession().persist(entity);
+		sessionFactory.getCurrentSession().saveOrUpdate(entity);
 	}
 
 	@Override
 	public void update(BaseEntity entity) throws Exception {
 		entity = (BaseEntity) sessionFactory.getCurrentSession().merge(entity);
+		//sessionFactory.getCurrentSession().saveOrUpdate(entity);
 	}
 
 	@Override
