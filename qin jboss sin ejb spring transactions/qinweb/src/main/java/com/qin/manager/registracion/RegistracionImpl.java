@@ -2,6 +2,7 @@ package com.qin.manager.registracion;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.qin.eao.usuario.UsuarioEAO;
@@ -22,7 +23,7 @@ public class RegistracionImpl implements Registracion {
 		return usuario;
 	}
 
-	@Transactional
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public Usuario getUsuario(Long id) throws Exception {
 		Usuario usuario = usuarioEAO.findById(id);
 		return usuario;
