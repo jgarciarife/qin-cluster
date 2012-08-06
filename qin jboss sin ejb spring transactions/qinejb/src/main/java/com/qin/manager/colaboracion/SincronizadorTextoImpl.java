@@ -2,12 +2,8 @@ package com.qin.manager.colaboracion;
 
 import java.util.LinkedList;
 
-import javax.ejb.ConcurrencyManagement;
-import javax.ejb.ConcurrencyManagementType;
-import javax.ejb.Lock;
-import javax.ejb.LockType;
-import javax.ejb.Singleton;
-
+import org.jboss.ejb3.annotation.Management;
+import org.jboss.ejb3.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,26 +13,18 @@ import com.qin.utils.HAUtils;
 import com.qin.utils.diff_match_patch;
 import com.qin.utils.diff_match_patch.Patch;
 
-@ConcurrencyManagement(ConcurrencyManagementType.CONTAINER)
-@Singleton
+@Service
 public class SincronizadorTextoImpl implements SincronizadorTexto {
 
-	protected static Logger logger = LoggerFactory
+	private static Logger logger = LoggerFactory
 			.getLogger(SincronizadorTextoImpl.class);
 
-	private static PojoCacheManager pojoCacheManager = null;
-
-	static {
-		try {
-			pojoCacheManager = (PojoCacheManager) HAUtils
-					.lookup(PojoCacheManagerImpl.JNDI_NAME);
-		} catch (Throwable t) {
-			t.printStackTrace();
-			logger.error(t.getMessage());
-		}
+	private PojoCacheManager pojoCacheManager = null;
+	
+	public SincronizadorTextoImpl() {
 	}
 
-	@Lock(LockType.READ)
+	@Override
 	public void activarTp(String id, String texto) {
 		try {
 			if (pojoCacheManager == null) {
@@ -52,7 +40,7 @@ public class SincronizadorTextoImpl implements SincronizadorTexto {
 		}
 	}
 
-	@Lock(LockType.WRITE)
+	@Override
 	public void desactivarTp(String id) {
 		try {
 			if (pojoCacheManager == null) {
@@ -66,7 +54,7 @@ public class SincronizadorTextoImpl implements SincronizadorTexto {
 		}
 	}
 
-	@Lock(LockType.WRITE)
+	@Override
 	public String actualizarTp(String id, LinkedList<Patch> patches) {
 		try {
 			if (pojoCacheManager == null) {
@@ -97,7 +85,7 @@ public class SincronizadorTextoImpl implements SincronizadorTexto {
 		}
 	}
 
-	@Lock(LockType.READ)
+	@Override
 	public String obtenerTp(String id) {
 		try {
 			if (pojoCacheManager == null) {
