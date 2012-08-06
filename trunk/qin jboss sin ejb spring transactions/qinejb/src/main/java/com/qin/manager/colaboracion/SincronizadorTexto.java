@@ -2,15 +2,19 @@ package com.qin.manager.colaboracion;
 
 import java.util.LinkedList;
 
+import javax.ejb.Local;
+
 import com.qin.utils.diff_match_patch.Patch;
 
+@Local
 public interface SincronizadorTexto {
-	public void activarTp(String id, String texto);
 
-	public void desactivarTp(String id);
+	void activarTp(String id, String texto);
 
-	public String actualizarTp(String id, LinkedList<Patch> patches);
+	void desactivarTp(String id);
 
-	public String obtenerTp(String id);
+	String actualizarTp(String id, LinkedList<Patch> patches);
+
+	String obtenerTp(String id);
 
 }

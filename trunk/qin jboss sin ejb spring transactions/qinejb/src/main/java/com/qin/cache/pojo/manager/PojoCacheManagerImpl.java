@@ -23,9 +23,9 @@ public class PojoCacheManagerImpl implements PojoCacheManager {
 	public static final String JNDI_NAME = "qinear-1.0/PojoCacheManagerImpl/remote";
 
 	private boolean masterNode = false;
-	
+
 	private PojoCacheManager reference;
-	
+
 	private Map<String, String> pojoCache = new HashMap<String, String>();
 
 	@Override
@@ -42,11 +42,8 @@ public class PojoCacheManagerImpl implements PojoCacheManager {
 	public void start() throws Exception {
 		try {
 			logger.debug("start");
-			/*
-			 * Remove from local JNDI until started as a singleton,
-			 * 
-			 * but keep the reference locally so it could be restored later.
-			 */
+			// Remove from local JNDI until started as a singleton,
+			// but keep the reference locally so it could be restored later.
 			Context ctx = new InitialContext();
 			reference = (PojoCacheManager) ctx.lookup(JNDI_NAME);
 			Util.unbind(ctx, JNDI_NAME);
@@ -74,9 +71,7 @@ public class PojoCacheManagerImpl implements PojoCacheManager {
 		try {
 			logger.debug("startSingleton");
 			masterNode = true;
-			/*
-			 * Rebind to JNDI when started as singleton
-			 */
+			// Rebind to JNDI when started as singleton
 			Context ctx = new InitialContext();
 			Util.rebind(ctx, JNDI_NAME, reference);
 		} catch (Throwable t) {
@@ -93,9 +88,7 @@ public class PojoCacheManagerImpl implements PojoCacheManager {
 		try {
 			logger.debug("stopSingleton");
 			masterNode = false;
-			/*
-			 * Unbind from local JNDI when stopped
-			 */
+			// Unbind from local JNDI when stopped
 			Context ctx = new InitialContext();
 			Util.unbind(ctx, JNDI_NAME);
 		} catch (Throwable t) {
@@ -103,7 +96,7 @@ public class PojoCacheManagerImpl implements PojoCacheManager {
 			logger.debug(t.getMessage());
 		}
 	}
-	
+
 	@Override
 	public boolean existsKey(String key) {
 		try {
