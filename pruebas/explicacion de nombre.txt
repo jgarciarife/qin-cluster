@@ -1,4 +1,0 @@
-prueba simple - 300 850 - 4 loops - 60 ramp up - desktop=>
-	300 usuarios en el JMeter de MOntevideo
-	850 en cada uno de los nodos
-	4 loops 60 ramp up

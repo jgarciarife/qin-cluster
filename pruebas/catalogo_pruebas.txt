@@ -1,8 +1,0 @@
-
-1) "10 Usuarios - 2 nodos - No guardan resoluciones"
-2) "10 Usuarios - Guardan resoluciones"
-
-Tengo que hacer que el 2) guarde resoluciones asi es mas comparable al 1)
-Ambos usan el archivo usuarios.dat, desde el elemento del jmeter "parametros de usuario" hay que apuntar a este archivo. Lo utiliza para loguear con 10 usuarios diferentes (uno por linea)
-
-00) "WorkBench - HttpProxy" Es un elemento HttpProxy, para utilizarlo, hay que darle start. y luego al firefox (creo que chrome no se lo banca), hay que configurar un proxy en localhost:8085, y marcar la opcion que corresponda para que redirija inclusive el trafico de localhost hacia el proxy. Con esto el proxy http del jmeter puede grabar la interaccion del usuario con el browser.
