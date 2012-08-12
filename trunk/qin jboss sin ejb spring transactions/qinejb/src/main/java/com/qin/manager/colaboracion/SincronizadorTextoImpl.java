@@ -2,8 +2,8 @@ package com.qin.manager.colaboracion;
 
 import java.util.LinkedList;
 
-import org.jboss.ejb3.annotation.Management;
-import org.jboss.ejb3.annotation.Service;
+import javax.ejb.Stateless;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +13,7 @@ import com.qin.utils.HAUtils;
 import com.qin.utils.diff_match_patch;
 import com.qin.utils.diff_match_patch.Patch;
 
-@Service
+@Stateless
 public class SincronizadorTextoImpl implements SincronizadorTexto {
 
 	private static Logger logger = LoggerFactory
