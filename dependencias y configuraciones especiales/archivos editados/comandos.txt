@@ -1,0 +1,2 @@
+Para /etc/sysctl.conf: sudo sysctl -p
+
