@@ -1,2 +1,3 @@
 Para /etc/sysctl.conf: sudo sysctl -p
 
+Para /etc/security/limits.conf y /etc/pam.d/common-session: ulimit -n && ulimit -a
