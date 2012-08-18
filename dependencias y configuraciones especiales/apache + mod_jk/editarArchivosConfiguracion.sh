@@ -47,7 +47,7 @@ if [ "$esGNewSense" == "" ]; then
 	source "$posicion"/detectarSO.sh
 fi
 if [ "$modJk" == "" ]; then
-	modJk="1"
+	modJk="0"
 fi
 if [ "$instancias" == "" ]; then
 	instancias="2"
@@ -76,6 +76,8 @@ fi
 if [ "$puertoInstancia3" == "" ]; then
 	puertoInstancia3="8209"
 fi
+
+modJk="0"
 
 project="qinweb"
 
@@ -478,8 +480,8 @@ if [ "$modJk" == "0" ]; then
 	<Location /server-status>
 		SetHandler server-status
 		Order deny,allow
-		Deny from all
-		Allow from $ipApache
+		# Deny from all
+		Allow from all
 		Satisfy all
 	</Location>
 	# Keep track of extended status information for each request
@@ -495,16 +497,15 @@ if [ "$modJk" == "0" ]; then
 </IfModule>" > /etc/apache2/mods-available/status.conf
 	fi
 	if [ -f "/etc/apache2/mods-available/proxy_balancer.conf.anterior" ]; then
-		echo "
-<IfModule mod_proxy_balancer.c>
+		echo "<IfModule mod_proxy_balancer.c>
 # Balancer manager enables dynamic update of balancer members
 # (needs mod_status). Uncomment to enable.
 	<IfModule mod_status.c>
 		<Location /balancer-manager>
 			SetHandler balancer-manager
 			Order deny,allow
-			Deny from all
-			Allow from $ipApache
+			# Deny from all
+			Allow from all
 			Satisfy all
 		</Location>
 	</IfModule>
@@ -785,7 +786,6 @@ JkShmFile run/jk.shm
 		Deny from all
 		Allow from 127.0.0.0/255.0.0.0 ::1/128
 	</Directory>
-
 </VirtualHost>" > /etc/apache2/sites-available/default.nuevo
 			sudo mv -f /etc/apache2/sites-available/default.nuevo /etc/apache2/sites-available/default
 		else
@@ -833,8 +833,7 @@ JkShmFile run/jk.shm
 		Order deny,allow
 		Deny from all
 		Allow from 127.0.0.0/255.0.0.0 ::1/128
-</Directory>
-
+	</Directory>
 </VirtualHost>" > /etc/apache2/sites-available/default.nuevo
 			sudo mv -f /etc/apache2/sites-available/default.nuevo /etc/apache2/sites-available/default
 		fi
