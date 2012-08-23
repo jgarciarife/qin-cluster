@@ -10,7 +10,7 @@
 
       <!-- A HTTP/1.1 Connector on port 8080 -->
       <Connector protocol="HTTP/1.1" port="${jboss.web.http.port}" address="${jboss.bind.address}" 
-         redirectPort="${jboss.web.https.port}"/>
+         redirectPort="${jboss.web.https.port}" maxThreads="5120"/>
 
       <!-- Add this option to the connector to avoid problems with 
           .NET clients that don't implement HTTP/1.1 correctly 
