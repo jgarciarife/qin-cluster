@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.qin.eao.grupo.GrupoEAO;
 import com.qin.eao.materia.MateriaEAO;
@@ -52,16 +54,19 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 	}
 
 	@Override
+	@Transactional
 	public void insertGrupo(Grupo grupo) throws Exception {
 		grupoEAO.insert(grupo);
 	}
 
 	@Override
+	@Transactional
 	public void updateGrupo(Grupo grupo) throws Exception {
 		grupoEAO.update(grupo);
 	}
 
 	@Override
+	@Transactional
 	public void deleteGrupo(Grupo grupo) throws Exception {
 		grupoEAO.delete(grupo);
 	}
@@ -90,6 +95,7 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 	}
 
 	@Override
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public List<Materia> findAllMaterias() throws Exception {
 		return materiaEAO.findAll();
 	}
@@ -100,6 +106,7 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 	}
 
 	@Override
+	@Transactional
 	public void saveResolucion(Resolucion res) throws Exception {
 		Resolucion original = resolucionEAO
 				.findByTrabajoPracticoIdAndCodigoResolucionCompartida(res
@@ -130,36 +137,6 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 				}
 			}
 			updateResolucion(original);
-			// -------------------------------------------------------------
-			/*
-			 * Map<Long, Respuesta> insertar = new HashMap<Long, Respuesta>();
-			 * Map<Long, Respuesta> actualizar = new HashMap<Long, Respuesta>();
-			 * Map<Long, Respuesta> borrar = new HashMap<Long, Respuesta>();
-			 * Set<Long> nuevas = new HashSet<Long>(); for (Respuesta r :
-			 * res.getRespuestas()) { if (r.getId() == null) {
-			 * r.setResolucion(res); respuestaEAO.insert(r); }
-			 * nuevas.add(r.getId()); } Set<Long> originales = new
-			 * HashSet<Long>(); for (Respuesta r : original.getRespuestas()) {
-			 * if (nuevas.contains(r.getId())) { actualizar.put(r.getId(), r); }
-			 * else { borrar.put(r.getId(), r); } originales.add(r.getId()); }
-			 * for (Respuesta r : res.getRespuestas()) { if
-			 * (!originales.contains(r.getId())) { r.setResolucion(res);
-			 * insertar.put(r.getId(), r); } } Respuesta r = null; for
-			 * (Map.Entry<Long, Respuesta> entrada : insertar.entrySet()) { r =
-			 * entrada.getValue(); r.setResolucion(original); if (r.getId() !=
-			 * null) { respuestaEAO.update(r); } else { respuestaEAO.insert(r);
-			 * } } for (Map.Entry<Long, Respuesta> entrada :
-			 * actualizar.entrySet()) { r = entrada.getValue();
-			 * r.setResolucion(original); if (r.getId() != null) {
-			 * respuestaEAO.update(r); } else { respuestaEAO.insert(r); } } for
-			 * (Map.Entry<Long, Respuesta> entrada : borrar.entrySet()) { r =
-			 * entrada.getValue(); if (r.getId() != null) {
-			 * respuestaEAO.delete(r); } } original = null; res = (Resolucion)
-			 * resolucionEAO
-			 * .findByTrabajoPracticoIdAndCodigoResolucionCompartida(
-			 * res.getTrabajoPractico().getId(), res
-			 * .getCodigoResolucionCompartida()); updateResolucion(res);
-			 */
 		} else {
 			if (res.getRespuestas() != null) {
 				for (Respuesta r : res.getRespuestas()) {
@@ -178,15 +155,18 @@ public class ColaboracionManagerImpl implements ColaboracionManager {
 		return resolucionEAO;
 	}
 
+	@Transactional
 	public void insertResolucion(Resolucion res) throws Exception {
 		resolucionEAO.insert(res);
 	}
 
+	@Transactional
 	public void updateResolucion(Resolucion res) throws Exception {
 		resolucionEAO.update(res);
 	}
 
 	@Override
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public Map<Integer, String> findAllTPNotaByMateria(Long materiaId)
 			throws Exception {
 		return dictamenManager.findAllTPNotaByMateria(materiaId);

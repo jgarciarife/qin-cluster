@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qin.manager.colaboracion.SincronizadorTexto;
+import com.qin.utils.ProfilingUtils;
 import com.qin.utils.diff_match_patch;
 import com.qin.utils.diff_match_patch.Diff;
 import com.qin.utils.diff_match_patch.Patch;
 
 @Controller
 public class SincronizadorTPController {
-	
+
 	private static Logger logger = LoggerFactory
 			.getLogger(SincronizadorTPController.class);
 
@@ -33,21 +34,12 @@ public class SincronizadorTPController {
 	TextoResolucion sincronizar(@RequestParam Integer id,
 			@RequestParam String texto, HttpSession session)
 			throws JMSException {
-
+		long inicio = ProfilingUtils.iniciar();
 		String codigo = (String) session
 				.getAttribute(ElaboracionResolucionController.CODIGO_RESOLUCION_COMPARTIDA);
-
 		diff_match_patch dmp = new diff_match_patch();
-
 		String idTextoCompartido = codigo + id;
-		sincronizadorTexto.activarTp(idTextoCompartido, texto); // TODO: tiene
-																// un if
-		// que lo
-		// hace
-		// una sola vez..
-		// igualmente..
-		// SACAR DE ACA
-
+		sincronizadorTexto.activarTp(idTextoCompartido, texto);
 		boolean mergear = true;
 		String resolucionEnSesison = "miTexto_" + codigo + "_" + id;
 		String textoBase = (String) session.getAttribute(resolucionEnSesison);
@@ -57,7 +49,6 @@ public class SincronizadorTPController {
 				mergear = false;
 			}
 		}
-
 		String textoNuevo = "";
 		if (mergear) {
 			LinkedList<Diff> diffs = null;
@@ -83,8 +74,10 @@ public class SincronizadorTPController {
 
 		}
 		session.setAttribute(resolucionEnSesison, textoNuevo);
-
-		return new TextoResolucion(textoNuevo);
+		TextoResolucion retorno = new TextoResolucion(textoNuevo);
+		ProfilingUtils.logear(inicio,
+				"com.qin.controller.SincronizadorTPController.sincronizar");
+		return retorno;
 	}
 
 	public void setSincronizadorTexto(SincronizadorTexto sincronizadorTexto) {
@@ -110,5 +103,4 @@ public class SincronizadorTPController {
 			return texto;
 		}
 	}
-
 }

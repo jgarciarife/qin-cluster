@@ -11,11 +11,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.qin.entity.base.BaseEntity;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "trabajo_practico", catalog = "qintomcat")
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class TrabajoPractico extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)

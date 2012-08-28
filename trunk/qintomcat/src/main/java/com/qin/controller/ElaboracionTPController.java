@@ -17,6 +17,7 @@ import com.qin.entity.Materia;
 import com.qin.entity.TrabajoPractico;
 import com.qin.manager.colaboracion.ColaboracionManager;
 import com.qin.manager.trabajoPractico.TrabajoPracticoManager;
+import com.qin.utils.ProfilingUtils;
 
 @Controller
 public class ElaboracionTPController {
@@ -31,31 +32,48 @@ public class ElaboracionTPController {
 
 	@ModelAttribute("materias")
 	public List<Materia> popularMaterias() throws Exception {
-		return colaboracionManager.findAllMaterias();
+		long inicio = ProfilingUtils.iniciar();
+		List<Materia> retorno = colaboracionManager.findAllMaterias();
+		ProfilingUtils.logear(inicio,
+				"com.qin.controller.ElaboracionTPController.popularMaterias");
+		return retorno;
 	}
 
 	@RequestMapping(value = "/guardar_tp.html", method = RequestMethod.POST)
 	public String guardarTP(TrabajoPractico tp, Model model) throws Exception {
+		long inicio = ProfilingUtils.iniciar();
 		if (tp.getConsignas() != null) {
 			for (Consigna c : tp.getConsignas()) {
 				c.setTrabajoPractico(tp);
 			}
 		}
+		ProfilingUtils
+				.logear(inicio,
+						"com.qin.controller.ElaboracionTPController.guardarTP: setearle a las consignas el trabajo práctico");
+		long inicio2 = ProfilingUtils.iniciar();
 		logger.info("materia " + tp.getMateria().getId());
 		if (tp.getId() == null) {
 			colaboracionManager.insertTP(tp);
+			ProfilingUtils
+					.logear(inicio2,
+							"com.qin.controller.ElaboracionTPController.guardarTP: colaboracionManager.insertTP(tp)");
 		} else {
 			colaboracionManager.updateTP(tp);
+			ProfilingUtils
+					.logear(inicio2,
+							"com.qin.controller.ElaboracionTPController.guardarTP: colaboracionManager.updateTP(tp)");
 		}
 
-		model.addAttribute("trabajoPractico",
-				trabajoPracticoManager.findById(tp.getId()));
+		model.addAttribute("trabajoPractico", tp);
+		ProfilingUtils.logear(inicio,
+				"com.qin.controller.ElaboracionTPController.guardarTP");
 		return "tp.alta";
 	}
 
 	@RequestMapping(value = "/alta_tp.html")
 	public String altaTP(@RequestParam(required = false) Long id, Model model)
 			throws Exception {
+		long inicio = ProfilingUtils.iniciar();
 		TrabajoPractico trabajoPractico = null;
 		if (id != null) {
 			try {
@@ -71,6 +89,8 @@ public class ElaboracionTPController {
 			trabajoPractico = new TrabajoPractico();
 		}
 		model.addAttribute("trabajoPractico", trabajoPractico);
+		ProfilingUtils.logear(inicio,
+				"com.qin.controller.ElaboracionTPController.altaTP");
 		return "tp.alta";
 	}
 

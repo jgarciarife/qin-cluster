@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.qin.entity.Usuario;
 import com.qin.manager.registracion.Registracion;
+import com.qin.utils.ProfilingUtils;
 
 @Controller
 public class LoginController {
@@ -18,13 +19,15 @@ public class LoginController {
 
 	@RequestMapping(value = "/login.html")
 	protected String home(@RequestParam("user") String user, HttpSession session) {
-
+		long inicio = ProfilingUtils.iniciar();
 		try {
 			Usuario usuario = registracionBean.login(user);
 			session.setAttribute(ControllerKeys.USUARIO, usuario);
 		} catch (Exception e) {
 			return "error_logueo";
 		}
+		ProfilingUtils.logear(inicio,
+				"com.qin.controller.LoginController.home");
 		return "home";
 	}
 

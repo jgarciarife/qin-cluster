@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qin.entity.Materia;
 import com.qin.manager.colaboracion.ColaboracionManager;
+import com.qin.utils.ProfilingUtils;
 
 @Controller
 public class EstadisticaTPController {
@@ -29,7 +30,11 @@ public class EstadisticaTPController {
 
 	@ModelAttribute("materias")
 	public List<Materia> popularMaterias() throws Exception {
-		return getColaboracionManager().findAllMaterias();
+		long inicio = ProfilingUtils.iniciar();
+		List<Materia> retorno = getColaboracionManager().findAllMaterias();
+		ProfilingUtils.logear(inicio,
+				"com.qin.controller.EstadisticaTPController.popularMaterias");
+		return retorno;
 	}
 
 	@RequestMapping(value = "/estadistica_tp.html")
@@ -39,9 +44,6 @@ public class EstadisticaTPController {
 
 	@RequestMapping(value = "/ver_estadistica.html")
 	protected String buscarTPs(Long materiaId, Model model) throws Exception {
-		// HashMap<Integer, String> obj = colaboracionManager
-		// .findAllTPNotaByMateria(materiaId);
-		// JsonControllerUtil.sendChartToClient(obj, request);
 		model.addAttribute("materiaId", materiaId);
 		return "tp.ver_estadistica_tp_en_materia";
 	}
@@ -49,15 +51,20 @@ public class EstadisticaTPController {
 	@RequestMapping(value = "/actualizar_estadistica.html", method = RequestMethod.GET)
 	protected @ResponseBody
 	Grafico actualizarGraficoTPs(Long materiaId) throws Exception {
+		long inicio = ProfilingUtils.iniciar();
 		Map<Integer, String> itemsMap = colaboracionManager
 				.findAllTPNotaByMateria(materiaId);
 		Grafico grafico = new Grafico();
 		List<ItemGrafico> itemsGrafico = mapear(itemsMap);
 		grafico.setData(itemsGrafico);
+		ProfilingUtils
+				.logear(inicio,
+						"com.qin.controller.EstadisticaTPController.actualizarGraficoTPs");
 		return grafico;
 	}
 
 	private List<ItemGrafico> mapear(Map<Integer, String> itemsMap) {
+		long inicio = ProfilingUtils.iniciar();
 		List<ItemGrafico> items = new ArrayList<ItemGrafico>();
 		if (itemsMap != null) {
 			for (Integer materia : itemsMap.keySet()) {
@@ -72,6 +79,8 @@ public class EstadisticaTPController {
 				return arg0.getLabel().compareTo(arg1.getLabel());
 			}
 		});
+		ProfilingUtils.logear(inicio,
+				"com.qin.controller.EstadisticaTPController.mapear");
 		return items;
 	}
 

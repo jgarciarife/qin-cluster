@@ -23,6 +23,7 @@ import com.qin.manager.administracion.AdministracionManager;
 import com.qin.manager.colaboracion.ColaboracionManager;
 import com.qin.manager.resolucion.ResolucionManager;
 import com.qin.manager.trabajoPractico.TrabajoPracticoManager;
+import com.qin.utils.ProfilingUtils;
 
 @Controller
 public class ElaboracionResolucionController {
@@ -45,16 +46,24 @@ public class ElaboracionResolucionController {
 
 	@ModelAttribute("materias")
 	public List<Materia> popularMaterias() throws Exception {
-		return colaboracionManager.findAllMaterias();
+		long inicio = ProfilingUtils.iniciar();
+		List<Materia> retorno = colaboracionManager.findAllMaterias();
+		ProfilingUtils
+				.logear(inicio,
+						"com.qin.controller.ElaboracionResolucionController.popularMaterias: List<Materia> retorno = colaboracionManager.findAllMaterias()");
+		return retorno;
 	}
 
 	@RequestMapping(value = "/guardar_resolucion.html", method = RequestMethod.POST)
 	public String guardarTP(Resolucion resol, Model model) throws Exception {
+		long inicio = ProfilingUtils.iniciar();
 		colaboracionManager.saveResolucion(resol);
 		model.addAttribute("trabajoPractico", trabajoPracticoManager
 				.findById(resol.getTrabajoPractico().getId()));
 		model.addAttribute("resolucion",
 				resolucionManager.findById(resol.getId()));
+		ProfilingUtils.logear(inicio,
+				"com.qin.controller.ElaboracionResolucionController.guardarResolucion");
 		return "resolucion.alta";
 	}
 
@@ -63,7 +72,12 @@ public class ElaboracionResolucionController {
 			@RequestParam(value = "codigo", required = true) String codigo,
 			@RequestParam(value = "tpId", required = true) Long tpId,
 			Model model, HttpSession session) throws Exception {
-		return altaTP(null, tpId, codigo, model, session);
+		long inicio = ProfilingUtils.iniciar();
+		String retorno = altaTP(null, tpId, codigo, model, session);
+		ProfilingUtils
+				.logear(inicio,
+						"com.qin.controller.ElaboracionResolucionController.unirseAResolucionTPs: String retorno = altaTP(null, tpId, codigo, model, session)");
+		return retorno;
 	}
 
 	@RequestMapping(value = "/alta_resolucion.html")
@@ -89,13 +103,11 @@ public class ElaboracionResolucionController {
 		}
 		resolucion = resolucionManager.joinResolucion(resolucion,
 				trabajoPractico, alumno, codigo);
-
 		if (resolucion != null
 				&& resolucion.getCodigoResolucionCompartida() != null
 				&& !resolucion.getCodigoResolucionCompartida().equals(codigo)) {
 			codigo = resolucion.getCodigoResolucionCompartida();
 		}
-
 		session.setAttribute(CODIGO_RESOLUCION_COMPARTIDA, codigo);
 		model.addAttribute("trabajoPractico", trabajoPractico);
 		model.addAttribute("resolucion", resolucion);

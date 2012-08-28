@@ -17,19 +17,18 @@ public class BaseEAOImpl implements BaseEAO {
 	}
 
 	@Override
-	@Transactional
 	public void insert(BaseEntity entity) throws Exception {
-		sessionFactory.getCurrentSession().persist(entity);
+		//sessionFactory.getCurrentSession().persist(entity);
+		sessionFactory.getCurrentSession().saveOrUpdate(entity);
 	}
 
 	@Override
-	@Transactional
 	public void update(BaseEntity entity) throws Exception {
 		entity = (BaseEntity) sessionFactory.getCurrentSession().merge(entity);
+		//sessionFactory.getCurrentSession().saveOrUpdate(entity);
 	}
 
 	@Override
-	@Transactional
 	public void delete(BaseEntity entity) throws Exception {
 		sessionFactory.getCurrentSession().delete(entity);
 	}

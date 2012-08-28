@@ -15,7 +15,7 @@ import com.qin.entity.base.BaseEntity;
 
 @SuppressWarnings("serial")
 @Entity
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @Table(name = "materia", catalog = "qintomcat", uniqueConstraints = { @UniqueConstraint(columnNames = {
 		"anio", "cuatrimestre", "carrera" }) })
 public class Materia extends BaseEntity {

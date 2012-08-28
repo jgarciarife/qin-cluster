@@ -10,12 +10,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.qin.entity.base.BaseEntity;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "resolucion", catalog = "qintomcat")
+@Table(name = "resolucion", catalog = "qintomcat", uniqueConstraints = { @UniqueConstraint(columnNames = {
+		"trabajo_practico_id", "codigo_resolucion_compartida" }) })
 public class Resolucion extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
