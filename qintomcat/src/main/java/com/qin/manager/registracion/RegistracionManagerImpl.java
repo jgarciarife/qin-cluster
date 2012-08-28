@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.qin.eao.usuario.UsuarioEAO;
 import com.qin.entity.Usuario;
@@ -20,21 +22,25 @@ public class RegistracionManagerImpl implements RegistracionManager {
 	}
 
 	@Override
+	@Transactional
 	public void insertUsuario(Usuario usuario) throws Exception {
 		usuarioEAO.insert(usuario);
 	}
 
 	@Override
+	@Transactional
 	public void updateUsuario(Usuario usuario) throws Exception {
 		usuarioEAO.update(usuario);
 	}
 
 	@Override
+	@Transactional
 	public void deleteUsuario(Usuario usuario) throws Exception {
 		usuarioEAO.delete(usuario);
 	}
 
 	@Override
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public Usuario findUsuarioById(Long usuarioId) throws Exception {
 		return usuarioEAO.findById(usuarioId);
 	}

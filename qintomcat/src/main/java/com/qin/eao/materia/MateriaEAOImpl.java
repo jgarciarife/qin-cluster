@@ -20,7 +20,6 @@ public class MateriaEAOImpl extends BaseEAOImpl implements MateriaEAO {
 	}
 
 	@Override
-	@Transactional
 	public Materia findById(Long materiaId) throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT materia ");
@@ -33,13 +32,12 @@ public class MateriaEAOImpl extends BaseEAOImpl implements MateriaEAO {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<Materia> findAll() throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT materia ");
 		jpql.append("FROM Materia materia ");
 		Query query = sessionFactory.getCurrentSession().createQuery(jpql.toString());
-//		query.setCacheable(true);
+		query.setCacheable(true);
 		return query.list();
 	}
 }

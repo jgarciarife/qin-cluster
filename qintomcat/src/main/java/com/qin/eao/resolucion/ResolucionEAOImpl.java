@@ -28,7 +28,6 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<Grupo> findByTPIdWithGrupo(Long tpid) throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT distinct grupo ");
@@ -45,7 +44,6 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<Grupo> findAllWithGrupo() throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT distinct grupo ");
@@ -59,7 +57,6 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 	}
 
 	@Override
-	@Transactional
 	public Resolucion findById(Long resolucionId) throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT resolucion FROM Resolucion resolucion  left outer join fetch resolucion.respuestas r "
@@ -70,12 +67,16 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 				jpql.toString());
 		query.setParameter("id", resolucionId);
 		Resolucion res = (Resolucion) query.uniqueResult();
+		if (res != null) {
+			if (res.getTrabajoPractico() != null) {
+				res.getTrabajoPractico().getTitulo();
+			}
+		}
 		return res;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<Resolucion> findAll() throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT resolucion ");
@@ -87,7 +88,6 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<Resolucion> findByTPId(Long tpid) throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT resolucion ");
@@ -100,7 +100,6 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 	}
 
 	@Override
-	@Transactional
 	public Resolucion findByTrabajoPracticoIdAndCodigoResolucionCompartida(
 			Long trabajoPracticoId, String codigoResolucionCompartida)
 			throws Exception {
@@ -109,7 +108,7 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 					&& (!codigoResolucionCompartida.trim().equals(""))) {
 				StringBuffer jpql = new StringBuffer();
 				jpql.append("SELECT resolucion ");
-				jpql.append("FROM Resolucion resolucion ");
+				jpql.append("FROM Resolucion resolucion left join fetch resolucion.respuestas rtas left join fetch rtas.consigna c ");
 				jpql.append("WHERE resolucion.trabajoPractico.id = :trabajoPracticoId ");
 				jpql.append("AND   resolucion.codigoResolucionCompartida = :codigoResolucionCompartida ");
 				Query query = sessionFactory.getCurrentSession().createQuery(
@@ -120,9 +119,13 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 				Resolucion res = (Resolucion) query.uniqueResult();
 				if (res == null){
 					return null;
-				}
-				
+				}			
 				Resolucion resComppleta = findById(res.getId());
+				if (resComppleta != null) {
+					if (resComppleta.getTrabajoPractico() != null) {
+						resComppleta.getTrabajoPractico().getTitulo();
+					}
+				}
 				return resComppleta;
 			} else {
 				return null;
@@ -135,7 +138,6 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 	}
 
 	@Override
-	@Transactional
 	public Resolucion findByTrabajoPracticoAndAlumno(
 			TrabajoPractico trabajoPractico, Alumno alumno) throws Exception {
 		try {
@@ -154,6 +156,11 @@ public class ResolucionEAOImpl extends BaseEAOImpl implements ResolucionEAO {
 				return null;
 			}
 			Resolucion resComppleta = findById(res.getId());
+			if (resComppleta != null) {
+				if (resComppleta.getTrabajoPractico() != null) {
+					resComppleta.getTrabajoPractico().getTitulo();
+				}
+			}
 			return resComppleta;
 		} catch (NonUniqueResultException e) {
 			return null;

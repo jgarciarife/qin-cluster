@@ -21,7 +21,6 @@ public class ConsignaEAOImpl extends BaseEAOImpl implements ConsignaEAO {
 	}
 
 	@Override
-	@Transactional
 	public Consigna findById(Long consignaId) throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT consigna ");
@@ -35,7 +34,6 @@ public class ConsignaEAOImpl extends BaseEAOImpl implements ConsignaEAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<Consigna> findAll() throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT consigna ");

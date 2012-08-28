@@ -6,21 +6,26 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.qin.eao.dictamen.DictamenEAO;
 import com.qin.entity.Dictamen;
+
 @Service
 public class DictamenManagerImpl implements DictamenManager {
 	@Autowired
 	private DictamenEAO dictamenEAO;
 
 	@Override
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public Dictamen findById(Long id) throws Exception {
 		Dictamen dic = getDictamenEAO().findById(id);
 		return dic;
 	}
-	
+
 	@Override
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public Dictamen findByResolucionId(Long id) throws Exception {
 		Dictamen dic = getDictamenEAO().findByResolucionId(id);
 		return dic;
@@ -35,21 +40,25 @@ public class DictamenManagerImpl implements DictamenManager {
 	}
 
 	@Override
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public List<Dictamen> findAll() throws Exception {
 		return getDictamenEAO().findAll();
 	}
 
 	@Override
+	@Transactional
 	public void insert(Dictamen tp) throws Exception {
 		getDictamenEAO().insert(tp);
 	}
 
 	@Override
+	@Transactional
 	public void update(Dictamen tp) throws Exception {
 		getDictamenEAO().update(tp);
 	}
 
 	@Override
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public Map<Integer, String> findAllTPNotaByMateria(Long materiaId)
 			throws Exception {
 		List<Object[]> resultado = getDictamenEAO()
