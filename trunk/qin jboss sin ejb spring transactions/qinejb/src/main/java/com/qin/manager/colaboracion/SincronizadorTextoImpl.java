@@ -20,17 +20,15 @@ public class SincronizadorTextoImpl implements SincronizadorTexto {
 			.getLogger(SincronizadorTextoImpl.class);
 
 	private PojoCacheManager pojoCacheManager = null;
-	
+
 	public SincronizadorTextoImpl() {
 	}
 
 	@Override
 	public void activarTp(String id, String texto) {
 		try {
-			if (pojoCacheManager == null) {
-				pojoCacheManager = (PojoCacheManager) HAUtils
-						.lookup(PojoCacheManagerImpl.JNDI_NAME);
-			}
+			pojoCacheManager = (PojoCacheManager) HAUtils
+					.lookup(PojoCacheManagerImpl.JNDI_NAME);
 			if (!pojoCacheManager.existsKey(id)) {
 				pojoCacheManager.setValue(id, texto);
 			}
@@ -43,10 +41,8 @@ public class SincronizadorTextoImpl implements SincronizadorTexto {
 	@Override
 	public void desactivarTp(String id) {
 		try {
-			if (pojoCacheManager == null) {
-				pojoCacheManager = (PojoCacheManager) HAUtils
-						.lookup(PojoCacheManagerImpl.JNDI_NAME);
-			}
+			pojoCacheManager = (PojoCacheManager) HAUtils
+					.lookup(PojoCacheManagerImpl.JNDI_NAME);
 			pojoCacheManager.removeKey(id);
 		} catch (Throwable t) {
 			t.printStackTrace();
@@ -57,10 +53,8 @@ public class SincronizadorTextoImpl implements SincronizadorTexto {
 	@Override
 	public String actualizarTp(String id, LinkedList<Patch> patches) {
 		try {
-			if (pojoCacheManager == null) {
-				pojoCacheManager = (PojoCacheManager) HAUtils
-						.lookup(PojoCacheManagerImpl.JNDI_NAME);
-			}
+			pojoCacheManager = (PojoCacheManager) HAUtils
+					.lookup(PojoCacheManagerImpl.JNDI_NAME);
 			String textoBase = pojoCacheManager.getValue(id);
 			diff_match_patch dmp = new diff_match_patch();
 			Object[] patch_apply = null;
@@ -88,10 +82,8 @@ public class SincronizadorTextoImpl implements SincronizadorTexto {
 	@Override
 	public String obtenerTp(String id) {
 		try {
-			if (pojoCacheManager == null) {
-				pojoCacheManager = (PojoCacheManager) HAUtils
-						.lookup(PojoCacheManagerImpl.JNDI_NAME);
-			}
+			pojoCacheManager = (PojoCacheManager) HAUtils
+					.lookup(PojoCacheManagerImpl.JNDI_NAME);
 			String resultado = pojoCacheManager.getValue(id);
 			return resultado;
 		} catch (Throwable t) {
