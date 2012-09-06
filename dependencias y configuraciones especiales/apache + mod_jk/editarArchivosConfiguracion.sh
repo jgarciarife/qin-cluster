@@ -29,7 +29,7 @@ if [ "$modJk" == "" ]; then
 	modJk="0"
 fi
 if [ "$instancias" == "" ]; then
-	instancias="3"
+	instancias="2"
 fi
 if [ "$sticky_session" == "" ]; then
 	sticky_session="1"
