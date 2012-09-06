@@ -9,8 +9,11 @@ function limpiarServidoresYLogs() {
 	rm -R -f /opt/jboss-6.1.0.Final.2/server/all/data/hornetq/*
 	rm -R -f /opt/jboss-6.1.0.Final.3/server/all/data/hornetq/*
 	rm -R -f /opt/jboss-6.1.0.Final/bin/*.log
+	rm -R -f /opt/jboss-6.1.0.Final/bin/*.log.*
 	rm -R -f /opt/jboss-6.1.0.Final.2/bin/*.log
+	rm -R -f /opt/jboss-6.1.0.Final.2/bin/*.log.*
 	rm -R -f /opt/jboss-6.1.0.Final.3/bin/*.log
+	rm -R -f /opt/jboss-6.1.0.Final.3/bin/*.log.*
 	rm -R -f /opt/jboss-6.1.0.Final/bin/*.old
 	rm -R -f /opt/jboss-6.1.0.Final.2/bin/*.old
 	rm -R -f /opt/jboss-6.1.0.Final.3/bin/*.old
@@ -28,6 +31,7 @@ function limpiarServidoresYLogs() {
 	rm -R -f /opt/jboss-6.1.0.Final.3/server/all/tmp/*
 	rm -R -f /opt/jboss-6.1.0.Final.3/server/all/work/jboss.web/localhost/*
 	rm -R -f /opt/apache-tomcat-7.0.23/bin/*.log
+	rm -R -f /opt/apache-tomcat-7.0.23/bin/*.log.*
 	rm -R -f /opt/apache-tomcat-7.0.23/bin/*~
 	rm -R -f /opt/apache-tomcat-7.0.23/conf/*.old
 	rm -R -f /opt/apache-tomcat-7.0.23/conf/*~
@@ -42,7 +46,9 @@ function limpiarServidoresYLogs() {
 	rm -R -f /opt/apache-tomcat-7.0.23/logs/*
 	rm -R -f /opt/apache-tomcat-7.0.23/temp/*
 	rm -R -f /opt/apache-tomcat-7.0.23/work/Catalina/localhost/*
+#	rm -R -f /opt/apache-tomcat-7.0.23/webapps/*
 	rm -R -f /opt/apache-tomcat-7.0.23.2/bin/*.log
+	rm -R -f /opt/apache-tomcat-7.0.23.2/bin/*.log.*
 	rm -R -f /opt/apache-tomcat-7.0.23.2/bin/*~
 	rm -R -f /opt/apache-tomcat-7.0.23.2/conf/*.old
 	rm -R -f /opt/apache-tomcat-7.0.23.2/conf/*~
@@ -57,7 +63,9 @@ function limpiarServidoresYLogs() {
 	rm -R -f /opt/apache-tomcat-7.0.23.2/logs/*
 	rm -R -f /opt/apache-tomcat-7.0.23.2/temp/*
 	rm -R -f /opt/apache-tomcat-7.0.23.2/work/Catalina/localhost/*
+#	rm -R -f /opt/apache-tomcat-7.0.23.2/webapps/*
 	rm -R -f /opt/apache-tomcat-7.0.23.3/bin/*.log
+	rm -R -f /opt/apache-tomcat-7.0.23.3/bin/*.log.*
 	rm -R -f /opt/apache-tomcat-7.0.23.3/bin/*~
 	rm -R -f /opt/apache-tomcat-7.0.23.3/conf/*.old
 	rm -R -f /opt/apache-tomcat-7.0.23.3/conf/*~
@@ -72,27 +80,37 @@ function limpiarServidoresYLogs() {
 	rm -R -f /opt/apache-tomcat-7.0.23.3/logs/*
 	rm -R -f /opt/apache-tomcat-7.0.23.3/temp/*
 	rm -R -f /opt/apache-tomcat-7.0.23.3/work/Catalina/localhost/*
+#	rm -R -f /opt/apache-tomcat-7.0.23.3/webapps/*
 	rm -R -f "$HOME"/workspace/qin-cluster/"dependencias y configuraciones especiales"/"apache + mod_jk"/*.log
+	rm -R -f "$HOME"/workspace/qin-cluster/"dependencias y configuraciones especiales"/"apache + mod_jk"/*.log.*
 	rm -R -f "$HOME"/workspace/qin-cluster/"dependencias y configuraciones especiales"/"apache + mod_jk"/*.old
 	rm -R -f "$HOME"/workspace/qin-cluster/"dependencias y configuraciones especiales"/"apache + mod_jk"/*~
 	rm -R -f /opt/terracotta-3.6.0/bin/*.log
+	rm -R -f /opt/terracotta-3.6.0/bin/*.log.*
 	rm -R -f /opt/terracotta-3.6.0/bin/*.old
 	rm -R -f /opt/terracotta-3.6.0/bin/*~
 	sudo rm -R -f /etc/apache2/*.log
+	sudo rm -R -f /etc/apache2/*.log.*
 	sudo rm -R -f /etc/apache2/*.old
 	sudo rm -R -f /etc/apache2/*~
 	sudo rm -R -f /etc/libapache2-mod-jk/*.log
+	sudo rm -R -f /etc/libapache2-mod-jk/*.log.*
 	sudo rm -R -f /etc/libapache2-mod-jk/*.old
 	sudo rm -R -f /etc/libapache2-mod-jk/*~
 	sudo rm -R -f /etc/apache2/mods-available/*.log
+	sudo rm -R -f /etc/apache2/mods-available/*.log.*
 	sudo rm -R -f /etc/apache2/mods-available/*.old
 	sudo rm -R -f /etc/apache2/mods-available/*~
 	sudo rm -R -f /etc/apache2/mods-enabled/*.log
+	sudo rm -R -f /etc/apache2/mods-enabled/*.log.*
 	sudo rm -R -f /etc/apache2/mods-enabled/*.old
 	sudo rm -R -f /etc/apache2/mods-enabled/*~
 	sudo rm -R -f /etc/apache2/sites-available/*.log
+	sudo rm -R -f /etc/apache2/sites-available/*.log.*
 	sudo rm -R -f /etc/apache2/sites-available/*.old
 	sudo rm -R -f /etc/apache2/sites-available/*~
+	sudo rm -R -f $HOME/terracotta/client-logs/*
+	sudo rm -R -f $HOME/terracotta/server-logs/*
 }
 
-sudo limpiarServidoresYLogs
+limpiarServidoresYLogs

@@ -22,13 +22,13 @@ sudo "$posicion"/configurarProcesador.sh
 source "$posicion"/backupearArchivosConfiguracion.sh
 source "$posicion"/subirMysql.sh
 source "$posicion"/resetearBaseDeDatos.sh
-source "$posicion"/agregarEntradaEnRouter.sh
 #source "$posicion"/compilarYDeployarQinweb.sh
 sudo "$posicion"/limpiarAmbiente.sh
 #instancia1
 instancia="1"
 if [ "$cluster" == "jboss" ]; then
 	echo "Cluster: JBoss"
+	source "$posicion"/agregarEntradaEnRouter.sh
 	source "$posicion"/subirJboss.sh
 	if [ "$instancias" == "2" ] || [ "$instancias" == "3" ]; then
 		#instancia2
@@ -42,7 +42,8 @@ if [ "$cluster" == "jboss" ]; then
 	fi
 else
 	echo "Cluster: Terracotta"
-	source "$posicion"/subirTerracota.sh
+	source "$posicion"/subirTerracotta.sh
+	sleep 10
 	source "$posicion"/subirTomcat.sh
 	if [ "$instancias" == "2" ] || [ "$instancias" == "3" ]; then
 		#instancia2

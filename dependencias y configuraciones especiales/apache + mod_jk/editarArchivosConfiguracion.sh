@@ -7,7 +7,7 @@ posicion="$PWD"
 source "$posicion"/manejarPermisos.sh
 
 if [ "$1" == "-h" ]; then
-	echo "editarArchivosConfiguracion.sh esGNewSense mod_jk instancias ipApache stickysession ipInstancia1 puertoInstancia1 ipInstancia2 puertoInstancia2 ipInstancia3 puertoInstancia3"
+	echo "editarArchivosConfiguracion.sh esGNewSense mod_jk instancias stickysession"
 fi
 
 if [ "$esGNewSense" == "" ]; then
@@ -19,29 +19,8 @@ fi
 if [ "$instancias" == "" ]; then
 	instancias="$3"
 fi
-if [ "$ipApache" == "" ]; then
-	ipApache="$4"
-fi
 if [ "$sticky_session" == "" ]; then
-	sticky_session="$5"
-fi
-if [ "$ipInstancia1" == "" ]; then
-	ipInstancia1="$6"
-fi
-if [ "$puertoInstancia1" == "" ]; then
-	puertoInstancia1="$7"
-fi
-if [ "$ipInstancia2" == "" ]; then
-	ipInstancia2="$8"
-fi
-if [ "$puertoInstancia2" == "" ]; then
-	puertoInstancia2="$9"
-fi
-if [ "$ipInstancia3" == "" ]; then
-	ipInstancia3="$10"
-fi
-if [ "$puertoInstancia3" == "" ]; then
-	puertoInstancia3="$11"
+	sticky_session="$4"
 fi
 if [ "$esGNewSense" == "" ]; then
 	source "$posicion"/detectarSO.sh
@@ -50,32 +29,19 @@ if [ "$modJk" == "" ]; then
 	modJk="0"
 fi
 if [ "$instancias" == "" ]; then
-	instancias="2"
-fi
-if [ "$ipApache" == "" ]; then
-	ipApache="apache"
+	instancias="3"
 fi
 if [ "$sticky_session" == "" ]; then
 	sticky_session="1"
 fi
-if [ "$ipInstancia1" == "" ]; then
-	ipInstancia1="worker1"
-fi
-if [ "$puertoInstancia1" == "" ]; then
-	puertoInstancia1="8009"
-fi
-if [ "$ipInstancia2" == "" ]; then
-	ipInstancia2="worker2"
-fi
-if [ "$puertoInstancia2" == "" ]; then
-	puertoInstancia2="8109"
-fi
-if [ "$ipInstancia3" == "" ]; then
-	ipInstancia3="worker3"
-fi
-if [ "$puertoInstancia3" == "" ]; then
-	puertoInstancia3="8209"
-fi
+
+ipApache="apache"
+ipInstancia1="worker1"
+puertoInstancia1="8009"
+ipInstancia2="worker2"
+puertoInstancia2="8109"
+ipInstancia3="worker3"
+puertoInstancia3="8209"
 
 modJk="0"
 

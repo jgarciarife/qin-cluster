@@ -4,8 +4,6 @@ mvn install:install-file -DgroupId=com.sun.jdmk -DartifactId=jmxtools -Dversion=
 
 mvn install:install-file -DgroupId=woodstox -DartifactId=wstx-asl -Dversion=3.2.1 -Dpackaging=jar -Dfile=wstx-asl-3.2.1.jar
 
-mvn install:install-file -DgroupId=woodstox -DartifactId=wstx-asl -Dversion=3.2.1 -Dpackaging=jar -Dfile=wstx-asl-3.2.1.jar
-
 mvn install:install-file -DgroupId=com.sun.istack -DartifactId=istack-commons-runtime -Dversion=1.1 -Dpackaging=jar -Dfile=istack-commons-runtime-1.1.jar
 
 mvn install:install-file -DgroupId=com.sun.istack -DartifactId=istack-commons-runtime -Dversion=1.1-SNAPSHOT -Dpackaging=jar -Dfile=istack-commons-runtime-1.1-SNAPSHOT.jar
@@ -15,8 +13,6 @@ mvn install:install-file -DgroupId=com.sun.istack -DartifactId=istack-commons-ru
 mvn install:install-file -DgroupId=com.sun.jmx -DartifactId=jmxri -Dversion=1.2.1 -Dpackaging=jar -Dfile=/home/diego/workspace/qin-cluster/"dependencias y configuraciones especiales"/jmxri-1.2.1.jar
 
 mvn install:install-file -DgroupId=com.sun.jdmk -DartifactId=jmxtools -Dversion=1.2.1 -Dpackaging=jar -Dfile=/home/diego/workspace/qin-cluster/"dependencias y configuraciones especiales"/jmxtools-1.2.1.jar
-
-mvn install:install-file -DgroupId=woodstox -DartifactId=wstx-asl -Dversion=3.2.1 -Dpackaging=jar -Dfile=/home/diego/workspace/qin-cluster/"dependencias y configuraciones especiales"/wstx-asl-3.2.1.jar
 
 mvn install:install-file -DgroupId=woodstox -DartifactId=wstx-asl -Dversion=3.2.1 -Dpackaging=jar -Dfile=/home/diego/workspace/qin-cluster/"dependencias y configuraciones especiales"/wstx-asl-3.2.1.jar
 
