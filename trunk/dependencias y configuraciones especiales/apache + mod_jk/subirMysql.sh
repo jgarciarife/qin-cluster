@@ -12,7 +12,6 @@ if [ "$esGNewSense" == "" ]; then
 fi
 
 source "$posicion"/detectarIpConexion.sh
-
 ipBaseDeDatos=`cat /etc/hosts | grep basededatos | sed -r 's/([0-9]*\.[0-9]*\.[0-9]*\.[0-9]*).*/\1/gi'`
 
 if [ "$ip" == "$ipBaseDeDatos" ]; then

@@ -20,7 +20,7 @@ echo "sudo chmod 777 -R /opt/apache-tomcat-7.0.23.3"
 sudo chmod 777 -R /opt/apache-tomcat-7.0.23.3
 echo "sudo chmod 777 -R /opt/terracotta-3.6.0"
 sudo chmod 777 -R /opt/terracotta-3.6.0
-echo "sudo chmod 777 -R $HOME/terracotta"
-sudo chmod 777 -R $HOME/terracotta
+echo "sudo chmod 777 -R $HOME/terracotta 2> /dev/null"
+sudo chmod 777 -R $HOME/terracotta 2> /dev/null
 echo "sudo chmod 777 -R $HOME/workspace/qin-cluster/qin jboss sin ejb spring transactions"
 sudo chmod 777 -R "$HOME/workspace/qin-cluster/qin jboss sin ejb spring transactions"
