@@ -1,6 +1,8 @@
 #!/bin/bash
 
-echo "subirAmbiente.sh"
+echo "limpiarAmbiente.sh"
+
+posicion="$PWD"
 
 function limpiarServidoresYLogs() {
 	rm -R -f /opt/jboss-6.1.0.Final/server/all/data/hornetq/*
@@ -85,65 +87,12 @@ function limpiarServidoresYLogs() {
 	sudo rm -R -f /etc/apache2/mods-available/*.log
 	sudo rm -R -f /etc/apache2/mods-available/*.old
 	sudo rm -R -f /etc/apache2/mods-available/*~
+	sudo rm -R -f /etc/apache2/mods-enabled/*.log
+	sudo rm -R -f /etc/apache2/mods-enabled/*.old
+	sudo rm -R -f /etc/apache2/mods-enabled/*~
 	sudo rm -R -f /etc/apache2/sites-available/*.log
 	sudo rm -R -f /etc/apache2/sites-available/*.old
 	sudo rm -R -f /etc/apache2/sites-available/*~
 }
 
-instancias="$1"
-
-if [ "$instancias" == "" ]; then
-	instancias="2"
-fi
-
-cluster="$2"
-
-if [ "$cluster" == "" ]; then
-	cluster="jboss"
-fi
-
-posicion="$PWD"
-
-source "$posicion"/bajarAmbiente.sh
-sudo "$posicion"/resetearProcesador.sh
-#source "$posicion"/instalarPaquetes.sh
-source "$posicion"/backupearArchivosConfiguracion.sh
-source "$posicion"/subirMysql.sh
-source "$posicion"/resetearBaseDeDatos.sh
-source "$posicion"/agregarEntradaEnRouter.sh
-#source "$posicion"/compilarYDeployarQinweb.sh
-limpiarServidoresYLogs
-#instancia1
-instancia="1"
-if [ "$cluster" == "jboss" ]; then
-	echo "Cluster: JBoss"
-	source "$posicion"/subirJboss.sh
-	if [ "$instancias" == "2" ] || [ "$instancias" == "3" ]; then
-		#instancia2
-		instancia="2"
-		subirJboss
-	fi
-	if [ "$instancias" == "3" ]; then
-		#instancia3
-		instancia="3"
-		subirJboss
-	fi
-else
-	echo "Cluster: Terracotta"
-	source "$posicion"/subirTerracota.sh
-	source "$posicion"/subirTomcat.sh
-	if [ "$instancias" == "2" ] || [ "$instancias" == "3" ]; then
-		#instancia2
-		instancia="2"
-		subirTomcat
-	fi
-	if [ "$instancias" == "3" ]; then
-		#instancia3
-		instancia="3"
-		subirTomcat
-	fi
-fi
-source "$posicion"/subirApacheCompleto.sh
-source "$posicion"/manejarPermisos.sh
-exit 0
-
+sudo limpiarServidoresYLogs
