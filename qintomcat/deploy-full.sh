@@ -28,6 +28,10 @@ debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - mvn clean install"
 
 mvn clean install
 
+debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - mvn eclipse:clean"
+
+mvn eclipse:clean
+
 debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - mvn eclipse:eclipse"
 
 mvn eclipse:eclipse
