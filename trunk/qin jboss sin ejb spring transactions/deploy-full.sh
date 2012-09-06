@@ -34,6 +34,10 @@ debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - mvn clean install"
 
 mvn clean install
 
+debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - mvn eclipse:clean"
+
+mvn eclipse:clean
+
 debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - mvn eclipse:eclipse"
 
 mvn eclipse:eclipse
@@ -57,6 +61,10 @@ rm -R target
 debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - mvn clean install"
 
 mvn clean install
+
+debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - mvn eclipse:clean"
+
+mvn eclipse:clean
 
 debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - mvn eclipse:eclipse"
 
@@ -85,6 +93,10 @@ rm -R target/qinear-1.0.ear
 debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - mvn clean install"
 
 mvn clean install
+
+debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - mvn eclipse:clean"
+
+mvn eclipse:clean
 
 debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - mvn eclipse:eclipse"
 
