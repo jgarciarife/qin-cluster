@@ -8,7 +8,7 @@ function debecho() {
 		if [ "$1" != "" ] ; then
 			echo "$1" >&2
 			if [ "$INGRESO_TEXTO" == "1" ] ; then
-				read -e usuario
+				read -e usuarioNombreRaroVariable
 			fi
 		fi
 	fi
@@ -106,6 +106,10 @@ debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - rm /opt/jboss-6.1.0.Final
 
 rm "/opt/jboss-6.1.0.Final.2/server/all/deploy/qinear-1.0.ear"
 
+debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - rm /opt/jboss-6.1.0.Final.3/server/all/deploy/qinear-1.0.ear"
+
+rm "/opt/jboss-6.1.0.Final.3/server/all/deploy/qinear-1.0.ear"
+
 debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - cp -f qinear/target/qinear-1.0.ear /opt/jboss-6.1.0.Final/server/all/deploy/qinear-1.0.ear"
 
 cp -f "qinear/target/qinear-1.0.ear" "/opt/jboss-6.1.0.Final/server/all/deploy/qinear-1.0.ear"
@@ -113,6 +117,10 @@ cp -f "qinear/target/qinear-1.0.ear" "/opt/jboss-6.1.0.Final/server/all/deploy/q
 debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - cp -f qinear/target/qinear-1.0.ear /opt/jboss-6.1.0.Final.2/server/all/deploy/qinear-1.0.ear"
 
 cp -f "qinear/target/qinear-1.0.ear" "/opt/jboss-6.1.0.Final.2/server/all/deploy/qinear-1.0.ear"
+
+debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - cp -f qinear/target/qinear-1.0.ear /opt/jboss-6.1.0.Final.3/server/all/deploy/qinear-1.0.ear"
+
+cp -f "qinear/target/qinear-1.0.ear" "/opt/jboss-6.1.0.Final.3/server/all/deploy/qinear-1.0.ear"
 
 debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - cd '$PWD'"
 
