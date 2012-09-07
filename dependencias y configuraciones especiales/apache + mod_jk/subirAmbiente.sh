@@ -17,7 +17,6 @@ fi
 posicion="$PWD"
 
 source "$posicion"/bajarAmbiente.sh
-sudo "$posicion"/configurarProcesador.sh
 #source "$posicion"/instalarPaquetes.sh
 source "$posicion"/backupearArchivosConfiguracion.sh
 source "$posicion"/subirMysql.sh

@@ -10,6 +10,7 @@ posicion="$PWD"
 #if [ "$esGNewSense" == "" ]; then
 #	source "$posicion"/detectarSO.sh
 #fi
+sudo "$posicion"/configurarProcesador.sh
 echo "sudo /usr/sbin/apache2ctl start"
 sudo /usr/sbin/apache2ctl start
 #if [ "$esGNewSense" == "1" ]; then
