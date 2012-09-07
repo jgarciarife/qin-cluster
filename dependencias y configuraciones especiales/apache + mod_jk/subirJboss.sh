@@ -10,30 +10,15 @@ fi
 if [ "$instancia" == "" ]; then
 	instancia="1"
 fi
-if [ "$ipInstancia1" == "" ]; then
-	ipInstancia1="$2"
-fi
-if [ "$ipInstancia2" == "" ]; then
-	ipInstancia2="$3"
-fi
-if [ "$ipInstancia3" == "" ]; then
-	ipInstancia3="$4"
-fi
 if [ "$multicast" == "" ]; then
-	multicast="$5"
+	multicast="$2"
 fi
 if [ "$ipMulticast" == "" ]; then
-	ipMulticast="$6"
+	ipMulticast="$3"
 fi
-if [ "$ipInstancia1" == "" ]; then
-	ipInstancia1="worker1"
-fi
-if [ "$ipInstancia2" == "" ]; then
-	ipInstancia2="worker2"
-fi
-if [ "$ipInstancia3" == "" ]; then
-	ipInstancia3="worker3"
-fi
+ipInstancia1="worker1"
+ipInstancia2="worker2"
+ipInstancia3="worker3"
 if [ "$multicast" == "" ]; then
 	multicast="0"
 fi

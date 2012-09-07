@@ -31,8 +31,9 @@ if [ "$cluster" == "jboss" ]; then
 	source "$posicion"/subirJboss.sh
 	if [ "$instancias" == "2" ] || [ "$instancias" == "3" ]; then
 		#instancia2
-		instancia="2"
-		subirJboss
+		#instancia="2"
+		#subirJboss
+		echo " "
 	fi
 	if [ "$instancias" == "3" ]; then
 		#instancia3
