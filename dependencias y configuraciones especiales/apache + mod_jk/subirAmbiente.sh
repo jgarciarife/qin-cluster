@@ -17,12 +17,12 @@ fi
 posicion="$PWD"
 
 source "$posicion"/bajarAmbiente.sh
+sudo "$posicion"/limpiarAmbiente.sh
 #source "$posicion"/instalarPaquetes.sh
 source "$posicion"/backupearArchivosConfiguracion.sh
 source "$posicion"/subirMysql.sh
 source "$posicion"/resetearBaseDeDatos.sh
 #source "$posicion"/compilarYDeployarQinweb.sh
-sudo "$posicion"/limpiarAmbiente.sh
 #instancia1
 instancia="1"
 if [ "$cluster" == "jboss" ]; then
