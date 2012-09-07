@@ -4,6 +4,7 @@ echo "martin.sh"
 
 posicion="$PWD"
 
+sudo "$posicion"/limpiarAmbiente.sh
 sudo "$posicion"/configurarProcesador.sh
 
 cluster="$1"
