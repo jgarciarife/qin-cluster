@@ -12,6 +12,7 @@ if [ "$instancia" == "" ]; then
 fi
 
 function subirTomcat() {
+	sudo "$posicion"/configurarProcesador.sh
 	if [ "$instancia" == "1" ]; then
 		echo "/opt/apache-tomcat-7.0.23/bin/startup.sh &"
 		/opt/apache-tomcat-7.0.23/bin/startup.sh &

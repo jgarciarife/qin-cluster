@@ -47,9 +47,7 @@ else
 fi
 
 function subirJboss() {
-#	echo "/opt/jboss-6.1.0.Final.2/bin/run.sh -c all -g qin $multicast -b "$ipInstancia2" -Djboss.messaging.ServerPeerID=2 -Djboss.service.binding.set=ports-01 => 8109 &"
-#	/opt/jboss-6.1.0.Final.2/bin/run.sh -c all -g qin $multicast -b "$ipInstancia1" -Djboss.messaging.ServerPeerID=2 -Djboss.service.binding.set=ports-01 &
-#	sleep 60
+	sudo "$posicion"/configurarProcesador.sh
 	if [ "$instancia" == "1" ]; then
 		echo "/opt/jboss-6.1.0.Final/bin/run.sh -c all -g qin $multicast -b "$ipInstancia1" -Djboss.messaging.ServerPeerID=1 -Djboss.service.binding.set=ports-default => 8009 &"
 		/opt/jboss-6.1.0.Final/bin/run.sh -c all -g qin $multicast -b "$ipInstancia1" -Djboss.messaging.ServerPeerID=1 -Djboss.service.binding.set=ports-default &
