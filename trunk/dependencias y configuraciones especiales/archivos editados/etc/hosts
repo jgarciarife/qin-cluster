@@ -1,33 +1,12 @@
-127.0.0.1	rocha	localhost.localdomain	localhost
-127.0.1.1	rocha
-#192.168.1.104	rocha
-192.168.1.1	trescruces
-192.168.100.1	carrasco
-192.168.1.101	montevideo
-192.168.1.108	lapaloma
-# colonia = celular diego
-192.168.1.103	colonia
-# atlantida = celular flor
-#192.168.1.102	atlantida
-192.168.53.128	carmelo
-192.168.1.102	invitadocableado1
-192.168.1.108	invitadocableado2
-192.168.1.107	invitadocableado3
+192.168.1.101	localhost
 
 192.168.1.107	martin
-192.168.1.102	terracotta # rocha
-192.168.1.101	basededatos # lapaloma / montevideo
-192.168.1.102	apache # rocha
-192.168.1.102	worker1 # rocha
+192.168.1.101	terracotta # rocha
+192.168.1.100	basededatos # lapaloma / montevideo
+192.168.1.101	apache # rocha
+192.168.1.101	worker1 # rocha
 192.168.1.107	worker2 # martin
-192.168.1.101	worker3 # montevideo
-
-#192.168.1.104	terracotta # rocha
-#192.168.1.104	basededatos # lapaloma / montevideo
-#192.168.1.104	apache # rocha
-#192.168.1.104	worker1 # rocha
-#192.168.1.104	worker2 # martin
-#192.168.1.104	worker3 # montevideo
+192.168.1.100	worker3 # montevideo
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback
