@@ -7,32 +7,14 @@ posicion="$PWD"
 source "$posicion"/manejarPermisos.sh
 
 if [ "$1" == "-h" ]; then
-	echo "editarArchivosConfiguracion.sh esGNewSense mod_jk instancias stickysession"
+	echo "editarArchivosConfiguracion.sh instancias"
 fi
 
-if [ "$esGNewSense" == "" ]; then
-	esGNewSense="$1"
-fi
-if [ "$modJk" == "" ]; then
-	modJk="$2"
+if [ "$instancias" == "" ]; then
+	instancias="$1"
 fi
 if [ "$instancias" == "" ]; then
-	instancias="$3"
-fi
-if [ "$sticky_session" == "" ]; then
-	sticky_session="$4"
-fi
-if [ "$esGNewSense" == "" ]; then
-	source "$posicion"/detectarSO.sh
-fi
-if [ "$modJk" == "" ]; then
-	modJk="0"
-fi
-if [ "$instancias" == "" ]; then
-	instancias="2"
-fi
-if [ "$sticky_session" == "" ]; then
-	sticky_session="1"
+	instancias="1"
 fi
 
 ipApache="apache"
@@ -42,10 +24,11 @@ ipInstancia2="worker2"
 puertoInstancia2="8109"
 ipInstancia3="worker3"
 puertoInstancia3="8209"
-
+sticky_session="1"
 modJk="0"
-
+esGNewSense="0"
 project="qinweb"
+instancias="2"
 
 if [ "$modJk" == "0" ]; then
 	sudo rm /etc/apache2/mods-enabled/jk.*
