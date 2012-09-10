@@ -575,7 +575,11 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Configuración del CSV Data Set" enabled="true">
           <stringProp name="delimiter">,</stringProp>
           <stringProp name="fileEncoding"></stringProp>
+<<<<<<< .mine
+          <stringProp name="filename">/opt/usuariosn1.csv</stringProp>
+=======
           <stringProp name="filename">/opt/usuariosn3.csv</stringProp>
+>>>>>>> .r751
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">true</boolProp>
           <stringProp name="shareMode">Todos los hilos</stringProp>
