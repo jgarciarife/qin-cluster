@@ -85,24 +85,44 @@ public class ElaboracionResolucionController {
 			@RequestParam(value = "tpId", required = false) Long tpId,
 			@RequestParam(value = "codigo", required = false) String codigo,
 			Model model, HttpSession session) throws Exception {
+		long iniciar = ProfilingUtils.iniciar();
+		long inicio = ProfilingUtils.iniciar();
 		Usuario usuario = (Usuario) session
 				.getAttribute(ControllerKeys.USUARIO);
 		Alumno alumno = getAdministracionManager().findAlumnoByUsuario(usuario);
+		ProfilingUtils
+		.logear(inicio,
+				"com.qin.controller.ElaboracionResolucionController.altaTP: getAdministracionManager().findAlumnoByUsuario(usuario)");
 		TrabajoPractico trabajoPractico = null;
 		Resolucion resolucion = null;
 		if (id != null) {
 			resolucion = resolucionManager.findById(id);
+			ProfilingUtils
+			.logear(inicio,
+					"com.qin.controller.ElaboracionResolucionController.altaTP: resolucionManager.findById(id)");
 			trabajoPractico = trabajoPracticoManager.findById(resolucion
 					.getTrabajoPractico().getId());
+			ProfilingUtils
+			.logear(inicio,
+					"com.qin.controller.ElaboracionResolucionController.altaTP: trabajoPracticoManager.findById(resolucion.getTrabajoPractico().getId())");
 		} else if (id == null && tpId != null) {
 			trabajoPractico = trabajoPracticoManager.findById(tpId);
+			ProfilingUtils
+			.logear(inicio,
+					"com.qin.controller.ElaboracionResolucionController.altaTP: trabajoPractico = trabajoPracticoManager.findById(tpId)");
 		}
 		if (codigo == null) {
 			codigo = colaboracionManager
 					.generateCodigoResolucionCompartida(usuario);
+			ProfilingUtils
+			.logear(inicio,
+					"com.qin.controller.ElaboracionResolucionController.altaTP: codigo = colaboracionManager.generateCodigoResolucionCompartida(usuario)");
 		}
 		resolucion = resolucionManager.joinResolucion(resolucion,
 				trabajoPractico, alumno, codigo);
+		ProfilingUtils
+		.logear(inicio,
+				"com.qin.controller.ElaboracionResolucionController.altaTP: resolucion = resolucionManager.joinResolucion(resolucion,trabajoPractico, alumno, codigo)");
 		if (resolucion != null
 				&& resolucion.getCodigoResolucionCompartida() != null
 				&& !resolucion.getCodigoResolucionCompartida().equals(codigo)) {
@@ -112,6 +132,9 @@ public class ElaboracionResolucionController {
 		model.addAttribute("trabajoPractico", trabajoPractico);
 		model.addAttribute("resolucion", resolucion);
 		model.addAttribute("codigo", codigo);
+		ProfilingUtils
+		.logear(iniciar,
+				"com.qin.controller.ElaboracionResolucionController.altaTP");
 		return "resolucion.alta";
 	}
 

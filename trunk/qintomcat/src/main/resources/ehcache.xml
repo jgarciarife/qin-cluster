@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <ehcache name="QinWebCache">
-   <defaultCache
-      maxElementsInMemory="10"
-      eternal="false"
-      timeToIdleSeconds="120"
-      timeToLiveSeconds="120"
-      overflowToDisk="false">
-      <terracotta/>
-    </defaultCache>
-  <terracottaConfig url="terracotta:9510"/>
+	<defaultCache maxElementsInMemory="15000" eternal="false"
+		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="false">
+		<terracotta />
+	</defaultCache>
+	<terracottaConfig url="terracotta:9510" />
 </ehcache>

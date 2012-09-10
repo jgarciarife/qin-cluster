@@ -26,7 +26,10 @@ public class BusquedaTPController extends MultiActionController {
 
 	@ModelAttribute("materias")
 	public List<Materia> popularMaterias() throws Exception {
-		return colaboracionManager.findAllMaterias();
+		long inicio = ProfilingUtils.iniciar();
+		List<Materia> retorno = colaboracionManager.findAllMaterias();
+		ProfilingUtils.logear(inicio, "com.qin.controller.BusquedaTPController.popularMaterias");
+		return retorno;
 	}
 
 	@RequestMapping(value = "/iniciar_busqueda.html")
@@ -40,13 +43,15 @@ public class BusquedaTPController extends MultiActionController {
 		List<TrabajoPractico> tps = null;		
 		if (materiaId.intValue() == -1){
 			tps = trabajoPracticoManager.findAll();
+			ProfilingUtils.logear(inicio,
+					"com.qin.controller.BusquedaTPController.buscarTPs: trabajoPracticoManager.findAll()");
 		} else{
 			tps = trabajoPracticoManager
 			.findByMateriaId(materiaId);
+			ProfilingUtils.logear(inicio,
+					"com.qin.controller.BusquedaTPController.buscarTPs: trabajoPracticoManager.findByMateriaId(materiaId)");
 		}
 		model.addAttribute("trabajos", tps);
-		ProfilingUtils.logear(inicio,
-				"com.qin.controller.BusquedaTPController.buscarTPs");
 		return "tp.resultado_busqueda";
 	}
 

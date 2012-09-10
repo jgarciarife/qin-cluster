@@ -29,12 +29,12 @@ public class BusquedaResolucionesController extends MultiActionController {
 		List<Grupo> tps = null;
 		if (tpId == null) {
 			tps = resolucionManager.findAllWithGrupo();
-
+			ProfilingUtils.logear(inicio, "com.qin.controller.BusquedaResolucionesController.buscarResoluciones: resolucionManager.findAllWithGrupo()");
 		} else {
 			tps = resolucionManager.findByTrabajoPracticoIdWithGroup(tpId);
+			ProfilingUtils.logear(inicio, "com.qin.controller.BusquedaResolucionesController.buscarResoluciones: resolucionManager.findByTrabajoPracticoIdWithGroup(tpId)");
 		}
 		model.addAttribute("grupos", tps);
-		ProfilingUtils.logear(inicio, "com.qin.controller.BusquedaResolucionesController.buscarResoluciones");
 		return "resolucion.resultado_busqueda";
 	}
 
