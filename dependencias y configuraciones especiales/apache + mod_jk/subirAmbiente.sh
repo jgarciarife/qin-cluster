@@ -5,7 +5,7 @@ echo "subirAmbiente.sh"
 instancias="$1"
 
 if [ "$instancias" == "" ]; then
-	instancias="2"
+	instancias="1"
 fi
 
 cluster="$2"
@@ -47,8 +47,9 @@ else
 	source "$posicion"/subirTomcat.sh
 	if [ "$instancias" == "2" ] || [ "$instancias" == "3" ]; then
 		#instancia2
-		instancia="2"
-		subirTomcat
+		#instancia="2"
+		#subirTomcat
+		echo " "
 	fi
 	if [ "$instancias" == "3" ]; then
 		#instancia3

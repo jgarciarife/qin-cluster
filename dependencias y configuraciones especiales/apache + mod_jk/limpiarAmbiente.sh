@@ -111,7 +111,6 @@ function limpiarServidoresYLogs() {
 	sudo rm -R -f /etc/apache2/sites-available/*~
 	sudo rm -R -f $HOME/terracotta/client-logs/*
 	sudo rm -R -f $HOME/terracotta/server-logs/*
-	sudo killall java
 }
 
 limpiarServidoresYLogs
