@@ -20,13 +20,10 @@ public class ConsultaController {
 	@RequestMapping(value = "/consultar.html")
 	protected String consultar(Model model, HttpSession session)
 			throws Exception {
-		long inicio = ProfilingUtils.iniciar();
 		Usuario usuario = (Usuario) session
 				.getAttribute(ControllerKeys.USUARIO);
 		model.addAttribute("nombre",
 				usuario.getNombre() + " " + usuario.getApellido());
-		ProfilingUtils.logear(inicio,
-				"com.qin.controller.ConsultaController.consultar");
 		return "consulta";
 	}
 
