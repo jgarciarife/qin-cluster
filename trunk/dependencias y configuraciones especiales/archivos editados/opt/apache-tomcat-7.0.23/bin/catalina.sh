@@ -97,6 +97,7 @@
 # $Id: catalina.sh 1202062 2011-11-15 06:50:02Z mturk $
 # -----------------------------------------------------------------------------
 # JAVA_OPTS="$JAVA_OPTS -XX:MaxPermSize=512m"
+# JAVA_OPTS="$JAVA_OPTS -Xms512m -Xmx2048m -Xmn128m -XX:MaxPermSize=256M -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:+CMSParallelRemarkEnabled -XX:+UseParNewGC -XX:CMSInitiatingOccupancyFraction=60 -XX:+UseCMSInitiatingOccupancyOnly -XX:+UseCMSCompactAtFullCollection -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n"
 JAVA_OPTS="$JAVA_OPTS -Xms512m -Xmx2048m -Xmn128m -XX:MaxPermSize=256M -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:+CMSParallelRemarkEnabled -XX:+UseParNewGC -XX:CMSInitiatingOccupancyFraction=60 -XX:+UseCMSInitiatingOccupancyOnly -XX:+UseCMSCompactAtFullCollection"
 # OS specific support.  $var _must_ be set to either true or false.
 cygwin=false
