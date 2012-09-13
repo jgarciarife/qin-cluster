@@ -19,7 +19,7 @@ import com.qin.entity.base.BaseEntity;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "trabajo_practico", catalog = "qin")
-@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
+//@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class TrabajoPractico extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
