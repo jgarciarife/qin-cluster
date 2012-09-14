@@ -1,12 +1,12 @@
-192.168.1.101	localhost
+192.168.1.100   localhost
 
-192.168.1.107	martin
-192.168.1.101	terracotta # rocha
-192.168.1.100	basededatos # lapaloma / montevideo
-192.168.1.101	apache # rocha
-192.168.1.101	worker1 # rocha
-192.168.1.107	worker2 # martin
-192.168.1.100	worker3 # montevideo
+192.168.1.107  martin
+192.168.1.103  terracota # rocha
+192.168.1.100  basededatos # lapaloma / montevideo
+192.168.1.103  apache # rocha
+192.168.1.103  worker1 # rocha
+192.168.1.104  worker2 # martin
+192.168.1.100  worker3 # montevideo
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback
