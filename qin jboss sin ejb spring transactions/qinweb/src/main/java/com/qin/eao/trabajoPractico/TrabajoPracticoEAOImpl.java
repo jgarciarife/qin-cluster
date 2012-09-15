@@ -6,7 +6,6 @@ import org.hibernate.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.qin.eao.base.BaseEAOImpl;
 import com.qin.entity.Alumno;
@@ -33,6 +32,7 @@ public class TrabajoPracticoEAOImpl extends BaseEAOImpl implements
 				jpql.toString());
 		query.setParameter("id", trabajoPracticoId);
 		TrabajoPractico singleResult = (TrabajoPractico) query.uniqueResult();
+		query.setCacheable(true);
 		return singleResult;
 	}
 
@@ -44,7 +44,7 @@ public class TrabajoPracticoEAOImpl extends BaseEAOImpl implements
 		jpql.append("FROM TrabajoPractico trabajoPractico ");
 		Query query = sessionFactory.getCurrentSession().createQuery(
 				jpql.toString());
-		//query.setCacheable(true);
+		query.setCacheable(true);
 		return query.list();
 	}
 
