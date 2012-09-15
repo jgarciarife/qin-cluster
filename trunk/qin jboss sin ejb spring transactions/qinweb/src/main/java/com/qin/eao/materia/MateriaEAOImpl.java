@@ -27,6 +27,7 @@ public class MateriaEAOImpl extends BaseEAOImpl implements MateriaEAO {
 		jpql.append("WHERE materia.id = :id ");
 		Query query = sessionFactory.getCurrentSession().createQuery(jpql.toString());
 		query.setParameter("id", materiaId);
+		query.setCacheable(true);
 		return (Materia) query.uniqueResult();
 	}
 	
