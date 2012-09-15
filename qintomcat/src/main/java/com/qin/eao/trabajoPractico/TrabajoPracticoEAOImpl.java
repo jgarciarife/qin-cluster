@@ -44,7 +44,7 @@ public class TrabajoPracticoEAOImpl extends BaseEAOImpl implements
 		jpql.append("FROM TrabajoPractico trabajoPractico ");
 		Query query = sessionFactory.getCurrentSession().createQuery(
 				jpql.toString());
-		query.setCacheable(true);
+		//query.setCacheable(true);
 		return query.list();
 	}
 
