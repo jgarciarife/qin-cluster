@@ -6,10 +6,10 @@ import org.hibernate.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.qin.eao.base.BaseEAOImpl;
 import com.qin.entity.Materia;
+
 @Repository
 public class MateriaEAOImpl extends BaseEAOImpl implements MateriaEAO {
 
@@ -25,18 +25,21 @@ public class MateriaEAOImpl extends BaseEAOImpl implements MateriaEAO {
 		jpql.append("SELECT materia ");
 		jpql.append("FROM Materia materia ");
 		jpql.append("WHERE materia.id = :id ");
-		Query query = sessionFactory.getCurrentSession().createQuery(jpql.toString());
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				jpql.toString());
 		query.setParameter("id", materiaId);
+		query.setCacheable(true);
 		return (Materia) query.uniqueResult();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Materia> findAll() throws Exception {
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT materia ");
 		jpql.append("FROM Materia materia ");
-		Query query = sessionFactory.getCurrentSession().createQuery(jpql.toString());
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				jpql.toString());
 		query.setCacheable(true);
 		return query.list();
 	}
