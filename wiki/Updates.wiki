@@ -1,4 +1,0 @@
-#summary Updates del proyecto
-
-<wiki:gadget url="http://bulletphysics.org/~erwincoumans/com1.xml" up_projectName="qin-cluster" width="800"  height="100"/> 
-Todas las asctualizaciones
