@@ -40,6 +40,10 @@ debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - rm -R -f /opt/apache-tomc
 
 rm -R -f /opt/apache-tomcat-7.0.23/webapps/qinear.war
 
+debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - rm -R -f /opt/apache-tomcat-7.0.23/webapps/qinweb/*"
+
+rm -R -f /opt/apache-tomcat-7.0.23/webapps/qinear/*
+
 debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - rm -R -f /opt/apache-tomcat-7.0.23/webapps/qinweb"
 
 rm -R -f /opt/apache-tomcat-7.0.23/webapps/qinear
@@ -48,6 +52,10 @@ debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - rm -R -f /opt/apache-tomc
 
 rm -R -f /opt/apache-tomcat-7.0.23.2/webapps/qinear.war
 
+debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - rm -R -f /opt/apache-tomcat-7.0.23.2/webapps/qinweb/*"
+
+rm -R -f /opt/apache-tomcat-7.0.23.2/webapps/qinear/*
+
 debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - rm -R -f /opt/apache-tomcat-7.0.23.2/webapps/qinweb"
 
 rm -R -f /opt/apache-tomcat-7.0.23.2/webapps/qinear
@@ -55,6 +63,10 @@ rm -R -f /opt/apache-tomcat-7.0.23.2/webapps/qinear
 debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - rm -R -f /opt/apache-tomcat-7.0.23.3/webapps/qinweb.war"
 
 rm -R -f /opt/apache-tomcat-7.0.23.3/webapps/qinear.war
+
+debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - rm -R -f /opt/apache-tomcat-7.0.23.3/webapps/qinweb/*"
+
+rm -R -f /opt/apache-tomcat-7.0.23.3/webapps/qinear/*
 
 debecho "[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] - rm -R -f /opt/apache-tomcat-7.0.23.3/webapps/qinweb"
 
