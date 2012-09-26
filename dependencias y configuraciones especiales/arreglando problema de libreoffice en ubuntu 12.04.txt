@@ -1,0 +1,1 @@
+sudo mv /usr/bin/libreoffice /usr/bin/libreoffice-original && sudo ln -s /usr/lib/libreoffice/program/soffice.bin /usr/bin/libreoffice
