@@ -1,0 +1,26 @@
+
+
+
+
+
+
+----------------------------------------------------------------------------
+
+(Convertir como se pueda en algo similar a lo anterior; referencia = http://www.cyta.com.ar/elearn/edita/material/690_2.htm)
+
+
+Jboss:
+	JBoss in Action Configuring the JBoss Application Server (http://www.manning.com/jamae/): Javid Jamae and Peter Johnson, enero de 2009, ISBN: 1-933988-02-9
+	http://es.wikipedia.org/wiki/JBoss
+
+Sesiones Web:
+	http://www.terracotta.org/web-sessions/?was-expanded=web-sessions-submenu
+
+Cache distribuida:
+	http://www.terracotta.org/ehcache/ehcache-dx
+	http://jboss.org/jbosscache
+
+Clusterización:
+http://www.terracotta.org/platform/platform-concepts
+	http://www.terracotta.org/platform/hello-clustered-world
+	http://es.wikipedia.org/wiki/Cluster_%28inform%C3%A1tica%29
