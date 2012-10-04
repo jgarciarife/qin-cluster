@@ -10,3 +10,11 @@
 - Incluir referencias a cluster ortogonal o paralelo, algo así
 - Ajustar las referencias bibliográficas
 - Deberíamos meter JMeter en Descripción de las herramientas ?
+
+- Hay que investigar como bajar y subir un nodo en JBoss sin que haya problemas
+- Incorporar definiciones de los apuntes teóricos de Martín
+- Números de funcionamiento standard
+- Intentar qué vamos a medir realmente al hablar de performance, escalabilidad, y disponibilidad
+- Integrar todo en un solo informe
+- Marcar en los gráficos los sectores que responden a los tiempos standard
+- Imprimir Google Doc
