@@ -1,0 +1,2 @@
+1 - pegar los graficos (y explicarlos un toque)
+2 - explicar los problemas jboss ya estamos
