@@ -1,0 +1,12 @@
+- Comprobar que haya un punto luego del número de la numeración en el informe
+- Bajar nivel de humo del lenguaje; ser más preciso con los adjetivos y los adverbios
+- Comprobar los tiempos verbales: primera persona del plural
+- Ajustar la manera en que se cita bibliografía
+	http://www.cyta.com.ar/elearn/edita/material/690_2.htm
+- Látex ?
+- Criterio para los punto y aparte
+- Acentos
+- Faltas de ortografía
+- Incluir referencias a cluster ortogonal o paralelo, algo así
+- Ajustar las referencias bibliográficas
+- Deberíamos meter JMeter en Descripción de las herramientas ?
