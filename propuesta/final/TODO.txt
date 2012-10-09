@@ -18,3 +18,8 @@
 - Integrar todo en un solo informe
 - Marcar en los gráficos los sectores que responden a los tiempos standard
 - Imprimir Google Doc
+
+- Aclarar la parte de los graficos
+- No mezclar los ejes
+	- Si están relacionadas, ok, pero sino desdoblar los gráficos
+- Gráficos que comparen directamente JBoss con Terracotta	
