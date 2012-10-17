@@ -1,5 +1,6 @@
 Nodo 1
 
+SUBIENDO
 ...
 04:25:13,773 INFO  [JBossASKernel] 	jboss.j2ee:ear=qinear-1.0.ear,jar=qinejb-1.0.jar,name=PojoCacheManagerImpl,service=EJB3; Required: Described
 04:25:13,773 INFO  [JBossASKernel]   and supplies:
@@ -37,6 +38,8 @@ Nodo 1
 04:25:15,059 INFO  [TransactionManagerFactory] Using a batchMode transaction manager
 04:25:15,175 INFO  [JGroupsTransport] Starting JGroups Channel
 04:25:15,175 INFO  [JChannel] JGroups version: 2.11.0.GA
+
+SUBIENDO SEGUNDO NODO
 ...
 2012-10-17 04:25:27,544 INFO  [org.jboss.ha.framework.server.ClusterPartition.lifecycle.qin] (Incoming-5,null) New cluster view for partition qin (id: 1, delta: 1, merge: false) : [worker1:1099, worker2:1199]
 2012-10-17 04:25:27,548 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) I am (worker1:1099) received membershipChanged event:
@@ -66,6 +69,8 @@ Nodo 1
 2012-10-17 04:29:34,714 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49794]) ------------------------------------------------------------------------------------------------
 2012-10-17 04:29:34,715 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49794]) ------------------------------------------------------------------------------------------------
 2012-10-17 04:29:34,715 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49794]) PojoCacheManagerImpl: getValue 
+
+MURIENDO
 ...
 2012-10-17 04:36:03,394 INFO  [org.jboss.system.server.jmx.JMXKernel] (Thread-30) Server exit called, exiting the JVM now!
 2012-10-17 04:36:03,409 INFO  [STDOUT] (Thread-1) Posting Shutdown Request to the server...
@@ -74,6 +79,8 @@ Nodo 1
 2012-10-17 04:36:03,411 INFO  [org.apache.coyote.http11.Http11Protocol] (Thread-31) Parando Coyote HTTP/1.1 en puerto http-worker1%2F192.168.1.107-8080
 2012-10-17 04:36:03,437 INFO  [org.apache.coyote.ajp.AjpProtocol] (Thread-31) Pausando Coyote AJP/1.3 en ajp-worker1%2F192.168.1.107-8009
 2012-10-17 04:36:03,438 INFO  [org.apache.coyote.ajp.AjpProtocol] (Thread-31) Parando Coyote AJP/1.3 en ajp-worker1%2F192.168.1.107-8009
+
+BAJANDO POJO CACHE
 ...
 04:36:03,486 INFO  [service] Restored bootstrap log handlers
 04:36:03,501 INFO  [TomcatDeployment] undeploy, ctxPath=/qinweb
@@ -161,6 +168,7 @@ Nodo 1
 
 Nodo 2
 
+SUBIENDO Y LEVANTANDO POJO CACHE
 ...
 04:25:37,561 INFO  [JBossASKernel] 	jboss.j2ee:ear=qinear-1.0.ear,jar=qinejb-1.0.jar,name=PojoCacheManagerImpl,service=EJB3; Required: Described
 04:25:37,562 INFO  [JBossASKernel]   and supplies:
@@ -192,6 +200,8 @@ Nodo 2
 04:25:37,902 INFO  [TransactionManagerFactory] Using a batchMode transaction manager
 04:25:37,921 INFO  [JGroupsTransport] Starting JGroups Channel
 04:25:37,921 INFO  [JChannel] JGroups version: 2.11.0.GA
+
+DESPERTANDO EL POJO CACHE PORQUE SE MURIO EL NODO 1
 ...
 2012-10-17 04:36:03,568 INFO  [STDOUT] (AsynchKeyChangeHandler Thread) ------------------------------------------------------------------------------------------------
 2012-10-17 04:36:03,585 INFO  [STDOUT] (AsynchKeyChangeHandler Thread) ------------------------------------------------------------------------------------------------
@@ -234,6 +244,8 @@ Nodo 2
 2012-10-17 04:36:06,058 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) ------------------------------------------------------------------------------------------------
 2012-10-17 04:36:06,058 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) ------------------------------------------------------------------------------------------------
 2012-10-17 04:36:06,059 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) PojoCacheManagerImpl: getValue 
+
+MURIENDO
 ...
 2012-10-17 04:37:18,662 INFO  [org.jboss.web.tomcat.service.deployers.TomcatDeployment] (http-worker2%2F192.168.1.107-8180-1) deploy, ctxPath=/jmx-console
 2012-10-17 04:38:06,895 INFO  [org.jboss.system.server.jmx.JMXKernel] (Thread-36) Server exit called, exiting the JVM now!
@@ -243,6 +255,8 @@ Nodo 2
 2012-10-17 04:38:06,898 INFO  [org.apache.coyote.http11.Http11Protocol] (Thread-37) Parando Coyote HTTP/1.1 en puerto http-worker2%2F192.168.1.107-8180
 2012-10-17 04:38:06,901 INFO  [org.apache.coyote.ajp.AjpProtocol] (Thread-37) Pausando Coyote AJP/1.3 en ajp-worker2%2F192.168.1.107-8109
 2012-10-17 04:38:06,901 INFO  [org.apache.coyote.ajp.AjpProtocol] (Thread-37) Parando Coyote AJP/1.3 en ajp-worker2%2F192.168.1.107-8109
+
+PARANDO POJOCACHE
 ...
 04:38:06,943 INFO  [service] Restored bootstrap log handlers
 04:38:06,975 INFO  [TomcatDeployment] undeploy, ctxPath=/qinweb
