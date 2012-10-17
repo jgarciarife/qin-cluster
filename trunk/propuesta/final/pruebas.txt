@@ -1,0 +1,25 @@
+Disponibilidad del sistema
+	Escenario con dos nodos al que se conecta un cliente
+	Corte intencional de conexión de uno de los nodos
+	Conclusión respecto a la disponibilidad
+	La aplicación siempre está disponible, aunque el cable que se retira sea del servidor preponderante en la configuración
+
+Desconexión de un nodo en esquema colaborativo
+	Desconexión de un nodo en un esquema colaborativo, en el momento de confección de resolución colaborativa
+	Instancia de contexto normal de funcionamiento con texto sincronizado
+	Trabajo práctico o dictamen en un determinado estado de sincronización
+	Correcto funcionamiento e ininterrumpido de la sincronización del texto del trabajo práctico o dictamen
+
+Réplicación de sesión
+	Verificar que ante la desconexión de un nodo, la sesión se replica a los otros nodos y la redirección a otra instancia del servidor es transparente para el usuario
+	1- instancia de escenario normal; ingreso al sistema con un usuario, consulto la pantalla Home para ver mis datos
+	2- Desconexión del nodo al que ingresamos
+	3- Nueva consulta de mis datos
+	Observar los datos del usuario arrojados en pantalla
+	Los datos en pantalla indican que se está apuntando a un nuevo nodo, pero manteniendo la misma sesión
+
+Caché
+	Consultar datos cacheables y verificar la replicación de la cache en los diferentes nodos
+	Instancia de escenario normal; ingreso al sistema con un usuario, ingreso en pantalla de búsqueda de trabajos prácticos, ingresar al segundo nodo y consultar la misma pantalla
+	Observar en el log, los hit/miss de la cache
+	El segundo nodo continua administrando la sesión del usuario sin problemas. En la segunda consulta se observan hits en la memoria cache a pesar de estar consultando en el segundo nodo
