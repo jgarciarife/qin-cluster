@@ -1,0 +1,339 @@
+Nodo 1
+
+...
+04:25:13,773 INFO  [JBossASKernel] 	jboss.j2ee:ear=qinear-1.0.ear,jar=qinejb-1.0.jar,name=PojoCacheManagerImpl,service=EJB3; Required: Described
+04:25:13,773 INFO  [JBossASKernel]   and supplies:
+04:25:13,773 INFO  [JBossASKernel] 	Class:com.qin.cache.pojo.manager.PojoCacheManager
+04:25:13,773 INFO  [JBossASKernel] 	jndi:PojoCacheManagerImpl
+04:25:13,774 INFO  [JBossASKernel] 	jndi:qinear-1.0/PojoCacheManagerImpl/remote
+04:25:13,774 INFO  [JBossASKernel] 	jndi:qinear-1.0/PojoCacheManagerImpl/remote-com.qin.cache.pojo.manager.PojoCacheManager
+04:25:13,774 INFO  [JBossASKernel] Installing bean(qinejb:service=PojoCacheManager) into kernel
+04:25:13,779 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:13,779 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:13,779 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:13,780 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:13,780 INFO  [STDOUT] PojoCacheManagerImpl: create 
+04:25:13,780 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:13,783 INFO  [EJBContainer] STARTED EJB: com.qin.cache.pojo.manager.PojoCacheManagerImpl ejbName: PojoCacheManagerImpl
+04:25:14,353 INFO  [JndiSessionRegistrarBase] Binding the following Entries in Global JNDI:
+
+	qinear-1.0/PojoCacheManagerImpl/remote - EJB3.x Default Remote Business Interface
+	qinear-1.0/PojoCacheManagerImpl/remote-com.qin.cache.pojo.manager.PojoCacheManager - EJB3.x Remote Business Interface
+
+04:25:14,388 WARN  [TimerServiceContainer] EJBTHREE-2193: using deprecated TimerServiceFactory for restoring timers
+04:25:14,740 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:14,740 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:14,741 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:14,741 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:14,741 INFO  [STDOUT] PojoCacheManagerImpl: start 
+04:25:14,741 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:14,805 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:14,805 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:14,805 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:14,806 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:14,806 INFO  [STDOUT] PojoCacheManagerImpl: startSingleton 
+04:25:14,806 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:14,843 INFO  [TomcatDeployment] deploy, ctxPath=/qinweb
+04:25:15,059 INFO  [TransactionManagerFactory] Using a batchMode transaction manager
+04:25:15,175 INFO  [JGroupsTransport] Starting JGroups Channel
+04:25:15,175 INFO  [JChannel] JGroups version: 2.11.0.GA
+...
+2012-10-17 04:25:27,544 INFO  [org.jboss.ha.framework.server.ClusterPartition.lifecycle.qin] (Incoming-5,null) New cluster view for partition qin (id: 1, delta: 1, merge: false) : [worker1:1099, worker2:1199]
+2012-10-17 04:25:27,548 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) I am (worker1:1099) received membershipChanged event:
+2012-10-17 04:25:27,549 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) Dead members: 0 ([])
+2012-10-17 04:25:27,548 INFO  [org.infinispan.remoting.transport.jgroups.JGroupsTransport] (Incoming-5,null) Received new cluster view: [worker1:1099|1] [worker1:1099, worker2:1199]
+2012-10-17 04:25:27,552 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) New Members : 1 ([worker2:1199])
+2012-10-17 04:25:27,552 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) All Members : 2 ([worker1:1099, worker2:1199])
+2012-10-17 04:25:28,239 INFO  [org.hornetq.core.server.cluster.impl.BridgeImpl] (Thread-1 (group:HornetQ-server-threads1758530532-754513616)) Connecting bridge sf.my-cluster.d13c5b06-182b-11e2-a756-68a3c49b1ef7 to its destination [bac837c6-182b-11e2-aedb-68a3c49b1ef7]
+2012-10-17 04:25:28,658 INFO  [org.hornetq.core.server.cluster.impl.BridgeImpl] (Thread-1 (group:HornetQ-server-threads1758530532-754513616)) Bridge sf.my-cluster.d13c5b06-182b-11e2-a756-68a3c49b1ef7 is connected [bac837c6-182b-11e2-aedb-68a3c49b1ef7-> sf.my-cluster.d13c5b06-182b-11e2-a756-68a3c49b1ef7]
+2012-10-17 04:25:38,028 INFO  [org.jboss.ha.core.framework.server.CoreGroupCommunicationService.lifecycle] (Incoming-18,null) New cluster view for partition null (id: 1, delta: 1, merge: false) : [worker1:1099, worker2:1199]
+2012-10-17 04:25:38,028 INFO  [org.infinispan.remoting.transport.jgroups.JGroupsTransport] (Incoming-18,null) Received new cluster view: [worker1:1099|1] [worker1:1099, worker2:1199]
+2012-10-17 04:25:39,577 INFO  [org.infinispan.remoting.transport.jgroups.JGroupsTransport] (Incoming-12,null) Received new cluster view: [worker1:1099|1] [worker1:1099, worker2:1199]
+2012-10-17 04:29:34,682 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49792]) ------------------------------------------------------------------------------------------------
+2012-10-17 04:29:34,683 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49792]) ------------------------------------------------------------------------------------------------
+2012-10-17 04:29:34,683 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49792]) ------------------------------------------------------------------------------------------------
+2012-10-17 04:29:34,683 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49792]) ------------------------------------------------------------------------------------------------
+2012-10-17 04:29:34,683 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49792]) PojoCacheManagerImpl: existsKey 
+2012-10-17 04:29:34,683 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49792]) ------------------------------------------------------------------------------------------------
+2012-10-17 04:29:34,699 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49793]) ------------------------------------------------------------------------------------------------
+2012-10-17 04:29:34,700 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49793]) ------------------------------------------------------------------------------------------------
+2012-10-17 04:29:34,700 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49793]) ------------------------------------------------------------------------------------------------
+2012-10-17 04:29:34,700 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49793]) ------------------------------------------------------------------------------------------------
+2012-10-17 04:29:34,700 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49793]) PojoCacheManagerImpl: setValue 
+2012-10-17 04:29:34,701 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49793]) ------------------------------------------------------------------------------------------------
+2012-10-17 04:29:34,714 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49794]) ------------------------------------------------------------------------------------------------
+2012-10-17 04:29:34,714 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49794]) ------------------------------------------------------------------------------------------------
+2012-10-17 04:29:34,714 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49794]) ------------------------------------------------------------------------------------------------
+2012-10-17 04:29:34,715 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49794]) ------------------------------------------------------------------------------------------------
+2012-10-17 04:29:34,715 INFO  [STDOUT] (WorkerThread#0[192.168.1.107:49794]) PojoCacheManagerImpl: getValue 
+...
+2012-10-17 04:36:03,394 INFO  [org.jboss.system.server.jmx.JMXKernel] (Thread-30) Server exit called, exiting the JVM now!
+2012-10-17 04:36:03,409 INFO  [STDOUT] (Thread-1) Posting Shutdown Request to the server...
+2012-10-17 04:36:03,409 INFO  [org.jboss.bootstrap.impl.base.server.AbstractServer] (Thread-31) Stopping: JBossAS [6.1.0.Final "Neo"]
+2012-10-17 04:36:03,410 INFO  [org.apache.coyote.http11.Http11Protocol] (Thread-31) Pausando Coyote HTTP/1.1 en puerto http-worker1%2F192.168.1.107-8080
+2012-10-17 04:36:03,411 INFO  [org.apache.coyote.http11.Http11Protocol] (Thread-31) Parando Coyote HTTP/1.1 en puerto http-worker1%2F192.168.1.107-8080
+2012-10-17 04:36:03,437 INFO  [org.apache.coyote.ajp.AjpProtocol] (Thread-31) Pausando Coyote AJP/1.3 en ajp-worker1%2F192.168.1.107-8009
+2012-10-17 04:36:03,438 INFO  [org.apache.coyote.ajp.AjpProtocol] (Thread-31) Parando Coyote AJP/1.3 en ajp-worker1%2F192.168.1.107-8009
+...
+04:36:03,486 INFO  [service] Restored bootstrap log handlers
+04:36:03,501 INFO  [TomcatDeployment] undeploy, ctxPath=/qinweb
+04:36:03,505 INFO  [[/qinweb]] Destroying Spring FrameworkServlet 'qinweb'
+04:36:03,510 INFO  [SessionFactoryImpl] closing
+04:36:03,518 INFO  [DefaultCacheContainerFactory] Stopped "com.qin.entity.Materia" cache from "hibernate" container
+04:36:03,525 INFO  [DefaultCacheContainerFactory] Stopped "local-query" cache from "hibernate" container
+04:36:03,530 INFO  [DefaultCacheContainerFactory] Stopped "org.hibernate.cache.UpdateTimestampsCache" cache from "hibernate" container
+04:36:03,544 INFO  [DefaultCacheContainerFactory] Stopped "//localhost/qinweb" cache from "web" container
+04:36:03,564 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:36:03,564 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:36:03,564 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:36:03,564 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:36:03,565 INFO  [STDOUT] PojoCacheManagerImpl: stopSingleton 
+04:36:03,565 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:36:03,573 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:36:03,573 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:36:03,573 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:36:03,573 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:36:03,573 INFO  [STDOUT] PojoCacheManagerImpl: stop 
+04:36:03,573 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:36:03,612 INFO  [EJBContainer] STOPPED EJB: com.qin.cache.pojo.manager.PojoCacheManagerImpl ejbName: PojoCacheManagerImpl
+04:36:03,612 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:36:03,612 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:36:03,612 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:36:03,612 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:36:03,612 INFO  [STDOUT] PojoCacheManagerImpl: destroy 
+04:36:03,613 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:36:03,618 INFO  [SessionSpecContainer] Stopping jboss.j2ee:ear=qinear-1.0.ear,jar=qinejb-1.0.jar,name=SincronizadorTextoImpl,service=EJB3
+04:36:03,620 INFO  [EJBContainer] STOPPED EJB: com.qin.manager.colaboracion.SincronizadorTextoImpl ejbName: SincronizadorTextoImpl
+04:36:03,641 INFO  [TomcatDeployment] undeploy, ctxPath=/
+04:36:03,699 INFO  [ConnectionFactoryBindingService] Unbound ConnectionManager 'jboss.jca:service=ConnectionFactoryBinding,name=JmsXA' from JNDI name 'java:JmsXA'
+04:36:03,707 INFO  [PersistenceUnitDeployment] Stopping persistence unit persistence.unit:unitName=jboss-ejb3-timerservice-mk2.jar#timerdb
+04:36:03,707 INFO  [SessionFactoryImpl] closing
+04:36:03,707 INFO  [SessionFactoryObjectFactory] Unbinding factory from JNDI name: persistence.unit:unitName=jboss-ejb3-timerservice-mk2.jar#timerdb
+04:36:03,708 INFO  [NamingHelper] JNDI InitialContext properties:{java.naming.factory.initial=org.jnp.interfaces.NamingContextFactory, java.naming.factory.url.pkgs=org.jboss.naming:org.jnp.interfaces}
+04:36:03,709 INFO  [SessionFactoryObjectFactory] Unbound factory from JNDI name: persistence.unit:unitName=jboss-ejb3-timerservice-mk2.jar#timerdb
+04:36:03,710 INFO  [ConnectionFactoryBindingService] Unbound ConnectionManager 'jboss.jca:service=DataSourceBinding,name=DefaultDS' from JNDI name 'java:DefaultDS'
+04:36:04,080 INFO  [HypersonicDatabase] Database standalone closed clean
+04:36:04,082 INFO  [QuartzScheduler] Scheduler JBossQuartzScheduler_$_NON_CLUSTERED shutting down.
+04:36:04,083 INFO  [QuartzScheduler] Scheduler JBossQuartzScheduler_$_NON_CLUSTERED paused.
+04:36:04,083 INFO  [QuartzScheduler] Scheduler JBossQuartzScheduler_$_NON_CLUSTERED shutdown complete.
+04:36:04,084 WARN  [ComponentDeploymentContext] Removing name on null names: jboss.naming:application=quartz-ra
+04:36:04,088 WARN  [ComponentDeploymentContext] Removing name on null names: jboss.naming:application=mail-ra
+04:36:04,091 INFO  [HornetQResourceAdapter] HornetQ resource adapter stopped
+04:36:04,092 WARN  [ComponentDeploymentContext] Removing name on null names: jboss.naming:application=jms-ra
+04:36:04,096 WARN  [ComponentDeploymentContext] Removing name on null names: jboss.naming:application=jboss-xa-jdbc
+04:36:04,099 WARN  [ComponentDeploymentContext] Removing name on null names: jboss.naming:application=jboss-local-jdbc
+04:36:04,111 INFO  [TomcatDeployment] undeploy, ctxPath=/invoker
+04:36:04,118 INFO  [TomcatDeployment] undeploy, ctxPath=/juddi
+04:36:04,121 INFO  [RegistryServlet] jUDDI Stopping: Cleaning up existing resources.
+04:36:04,151 INFO  [jbossatx] ARJUNA-32018 Destroying TransactionManagerService
+04:36:04,157 INFO  [jbossatx] ARJUNA-32014 Stopping transaction recovery manager
+04:36:04,203 INFO  [DefaultCacheContainerFactory] Stopped "distributed-tree" cache from "ha-partition" container
+04:36:04,214 INFO  [qin] Stopping partition qin
+04:36:04,223 INFO  [DefaultCacheContainerFactory] Stopped "distributed-state" cache from "ha-partition" container
+04:36:04,224 INFO  [qin] Partition qin stopped.
+04:36:04,224 INFO  [qin] Partition qin destroyed.
+04:36:04,386 INFO  [BridgeImpl] Bridge sf.my-cluster.d13c5b06-182b-11e2-a756-68a3c49b1ef7 being stopped
+04:36:04,390 INFO  [BridgeImpl] stopped bridge sf.my-cluster.d13c5b06-182b-11e2-a756-68a3c49b1ef7
+04:36:04,519 INFO  [HornetQServerImpl] HornetQ Server version 2.2.5.Final (HQ_2_2_5_FINAL_AS7, 121) [bac837c6-182b-11e2-aedb-68a3c49b1ef7] stopped
+04:36:04,608 INFO  [DefaultCacheContainerRegistry] Unbinding hibernate cache container from java:CacheManager/entity
+04:36:04,622 INFO  [JGroupsTransport] Disconnecting and closing JGroups Channel
+04:36:04,943 INFO  [JGroupsTransport] Stopping the RpcDispatcher
+04:36:04,946 INFO  [JGroupsTransport] Disconnecting and closing JGroups Channel
+04:36:05,252 INFO  [JGroupsTransport] Stopping the RpcDispatcher
+04:36:05,255 INFO  [JGroupsTransport] Disconnecting and closing JGroups Channel
+04:36:05,582 INFO  [JGroupsTransport] Stopping the RpcDispatcher
+04:36:05,586 INFO  [poa] POA Naming destroyed
+04:36:05,591 INFO  [poa] POA TPOA destroyed
+04:36:05,592 INFO  [poa] POA PPOA destroyed
+04:36:05,592 INFO  [MailService] Mail service 'java:/Mail' removed from JNDI
+04:36:05,600 INFO  [JMXConnector] JMXConnector stopped
+04:36:05,613 INFO  [orb] prepare ORB for shutdown...
+04:36:05,613 INFO  [orb] ORB going down...
+04:36:05,618 INFO  [poa] POA IR destroyed
+04:36:05,626 INFO  [poa] POA RootPOA destroyed
+04:36:05,628 INFO  [poa] POA OTS destroyed
+04:36:05,628 INFO  [poa] POA OTSResources destroyed
+04:36:05,631 INFO  [orb] ORB shutdown complete
+04:36:05,631 INFO  [orb] ORB run, exit
+04:36:05,631 INFO  [iiop] Listener exited
+04:36:05,706 INFO  [SnmpAgentService] SNMP agent stopped
+04:36:07,294 INFO  [AbstractServer] Stopped: JBossAS [6.1.0.Final "Neo"] in 3s:884ms
+
+Nodo 2
+
+...
+04:25:37,561 INFO  [JBossASKernel] 	jboss.j2ee:ear=qinear-1.0.ear,jar=qinejb-1.0.jar,name=PojoCacheManagerImpl,service=EJB3; Required: Described
+04:25:37,562 INFO  [JBossASKernel]   and supplies:
+04:25:37,562 INFO  [JBossASKernel] 	Class:com.qin.cache.pojo.manager.PojoCacheManager
+04:25:37,562 INFO  [JBossASKernel] 	jndi:PojoCacheManagerImpl
+04:25:37,562 INFO  [JBossASKernel] 	jndi:qinear-1.0/PojoCacheManagerImpl/remote
+04:25:37,562 INFO  [JBossASKernel] 	jndi:qinear-1.0/PojoCacheManagerImpl/remote-com.qin.cache.pojo.manager.PojoCacheManager
+04:25:37,562 INFO  [JBossASKernel] Installing bean(qinejb:service=PojoCacheManager) into kernel
+04:25:37,566 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:37,567 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:37,567 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:37,567 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:37,567 INFO  [STDOUT] PojoCacheManagerImpl: create 
+04:25:37,567 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:37,570 INFO  [EJBContainer] STARTED EJB: com.qin.cache.pojo.manager.PojoCacheManagerImpl ejbName: PojoCacheManagerImpl
+04:25:37,594 INFO  [JndiSessionRegistrarBase] Binding the following Entries in Global JNDI:
+
+	qinear-1.0/PojoCacheManagerImpl/remote - EJB3.x Default Remote Business Interface
+	qinear-1.0/PojoCacheManagerImpl/remote-com.qin.cache.pojo.manager.PojoCacheManager - EJB3.x Remote Business Interface
+
+04:25:37,631 WARN  [TimerServiceContainer] EJBTHREE-2193: using deprecated TimerServiceFactory for restoring timers
+04:25:37,706 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:37,706 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:37,706 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:37,706 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:37,706 INFO  [STDOUT] PojoCacheManagerImpl: start 
+04:25:37,706 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:25:37,775 INFO  [TomcatDeployment] deploy, ctxPath=/qinweb
+04:25:37,902 INFO  [TransactionManagerFactory] Using a batchMode transaction manager
+04:25:37,921 INFO  [JGroupsTransport] Starting JGroups Channel
+04:25:37,921 INFO  [JChannel] JGroups version: 2.11.0.GA
+...
+2012-10-17 04:36:03,568 INFO  [STDOUT] (AsynchKeyChangeHandler Thread) ------------------------------------------------------------------------------------------------
+2012-10-17 04:36:03,585 INFO  [STDOUT] (AsynchKeyChangeHandler Thread) ------------------------------------------------------------------------------------------------
+2012-10-17 04:36:03,586 INFO  [STDOUT] (AsynchKeyChangeHandler Thread) ------------------------------------------------------------------------------------------------
+2012-10-17 04:36:03,586 INFO  [STDOUT] (AsynchKeyChangeHandler Thread) ------------------------------------------------------------------------------------------------
+2012-10-17 04:36:03,586 INFO  [STDOUT] (AsynchKeyChangeHandler Thread) PojoCacheManagerImpl: startSingleton 
+2012-10-17 04:36:03,586 INFO  [STDOUT] (AsynchKeyChangeHandler Thread) ------------------------------------------------------------------------------------------------
+2012-10-17 04:36:04,418 WARN  [org.hornetq.core.protocol.core.impl.RemotingConnectionImpl] (Thread-4 (group:HornetQ-client-global-threads-1602965727)) Connection failure has been detected: The connection was disconnected because of server shutdown [code=4]
+2012-10-17 04:36:04,419 WARN  [org.hornetq.core.server.cluster.impl.BridgeImpl] (Thread-4 (group:HornetQ-client-global-threads-1602965727)) sf.my-cluster.bac837c6-182b-11e2-aedb-68a3c49b1ef7::Connection failed before reconnect : HornetQException[errorCode=4 message=The connection was disconnected because of server shutdown]
+	at org.hornetq.core.client.impl.ClientSessionFactoryImpl$Channel0Handler$1.run(ClientSessionFactoryImpl.java:1262) [:6.1.0.Final]
+	at org.hornetq.utils.OrderedExecutorFactory$OrderedExecutor$1.run(OrderedExecutorFactory.java:100) [:6.1.0.Final]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110) [:1.6.0_24]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603) [:1.6.0_24]
+	at java.lang.Thread.run(Thread.java:679) [:1.6.0_24]
+
+2012-10-17 04:36:04,422 WARN  [org.hornetq.core.protocol.core.impl.RemotingConnectionImpl] (Thread-5 (group:HornetQ-client-global-threads-1602965727)) Connection failure has been detected: The connection was disconnected because of server shutdown [code=4]
+2012-10-17 04:36:04,930 INFO  [org.infinispan.remoting.transport.jgroups.JGroupsTransport] (Incoming-9,null) Received new cluster view: [worker2:1199|2] [worker2:1199]
+2012-10-17 04:36:05,251 INFO  [org.jboss.ha.framework.server.ClusterPartition.lifecycle.qin] (Incoming-11,null) New cluster view for partition qin (id: 2, delta: -1, merge: false) : [worker2:1199]
+2012-10-17 04:36:05,251 INFO  [org.infinispan.remoting.transport.jgroups.JGroupsTransport] (Incoming-11,null) Received new cluster view: [worker2:1199|2] [worker2:1199]
+2012-10-17 04:36:05,251 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) I am (worker2:1199) received membershipChanged event:
+2012-10-17 04:36:05,252 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) Dead members: 1 ([worker1:1099])
+2012-10-17 04:36:05,252 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) New Members : 0 ([])
+2012-10-17 04:36:05,252 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) All Members : 1 ([worker2:1199])
+2012-10-17 04:36:05,560 INFO  [org.jboss.ha.core.framework.server.CoreGroupCommunicationService.lifecycle] (Incoming-17,null) New cluster view for partition null (id: 2, delta: -1, merge: false) : [worker2:1199]
+2012-10-17 04:36:05,561 INFO  [org.infinispan.remoting.transport.jgroups.JGroupsTransport] (Incoming-17,null) Received new cluster view: [worker2:1199|2] [worker2:1199]
+2012-10-17 04:36:06,047 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) ------------------------------------------------------------------------------------------------
+2012-10-17 04:36:06,048 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) ------------------------------------------------------------------------------------------------
+2012-10-17 04:36:06,048 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) ------------------------------------------------------------------------------------------------
+2012-10-17 04:36:06,048 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) ------------------------------------------------------------------------------------------------
+2012-10-17 04:36:06,049 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) PojoCacheManagerImpl: existsKey 
+2012-10-17 04:36:06,049 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) ------------------------------------------------------------------------------------------------
+2012-10-17 04:36:06,053 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) ------------------------------------------------------------------------------------------------
+2012-10-17 04:36:06,053 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) ------------------------------------------------------------------------------------------------
+2012-10-17 04:36:06,053 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) ------------------------------------------------------------------------------------------------
+2012-10-17 04:36:06,053 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) ------------------------------------------------------------------------------------------------
+2012-10-17 04:36:06,054 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) PojoCacheManagerImpl: setValue 
+2012-10-17 04:36:06,054 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) ------------------------------------------------------------------------------------------------
+2012-10-17 04:36:06,058 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) ------------------------------------------------------------------------------------------------
+2012-10-17 04:36:06,058 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) ------------------------------------------------------------------------------------------------
+2012-10-17 04:36:06,058 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) ------------------------------------------------------------------------------------------------
+2012-10-17 04:36:06,058 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) ------------------------------------------------------------------------------------------------
+2012-10-17 04:36:06,059 INFO  [STDOUT] (ajp-worker2%2F192.168.1.107-8109-1) PojoCacheManagerImpl: getValue 
+...
+2012-10-17 04:37:18,662 INFO  [org.jboss.web.tomcat.service.deployers.TomcatDeployment] (http-worker2%2F192.168.1.107-8180-1) deploy, ctxPath=/jmx-console
+2012-10-17 04:38:06,895 INFO  [org.jboss.system.server.jmx.JMXKernel] (Thread-36) Server exit called, exiting the JVM now!
+2012-10-17 04:38:06,896 INFO  [STDOUT] (Thread-1) Posting Shutdown Request to the server...
+2012-10-17 04:38:06,896 INFO  [org.jboss.bootstrap.impl.base.server.AbstractServer] (Thread-37) Stopping: JBossAS [6.1.0.Final "Neo"]
+2012-10-17 04:38:06,897 INFO  [org.apache.coyote.http11.Http11Protocol] (Thread-37) Pausando Coyote HTTP/1.1 en puerto http-worker2%2F192.168.1.107-8180
+2012-10-17 04:38:06,898 INFO  [org.apache.coyote.http11.Http11Protocol] (Thread-37) Parando Coyote HTTP/1.1 en puerto http-worker2%2F192.168.1.107-8180
+2012-10-17 04:38:06,901 INFO  [org.apache.coyote.ajp.AjpProtocol] (Thread-37) Pausando Coyote AJP/1.3 en ajp-worker2%2F192.168.1.107-8109
+2012-10-17 04:38:06,901 INFO  [org.apache.coyote.ajp.AjpProtocol] (Thread-37) Parando Coyote AJP/1.3 en ajp-worker2%2F192.168.1.107-8109
+...
+04:38:06,943 INFO  [service] Restored bootstrap log handlers
+04:38:06,975 INFO  [TomcatDeployment] undeploy, ctxPath=/qinweb
+04:38:06,978 INFO  [[/qinweb]] Destroying Spring FrameworkServlet 'qinweb'
+04:38:06,984 INFO  [SessionFactoryImpl] closing
+04:38:06,990 INFO  [DefaultCacheContainerFactory] Stopped "com.qin.entity.Materia" cache from "hibernate" container
+04:38:06,996 INFO  [DefaultCacheContainerFactory] Stopped "local-query" cache from "hibernate" container
+04:38:07,001 INFO  [DefaultCacheContainerFactory] Stopped "org.hibernate.cache.UpdateTimestampsCache" cache from "hibernate" container
+04:38:07,014 INFO  [DefaultCacheContainerFactory] Stopped "//localhost/qinweb" cache from "web" container
+04:38:07,033 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:38:07,033 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:38:07,033 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:38:07,033 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:38:07,033 INFO  [STDOUT] PojoCacheManagerImpl: stopSingleton 
+04:38:07,034 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:38:07,038 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:38:07,038 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:38:07,038 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:38:07,038 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:38:07,039 INFO  [STDOUT] PojoCacheManagerImpl: stop 
+04:38:07,039 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:38:07,045 INFO  [EJBContainer] STOPPED EJB: com.qin.cache.pojo.manager.PojoCacheManagerImpl ejbName: PojoCacheManagerImpl
+04:38:07,045 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:38:07,045 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:38:07,045 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:38:07,045 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:38:07,046 INFO  [STDOUT] PojoCacheManagerImpl: destroy 
+04:38:07,046 INFO  [STDOUT] ------------------------------------------------------------------------------------------------
+04:38:07,052 INFO  [SessionSpecContainer] Stopping jboss.j2ee:ear=qinear-1.0.ear,jar=qinejb-1.0.jar,name=SincronizadorTextoImpl,service=EJB3
+04:38:07,054 INFO  [EJBContainer] STOPPED EJB: com.qin.manager.colaboracion.SincronizadorTextoImpl ejbName: SincronizadorTextoImpl
+04:38:07,073 INFO  [TomcatDeployment] undeploy, ctxPath=/
+04:38:07,112 INFO  [ConnectionFactoryBindingService] Unbound ConnectionManager 'jboss.jca:service=ConnectionFactoryBinding,name=JmsXA' from JNDI name 'java:JmsXA'
+04:38:07,120 INFO  [PersistenceUnitDeployment] Stopping persistence unit persistence.unit:unitName=jboss-ejb3-timerservice-mk2.jar#timerdb
+04:38:07,120 INFO  [SessionFactoryImpl] closing
+04:38:07,120 INFO  [SessionFactoryObjectFactory] Unbinding factory from JNDI name: persistence.unit:unitName=jboss-ejb3-timerservice-mk2.jar#timerdb
+04:38:07,121 INFO  [NamingHelper] JNDI InitialContext properties:{java.naming.factory.initial=org.jnp.interfaces.NamingContextFactory, java.naming.factory.url.pkgs=org.jboss.naming:org.jnp.interfaces}
+04:38:07,121 INFO  [SessionFactoryObjectFactory] Unbound factory from JNDI name: persistence.unit:unitName=jboss-ejb3-timerservice-mk2.jar#timerdb
+04:38:07,122 INFO  [ConnectionFactoryBindingService] Unbound ConnectionManager 'jboss.jca:service=DataSourceBinding,name=DefaultDS' from JNDI name 'java:DefaultDS'
+04:38:07,474 INFO  [HypersonicDatabase] Database standalone closed clean
+04:38:07,477 INFO  [QuartzScheduler] Scheduler JBossQuartzScheduler_$_NON_CLUSTERED shutting down.
+04:38:07,478 INFO  [QuartzScheduler] Scheduler JBossQuartzScheduler_$_NON_CLUSTERED paused.
+04:38:07,478 INFO  [QuartzScheduler] Scheduler JBossQuartzScheduler_$_NON_CLUSTERED shutdown complete.
+04:38:07,479 WARN  [ComponentDeploymentContext] Removing name on null names: jboss.naming:application=quartz-ra
+04:38:07,483 WARN  [ComponentDeploymentContext] Removing name on null names: jboss.naming:application=mail-ra
+04:38:07,486 INFO  [HornetQResourceAdapter] HornetQ resource adapter stopped
+04:38:07,487 WARN  [ComponentDeploymentContext] Removing name on null names: jboss.naming:application=jms-ra
+04:38:07,490 WARN  [ComponentDeploymentContext] Removing name on null names: jboss.naming:application=jboss-xa-jdbc
+04:38:07,493 WARN  [ComponentDeploymentContext] Removing name on null names: jboss.naming:application=jboss-local-jdbc
+04:38:07,503 INFO  [TomcatDeployment] undeploy, ctxPath=/jmx-console
+04:38:07,522 INFO  [TomcatDeployment] undeploy, ctxPath=/invoker
+04:38:07,528 INFO  [TomcatDeployment] undeploy, ctxPath=/juddi
+04:38:07,530 INFO  [RegistryServlet] jUDDI Stopping: Cleaning up existing resources.
+04:38:07,539 INFO  [jbossatx] ARJUNA-32018 Destroying TransactionManagerService
+04:38:07,546 INFO  [jbossatx] ARJUNA-32014 Stopping transaction recovery manager
+04:38:07,583 INFO  [DefaultCacheContainerFactory] Stopped "distributed-tree" cache from "ha-partition" container
+04:38:07,593 INFO  [qin] Stopping partition qin
+04:38:07,602 INFO  [DefaultCacheContainerFactory] Stopped "distributed-state" cache from "ha-partition" container
+04:38:07,603 INFO  [qin] Partition qin stopped.
+04:38:07,606 INFO  [qin] Partition qin destroyed.
+04:38:07,653 WARN  [ClientSessionFactoryImpl] Failed to connect to server.
+04:38:07,654 WARN  [BridgeImpl] sf.my-cluster.bac837c6-182b-11e2-aedb-68a3c49b1ef7::Connection failed with failedOver=false: HornetQException[errorCode=4 message=The connection was disconnected because of server shutdown]
+	at org.hornetq.core.client.impl.ClientSessionFactoryImpl$Channel0Handler$1.run(ClientSessionFactoryImpl.java:1262) [:6.1.0.Final]
+	at org.hornetq.utils.OrderedExecutorFactory$OrderedExecutor$1.run(OrderedExecutorFactory.java:100) [:6.1.0.Final]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110) [:1.6.0_24]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603) [:1.6.0_24]
+	at java.lang.Thread.run(Thread.java:679) [:1.6.0_24]
+
+04:38:07,655 INFO  [BridgeImpl] Bridge sf.my-cluster.bac837c6-182b-11e2-aedb-68a3c49b1ef7 being stopped
+04:38:07,665 INFO  [BridgeImpl] stopped bridge sf.my-cluster.bac837c6-182b-11e2-aedb-68a3c49b1ef7
+04:38:07,667 WARN  [ClientSessionFactoryImpl] Failed to connect to server.
+04:38:07,761 INFO  [HornetQServerImpl] HornetQ Server version 2.2.5.Final (HQ_2_2_5_FINAL_AS7, 121) [d13c5b06-182b-11e2-a756-68a3c49b1ef7] stopped
+04:38:07,833 INFO  [DefaultCacheContainerRegistry] Unbinding hibernate cache container from java:CacheManager/entity
+04:38:07,840 INFO  [JGroupsTransport] Disconnecting and closing JGroups Channel
+04:38:07,860 INFO  [JGroupsTransport] Stopping the RpcDispatcher
+04:38:07,865 INFO  [JGroupsTransport] Disconnecting and closing JGroups Channel
+04:38:07,870 INFO  [JGroupsTransport] Stopping the RpcDispatcher
+04:38:07,876 INFO  [JGroupsTransport] Disconnecting and closing JGroups Channel
+04:38:07,886 INFO  [JGroupsTransport] Stopping the RpcDispatcher
+04:38:07,893 INFO  [MailService] Mail service 'java:/Mail' removed from JNDI
+04:38:07,894 INFO  [poa] POA PPOA destroyed
+04:38:07,895 INFO  [poa] POA TPOA destroyed
+04:38:07,895 INFO  [poa] POA Naming destroyed
+04:38:07,902 INFO  [JMXConnector] JMXConnector stopped
+04:38:07,930 INFO  [orb] prepare ORB for shutdown...
+04:38:07,930 INFO  [orb] ORB going down...
+04:38:07,931 INFO  [poa] POA IR destroyed
+04:38:07,936 INFO  [poa] POA OTSResources destroyed
+04:38:07,937 INFO  [poa] POA OTS destroyed
+04:38:07,937 INFO  [poa] POA RootPOA destroyed
+04:38:07,939 INFO  [orb] ORB shutdown complete
+04:38:07,939 INFO  [orb] ORB run, exit
+04:38:07,939 INFO  [iiop] Listener exited
+04:38:08,001 INFO  [SnmpAgentService] SNMP agent stopped
+04:38:09,309 INFO  [AbstractServer] Stopped: JBossAS [6.1.0.Final "Neo"] in 2s:413ms
