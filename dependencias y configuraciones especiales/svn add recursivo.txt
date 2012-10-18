@@ -3,3 +3,6 @@ svn add --force * --auto-props --parents --depth infinity -q
 
 Verbose:
 svn add --force * --auto-props --parents --depth infinity
+
+Todo junto:
+svn add --force * --auto-props --parents --depth infinity && svn ci -m "" *
