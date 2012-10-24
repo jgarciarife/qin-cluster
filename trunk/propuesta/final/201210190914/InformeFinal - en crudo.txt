@@ -2,7 +2,6 @@
 
 	El objetivo del presente trabajo, es analizar y comparar dos arquitecturas con soporte de Clustering, a partir del desarrollo y utilización de una aplicación Web de prueba, que brinde escalabilidad, alta disponibilidad y alto desempeño, junto con la estructuración, configuración, administración y despliegue del entorno productivo correspondiente. Particularmente, los dos tipos de arquitecturas a comparar utilizan las herramientas JBoss y Terracotta + Tomcat, respectivamente.
 
-
 2. Motivación / Propósito
 
 	A medida que van apareciendo más aplicaciones web integrales que resuelven cada vez más y más aspectos de diferentes tipos de negocio, más se va dependiendo de dichas soluciones, y más impacto tienen las caídas de los sistemas. Por lo cual, tener solamente una aplicación web atractiva y útil de acuerdo a ciertos fines, algo para nada fácil de lograr por cierto, es solo una parte del desafío si se quiere desarrollar una aplicación realmente exitosa; otra parte del desafío es lograr que esté disponible prácticamente siempre.
@@ -118,7 +117,6 @@ Las métricas obtenidas de ambos Clusters.
 
 	Cabe aclarar, que el foco del presente trabajo no es esta aplicación en sí; el presente trabajo, no es un trabajo de programación de una aplicación para una institución educativa de gran tamaño, sino que el presente trabajo se centra en investigar y comparar arquitecturas de cluster.
 
-
 5.3. Arquitectura general
 
 5.3.1. Propiedades de arquitectura
@@ -172,8 +170,7 @@ Layers (Capas lógicas): la separación en capas nos permite desacoplar las dist
 
 Domain Model (utilizando Service Layer): refiere a modelar el problema con un enfoque puramente orientado a objetos que representan el modelo del problema a resolver. Y service layer es una capa que interactúa directamente con el modelo y provee la funcionalidad auxiliar necesaria para coordinar y acceder al modelo.
 
-
-	En el gráfico anterior podemos observar la separación en capas, pero también se hace referencia a patrones de diseño específicos utilizados en cada capa.
+	En el gráfico siguiente podemos observar la separación en capas, pero también se hace referencia a patrones de diseño específicos utilizados en cada capa.
 
 Capa de presentación: MVC (Model-View-Controller).
 Capa de lógica de negocio.
@@ -183,7 +180,6 @@ Capa de persistencia: EAO (Entity-Access-Object).
 
 	La capa de presentación utiliza el patrón de diseño MVC, en particular utiliza el Framework SpringMVC (http://www.springsource.org/). Este framework es el encargado de manejar los pedidos (Request) de los navegadores, y hacer la llamada al Controlador correspondiente, decidiendo luego la vista a renderizar [SPRING MVC].
 	El proceso descrito se muestra a continuación:
-
 
 	Persistencia
 
@@ -198,7 +194,6 @@ Foreign Key Mapping.
 Association Table.
 
 	Desde el punto de vista de diseño, en la capa de persistencia se utiliza el patrón Entity-Access-Object (EAO) [EJB3 IN ACTION], este patrón provee una interfaz con las operaciones de persistencia, suficientemente versátil como para permitir trabajar correctamente en ambos servidores considerados.
-
 
 	Como se puede ver en los gráficos anteriores, obviamos totalmente la utilización de clases auxiliares como Data Transfer Objects (DTO), ya que si bien las mismas agregarían un grado de abstracción, ante un cambio en el modelo se termina necesitando realizar el mismo cambio en los DTO, agregando complejidad innecesaria al desarrollo, sobre todo teniendo en cuenta que el objetivo del trabajo práctico no está relacionado con técnicas de desarrollo de aplicaciones.
 
@@ -218,16 +213,15 @@ Base de datos: un nodo.
 
 	No contemplamos una base de datos distribuida para no incrementar la complejidad del presente trabajo. Suponemos que el servidor con la base de datos no experimentará falencias ya que en un esquema productivo real, se pueden invertir parte de los recursos monetarios en infraestructura y hardware de mayor confianza para este servidor.
 
-
 	A partir de esta estructura física propuesta, modelamos nuestros clusters de prueba, con los recursos disponibles.
 
 5.4. Descripción de las herramientas
 
 5.4.1. JBoss AS
 
-	URL: http://www.jboss.org/jbossas/ ; http://es.wikipedia.org/wiki/JBoss
+	URL: http://www.jboss.org/JBossas/ ; http://es.wikipedia.org/wiki/JBoss
 	Versión: 6.1.0.Final
-	Descarga: http://download.jboss.org/jbossas/6.1/jboss-as-distribution-6.1.0.Final.zip
+	Descarga: http://download.jboss.org/JBossas/6.1/JBoss-as-distribution-6.1.0.Final.zip
 
 	JBoss es un servidor de aplicaciones J2EE de código abierto implementado púramente en Java; por ende, JBoss puede ser utilizado en cualquier sistema operativo para el que esté disponible Java [JBOSS AS INSTALLATION]. Los principales desarrolladores trabajan para una empresa de servicios, JBoss Inc., adquirida por Red Hat en abril del 2006, fundada por Marc Fleury, el creador de la primera versión de JBoss. El proyecto está apoyado por una red mundial de colaboradores.
 
@@ -238,7 +232,6 @@ Base de datos: un nodo.
 	Por ejemplo, imaginemos un cluster de tres nodos, cada uno de ellos en una computadora distinta.
 
 	Ver “7.1. Apéndice 1: Cómo utilizar las herramientas seleccionadas”.
-
 
 5.4.1.1. Herramientas similares
 
@@ -266,7 +259,7 @@ Cualquier servidor de aplicaciones que implemente Java EE: http://es.wikipedia.o
 
 	Ver “7.1. Apéndice 1: Cómo utilizar las herramientas seleccionadas”.
 
-Tomcat
+	Tomcat
 
 	URL: http://tomcat.apache.org/
 	Versión: 7.0.23
@@ -279,7 +272,6 @@ Tomcat
 	Si bien Tomcat y Terracotta son herramientas totalmente diferentes, inclusive de diferentes compañías, éstas se complementan, ya que se puede desarrollar una aplicación web al estilo tradicional utilizando Tomcat y sin tener en cuenta aspectos de la Clusterización, y luego utilizar Terracotta para replicar esta aplicación web y lograr un comportamiento de Cluster.
 
 	Ver “7.1. Apéndice 1: Cómo utilizar las herramientas seleccionadas”.
-
 
 5.4.2.1. Herramientas similares
 
@@ -307,7 +299,6 @@ Jetty: http://jetty.codehaus.org/jetty/
 	Dedicamos un plan de prueba a cada una de las pruebas automáticas que definimos, que se explicarán a continuación, y justamente ejecutándolos varias veces modificando el parámetro de cantidad de usuarios, es que hemos podido recolectar la información con la que hemos llegado hasta las conclusiones finales de presente trabajo.
 
 	Ver “7.1. Apéndice 1: Cómo utilizar las herramientas seleccionadas”.
-
 
 	General
 
@@ -360,27 +351,17 @@ Instancias de JMeter: en todas las computadoras que forman parte del cluster, ba
 
 	Para armar los casos de prueba, confeccionamos la siguiente planilla, que instanciaremos en cada una de las pruebas definidas.
 
-
 	Pruebas manuales
 
 	Las pruebas manuales encierran propiedades que son a nuestro criterio deseables en una estructura de cluster de un ambiente productivo. Propiedades que de no cumplirse, harían que se perdiera el sentido de utilizar un cluster.
 
 	Disponibilidad del sistema
 
-
-
 	Desconexión de un nodo en esquema colaborativo
-
-
-
 
 	Replicación de sesión
 
-
-
 	Caché
-
-
 
 	Pruebas automáticas
 
@@ -389,7 +370,6 @@ Instancias de JMeter: en todas las computadoras que forman parte del cluster, ba
 	Las pruebas automáticas implementadas son:
 
 	Stress Test (STT)
-
 
 	El plan de pruebas “HttpProxy - Test Plan - Prueba completa” consiste en:
 
@@ -404,7 +384,6 @@ Guardar un Trabajo Práctico.
 
 	Load Test (LT)
 
-
 	El plan de pruebas “HttpProxy - Test Plan - Prueba completa Simple” consiste en:
 
 Buscar Trabajos Prácticos.
@@ -412,16 +391,13 @@ Iniciar Resolución.
 Sincronizar texto de resolución 10 veces.
 Guardar Resolución.
 
-
 	Load Test Datos Clusterizados (ST)
-
 
 	El plan de pruebas “HttpProxy - Test Plan – Prueba de solo sincronizar” consiste en:
 
-Sincronizar 	texto de resolución 10 veces.
+Sincronizar texto de resolución 10 veces.
 
 	Load Test Datos No Clusterizados (NST)
-
 
 	El plan de pruebas “HttpProxy - Test Plan - Prueba sin sincronizar” consiste en:
 
@@ -446,7 +422,6 @@ Guardar Resolución.
 	Finalmente, esta propuesta de presentar el trabajo en una imagen virtualizada fue dejada de lado por un simple tema de recursos de las computadoras. Seguramente es una idea que fomenta la prolijidad, pero lamentablemente no la pudimos implementar.
 
 Los ambientes se montaron, se corrieron y se correrán directamente sobre el sistema operativo primario de las Notebooks.
-
 
 	Repetibilidad
 
@@ -500,7 +475,6 @@ MaxKeepAliveRequests 0
 
 …
 
-
 # worker MPM
 # StartServers: initial number of server processes to start
 # MinSpareThreads: minimum number of worker threads which are kept spare
@@ -532,7 +506,6 @@ MaxKeepAliveRequests 0
 </IfModule>
 
 …
-
 
 # event MPM
 # StartServers: initial number of server processes to start
@@ -572,13 +545,11 @@ MaxKeepAliveRequests 0
 LogLevel error
 ...
 
-
 	Y además editamos en /etc/apache2/sites-available/default:
 
 # Possible values include: debug, info, notice, warn, error, crit,
 # alert, emerg.
 LogLevel error
-
 
 	MySQL
 
@@ -631,7 +602,6 @@ net.core.rmem_max = 26214400
 
 … posteriormente ejecutamos sudo sysctl -p , y finalmente vimos en consola que los buffers cambiaron de tamaño; a partir de ese momento, JBoss no volvió a informar problemas al respecto.
 
-
 	Y para finalizar los ajustes del sistema operativo, también nos ocurrió que en una de las primeras secuencias exitosas de pruebas, surgieron errores de “too many open files”. Por ende, en el archivo /etc/security/limits.conf, al final del mismo, agregamos:
 
 * soft nofile 65535
@@ -643,13 +613,11 @@ session required			pam_limits.so
 
 … ejecutamos ulimit -n && ulimit -a, reiniciamos la sesión de usuario, y constatamos que los nuevos límites de cantidad de archivos tomaron lugar.
 
-
 	Generalidades
 
 	En un momento, reparamos en el código fuente de la aplicación. Notamos que ciertas operaciones parecían tardar demasiado.
 
 	En consecuencia, creamos un Profiler (la clase com.qin.utils.ProfilingUtils), que corrimos varias veces junto con la aplicación, para intentar detectar los problemas. Se adjunta una imagen de una de las corridas del Profiler a modo de ejemplo:
-
 
 	Lo que se vé aquí, es cómo tarda el procedimiento del alta de TP (punto 5 en el eje X), en comparación a todos los demaś procedimientos del sistema; claramente, la rutina de alta de TP necesita un ajuste.
 
@@ -660,7 +628,6 @@ Evitar logear información; que el nivel de log sera fatal o error.
 No utilizar transacciones al hacer consultas de sólo lectura para no trabar a las posibles inserciones, modificaciones o borrados que pudieran darse en simultáneo (ver sección “Transacciones”).
 Ingresar al caché las entidades de clase Materia, ya que son invariables; utilizar el cache.
 Variaciones de todo lo anterior, tal como se puede ver en la progresión de commits en http://code.google.com/p/qin-cluster/source/list
-
 
 	Transacciones
 
@@ -697,7 +664,6 @@ Variaciones de todo lo anterior, tal como se puede ver en la progresión de comm
 
 	Estos parámetros se utilizan en el entorno productivo de una institucion pública de alcance nacional, por lo cual consideramos que es si estos parámetros demuestran rendir en el contexto de dicha institución, entonces seguramente van a rendir en nuestro trabajo.
 
-
 	Servidores
 
 	Todos los servidores se levantan con el modo debug en off.
@@ -728,7 +694,6 @@ nucleo3=`more /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor`
 
 	Inicialmente comenzamos utilizando mod_jk, pero con el paso del tiempo, nos dimos cuenta de que nos era mucho más práctico utilizar mod_proxy, ya que el mismo provee una funcionalidad llamada balancer-manager, que permite controlar mediante un navegador web el status del cluster. Fue muy práctico para efectuar seguimiento del comportamiento del cluster.
 
-
 	Cache
 
 	Una herramienta frecuentemente utilizada para mejorar la performance de una aplicación es la cache. En nuestro caso decidimos implementar una cache de 2do nivel, esto significa que las entidades puestas en la cache se mantienen inclusive entre diferentes transacciones con la base de datos.
@@ -738,8 +703,6 @@ nucleo3=`more /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor`
 	Por otro lado dependiendo del tipo de cache también se pueden introducir bloqueos de threads gracias a que la cache no devuelve información hasta asegurarse de estar actualizada (o sea, solo devuelve información luego de sincronizar con el resto de los nodos) consiguiendo una disminución de la performance muy significativa.
 
 	En conclusión, se debe prestar especial atención a la hora de elegir las entidades/queries cacheables, en especial al trabajar con caches clusterizadas, ya que se pueden introducir grandes disminuciones en la performance.
-
-
 
 5.6.2. JBoss
 
@@ -752,7 +715,6 @@ nucleo3=`more /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor`
 	Finalmente, la combinacion adecuada es instalar JBoss en tantos directorios distintos como instancias se quiera tener, levantar todas esas instancias utilizando el perfil all, y utilizar ports-default en una de las instancias, y correr los puertos de a cien unidades con ports-XY en las demás instancias.
 
 	Ver “7.1. Apéndice 1: Cómo utilizar las herramientas seleccionadas”.
-
 
 	Hornetq
 
@@ -774,15 +736,14 @@ nucleo3=`more /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor`
 
 	La solución a este inconveniente se ve más en detalle en la sección que sigue.
 
-
-	Replicación de datos clusterizados
+	Replicación de datos centralizados
 
 	La funcionalidad de resolución colaborativa de trabajos prácticos requiere de compartir el texto de las resoluciones entre los usuarios que pueden estar conectados a diferentes nodos del cluster. Para atacar este problema decidimos implementar una caché distribuida de entidades no persistentes.
 
 	Investigando esta posibilidad, dimos con un problema que a partir de que lo supimos detectar, lo pudimos reconocer en todos y cada uno de los inconvenientes vividos. Se intenta explicar a continuación sus aspectos más importantes:
 
 Al comenzar este trabajo, elegimos utilizar el servidor JBoss cuya versión se puede ver en “7.1. Apéndice 1: Cómo utilizar las herramientas seleccionadas”; las versiones posteriores del mismo en aquel momento nos parecieron demasiado nuevas como para ser suficientemente estables, y las versiones anteriores al mismo parecieron estar suficientemente superadas como para elegirlas.
-La documentación de las versiones previas a la elegida, es realmente muy completa y útil; además, dichas versiones previas tenían integradas las herramientas de JBossCache, y PojoCache (http://www.jboss.org/jbosscache), dos herramientas que nos interesaba sumar, pero que finalmente son complicadas de utilizar debido a lo que se explica a continuación.
+La documentación de las versiones previas a la elegida, es realmente muy completa y útil; además, dichas versiones previas tenían integradas las herramientas de JBossCache, y PojoCache (http://www.jboss.org/JBosscache), dos herramientas que nos interesaba sumar, pero que finalmente son complicadas de utilizar debido a lo que se explica a continuación.
 La documentación de la versión elegida de JBoss quedó inconclusa, porque cuando la comunidad de JBoss resolvió a dar origen a la versión posterior, tomó la decisión de prácticamente eliminar todo el código fuente y empezar nuevamente, por ende toda la documentación de la versión elegida se torna obsoleta automáticamente, por lo cual ante la evidencia de un esfuerzo sin sentido cesó el proceso de documentación de la versión de JBoss elegido.
 Como la versión nueva de JBoss es una reescritura por completo, su documentación no puede ser tomada para nuestro caso.
 Los componentes de JBossCache y PojoCache tan correctamente integrados y documentados en las versiones previas, en la versión elegida han sido reemplazados por Infinispan, cuya documentación no es suficiente y además adolece de un reemplazante natural para PojoCache.
@@ -792,9 +753,9 @@ Los componentes de JBossCache y PojoCache tan correctamente integrados y documen
 Leer la documentación de todas las versiones posibles y sacar de esa lectura todas las conclusiones que se puedan sacar, y realizar todas las pruebas y todos los códigos de prueba que se puedan hacer.
 Utilizar Infinispan sólo para cache de segundo nivel de persistencia.
 Integrar manualmente a las instancias de JBoss, el componente PojoCache.
-No trabajar con JbossCache.
+No trabajar con JBossCache.
 
-	Ver sección “Cache de segundo nivel” de este punto, y ver “7.4. Apéndice 4: Diferencias en la implementación de la sincronización” y “7.5. Apéndice 5: Código de la clase PojoCacheManagerImpl, utilizada en el cluster con Jboss”.
+	Ver sección “Cache de segundo nivel” de este punto, y ver “7.4. Apéndice 4: Diferencias en la implementación de la sincronización” y “7.5. Apéndice 5: Código de la clase PojoCacheManagerImpl, utilizada en el cluster con JBoss”.
 
 	Cache de segundo nivel
 
@@ -825,7 +786,7 @@ Query result caching, or entity caching, may or may not improve application perf
 
 5.6.3. Terracotta + Tomcat
 
-	Replicación de datos clusterizados
+	Replicación de datos centralizados
 
 	En terracotta existen dos formas para poder compartir los datos de las resoluciones de trabajos prácticos inclusive entre los distintos nodos del cluster.
 
@@ -836,7 +797,6 @@ Query result caching, or entity caching, may or may not improve application perf
 Map mapaResoluciones = new TerracottaClient("ip_terracotta:9510").getToolkit().getMap("myStaticMap");
 
 	De esta forma, evitamos todo tipo de configuración, y todo el manejo de concurrencia y sincronización del mapa está dado automáticamente.
-
 
 	Cache de segundo nivel
 
@@ -858,7 +818,6 @@ Map mapaResoluciones = new TerracottaClient("ip_terracotta:9510").getToolkit().g
 <terracottaConfig url="ip_terracotta:9510" />
 </ehcache>
 
-
 	Replicación de sesiones
 
 	Terracotta soporta la replicación de sesiones entre los diferentes nodos del cluster [TERRACOTTA SESSIONS]. Esto se puede lograr fácilmente, modificando el archivo context.xml de de Tomcat:
@@ -876,7 +835,6 @@ Map mapaResoluciones = new TerracottaClient("ip_terracotta:9510").getToolkit().g
 5.7. Resultados
 
 	Como explicamos en la sección de 5.5. Pruebas, utilizamos Apache JMeter para realizar las pruebas automáticas. Esta herramienta arroja resultados de la siguiente forma:
-
 
 	Podemos ver a la derecha las peticiones que se realizan al sistema, y a la izquierda en forma de tabla podemos observar la cantidad de peticiones de cada tipo, los tiempos medios de respuesta, las desviaciones estándares, porcentaje de error, rendimiento y mas.
 
@@ -967,9 +925,6 @@ Desviación estándar total datos sin clusterizar
 310,25
 232,44
 
-
-
-
 	El punto de tiempo estándar más alto en toda la prueba, es de 474,25 milisegundos, para los datos clusterizados con 1400 usuarios, que es un valor aceptable. Se concluye que en toda la prueba, los tiempos fueron los deseables.
 
 	Como se puede ver, hasta los 1300 usuarios (en dos nodos; podríamos decir como máximo 650 usuarios por nodo en una foto ideal del funcionamiento en equilibrio) el comportamiento de la aplicación es el deseable. Desde los 1300 usuarios en adelante, el cluster con JBoss se enfrenta a la escasez de recursos, propia de trabajar un escenario tan exigente como este, sobre una notebook, y no sobre un servidor especialmente preparado para esto.
@@ -1002,9 +957,6 @@ Desviación estándar total datos sin clusterizar
 19,48
 9,22
 19,46
-
-
-
 
 	El punto de tiempo estándar más alto en toda la prueba, es de 38,94 milisegundos, para los datos sin clusterizar con 900 usuarios, que es un valor aceptable. Se concluye que en toda la prueba, los tiempos fueron los deseables.
 
@@ -1083,9 +1035,6 @@ Desviación estándar total datos sin clusterizar
 368.74
 335.85
 
-
-
-
 	El punto de tiempo estándar más alto en toda la prueba, es de 621,44 milisegundos, para los datos clusterizados con 5100 usuarios, que es un valor aceptable. Se concluye que en toda la prueba, los tiempos fueron los deseables.
 
 	Se puede ver que hasta un poco antes de los 4500 usuarios, el comportamiento del cluster es el deseable, y que incluso aunque lamentablemente el servicio se separe del ideal, de alguna manera llega a atender hasta a 5000 usuarios sin que haya un detrimento en el punto de tiempo estándar; a continuación, el ambiente se queda sin recursos, y colapsa.
@@ -1141,9 +1090,6 @@ Desviación estándar total datos sin clusterizar
 55,41
 64,83
 
-
-
-
 	El punto de tiempo estándar más alto en toda la prueba, es de 105,54 milisegundos, para los datos sin clusterizar con 3800 usuarios, que es un valor aceptable. Se concluye que en toda la prueba, los tiempos fueron los deseables.
 
 	Mismo patrón de comportamiento que en el caso anterior.
@@ -1183,12 +1129,10 @@ Desviación estándar total datos clusterizados
 428,33
 633,86
 
-
-
-
 	El punto de tiempo estándar con 4200 usuarios, el más alto hasta ese punto, es de 211,11 milisegundos naturalmente para los datos clusterizados que son los únicos datos analizados en esta prueba, y el mismo valor en el paso siguiente de 4800 usuarios salta hasta 1062,19 milisegundos, lo cual excede los tiempos estándar esperados en una aplicación web. De hecho, valores al margen, queda más que claro contemplando el gráfico, que entre 4000 y 4500 usuarios el sistema empieza a colapsar, pero soporta hasta 4800 usuarios. A continuación, el ambiente se queda sin recursos, y colapsa por completo.
 
 	Muy similar cualitativamente al caso de Load Test para cluster de JBoss.
+
 	Load Test Datos Clusterizados (ST) - Individual
 
 Total hilos
@@ -1220,11 +1164,10 @@ Desviación estándar total datos clusterizados
 12.266,00
 8.037,87
 
-
-
 	El punto de tiempo estándar con 1800 usuarios, el más alto hasta ese punto, es de 962,24 milisegundos naturalmente para los datos clusterizados que son los únicos datos analizados en esta prueba, lo cual se acerca mucho al límite considerado, y el mismo valor en el paso siguiente de 2400 usuarios salta hasta 7 segundos, lo cual como se está trabajando con promedios indica que se exceden los tiempos estándar esperados en una aplicación web. El punto de tiempo estándar termina alcanzando los 20 segundos a los 4200 usuarios, lo cual es desde el punto de vista de los valores esperados, totalmente inadmisible. Valores al margen, queda más que claro contemplando el gráfico, que si bien evidentemente los números en el inicio de la prueba ya son elevados en comparación con otras pruebas, entre 1500 y 2000 usuarios el sistema empieza a colapsar, pero soporta hasta 4200 usuarios. A continuación, el ambiente se queda sin recursos, y colapsa por completo.
 
 	Sencillamente, esta prueba es excesivamente exigente para un solo nodo, independientemente de que en ese único nodo se encuentre un servidor EE como JBoss. Un ejemplo muy claro del funcionamiento superador de un cluster, en este caso.
+
 	Load Test Datos No Clusterizados (NST) - Cluster
 
 Total hilos
@@ -1260,12 +1203,10 @@ Desviación estándar total datos sin clusterizar
 112,67
 292,23
 
-
-
-
 	El punto de tiempo estándar más alto en toda la prueba, es de 404,90 milisegundos, para los datos sin clusterizar con 3800 usuarios, que es un valor aceptable. Se concluye que en toda la prueba, los tiempos fueron los deseables.
 
 	Hasta apróximadamente los 3500 usuarios, el comportamiento del sistema es prácticamente el ideal; y se ve con claridad que ese es el pico en esta configuración y en esta prueba; no se llega al siguiente paso, el de los 4000 usuarios.
+
 	Load Test Datos No Clusterizados (NST) - Individual
 
 Total hilos
@@ -1280,8 +1221,6 @@ Desviación estándar total datos sin clusterizar
 209,88
 85,00
 503,74
-
-
 
 	El punto de tiempo estándar más alto en toda la prueba, es de 588,74 milisegundos, para los datos sin clusterizar con 2000 usuarios, que es un valor aceptable, independientemente de que la pendiente indica que si se pudieran sumar más pasos el sistema colapsará. Se concluye que en toda la prueba, los tiempos fueron los deseables.
 
@@ -1336,9 +1275,6 @@ Desviación estándar total datos sin clusterizar
 69,40
 184,41
 
-
-
-
 	El punto de tiempo estándar más alto en toda la prueba, es de 292,06 milisegundos, para los datos sin clusterizar con 1200 usuarios, que es un valor aceptable. Se concluye que en toda la prueba, los tiempos fueron los deseables.
 
 	Se puede observar en este caso, un patrón de respuesta muy similar a la prueba STT - JBoss - Cluster, aunque el ambiente colapsa en una cantidad de usuarios menor que el cluster de JBoss; además, se vé una característica que se notará en la mayoría de las pruebas de Terracotta + Tomcat, que es que mientras Terracotta + Tomcat tiene recursos del nodo en que está trabajando, el tiempo de respuesta es muy pequeño, o sea, es muy bueno; sin embargo, no va empeorando su performance de manera gradual, sino que de un salto pasa a un estado en que ya no puede responder; JBoss como se puede ver en los gráficos, es más gradual.
@@ -1386,14 +1322,12 @@ Desviación estándar total datos sin clusterizar
 261,66
 184,11
 
-
-
-
 	El punto de tiempo estándar más alto en toda la prueba, es de 275,32 milisegundos, para los datos clusterizados con 855 usuarios, que es un valor aceptable. Se concluye que en toda la prueba, los tiempos fueron los deseables.
 
 	Se repite el patrón visto anteriormente: mientras el cluster Terracotta + Tomcat puede responder, su tiempo de respuesta es excelente, y de repente colapsa.
 
 	Se percibe también que en este caso, no se llegan a atender a tantos usuarios como en la prueba equivalente en el JBoss individual.
+
 	Load Test (LT) - Cluster
 
 Total hilos
@@ -1463,12 +1397,10 @@ Desviación estándar total datos sin clusterizar
 1.092,89
 1.644,81
 
-
-
-
 	El punto de tiempo estándar con 4800 usuarios, el más alto hasta ese punto, es de 188,77 milisegundos para los datos sin clusterizar, y el mismo valor en el paso siguiente de 5100 usuarios salta hasta 1913,02 milisegundos, lo cual excede los tiempos estándar esperados en una aplicación web. De hecho, valores al margen, queda más que claro contemplando el gráfico, que entre 4000 y 5000 usuarios el sistema empieza a colapsar, pero soporta hasta 5100 usuarios. A continuación, el ambiente se queda sin recursos, y colapsa por completo.
 
 	Se repiten todos los patrones observados.
+
 	Load Test (LT) - Individual
 
 Total hilos
@@ -1514,12 +1446,10 @@ Desviación estándar total datos sin clusterizar
 1.264,65
 1.298,18
 
-
-
-
 	El punto de tiempo estándar con 3000 usuarios, el más alto hasta ese punto, es de 73,63 milisegundos, y el mismo valor en el paso siguiente de 3600 usuarios salta hasta 1446,47 milisegundos, lo cual excede los tiempos estándar esperados en una aplicación web. De hecho, valores al margen, queda más que claro contemplando el gráfico, que a los 3000 usuarios el sistema empieza a colapsar, pero soporta hasta 3600 usuarios. A continuación, el ambiente se queda sin recursos, y colapsa por completo.
 
 	Se repiten todos los patrones observados.
+
 	Load Test Datos Clusterizados (ST) - Cluster
 
 Total hilos
@@ -1562,8 +1492,6 @@ Desviación estándar total datos clusterizados
 649,73
 51,67
 114,61
-
-
 
 	El punto de tiempo estándar más alto en toda la prueba, es de 166,28 milisegundos, para los datos clusterizados con 6000 usuarios, que es un valor aceptable. Se concluye que en toda la prueba, los tiempos fueron los deseables.
 
@@ -1622,9 +1550,6 @@ Desviación estándar total datos clusterizados
 44,33
 628,65
 
-
-
-
 	El punto de tiempo estándar con 6600 usuarios, el más alto hasta ese punto, es de 102,35 milisegundos, y el mismo valor en el paso siguiente de 7350 usuarios salta hasta 672,98 milisegundos; si bien el salto es considerable, se sigue estando dentro de los tiempos estádar.
 
 	Se repite el caso anterior, en que el cluster con Terracotta - Tomcat exhibe unos números notables, llegando a atender a más de 7000 usuarios.
@@ -1664,9 +1589,6 @@ Desviación estándar total datos sin clusterizar
 310,00
 1.049,89
 
-
-
-
 	El punto de tiempo estándar con 3600 usuarios, el más alto hasta ese punto, es de 795,73 milisegundos, y el mismo valor en el paso siguiente de 4800 usuarios salta hasta 1359,89 milisegundos, lo cual excede los tiempos estándar esperados en una aplicación web. De hecho, valores al margen, queda más que claro contemplando el gráfico, que a los 3000 usuarios el sistema empieza a colapsar, pero soporta hasta 3800 usuarios. A continuación, el ambiente se queda sin recursos, y colapsa por completo.
 
 	Se retorna a los patrones de comportamiento más frecuentes.
@@ -1694,9 +1616,6 @@ Desviación estándar total datos sin clusterizar
 132,00
 506,79
 
-
-
-
 	El punto de tiempo estándar con 1700 usuarios, el más alto hasta ese punto, es de 74,27 milisegundos, y el mismo valor en el paso siguiente de 2000 usuarios salta hasta 638,79 milisegundos; si bien el salto es considerable, se sigue estando dentro de los tiempos estándar de respuesta.
 
 	Se retorna a los patrones de comportamiento más frecuentes.
@@ -1715,9 +1634,8 @@ Escalabilidad: ambas herramientas probaron proveer de buena escalabilidad, ya qu
 
 Elasticidad: en los siguientes gráfico presentamos la comparativa de los resultados de las pruebas de carga para ambas herramientas:
 
+	Observando la performance y redimiento conseguidos con ambas herramientas, podemos ver que JBoss es mas predecible, ya que a medida que aumentamos la carga, los tiempos de respuesta se van incrementando paulatinamente. Por el contrario, si bien Terracotta + Tomcat nos provee de una performance similar, al aumentar la carga sobre el sistema llegamos a un punto de quiebre, en donde los tiempos de respuesta se disparan. Teniendo esto en cuenta, podemos decir que la arquitectura implementada con JBoss es una arquitectura mas elástica que la implementada con Terracotta + Tomcat ya que al ser mas predecible se pueden tomar las acciones necesarias para aumentar la cantidad de nodos del cluster y asi obtener una mayor tolerancia al incremento en la carga.
 
-
-	Observando la performance y redimiento conseguidos con ambas herramientas, podemos ver que Jboss es mas predecible, ya que a medida que aumentamos la carga, los tiempos de respuesta se van incrementando paulatinamente. Por el contrario, si bien Terracotta + Tomcat nos provee de una performance similar, al aumentar la carga sobre el sistema llegamos a un punto de quiebre, en donde los tiempos de respuesta se disparan. Teniendo esto en cuenta, podemos decir que la arquitectura implementada con JBoss es una arquitectura mas elástica que la implementada con Terracotta + Tomcat ya que al ser mas predecible se pueden tomar las acciones necesarias para aumentar la cantidad de nodos del cluster y asi obtener una mayor tolerancia al incremento en la carga.
 7. Apéndices
 
 7.1. Apéndice 1: Cómo utilizar las herramientas seleccionadas
@@ -1748,42 +1666,41 @@ worker2
 
 	También cabe recordar en el contexto de esta sección, que siempre el sistema operativo es Ubuntu Linux.
 
-
 	JBoss AS: cluster
 
-	Se define [home 1 de JBoss 6] como directorio de instalación de la instancia de JBoss que conforma el worker1, por ejemplo /opt/jboss-6.1.0.Final, y [home 2 de JBoss 6] como directorio de instalación de la instancia de JBoss que conforma el worker2, por ejemplo /opt/jboss-6.1.0.Final.2., independientemente de la computadora.
+	Se define [home 1 de JBoss 6] como directorio de instalación de la instancia de JBoss que conforma el worker1, por ejemplo /opt/JBoss-6.1.0.Final, y [home 2 de JBoss 6] como directorio de instalación de la instancia de JBoss que conforma el worker2, por ejemplo /opt/JBoss-6.1.0.Final.2., independientemente de la computadora.
 
 	Si en worker1 se ejecuta:
 
-[home 1 de JBoss 6]/bin/run.sh -c all -g qin -u 239.1.2.3 -b worker1 -Djboss.messaging.ServerPeerID=1 -Djboss.service.binding.set=ports-default
+[home 1 de JBoss 6]/bin/run.sh -c all -g qin -u 239.1.2.3 -b worker1 -DJBoss.messaging.ServerPeerID=1 -DJBoss.service.binding.set=ports-default
 
 … y en worker2 se ejecuta:
 
-[home 2 de JBoss 6]/bin/run.sh -c all -g qin -u 239.1.2.3 -b worker2 -Djboss.messaging.ServerPeerID=2 -Djboss.service.binding.set=ports-01
+[home 2 de JBoss 6]/bin/run.sh -c all -g qin -u 239.1.2.3 -b worker2 -DJBoss.messaging.ServerPeerID=2 -DJBoss.service.binding.set=ports-01
 
 … se arma un cluster. Explicación de las llamadas: 
 
 [home 1 de JBoss 6]/bin/run.sh: comando para ejecutar la instancia de JBoss 6; ídem que [home 2 de JBoss 6]/bin/run.sh
--c all: perfil a utilizar; JBoss 6 provee los perfiles: all, default, jbossweb-standalone, minimal, standard; el perfil all es el recomendado por la bibliografía para trabajar con clusters [JBOSS AS IN ACTION]
+-c all: perfil a utilizar; JBoss 6 provee los perfiles: all, default, JBossweb-standalone, minimal, standard; el perfil all es el recomendado por la bibliografía para trabajar con clusters [JBOSS AS IN ACTION]
 -g qin: nombre de fantasía del cluster, con el que cada instancia de JBoss se asociará, que además sirve también para distinguir este clusters de otros clusters, si hubiere; en nuestro caso, el nombre es qin, como el de todo el proyecto
 -u 239.1.2.3: dirección IP para multicast, utilizada por los mecanismos de sincronización del cluster, como el servicio de multicaste JGroups (http://www.jgroups.org/) y el sistema de mensajería Hornetq (https://www.jboss.org/hornetq) en que se basa el clustering provisto por JBoss
 -b worker1: dirección IP en que atiende esta instancia en particular; se utiliza directamente worker1, para que se levante el IP definido para el alias worker1 en /etc/hosts; equivalente en el caso de -b worker2.
--Djboss.messaging.ServerPeerID=1: identificación del canal de mensajería que se le asigna al nodo; único para cada nodo; en este caso se toma el canal 1. En el caso de worker2 el canal es el 2.
--Djboss.service.binding.set=ports-default: set de puertos a tomar en la computadora en que corre el nodo; en este caso, el set por defecto, que determina http en el puerto 8080 y ajp en el puerto 8009. En el caso de -Djboss.service.binding.set=ports-01, se le indica a la instancia de JBoss que incremente el número de sus puertos en una centena (se determina la cantidad de centenas con el “01” de “ports-01”; en este caso, una centena); esto no es necesario cuando los nodos se encuentran en computadoras distintas, es decir cuando la topología es horizontal, pero igualmente decidimos utilizar siempre esta opción para el worker2, para de esta manera poder levantar todo en una sola computadora, si así fuera necesario, con los mismos comandos. Naturalmente, http queda en el puerto 8180 y ajp queda en el puerto 8109.
+-DJBoss.messaging.ServerPeerID=1: identificación del canal de mensajería que se le asigna al nodo; único para cada nodo; en este caso se toma el canal 1. En el caso de worker2 el canal es el 2.
+-DJBoss.service.binding.set=ports-default: set de puertos a tomar en la computadora en que corre el nodo; en este caso, el set por defecto, que determina http en el puerto 8080 y ajp en el puerto 8009. En el caso de -DJBoss.service.binding.set=ports-01, se le indica a la instancia de JBoss que incremente el número de sus puertos en una centena (se determina la cantidad de centenas con el “01” de “ports-01”; en este caso, una centena); esto no es necesario cuando los nodos se encuentran en computadoras distintas, es decir cuando la topología es horizontal, pero igualmente decidimos utilizar siempre esta opción para el worker2, para de esta manera poder levantar todo en una sola computadora, si así fuera necesario, con los mismos comandos. Naturalmente, http queda en el puerto 8180 y ajp queda en el puerto 8109.
 
 	Nótese que de esta manera, los comandos para levantar el cluster quedan escritos “en genérico”, y sirven para cuanta combinación se determine, actualizando los valores de los IPs de worker1 y worker2 en el archivo /etc/hosts según lo que se necesite.
 
-	Ambos comandos descritos anteriormente, se complementan con la edición de respectivamente [home de JBoss 6]/server/all/deploy/jbossweb.sar/server.xml y de [home 2 de JBoss 6]/server/all/deploy/jbossweb.sar/server.xml. En la línea 33 existe:
+	Ambos comandos descritos anteriormente, se complementan con la edición de respectivamente [home de JBoss 6]/server/all/deploy/JBossweb.sar/server.xml y de [home 2 de JBoss 6]/server/all/deploy/JBossweb.sar/server.xml. En la línea 33 existe:
 
-<Engine name="jboss.web" defaultHost="localhost">
+<Engine name="JBoss.web" defaultHost="localhost">
 
 … y se lo debe editar de la manera:
 
-<Engine name="jboss.web" defaultHost="localhost" jvmRoute="worker1">
+<Engine name="JBoss.web" defaultHost="localhost" jvmRoute="worker1">
 
 … y
 
-<Engine name="jboss.web" defaultHost="localhost" jvmRoute="worker2">
+<Engine name="JBoss.web" defaultHost="localhost" jvmRoute="worker2">
 
 … respectivamente. El valor del atributo jvmRoute, es el identificador con el que puede trabajar el balanceador de carga al ser configurado, como es nuestro caso, con StickySession, lo cual significa que una vez que un nodo atiende una petición para un usuario, dicho nodo atenderá todas las demás peticiones del mismo usuario; con este identificador, es que el balanceador de carga puede saber qué nodo (el nodo de jvmRoute igual a worker1 o el nodo de jvmRoute igual a worker2) atiende a qué usuario.
 
@@ -1795,10 +1712,9 @@ worker2
 
 	Siempre que se necesitó trabajar con sólamente un nodo de JBoss, se utilizó la configuración para worker1 vista anteriormente, a saber:
 
-[home 1 de JBoss 6]/bin/run.sh -c all -g qin -u 239.1.2.3 -b worker1 -Djboss.messaging.ServerPeerID=1 -Djboss.service.binding.set=ports-default
+[home 1 de JBoss 6]/bin/run.sh -c all -g qin -u 239.1.2.3 -b worker1 -DJBoss.messaging.ServerPeerID=1 -DJBoss.service.binding.set=ports-default
 
 	Este comando, no requiere a modo de complemento la ejecución del comando de worker2 para poder funcionar; es decir no es un comando que sólo tiene sentido al armar un cluster. Simplemente, con este comando se puede levantar el nodo de worker1; al no ejecutar el comando de worker2, no se arma un cluster; al ejecutar el comando de worker2, sí se arma el cluster, tal como se explicó en la sección anterior.
-
 
 	Terracotta
 
@@ -1807,7 +1723,6 @@ worker2
 [home de Terracotta 3.6]/bin/start-tc-server.sh
 
 	Luego de levantar el servidor de Terracotta de esta manera, el mismo se quedará esperando a que se le conecten clientes. En nuestro caso, los clientes son instancias de Tomcat.
-
 
 	Tomcat: utilizando a Terracotta como sincronizador
 
@@ -1845,7 +1760,6 @@ worker2
 
 	[home 1 de Tomcat 7]/bin/startup.sh
 
-
 	JMeter
 
 	JMeter se levanta de manera normal, ejecutando su script principal jmeter.sh.
@@ -1861,7 +1775,7 @@ backupearArchivosConfiguracion.sh: antes de levantar Apache con su balanceador d
 bajarAmbiente.sh: bajar cluster, no importa cual.
 bajarApacheCompleto.sh: bajar sólamente Apache, de manera completa, lo cual implica utilizar graceful-stop y recuperar los archivos de configuración salvaguardados.
 bajarApache.sh: bajar Apache, solamente.
-bajarJboss.sh: bajar cualquier instanciade Jboss.
+bajarJBoss.sh: bajar cualquier instanciade JBoss.
 bajarMysql.sh: bajar el servicio de MySQL.
 bajarTerracotta.sh: bajar Terracotta.
 bajarTomcat.sh: bajar cualquier instancia de Tomcat.
@@ -1872,7 +1786,7 @@ editarArchivosConfiguracion.sh: editar archivos de configuración de Apache y de
 jmeter.sh: levantar Jmeter.
 limpiarAmbiente.sh: limpiar todos los archivos de log y temporales del entorno.
 logearApache.sh: mostrar en terminal, el log de Apache.
-logearJboss.sh: mostrar en terminal, el log de cualquier instancia de Jboss.
+logearJBoss.sh: mostrar en terminal, el log de cualquier instancia de JBoss.
 logearTerracotta.sh: mostrar en terminal, el log de Terracotta.
 logearTomcat.sh: mostrar en terminal, el log de Tomcat.
 manejarPermisos.sh: para evitar complicaciones, dar todos los permisos a todos los servidores utilizados.
@@ -1883,7 +1797,7 @@ resetearProcesador.sh: colocar la velocidad de todos los núcleos del CPU en mod
 subirAmbiente.sh: subir el cluster entero, ya sea de JBoss o de Terracotta.
 subirApacheCompleto.sh: subir Apache y su balanceador de carga mod_proxy, recargando la configuración.
 subirApache.sh: sólamente, subir Apache.
-subirJboss.sh: subir cualquier instancia de Jboss.
+subirJBoss.sh: subir cualquier instancia de JBoss.
 subirMysql.sh: subir el servicio MySQL.
 subirTerracotta.sh: subir Terracotta.
 subirTomcat.sh: subir cualquier instancia de Tomcat
@@ -1899,9 +1813,9 @@ backupearArchivosConfiguracion.sh
 subirMysql.sh
 resetearBaseDeDatos.sh
 compilarYDeployarQinweb.sh
-Si el cluster se implementa con Jboss:
+Si el cluster se implementa con JBoss:
 agregarEntradaEnRouter.sh
-subirJboss.sh (dos veces)
+subirJBoss.sh (dos veces)
 Si el cluster se implementa con Terracotta + Tomcat:
 subirTerracotta.sh
 subirTomcat.sh (dos veces)
@@ -1940,7 +1854,6 @@ manejarPermisos.sh
 
 	En ese contexto, el texto que vierten los alumnos que resuelven el trabajo práctico de manera colaborativa en el sistema, y que aún no ha sido almacenado en la base de datos, es sincronizado de manera centralizada y actualizado automáticamente cada cinco segundos, presentando en la sesión de cada uno de los alumnos vinculados a esa resolución el mismo texto actualizado; en otras palabras, a modo de ejemplo sólo para hacernos entender y salvando las distancias, una especie de Google Docs ahora renombrado Google Drive (http://es.wikipedia.org/wiki/Google_Drive).
 
-
 	La implementación de este servicio es en esencia la misma tanto para el cluster estructurado con JBoss como para el cluster estructurado con Terracotta + Tomcat: finalmente estamos hablando de una clase de sincronizacion de texto, que interactúa con un arreglo en que se almacenan todos los textos de todas las resoluciones colaborativas utilizadas por las sesiones de usuarios presentes y activas en el sistema. Dicho arreglo debe ser único en todo el cluster y debe estar sincronizado.
 
 	Las pequeñas diferencias de las que se habla en varios sectores del informe, refieren a cómo se implementa con JBoss por un lado y con Terracotta + Tomcat por el otro dicha sincronización.
@@ -1963,7 +1876,6 @@ public interface SincronizadorTexto {
 	String obtenerTp(String id);
 
 }
-
 
 	Implementación:
 
@@ -2136,8 +2048,6 @@ public class SincronizadorTextoImpl implements SincronizadorTexto {
 		return nuevoTexto;
 	}
 
-
-
 	public String obtenerTp(String id) {
 		return tpsActivos.get(id);
 	}
@@ -2157,13 +2067,13 @@ public class SincronizadorTextoImpl implements SincronizadorTexto {
 
 7.5. Apéndice 5: Código de la clase PojoCacheManagerImpl, utilizada en el cluster con JBoss
 
-	El PojoCache se configura mediante el archivo qinejb/src/main/resources/META-INF/jboss-service.xml, cuyo contenido es:
+	El PojoCache se configura mediante el archivo qinejb/src/main/resources/META-INF/JBoss-service.xml, cuyo contenido es:
 
 <?xml version="1.0" encoding="UTF-8"?>
 
 <server>
 	<mbean name="qinejb:service=PojoCacheManager-Controller"
-		code="org.jboss.ha.singleton.HASingletonController">
+		code="org.JBoss.ha.singleton.HASingletonController">
 		<depends>qinejb:service=PojoCacheManager</depends>
 		<attribute name="HAPartition">
 			<inject bean="HAPartition" />
@@ -2174,7 +2084,7 @@ public class SincronizadorTextoImpl implements SincronizadorTexto {
 	</mbean>
 </server>
 
-	Como puede verse en jboss-service.xml, se definen el método para iniciar el servicio, de nombre startSingleton, y el método para parar el servicio, de nombre stopSingleton. Esos métodos se implementan en:
+	Como puede verse en JBoss-service.xml, se definen el método para iniciar el servicio, de nombre startSingleton, y el método para parar el servicio, de nombre stopSingleton. Esos métodos se implementan en:
 
 	Interface remota
 
@@ -2220,9 +2130,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import org.jboss.ejb3.annotation.Management;
-import org.jboss.ejb3.annotation.Service;
-import org.jboss.naming.Util;
+import org.JBoss.ejb3.annotation.Management;
+import org.JBoss.ejb3.annotation.Service;
+import org.JBoss.naming.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -2359,7 +2269,7 @@ public class PojoCacheManagerImpl implements PojoCacheManager {
 	}
 }
 
-	El comportamiento a nivel cluster, es el siguiente: se deploya tanto el archivo jboss-service.xml en todos los nodos del cluster como el código fuente conteniendo la interface PojoCacheManager y la clase PojoCacheManagerImpl, y cuando esto ocurre en todos los nodos se ejecuta el método start definido en la interface remota. Dicho método, lo que hace es desconectar del repositorio JNDI el servicio de sincronización de Pojos, pero lo deja en una referencia local para poder ser utilizado posteriormente. En el nodo máster, se procesa el archivo jboss-service.xml, y se ejecuta el método definido para comenzar el servicio, en este caso, startSingleton (es sólamente un nombre; este artefacto no es estrictamente hablando un singleton, pero conceptualmente funciona como “un singleton a nivel cluster”, lo cual no tiene soporte nativo). Éste último método, lo que hace es tomar la referencia local del servicio anteriormente eliminada del repositorio JNDI, y lo vuelve a registrar, por ende a partir de ese momento cuando cualquier nodo quiera comunicarse con el servicio, el único registrado por lo cual el único que atenderá, será aquel cuya implementación es la del nodo máster, logrando de esta manera una sincronización centralizada a nivel cluster de los Pojos.
+	El comportamiento a nivel cluster, es el siguiente: se deploya tanto el archivo JBoss-service.xml en todos los nodos del cluster como el código fuente conteniendo la interface PojoCacheManager y la clase PojoCacheManagerImpl, y cuando esto ocurre en todos los nodos se ejecuta el método start definido en la interface remota. Dicho método, lo que hace es desconectar del repositorio JNDI el servicio de sincronización de Pojos, pero lo deja en una referencia local para poder ser utilizado posteriormente. En el nodo máster, se procesa el archivo JBoss-service.xml, y se ejecuta el método definido para comenzar el servicio, en este caso, startSingleton (es sólamente un nombre; este artefacto no es estrictamente hablando un singleton, pero conceptualmente funciona como “un singleton a nivel cluster”, lo cual no tiene soporte nativo). Éste último método, lo que hace es tomar la referencia local del servicio anteriormente eliminada del repositorio JNDI, y lo vuelve a registrar, por ende a partir de ese momento cuando cualquier nodo quiera comunicarse con el servicio, el único registrado por lo cual el único que atenderá, será aquel cuya implementación es la del nodo máster, logrando de esta manera una sincronización centralizada a nivel cluster de los Pojos.
 
 	Si algo ocurriera con el nodo máster y éste dejara de funcionar, aplicando los mismos procedimientos, se activará el servicio en el nodo iniciado en segundo lugar, y así siguiendo.
 
@@ -2375,15 +2285,15 @@ public class PojoCacheManagerImpl implements PojoCacheManager {
 
 Se levanta el cluster; se comprueba que se haya armado correctamente.
 
-	Worker1 activándose y levantando el PojoCacheManager: cabe destacar, que como es el nodo que se levanta primero, se inicia en este nodo con startSingleton el servicio de sincronización (ver "7.4. Apéndice 4: Diferencias en la implementación de la sincronización" y "7.5. Apéndice 5: Código de la clase PojoCacheManagerImpl, utilizada en el cluster con Jboss").
+	Worker1 activándose y levantando el PojoCacheManager: cabe destacar, que como es el nodo que se levanta primero, se inicia en este nodo con startSingleton el servicio de sincronización (ver "7.4. Apéndice 4: Diferencias en la implementación de la sincronización" y "7.5. Apéndice 5: Código de la clase PojoCacheManagerImpl, utilizada en el cluster con JBoss").
 
-04:25:13,773 INFO  [JBossASKernel]     jboss.j2ee:ear=qinear-1.0.ear,jar=qinejb-1.0.jar,name=PojoCacheManagerImpl,service=EJB3; Required: Described
-04:25:13,773 INFO  [JBossASKernel]   and supplies:
-04:25:13,773 INFO  [JBossASKernel]     Class:com.qin.cache.pojo.manager.PojoCacheManager
-04:25:13,773 INFO  [JBossASKernel]     jndi:PojoCacheManagerImpl
-04:25:13,774 INFO  [JBossASKernel]     jndi:qinear-1.0/PojoCacheManagerImpl/remote
-04:25:13,774 INFO  [JBossASKernel]     jndi:qinear-1.0/PojoCacheManagerImpl/remote-com.qin.cache.pojo.manager.PojoCacheManager
-04:25:13,774 INFO  [JBossASKernel] Installing bean(qinejb:service=PojoCacheManager) into kernel
+04:25:13,773 INFO  [JBOSSASKernel]     JBoss.j2ee:ear=qinear-1.0.ear,jar=qinejb-1.0.jar,name=PojoCacheManagerImpl,service=EJB3; Required: Described
+04:25:13,773 INFO  [JBOSSASKernel]   and supplies:
+04:25:13,773 INFO  [JBOSSASKernel]     Class:com.qin.cache.pojo.manager.PojoCacheManager
+04:25:13,773 INFO  [JBOSSASKernel]     jndi:PojoCacheManagerImpl
+04:25:13,774 INFO  [JBOSSASKernel]     jndi:qinear-1.0/PojoCacheManagerImpl/remote
+04:25:13,774 INFO  [JBOSSASKernel]     jndi:qinear-1.0/PojoCacheManagerImpl/remote-com.qin.cache.pojo.manager.PojoCacheManager
+04:25:13,774 INFO  [JBOSSASKernel] Installing bean(qinejb:service=PojoCacheManager) into kernel
 04:25:13,780 INFO  [STDOUT] PojoCacheManagerImpl: create
 04:25:13,783 INFO  [EJBContainer] STARTED EJB: com.qin.cache.pojo.manager.PojoCacheManagerImpl ejbName: PojoCacheManagerImpl
 04:25:14,353 INFO  [JndiSessionRegistrarBase] Binding the following Entries in Global JNDI:
@@ -2401,13 +2311,13 @@ Se levanta el cluster; se comprueba que se haya armado correctamente.
 
 	Worker2 activándose y levantando el PojoCacheManager, sin ejecutar startSingleton.
 
-04:25:37,561 INFO  [JBossASKernel]     jboss.j2ee:ear=qinear-1.0.ear,jar=qinejb-1.0.jar,name=PojoCacheManagerImpl,service=EJB3; Required: Described
-04:25:37,562 INFO  [JBossASKernel]   and supplies:
-04:25:37,562 INFO  [JBossASKernel]     Class:com.qin.cache.pojo.manager.PojoCacheManager
-04:25:37,562 INFO  [JBossASKernel]     jndi:PojoCacheManagerImpl
-04:25:37,562 INFO  [JBossASKernel]     jndi:qinear-1.0/PojoCacheManagerImpl/remote
-04:25:37,562 INFO  [JBossASKernel]     jndi:qinear-1.0/PojoCacheManagerImpl/remote-com.qin.cache.pojo.manager.PojoCacheManager
-04:25:37,562 INFO  [JBossASKernel] Installing bean(qinejb:service=PojoCacheManager) into kernel
+04:25:37,561 INFO  [JBOSSASKernel]     JBoss.j2ee:ear=qinear-1.0.ear,jar=qinejb-1.0.jar,name=PojoCacheManagerImpl,service=EJB3; Required: Described
+04:25:37,562 INFO  [JBOSSASKernel]   and supplies:
+04:25:37,562 INFO  [JBOSSASKernel]     Class:com.qin.cache.pojo.manager.PojoCacheManager
+04:25:37,562 INFO  [JBOSSASKernel]     jndi:PojoCacheManagerImpl
+04:25:37,562 INFO  [JBOSSASKernel]     jndi:qinear-1.0/PojoCacheManagerImpl/remote
+04:25:37,562 INFO  [JBOSSASKernel]     jndi:qinear-1.0/PojoCacheManagerImpl/remote-com.qin.cache.pojo.manager.PojoCacheManager
+04:25:37,562 INFO  [JBOSSASKernel] Installing bean(qinejb:service=PojoCacheManager) into kernel
 04:25:37,567 INFO  [STDOUT] PojoCacheManagerImpl: create
 04:25:37,570 INFO  [EJBContainer] STARTED EJB: com.qin.cache.pojo.manager.PojoCacheManagerImpl ejbName: PojoCacheManagerImpl
 04:25:37,594 INFO  [JndiSessionRegistrarBase] Binding the following Entries in Global JNDI:
@@ -2424,15 +2334,15 @@ Se levanta el cluster; se comprueba que se haya armado correctamente.
 
 	Worker1 detecta que se inicia worker2, lo toma para armar un cluster, y arranca definitivamente el PojoCacheManager, ya que ya se ha determinado que la instancia que queda sincronizando a nivel cluster es la de worker1.
 
-2012-10-17 04:25:27,544 INFO  [org.jboss.ha.framework.server.ClusterPartition.lifecycle.qin] (Incoming-5,null) New cluster view for partition qin (id: 1, delta: 1, merge: false) : [worker1:1099, worker2:1199]
-2012-10-17 04:25:27,548 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) I am (worker1:1099) received membershipChanged event:
-2012-10-17 04:25:27,549 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) Dead members: 0 ([])
+2012-10-17 04:25:27,544 INFO  [org.JBoss.ha.framework.server.ClusterPartition.lifecycle.qin] (Incoming-5,null) New cluster view for partition qin (id: 1, delta: 1, merge: false) : [worker1:1099, worker2:1199]
+2012-10-17 04:25:27,548 INFO  [org.JBoss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) I am (worker1:1099) received membershipChanged event:
+2012-10-17 04:25:27,549 INFO  [org.JBoss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) Dead members: 0 ([])
 2012-10-17 04:25:27,548 INFO  [org.infinispan.remoting.transport.jgroups.JGroupsTransport] (Incoming-5,null) Received new cluster view: [worker1:1099|1] [worker1:1099, worker2:1199]
-2012-10-17 04:25:27,552 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) New Members : 1 ([worker2:1199])
-2012-10-17 04:25:27,552 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) All Members : 2 ([worker1:1099, worker2:1199])
+2012-10-17 04:25:27,552 INFO  [org.JBoss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) New Members : 1 ([worker2:1199])
+2012-10-17 04:25:27,552 INFO  [org.JBoss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) All Members : 2 ([worker1:1099, worker2:1199])
 2012-10-17 04:25:28,239 INFO  [org.hornetq.core.server.cluster.impl.BridgeImpl] (Thread-1 (group:HornetQ-server-threads1758530532-754513616)) Connecting bridge sf.my-cluster.d13c5b06-182b-11e2-a756-68a3c49b1ef7 to its destination [bac837c6-182b-11e2-aedb-68a3c49b1ef7]
 2012-10-17 04:25:28,658 INFO  [org.hornetq.core.server.cluster.impl.BridgeImpl] (Thread-1 (group:HornetQ-server-threads1758530532-754513616)) Bridge sf.my-cluster.d13c5b06-182b-11e2-a756-68a3c49b1ef7 is connected [bac837c6-182b-11e2-aedb-68a3c49b1ef7-> sf.my-cluster.d13c5b06-182b-11e2-a756-68a3c49b1ef7]
-2012-10-17 04:25:38,028 INFO  [org.jboss.ha.core.framework.server.CoreGroupCommunicationService.lifecycle] (Incoming-18,null) New cluster view for partition null (id: 1, delta: 1, merge: false) : [worker1:1099, worker2:1199]
+2012-10-17 04:25:38,028 INFO  [org.JBoss.ha.core.framework.server.CoreGroupCommunicationService.lifecycle] (Incoming-18,null) New cluster view for partition null (id: 1, delta: 1, merge: false) : [worker1:1099, worker2:1199]
 2012-10-17 04:25:38,028 INFO  [org.infinispan.remoting.transport.jgroups.JGroupsTransport] (Incoming-18,null) Received new cluster view: [worker1:1099|1] [worker1:1099, worker2:1199]
 2012-10-17 04:25:39,577 INFO  [org.infinispan.remoting.transport.jgroups.JGroupsTransport] (Incoming-12,null) Received new cluster view: [worker1:1099|1] [worker1:1099, worker2:1199]
 (WorkerThread#0[192.168.1.107:49792]) PojoCacheManagerImpl: existsKey
@@ -2441,27 +2351,21 @@ Se levanta el cluster; se comprueba que se haya armado correctamente.
 
 Se ingresa con el navegador Mozilla Firefox con usuario1.
 
-
 Se confirma qué nodo atiende a usuario1; es el worker2.
-
 
 Se ingresa con el navegador Chromium con usuario2.
 
-
 Se confirma qué nodo atiende a usuario2; es el worker1.
 
-
 Se verifica que el sincronizador está trabajando.
-
-
 
 Se baja worker1; comprobar que la sincronización continúa; se superan las pruebas manuales “Desconexión de un nodo en esquema colaborativo” y “Disponibilidad del sistema”.
 
 	Worker1 bajando y desconectando el PojoCacheManager.
 
-2012-10-17 04:36:03,394 INFO  [org.jboss.system.server.jmx.JMXKernel] (Thread-30) Server exit called, exiting the JVM now!
+2012-10-17 04:36:03,394 INFO  [org.JBoss.system.server.jmx.JMXKernel] (Thread-30) Server exit called, exiting the JVM now!
 2012-10-17 04:36:03,409 INFO  [STDOUT] (Thread-1) Posting Shutdown Request to the server...
-2012-10-17 04:36:03,409 INFO  [org.jboss.bootstrap.impl.base.server.AbstractServer] (Thread-31) Stopping: JBossAS [6.1.0.Final "Neo"]
+2012-10-17 04:36:03,409 INFO  [org.JBoss.bootstrap.impl.base.server.AbstractServer] (Thread-31) Stopping: JBossAS [6.1.0.Final "Neo"]
 2012-10-17 04:36:03,410 INFO  [org.apache.coyote.http11.Http11Protocol] (Thread-31) Pausando Coyote HTTP/1.1 en puerto http-worker1%2F192.168.1.107-8080
 2012-10-17 04:36:03,411 INFO  [org.apache.coyote.http11.Http11Protocol] (Thread-31) Parando Coyote HTTP/1.1 en puerto http-worker1%2F192.168.1.107-8080
 2012-10-17 04:36:03,437 INFO  [org.apache.coyote.ajp.AjpProtocol] (Thread-31) Pausando Coyote AJP/1.3 en ajp-worker1%2F192.168.1.107-8009
@@ -2479,31 +2383,31 @@ Se baja worker1; comprobar que la sincronización continúa; se superan las prue
 04:36:03,573 INFO  [STDOUT] PojoCacheManagerImpl: stop 
 04:36:03,612 INFO  [EJBContainer] STOPPED EJB: com.qin.cache.pojo.manager.PojoCacheManagerImpl ejbName: PojoCacheManagerImpl
 04:36:03,612 INFO  [STDOUT] PojoCacheManagerImpl: destroy 
-04:36:03,618 INFO  [SessionSpecContainer] Stopping jboss.j2ee:ear=qinear-1.0.ear,jar=qinejb-1.0.jar,name=SincronizadorTextoImpl,service=EJB3
+04:36:03,618 INFO  [SessionSpecContainer] Stopping JBoss.j2ee:ear=qinear-1.0.ear,jar=qinejb-1.0.jar,name=SincronizadorTextoImpl,service=EJB3
 04:36:03,620 INFO  [EJBContainer] STOPPED EJB: com.qin.manager.colaboracion.SincronizadorTextoImpl ejbName: SincronizadorTextoImpl
 04:36:03,641 INFO  [TomcatDeployment] undeploy, ctxPath=/
-04:36:03,699 INFO  [ConnectionFactoryBindingService] Unbound ConnectionManager 'jboss.jca:service=ConnectionFactoryBinding,name=JmsXA' from JNDI name 'java:JmsXA'
-04:36:03,707 INFO  [PersistenceUnitDeployment] Stopping persistence unit persistence.unit:unitName=jboss-ejb3-timerservice-mk2.jar#timerdb
+04:36:03,699 INFO  [ConnectionFactoryBindingService] Unbound ConnectionManager 'JBoss.jca:service=ConnectionFactoryBinding,name=JmsXA' from JNDI name 'java:JmsXA'
+04:36:03,707 INFO  [PersistenceUnitDeployment] Stopping persistence unit persistence.unit:unitName=JBoss-ejb3-timerservice-mk2.jar#timerdb
 04:36:03,707 INFO  [SessionFactoryImpl] closing
-04:36:03,707 INFO  [SessionFactoryObjectFactory] Unbinding factory from JNDI name: persistence.unit:unitName=jboss-ejb3-timerservice-mk2.jar#timerdb
-04:36:03,708 INFO  [NamingHelper] JNDI InitialContext properties:{java.naming.factory.initial=org.jnp.interfaces.NamingContextFactory, java.naming.factory.url.pkgs=org.jboss.naming:org.jnp.interfaces}
-04:36:03,709 INFO  [SessionFactoryObjectFactory] Unbound factory from JNDI name: persistence.unit:unitName=jboss-ejb3-timerservice-mk2.jar#timerdb
-04:36:03,710 INFO  [ConnectionFactoryBindingService] Unbound ConnectionManager 'jboss.jca:service=DataSourceBinding,name=DefaultDS' from JNDI name 'java:DefaultDS'
+04:36:03,707 INFO  [SessionFactoryObjectFactory] Unbinding factory from JNDI name: persistence.unit:unitName=JBoss-ejb3-timerservice-mk2.jar#timerdb
+04:36:03,708 INFO  [NamingHelper] JNDI InitialContext properties:{java.naming.factory.initial=org.jnp.interfaces.NamingContextFactory, java.naming.factory.url.pkgs=org.JBoss.naming:org.jnp.interfaces}
+04:36:03,709 INFO  [SessionFactoryObjectFactory] Unbound factory from JNDI name: persistence.unit:unitName=JBoss-ejb3-timerservice-mk2.jar#timerdb
+04:36:03,710 INFO  [ConnectionFactoryBindingService] Unbound ConnectionManager 'JBoss.jca:service=DataSourceBinding,name=DefaultDS' from JNDI name 'java:DefaultDS'
 04:36:04,080 INFO  [HypersonicDatabase] Database standalone closed clean
 04:36:04,082 INFO  [QuartzScheduler] Scheduler JBossQuartzScheduler_$_NON_CLUSTERED shutting down.
 04:36:04,083 INFO  [QuartzScheduler] Scheduler JBossQuartzScheduler_$_NON_CLUSTERED paused.
 04:36:04,083 INFO  [QuartzScheduler] Scheduler JBossQuartzScheduler_$_NON_CLUSTERED shutdown complete.
-04:36:04,084 WARN  [ComponentDeploymentContext] Removing name on null names: jboss.naming:application=quartz-ra
-04:36:04,088 WARN  [ComponentDeploymentContext] Removing name on null names: jboss.naming:application=mail-ra
+04:36:04,084 WARN  [ComponentDeploymentContext] Removing name on null names: JBoss.naming:application=quartz-ra
+04:36:04,088 WARN  [ComponentDeploymentContext] Removing name on null names: JBoss.naming:application=mail-ra
 04:36:04,091 INFO  [HornetQResourceAdapter] HornetQ resource adapter stopped
-04:36:04,092 WARN  [ComponentDeploymentContext] Removing name on null names: jboss.naming:application=jms-ra
-04:36:04,096 WARN  [ComponentDeploymentContext] Removing name on null names: jboss.naming:application=jboss-xa-jdbc
-04:36:04,099 WARN  [ComponentDeploymentContext] Removing name on null names: jboss.naming:application=jboss-local-jdbc
+04:36:04,092 WARN  [ComponentDeploymentContext] Removing name on null names: JBoss.naming:application=jms-ra
+04:36:04,096 WARN  [ComponentDeploymentContext] Removing name on null names: JBoss.naming:application=JBoss-xa-jdbc
+04:36:04,099 WARN  [ComponentDeploymentContext] Removing name on null names: JBoss.naming:application=JBoss-local-jdbc
 04:36:04,111 INFO  [TomcatDeployment] undeploy, ctxPath=/invoker
 04:36:04,118 INFO  [TomcatDeployment] undeploy, ctxPath=/juddi
 04:36:04,121 INFO  [RegistryServlet] jUDDI Stopping: Cleaning up existing resources.
-04:36:04,151 INFO  [jbossatx] ARJUNA-32018 Destroying TransactionManagerService
-04:36:04,157 INFO  [jbossatx] ARJUNA-32014 Stopping transaction recovery manager
+04:36:04,151 INFO  [JBOSSatx] ARJUNA-32018 Destroying TransactionManagerService
+04:36:04,157 INFO  [JBOSSatx] ARJUNA-32014 Stopping transaction recovery manager
 04:36:04,203 INFO  [DefaultCacheContainerFactory] Stopped "distributed-tree" cache from "ha-partition" container
 04:36:04,214 INFO  [qin] Stopping partition qin
 04:36:04,223 INFO  [DefaultCacheContainerFactory] Stopped "distributed-state" cache from "ha-partition" container
@@ -2536,7 +2440,6 @@ Se baja worker1; comprobar que la sincronización continúa; se superan las prue
 04:36:05,706 INFO  [SnmpAgentService] SNMP agent stopped
 04:36:07,294 INFO  [AbstractServer] Stopped: JBossAS [6.1.0.Final "Neo"] in 3s:884ms
 
-
 	Worker2 activando su instancia de PojoCacheManager, para que ahora ésta pueda ser la instancia que sincroniza todo el cluster, y registrando que el cluster perdió un nodo.
 
 2012-10-17 04:36:03,586 INFO  [STDOUT] (AsynchKeyChangeHandler Thread) PojoCacheManagerImpl: startSingleton 
@@ -2550,32 +2453,27 @@ Se baja worker1; comprobar que la sincronización continúa; se superan las prue
 
 2012-10-17 04:36:04,422 WARN  [org.hornetq.core.protocol.core.impl.RemotingConnectionImpl] (Thread-5 (group:HornetQ-client-global-threads-1602965727)) Connection failure has been detected: The connection was disconnected because of server shutdown [code=4]
 2012-10-17 04:36:04,930 INFO  [org.infinispan.remoting.transport.jgroups.JGroupsTransport] (Incoming-9,null) Received new cluster view: [worker2:1199|2] [worker2:1199]
-2012-10-17 04:36:05,251 INFO  [org.jboss.ha.framework.server.ClusterPartition.lifecycle.qin] (Incoming-11,null) New cluster view for partition qin (id: 2, delta: -1, merge: false) : [worker2:1199]
+2012-10-17 04:36:05,251 INFO  [org.JBoss.ha.framework.server.ClusterPartition.lifecycle.qin] (Incoming-11,null) New cluster view for partition qin (id: 2, delta: -1, merge: false) : [worker2:1199]
 2012-10-17 04:36:05,251 INFO  [org.infinispan.remoting.transport.jgroups.JGroupsTransport] (Incoming-11,null) Received new cluster view: [worker2:1199|2] [worker2:1199]
-2012-10-17 04:36:05,251 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) I am (worker2:1199) received membershipChanged event:
-2012-10-17 04:36:05,252 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) Dead members: 1 ([worker1:1099])
-2012-10-17 04:36:05,252 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) New Members : 0 ([])
-2012-10-17 04:36:05,252 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) All Members : 1 ([worker2:1199])
-2012-10-17 04:36:05,560 INFO  [org.jboss.ha.core.framework.server.CoreGroupCommunicationService.lifecycle] (Incoming-17,null) New cluster view for partition null (id: 2, delta: -1, merge: false) : [worker2:1199]
+2012-10-17 04:36:05,251 INFO  [org.JBoss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) I am (worker2:1199) received membershipChanged event:
+2012-10-17 04:36:05,252 INFO  [org.JBoss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) Dead members: 1 ([worker1:1099])
+2012-10-17 04:36:05,252 INFO  [org.JBoss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) New Members : 0 ([])
+2012-10-17 04:36:05,252 INFO  [org.JBoss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) All Members : 1 ([worker2:1199])
+2012-10-17 04:36:05,560 INFO  [org.JBoss.ha.core.framework.server.CoreGroupCommunicationService.lifecycle] (Incoming-17,null) New cluster view for partition null (id: 2, delta: -1, merge: false) : [worker2:1199]
 2012-10-17 04:36:05,561 INFO  [org.infinispan.remoting.transport.jgroups.JGroupsTransport] (Incoming-17,null) Received new cluster view: [worker2:1199|2] [worker2:1199]
 (ajp-worker2%2F192.168.1.107-8109-1) PojoCacheManagerImpl: existsKey 
 (ajp-worker2%2F192.168.1.107-8109-1) PojoCacheManagerImpl: setValue 
 (ajp-worker2%2F192.168.1.107-8109-1) PojoCacheManagerImpl: getValue 
 
-
 	El balancer manager muestra que se perdió un nodo
 
-
 Se confirma en qué navegador de Internet se trabaja con qué usuario.
-
 
 	Usuario2 en Chromium y usuario1 en Mozilla Firefox
 
 Se comprueba que ambos usuarios estén siendo atendidos por el nodo que no se bajó, en este caso worker2; se supera la prueba manual “Réplicación de sesión”.
 
-
 Se comprueba que el cache de segundo nivel de persistencia esté operando; se supera la prueba manual “Caché”.
-
 
 Se vuelve a levantar el nodo que se bajó anteriormente.
 
@@ -2583,13 +2481,13 @@ Se vuelve a levantar el nodo que se bajó anteriormente.
 
 2012-10-17 04:57:20,702 INFO  [org.hornetq.core.server.cluster.impl.BridgeImpl] (Thread-1 (group:HornetQ-server-threads1424309400-1907685389)) Connecting bridge sf.my-cluster.45ead1b5-1830-11e2-9578-68a3c49b1ef7 to its destination [30969d9a-1830-11e2-b820-68a3c49b1ef7]
 2012-10-17 04:57:21,146 INFO  [org.hornetq.core.server.cluster.impl.BridgeImpl] (Thread-1 (group:HornetQ-server-threads1424309400-1907685389)) Bridge sf.my-cluster.45ead1b5-1830-11e2-9578-68a3c49b1ef7 is connected [30969d9a-1830-11e2-b820-68a3c49b1ef7-> sf.my-cluster.45ead1b5-1830-11e2-9578-68a3c49b1ef7]
-2012-10-17 04:57:21,273 INFO  [org.jboss.ha.framework.server.ClusterPartition.lifecycle.qin] (Incoming-5,null) New cluster view for partition qin (id: 1, delta: 1, merge: false) : [worker1:1099, worker2:1199]
+2012-10-17 04:57:21,273 INFO  [org.JBoss.ha.framework.server.ClusterPartition.lifecycle.qin] (Incoming-5,null) New cluster view for partition qin (id: 1, delta: 1, merge: false) : [worker1:1099, worker2:1199]
 2012-10-17 04:57:21,276 INFO  [org.infinispan.remoting.transport.jgroups.JGroupsTransport] (Incoming-5,null) Received new cluster view: [worker1:1099|1] [worker1:1099, worker2:1199]
-2012-10-17 04:57:21,276 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) I am (worker1:1099) received membershipChanged event:
-2012-10-17 04:57:21,276 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) Dead members: 0 ([])
-2012-10-17 04:57:21,277 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) New Members : 1 ([worker2:1199])
-2012-10-17 04:57:21,277 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) All Members : 2 ([worker1:1099, worker2:1199])
-2012-10-17 04:57:28,732 INFO  [org.jboss.ha.core.framework.server.CoreGroupCommunicationService.lifecycle] (Incoming-12,null) New cluster view for partition null (id: 1, delta: 1, merge: false) : [worker1:1099, worker2:1199]
+2012-10-17 04:57:21,276 INFO  [org.JBoss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) I am (worker1:1099) received membershipChanged event:
+2012-10-17 04:57:21,276 INFO  [org.JBoss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) Dead members: 0 ([])
+2012-10-17 04:57:21,277 INFO  [org.JBoss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) New Members : 1 ([worker2:1199])
+2012-10-17 04:57:21,277 INFO  [org.JBoss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) All Members : 2 ([worker1:1099, worker2:1199])
+2012-10-17 04:57:28,732 INFO  [org.JBoss.ha.core.framework.server.CoreGroupCommunicationService.lifecycle] (Incoming-12,null) New cluster view for partition null (id: 1, delta: 1, merge: false) : [worker1:1099, worker2:1199]
 2012-10-17 04:57:28,733 INFO  [org.infinispan.remoting.transport.jgroups.JGroupsTransport] (Incoming-12,null) Received new cluster view: [worker1:1099|1] [worker1:1099, worker2:1199]
 2012-10-17 04:57:30,244 INFO  [org.infinispan.remoting.transport.jgroups.JGroupsTransport] (Incoming-5,null) Received new cluster view: [worker1:1099|1] [worker1:1099, worker2:1199]
 ...
@@ -2608,7 +2506,6 @@ Se vuelve a levantar el nodo que se bajó anteriormente.
 
 Se vuelve a armar el cluster.
 
-
 	Como se puede apreciar, las pruebas manuales que sirvieron para regular el desarrollo del trabajo práctico, son igualmente superadas por este cluster en esta etapa de producto terminado, lo cual es de vital importancia porque cada prueba manual encierra propiedades que son a nuestro criterio deseables en una estructura de cluster de un ambiente productivo, y además cada prueba manual superada revalida la investigación efectuada.
 
 	Terracotta + Tomcat
@@ -2617,58 +2514,52 @@ Se vuelve a armar el cluster.
 
 Se levanta el cluster; se comprueba que se haya armado correctamente.
 
-	Aplican a este caso, las mismas imágenes de la aplicación de prueba qinweb y del balancer manager como en el caso de Jboss.
+	Aplican a este caso, las mismas imágenes de la aplicación de prueba qinweb y del balancer manager como en el caso de JBoss.
 
 	Verificación de que se ven ambos nodos (con dos conexiones cada uno) en la consola adminitrativa de Terracotta.
 
-
 Se ingresa con el navegador Mozilla Firefox con usuario1.
 
-	Misma imagen que en el caso de Jboss.
+	Misma imagen que en el caso de JBoss.
 
 Se confirma qué nodo atiende a usuario1; es el worker2.
 
-	Misma imagen que en el caso de Jboss.
+	Misma imagen que en el caso de JBoss.
 
 Se ingresa con el navegador Google Chrome con usuario2.
 
-	Misma imagen que en el caso de Jboss.
+	Misma imagen que en el caso de JBoss.
 
 Se confirma qué nodo atiende a usuario2; es el worker1.
 
-	Misma imagen que en el caso de Jboss.
+	Misma imagen que en el caso de JBoss.
 
 Se verifica que el sincronizador está trabajando.
 
 	El sincronizador es Terracotta, por ende sí está trabajando, ya que estamos usando su consola administrativa.
 
-
 Se baja worker1; comprobar que la sincronización continúa; se superan las pruebas manuales “Desconexión de un nodo en 	esquema colaborativo” y “Disponibilidad del sistema”.
 
-	Aplica la imagen del balancer manager mostrando que se cayó un nodo vista en el caso de Jboss.
+	Aplica la imagen del balancer manager mostrando que se cayó un nodo vista en el caso de JBoss.
 
 	Confirmación en la consola administrativa de Terracotta, de que faltan dos conexiones.
 
-
 Se confirma en qué navegador de Internet se trabaja con qué usuario.
 
-	Misma imagen que en el caso de Jboss.
+	Misma imagen que en el caso de JBoss.
 
 Se comprueba que ambos usuarios estén siendo atendidos por el nodo que no se bajó, en este caso worker2; se supera la prueba manual “Réplicación de sesión”.
 
-	Misma imagen que en el caso de Jboss.
+	Misma imagen que en el caso de JBoss.
 
 Se comprueba que el cache de segundo nivel de persistencia estéoperando; se supera la prueba manual “Caché”.
 
 	Estadísticas de ehcache.
 
-
 	Estadísticas de hibernate.
-
 
 Se vuelve a levantar el nodo que se bajó anteriormente.
 
 	Se confirma que se vuelven a ver ambos nodos (dos conexiones por nodo).
 
-
-	También en este caso, se superan las pruebas manuales, al igual que en el caso de JBoss. Aplica la misma conclusión que en el caso de Jboss.
+	También en este caso, se superan las pruebas manuales, al igual que en el caso de JBoss. Aplica la misma conclusión que en el caso de JBoss.
