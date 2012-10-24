@@ -1,11 +1,50 @@
+Índice de contenido
+1. Abstract	2
+2. Motivación / Propósito	2
+3. Estado del arte	3
+4. Plan de la obra	6
+4.1. Metodología	6
+5. Desarrollo	7
+5.1. Introducción	7
+5.2. Breve descripción de la aplicación de prueba	9
+5.3. Arquitectura general	12
+5.3.1. Propiedades de arquitectura	12
+5.3.2. Patrones de arquitectura y diseño	14
+5.3.3. Arquitectura física propuesta	18
+5.4. Descripción de las herramientas	20
+5.4.1. JBoss AS	20
+5.4.1.1. Herramientas similares	20
+5.4.2. Terracotta + Tomcat	21
+5.4.2.1. Herramientas similares	22
+5.5. Pruebas	23
+5.6. Problemas encontrados y soluciones propuestas	35
+5.6.1. Generales	35
+5.6.2. JBoss	48
+5.6.3. Terracotta + Tomcat	53
+5.7. Resultados	56
+5.7.1. JBoss	58
+5.7.2. Terracotta + Tomcat	74
+6. Conclusiones	92
+7. Apéndices	95
+7.1. Apéndice 1: Cómo utilizar las herramientas seleccionadas	95
+7.2. Apéndice 2: Breve listado de los scripts creados	102
+7.3. Apéndice 3: Detalle del manejo de transacciones	104
+7.4. Apéndice 4: Diferencias en la implementación de la sincronización	105
+7.5. Apéndice 5: Código de la clase PojoCacheManagerImpl, utilizada en el cluster con JBoss	112
+7.6. Apéndice 6: Ejecución de la combinación de casos de pruebas manuales	118
+8. Datos de los autores	143
+Barrabino, Diego	143
+Moreyra, Martín	148
+9. Bibliografía	151
+
 1. Abstract
 
-El objetivo del presente trabajo, es analizar y comparar dos arquitecturas con soporte de Clustering, a partir del desarrollo y utilización de una aplicación Web de prueba, que brinde escalabilidad, alta disponibilidad y alto desempeño, junto con la estructuración, configuración, administración y despliegue del entorno productivo correspondiente. Particularmente, los dos tipos de arquitecturas a comparar utilizan las herramientas JBoss y Terracotta + Tomcat, respectivamente.
+	El objetivo del presente trabajo, es analizar y comparar dos arquitecturas con soporte de Clustering, a partir del desarrollo y utilización de una aplicación Web de prueba, que brinde escalabilidad, alta disponibilidad y alto desempeño, junto con la estructuración, configuración, administración y despliegue del entorno productivo correspondiente. Particularmente, los dos tipos de arquitecturas a comparar utilizan las herramientas JBoss y Terracotta + Tomcat, respectivamente.
 
 
 2. Motivación / Propósito
 
-A medida que van apareciendo más aplicaciones web integrales que resuelven cada vez más y más aspectos de diferentes tipos de negocio, más se va dependiendo de dichas soluciones, y más impacto tienen las caídas de los sistemas. Por lo cual, tener solamente una aplicación web atractiva y útil de acuerdo a ciertos fines, algo para nada fácil de lograr por cierto, es solo una parte del desafío si se quiere desarrollar una aplicación realmente exitosa; otra parte del desafío es lograr que esté disponible prácticamente siempre.
+	A medida que van apareciendo más aplicaciones web integrales que resuelven cada vez más y más aspectos de diferentes tipos de negocio, más se va dependiendo de dichas soluciones, y más impacto tienen las caídas de los sistemas. Por lo cual, tener solamente una aplicación web atractiva y útil de acuerdo a ciertos fines, algo para nada fácil de lograr por cierto, es solo una parte del desafío si se quiere desarrollar una aplicación realmente exitosa; otra parte del desafío es lograr que esté disponible prácticamente siempre.
 
 	Una de las soluciones posibles para intentar que las aplicaciones estén en lìnea la mayor cantidad de tiempo posible, y particularmente la solución que nos interesa, es implementar Clustering en el entorno productivo de la aplicación. De esta forma, por las características propias de la técnica, se puede mantener la aplicación en línea incluso en caso de que alguna de las computadoras que conforman el Cluster deje de funcionar, entre otros inconvenientes que podrían surgir.
 
@@ -21,17 +60,17 @@ A medida que van apareciendo más aplicaciones web integrales que resuelven cada
 
 	De un Cluster se espera que presente las siguientes propiedades de arquitectura [FIELDING]:
 
-	1.-	Alto rendimiento
-	2.-	Alta disponibilidad
-	3.-	Escalabilidad
+	1.-	Alto rendimiento.
+	2.-	Alta disponibilidad.
+	3.-	Escalabilidad.
 
 	La construcción de los servidores del Cluster es fácil y económica debido a su flexibilidad: pueden tener todos la misma configuración de hardware y sistema operativo (Cluster homogéneo), diferente rendimiento pero con arquitecturas y sistemas operativos similares (Cluster semi-homogéneo), o tener diferente hardware y sistema operativo (Cluster heterogéneo), lo que hace más fácil y económica su construcción. Incluso, pueden montarse todos los nodos de un cluster en una misma computadora (topología de Cluster vertical; práctico cuando se tiene a disposición una supercomputadora), o puede montarse cada nodo en una computadora distinta (topología de Cluster horizontal; práctico cuando las computadoras a disposición no dejan de ser computadoras o servidores normales), o pueden montarse los nodos según combinaciones de estas dos topologías, para un óptimo uso del hardware a disposición [JBOSS AS IN ACTION].
 
 	Sin embargo, para que un Cluster funcione como tal, no basta sólo con conectar entre sí los servidores, sino que es necesario proveer un sistema de manejo del Cluster, el cual se encargue de interactuar con el usuario y los procesos que corren en él para optimizar el funcionamiento. A continuación se presentan dos herramientas que cuentan con gran popularidad y que pueden realizar estas funciones:
 
-JBoss: propone replicar partes de una aplicación en varios servidores sincronizándolos mediante mecanismos provistos por él mismo. Una aparente desventajaetc de esta herramienta es que requiere efectuar implementaciones específicas requeridas por el servidor de aplicaciones, condicionando el diseño de la aplicación. Sin embargo esto tiene una gran ventaja, ya que se al desarrollar una aplicación específicamente pensada para funcionar con esta herramienta, probablemente se obtenga una muy buena performance [CLUSTERED JAVA EE]
+JBoss: propone replicar partes de una aplicación en varios servidores sincronizándolos mediante mecanismos provistos por él mismo. Una aparente desventajaetc de esta herramienta es que requiere efectuar implementaciones específicas requeridas por el servidor de aplicaciones, condicionando el diseño de la aplicación. Sin embargo esto tiene una gran ventaja, ya que se al desarrollar una aplicación específicamente pensada para funcionar con esta herramienta, probablemente se obtenga una muy buena performance [CLUSTERED JAVA EE].
 
-Terracotta (junto con Tomcat): provee de un conjunto de herramientas, con el fin de montar una aplicación pensada para un único servidor y desplegarla en múltiples servidores de manera que no tengan conocimiento de existencia entre si. El encargado de la sincronización es justamente el conjunto de librerias de Terracotta. Una aparente ventaja es que Terracotta no requiere implementaciones específicas para funcionar, por lo que en teoría se puede replicar cualquier aplicación. Por otro lado en contraposición con JBoss, esta situación lleva a una posible disminución de la performance [TERRACOTTA WORKS]
+Terracotta (junto con Tomcat): provee de un conjunto de herramientas, con el fin de montar una aplicación pensada para un único servidor y desplegarla en múltiples servidores de manera que no tengan conocimiento de existencia entre si. El encargado de la sincronización es justamente el conjunto de librerias de Terracotta. Una aparente ventaja es que Terracotta no requiere implementaciones específicas para funcionar, por lo que en teoría se puede replicar cualquier aplicación. Por otro lado en contraposición con JBoss, esta situación lleva a una posible disminución de la performance [TERRACOTTA WORKS].
 
 	En otras palabras:
 
@@ -45,11 +84,11 @@ En cambio, Tomcat no provee una plataforma semejante a la de JBoss, si bien ha a
 
 	La metodología elegida para llevar adelante este proyecto, consistió en definir los objetivos del mismo, y a partir de dichos objetivos, organizar el tiempo en secciones evolutivas del proyecto, a saber:
 
-	1.-	Concepción
-	2.-	Elaboración
-	3.-	Análisis de la arquitectura
-	4.-	Construcción
-	5.-	Finalización
+	1.-	Concepción.
+	2.-	Elaboración.
+	3.-	Análisis de la arquitectura.
+	4.-	Construcción.
+	5.-	Finalización.
 
 	Por la naturaleza del proyecto, las etapas más importantes son las primeras tres etapas.
 
@@ -59,14 +98,14 @@ En cambio, Tomcat no provee una plataforma semejante a la de JBoss, si bien ha a
 
 5.1. Introducción
 
-El objetivo del trabajo es comparar una aplicación clusterizada con dos herramientas diferentes: JBoss y Terracotta + Tomcat. Esta comparación se realiza teniendo en cuenta las propiedades de arquitectura, desde diferentes puntos de vista:
+	El objetivo del trabajo es comparar una aplicación clusterizada con dos herramientas diferentes: JBoss y Terracotta + Tomcat. Esta comparación se realiza teniendo en cuenta las propiedades de arquitectura, desde diferentes puntos de vista:
 
-Las herramientas utilizadas para clusterizar la aplicación
+Las herramientas utilizadas para clusterizar la aplicación.
 Las métricas obtenidas de ambos Clusters.
 
-El primer paso para poder realizar las comparaciones enunciadas, fue la búsqueda de una aplicación que necesitara de las propiedades de arquitectura vistas en [FIELDING]: buen rendimiento, escalabilidad y alta disponibilidad. Al decidir las características de la aplicación, elegimos un pequeño conjunto de casos de uso representativos, los cuales fueron implementados para ser clusterizados con ambas herramientas (ver sección “5.2. Breve descripción de la aplicación de prueba”). Sintetizando, la aplicación presenta funcionalidades que pueden ser ejecutadas en los distintos nodos del cluster sin que medie sincronización entre ellas, y también presenta una funcionalidad que debe ser sincronizada de manera única en todo el cluster al igual que las sesiones de usuario que también deben poder replicarse en todo el cluster; en éste último caso naturalmente para que la aplicación pueda continuar dando servicio a los usuarios incluso luego de que colapse cualquier nodo del cluster (lo cual será una de las pruebas a realizar). Esta decisión se tomó para poder poner a prueba los servicios de sincronización de cada tipo de cluster. 
+	El primer paso para poder realizar las comparaciones enunciadas, fue la búsqueda de una aplicación que necesitara de las propiedades de arquitectura vistas en [FIELDING]: buen rendimiento, escalabilidad y alta disponibilidad. Al decidir las características de la aplicación, elegimos un pequeño conjunto de casos de uso representativos, los cuales fueron implementados para ser clusterizados con ambas herramientas (ver sección “5.2. Breve descripción de la aplicación de prueba”). Sintetizando, la aplicación presenta funcionalidades que pueden ser ejecutadas en los distintos nodos del cluster sin que medie sincronización entre ellas, y también presenta una funcionalidad que debe ser sincronizada de manera única en todo el cluster al igual que las sesiones de usuario que también deben poder replicarse en todo el cluster; en éste último caso naturalmente para que la aplicación pueda continuar dando servicio a los usuarios incluso luego de que colapse cualquier nodo del cluster (lo cual será una de las pruebas a realizar). Esta decisión se tomó para poder poner a prueba los servicios de sincronización de cada tipo de cluster. 
 
-	Habiendo implementado la aplicación de prueba, la ajustamos para que no requiriese a nivel código fuente, modificaciones sustanciales que pudieran llevar a concluir que en realidad se compararon aplicaciones en esencia distintas. Por ejemplo, se evitó utilizar EJB independientemente de trabajar con un servidor JEE que las soporta (JBoss), e independientemente también de que en una etapa inicial del trabajo fueron contemplados. De haber utilizado EJB, nos habríamos encontrado con el dilema de incorporar o no algunas otras librerías a Terracotta + Tomcat (por ejemplo, OpenEJB -http://openejb.apache.org/-) para poder utilizar la misma aplicación en éste último cluster, con el riesgo de corromper la naturaleza de la investigación al incorporarle al segundo cluster librerías (las de, siguiendo con el ejemplo, OpenEJB) que compiten y se solapan en muchos aspectos con Terracotta. Es decir, el criterio detrás de la decisión de ajustar el código fuente de la aplicación, es posibilitar una comparación coherente de los resultados conseguidos sobre en esencia la misma aplicación, y permitir concluir con claridad que de encontrarse diferencias en los resultados, éstos se deben a las diferencias en la constitución del cluster a partir de las herramientas elegidas. Este ajuste fue aplicado en profundidad, salvo en el punto en que el servicio de sincronización de cada tipo de cluster obligó a tener diferencias menores en el código, que no impactan en la arquitectura ni en el funcionamiento de la aplicación (ver “7.4. Apéndice 4: Diferencias en la implementación de la sincronización”)
+	Habiendo implementado la aplicación de prueba, la ajustamos para que no requiriese a nivel código fuente, modificaciones sustanciales que pudieran llevar a concluir que en realidad se compararon aplicaciones en esencia distintas. Por ejemplo, se evitó utilizar EJB independientemente de trabajar con un servidor JEE que las soporta (JBoss), e independientemente también de que en una etapa inicial del trabajo fueron contemplados. De haber utilizado EJB, nos habríamos encontrado con el dilema de incorporar o no algunas otras librerías a Terracotta + Tomcat (por ejemplo, OpenEJB -http://openejb.apache.org/-) para poder utilizar la misma aplicación en éste último cluster, con el riesgo de corromper la naturaleza de la investigación al incorporarle al segundo cluster librerías (las de, siguiendo con el ejemplo, OpenEJB) que compiten y se solapan en muchos aspectos con Terracotta. Es decir, el criterio detrás de la decisión de ajustar el código fuente de la aplicación, es posibilitar una comparación coherente de los resultados conseguidos sobre en esencia la misma aplicación, y permitir concluir con claridad que de encontrarse diferencias en los resultados, éstos se deben a las diferencias en la constitución del cluster a partir de las herramientas elegidas. Este ajuste fue aplicado en profundidad, salvo en el punto en que el servicio de sincronización de cada tipo de cluster obligó a tener diferencias menores en el código, que no impactan en la arquitectura ni en el funcionamiento de la aplicación (ver “7.4. Apéndice 4: Diferencias en la implementación de la sincronización”).
 
 	A continuación, definimos las pruebas automáticas a ejecutar sobre cada ambiente:  pruebas de stress, carga, sólo sincronización, y de operación de todas las funcionalidades de la aplicación de pruebas salvo por las de sincronización. También definimos pruebas manuales, como por ejemplo desactivar cualquier nodo de cualquier cluster.
 
@@ -106,7 +145,7 @@ El primer paso para poder realizar las comparaciones enunciadas, fue la búsqued
 
 	Asumimos que el sistema debe ser utilizado por una universidad con gran cantidad de alumnos, por lo que la carga sobre el sistema resultante de cualquiera de los casos de uso mencionados a continuación será muy grande.
 
-	1.- Loguearse en el sistema: proveer acceso al sistema mediante usuarios que podrán tener acceso a las pantallas de carga o evaluación según corresponda
+	1.- Loguearse en el sistema: proveer acceso al sistema mediante usuarios que podrán tener acceso a las pantallas de carga o evaluación según corresponda.
 
 	2.- Buscar TPs: pantalla de búsqueda de trabajos según cuatrimestre y materia.
 
@@ -127,9 +166,9 @@ El primer paso para poder realizar las comparaciones enunciadas, fue la búsqued
 
 	Empezaremos exponiendo la definición de arquitectura de software propuesta en [FIELDING]:
 
-	“La arquitectura de software queda definida por una configuración de elementos arquitectónicos -componentes, conectores y datos-, restringidos en sus relaciones con el propósito de obtener un conjunto de propiedades de arquitectura deseables”
+	“La arquitectura de software queda definida por una configuración de elementos arquitectónicos -componentes, conectores y datos-, restringidos en sus relaciones con el propósito de obtener un conjunto de propiedades de arquitectura deseables”.
 
-	Un componente es una unidad de software que está compuesta por instrucciones, estado e interfaces mediante las cuales se provee la funcionalidad de realizar transformaciones a datos. Estos componentes están relacionados por lo conectores: mecanismos que median la comunicación, coordinación y cooperación entre los componentes. 
+	Un componente es una unidad de software que está compuesta por instrucciones, estado e interfaces mediante las cuales se provee la funcionalidad de realizar transformaciones a datos. Estos componentes están relacionados por lo conectores: mecanismos que median la comunicación, coordinación y cooperación entre los componentes.
 
 	Según Fielding la elección de una arquitectura significa elegir las restricciones que se aplicarán al sistema, y mediante la aplicación de estas restricciones se obtendrán las propiedades de arquitectura deseadas.
 
@@ -175,13 +214,13 @@ Domain Model (utilizando Service Layer): refiere a modelar el problema con un en
 
 	En el gráfico anterior podemos observar la separación en capas, pero también se hace referencia a patrones de diseño específicos utilizados en cada capa.
 
-Capa de presentación: MVC (Model-View-Controller)	
-Capa de lógica de negocio
-Capa de persistencia: EAO (Entity-Access-Object)
+Capa de presentación: MVC (Model-View-Controller).
+Capa de lógica de negocio.
+Capa de persistencia: EAO (Entity-Access-Object).
 
 	Presentación
 
-	La capa de presentación utiliza el patrón de diseño MVC, en particular utiliza el Framework SpringMVC (http://www.springsource.org/). Este framework es el encargado de manejar los pedidos (Request) de los navegadores, y hacer la llamada al Controlador correspondiente, decidiendo luego la vista a renderizar [SPRING MVC]
+	La capa de presentación utiliza el patrón de diseño MVC, en particular utiliza el Framework SpringMVC (http://www.springsource.org/). Este framework es el encargado de manejar los pedidos (Request) de los navegadores, y hacer la llamada al Controlador correspondiente, decidiendo luego la vista a renderizar [SPRING MVC].
 	El proceso descrito se muestra a continuación:
 
 
@@ -189,13 +228,13 @@ Capa de persistencia: EAO (Entity-Access-Object)
 
 	Desde el punto de vista arquitectónico, se utilizaron los Patrones de Fuentes de Datos, de mapeo Objeto-Relacional de comportamiento y estructurales del [PEAA]: sin embargo este conjunto de patrones esta implementado directamente por el framework de persistencia utilizado: Hibernate. Dicho conjunto de patrones, está compuesto por:
 
-DataMapper
-Lazy load
-Unit of Work
-Identity Map 
-Identity Field
-Foreign Key Mapping
-Association Table
+DataMapper.
+Lazy load.
+Unit of Work.
+Identity Map .
+Identity Field.
+Foreign Key Mapping.
+Association Table.
 
 	Desde el punto de vista de diseño, en la capa de persistencia se utiliza el patrón Entity-Access-Object (EAO) [EJB3 IN ACTION], este patrón provee una interfaz con las operaciones de persistencia, suficientemente versátil como para permitir trabajar correctamente en ambos servidores considerados.
 
@@ -206,17 +245,17 @@ Association Table
 
 	Desde un punto de vista físico, proponemos la siguiente configuración de cluster:
 
-Instancias del servidor: dos o más nodos. 
+Instancias del servidor: dos o más nodos.
 
-En un contexto ideal se pueden poner en marcha dos nodos, con el fin de tener redundancia en caso de que uno de ellos falle, e ir activando nodos extra a medida que la carga de los mismos vaya aumentando. Por este motivo nos interesa la propiedad de elasticidad mencionada en el punto 5.3.1 de este documento
+	En un contexto ideal se pueden poner en marcha dos nodos, con el fin de tener redundancia en caso de que uno de ellos falle, e ir activando nodos extra a medida que la carga de los mismos vaya aumentando. Por este motivo nos interesa la propiedad de elasticidad mencionada en el punto 5.3.1 de este documento.
 
 Balanceador de carga: un nodo.
 
 El cluster necesita de un punto de entrada inicial que recibirá los pedidos, y los despachará a los nodos del servidor correspondientes.
 
-Base de datos: un nodo. 
+Base de datos: un nodo.
 
-No contemplamos una base de datos distribuida para no incrementar la complejidad del presente trabajo. Suponemos que el servidor con la base de datos no experimentará falencias ya que en un esquema productivo real, se pueden invertir parte de los recursos monetarios en infraestructura y hardware de mayor confianza para este servidor.
+	No contemplamos una base de datos distribuida para no incrementar la complejidad del presente trabajo. Suponemos que el servidor con la base de datos no experimentará falencias ya que en un esquema productivo real, se pueden invertir parte de los recursos monetarios en infraestructura y hardware de mayor confianza para este servidor.
 
 
 	A partir de esta estructura física propuesta, modelamos nuestros clusters de prueba, con los recursos disponibles.
@@ -237,7 +276,7 @@ No contemplamos una base de datos distribuida para no incrementar la complejidad
 
 	Por ejemplo, imaginemos un cluster de tres nodos, cada uno de ellos en una computadora distinta.
 
-	Ver “7.1. Apéndice 1: Cómo utilizar las herramientas seleccionadas”
+	Ver “7.1. Apéndice 1: Cómo utilizar las herramientas seleccionadas”.
 
 
 5.4.1.1. Herramientas similares
@@ -254,7 +293,7 @@ Cualquier servidor de aplicaciones que implemente Java EE: http://es.wikipedia.o
 	Versión: 3.6.0
 	Descarga: http://terracotta.org/downloads/enterprise-ehcache?destination&name=terracotta-ee-3.7.0-installer.jar&bucket=tcdistributions&file=terracotta-ee-3.7.0-installer.jar
 
- 	Terracotta es un software de código abierto que permite crear aplicaciones Java que pueden escalar a cualquier cantidad de computadoras, sin tener que crear código adicional o usar bases de datos para compartir datos dentro del Cluster.
+	Terracotta es un software de código abierto que permite crear aplicaciones Java que pueden escalar a cualquier cantidad de computadoras, sin tener que crear código adicional o usar bases de datos para compartir datos dentro del Cluster.
 
 	Terracotta utiliza el concepto de Memoria Adjunta a la Red (NAM - Network Attached Memory). El uso de NAM le permite a Terracotta distribuir en Cluster a Máquinas Virtuales Java (JVM) directamente debajo de las aplicaciones, brindando alta disponibilidad y escalabilidad de forma transparente.
 
@@ -264,7 +303,7 @@ Cualquier servidor de aplicaciones que implemente Java EE: http://es.wikipedia.o
 
 	En definitiva, se puede programar la aplicación de manera natural, y se deja a Terracotta que administre todo el trabajo para crear un entorno escalable y de alta disponibilidad [TERRACOTTA WORKS].
 
-	Ver “7.1. Apéndice 1: Cómo utilizar las herramientas seleccionadas”
+	Ver “7.1. Apéndice 1: Cómo utilizar las herramientas seleccionadas”.
 
 Tomcat
 
@@ -276,9 +315,9 @@ Tomcat
 
 	Los mencionados servlets son simples clases de Java, que reciben pedidos HTTP y envían respuestas que son mostradas en el navegador web del cliente.
 
-	Si bien Tomcat y Terracotta son herramientas totalmente diferentes, inclusive de diferentes compañías, éstas se complementan, ya que se puede desarrollar una aplicación web al estilo tradicional utilizando Tomcat y sin tener en cuenta aspectos de la Clusterización, y luego utilizar Terracotta para replicar esta aplicación web y lograr un comportamiento de Cluster. 
+	Si bien Tomcat y Terracotta son herramientas totalmente diferentes, inclusive de diferentes compañías, éstas se complementan, ya que se puede desarrollar una aplicación web al estilo tradicional utilizando Tomcat y sin tener en cuenta aspectos de la Clusterización, y luego utilizar Terracotta para replicar esta aplicación web y lograr un comportamiento de Cluster.
 
-	Ver “7.1. Apéndice 1: Cómo utilizar las herramientas seleccionadas”
+	Ver “7.1. Apéndice 1: Cómo utilizar las herramientas seleccionadas”.
 
 
 5.4.2.1. Herramientas similares
@@ -306,7 +345,7 @@ Jetty: http://jetty.codehaus.org/jetty/
 
 	Dedicamos un plan de prueba a cada una de las pruebas automáticas que definimos, que se explicarán a continuación, y justamente ejecutándolos varias veces modificando el parámetro de cantidad de usuarios, es que hemos podido recolectar la información con la que hemos llegado hasta las conclusiones finales de presente trabajo.
 
-	Ver “7.1. Apéndice 1: Cómo utilizar las herramientas seleccionadas”
+	Ver “7.1. Apéndice 1: Cómo utilizar las herramientas seleccionadas”.
 
 
 	General
@@ -328,7 +367,7 @@ Aceptar y procesar toda la entrada del usuario
 
 	Estos tiempos son tiempos aproximados y no necesariamente significa que si la respuesta tarda mas del límite es inaceptable, sino que son tiempos de espera deseados, y bajo los cuales no se pierde la atención del usuario, ya que el mismo siente cierta fluidez en la interacción con la aplicación. Dichos tiempos pueden variar, pero deberían en promedio mantenerse por debajo de los límites citados.
 
-	La tabla de tiempos es estándar en cualquier aplicación, en particular en una aplicación web no se espera ninguna variación con respecto a tiempos en una aplicación local [RESPONSIVENESS]
+	La tabla de tiempos es estándar en cualquier aplicación, en particular en una aplicación web no se espera ninguna variación con respecto a tiempos en una aplicación local [RESPONSIVENESS].
 
 	Entorno de pruebas
 
@@ -336,11 +375,11 @@ Aceptar y procesar toda la entrada del usuario
 
 	Disponemos de tres computadoras:
 
-Netbook: Acer Aspire One (http://www.acer.com/aspireone/aspireone_8_9/), procesador Intel(R) Atom(TM) CPU N270 @ 1.60GHz, placa madre Acer, placa de red Realtek RTL8102E/RTL8103E Family PCI-E Fast Ethernet NIC, placa de red wifi Atheros AR5007EG Wireless Network Adapter, memoria RAM de 2 plaquetas de 512 Mb DDR2 (PC2-5300) 333 MHz (DDR2 667), disco rígido Hitachi HTS543216L9A300 160.0 GB 5400 RPM Serial ATA, sistemas operativos Windows XP y Lubuntu Linux 12.04 en dual boot
+Netbook: Acer Aspire One (http://www.acer.com/aspireone/aspireone_8_9/), procesador Intel(R) Atom(TM) CPU N270 @ 1.60GHz, placa madre Acer, placa de red Realtek RTL8102E/RTL8103E Family PCI-E Fast Ethernet NIC, placa de red wifi Atheros AR5007EG Wireless Network Adapter, memoria RAM de 2 plaquetas de 512 Mb DDR2 (PC2-5300) 333 MHz (DDR2 667), disco rígido Hitachi HTS543216L9A300 160.0 GB 5400 RPM Serial ATA, sistemas operativos Windows XP y Lubuntu Linux 12.04 en dual boot.
 
-Notebook I5 4GB RAM: Positivo BGH A 490 (http://www.positivobgh.com.ar/#/productos => Xpert Ultra A-400 => Xpert Book A-490), procesador Intel(R) Core I5(TM)-2410M @ 2.30Ghz x 4, placa madre Intel, placa de red Realtek RTL8111/8168B PCI Express Gigabit Ethernet, placa de red wifi Realtek RTL8188CE 802.11b/g/n WiFi Adapter, memoria RAM de 4 Gb SODIMM DDR3 1334 Mhz, disco rígido Samsung HM641JI 640.0 GB Serial ATA, sistemas operativos Windows 7 y Ubuntu Linux 12.04 en dual boot
+Notebook I5 4GB RAM: Positivo BGH A 490 (http://www.positivobgh.com.ar/#/productos => Xpert Ultra A-400 => Xpert Book A-490), procesador Intel(R) Core I5(TM)-2410M @ 2.30Ghz x 4, placa madre Intel, placa de red Realtek RTL8111/8168B PCI Express Gigabit Ethernet, placa de red wifi Realtek RTL8188CE 802.11b/g/n WiFi Adapter, memoria RAM de 4 Gb SODIMM DDR3 1334 Mhz, disco rígido Samsung HM641JI 640.0 GB Serial ATA, sistemas operativos Windows 7 y Ubuntu Linux 12.04 en dual boot.
 
-Notebook I3 4GB RAM: Positivo BGH A 470 (http://www.positivobgh.com.ar/#/productos => Xpert Ultra A-400 => Xpert Book A-470), procesador Intel(R) Core I3(TM)-2410M @ 2.30Ghz x 4, placa madre Intel, placa de red Realtek RTL8111/8168B PCI Express Gigabit Ethernet, placa de red wifi Realtek RTL8188CE 802.11b/g/n WiFi Adapter, memoria RAM de 4 Gb SODIMM DDR3 1334 Mhz, disco rígido Samsung HM641JI 640.0 GB Serial ATA, sistemas operativos Windows 7 y Ubuntu Linux 11.10 en dual boot
+Notebook I3 4GB RAM: Positivo BGH A 470 (http://www.positivobgh.com.ar/#/productos => Xpert Ultra A-400 => Xpert Book A-470), procesador Intel(R) Core I3(TM)-2410M @ 2.30Ghz x 4, placa madre Intel, placa de red Realtek RTL8111/8168B PCI Express Gigabit Ethernet, placa de red wifi Realtek RTL8188CE 802.11b/g/n WiFi Adapter, memoria RAM de 4 Gb SODIMM DDR3 1334 Mhz, disco rígido Samsung HM641JI 640.0 GB Serial ATA, sistemas operativos Windows 7 y Ubuntu Linux 11.10 en dual boot.
 
 	Por cuestiones de practicidad, en etapa de desarrollo, en lugar de la Netbook se usó:
 
@@ -348,9 +387,9 @@ Desktop: computadora clon, procesador Intel(R) Core(TM)2 Quad CPU Q8200 @ 2.33GH
 
 	Por lo tanto armamos el entorno de pruebas de la siguiente forma:
 
-Instancias del servidor: dos nodos (Notebook I3; Notebook I5)
-Balanceador de carga: un nodo (Notebook I5)
-Base de datos: un nodo (Netbook / PC Desktop)
+Instancias del servidor: dos nodos (Notebook I3; Notebook I5).
+Balanceador de carga: un nodo (Notebook I5).
+Base de datos: un nodo (Netbook / PC Desktop).
 
 Clientes: Utilizamos en cualquier computadora en que queramos interactuar con la aplicación, los navegadores de internet (Lynx -http://lynx.browser.org/-, Google Chrome / Chromium -https://www.google.com/intl/es/chrome/browser/ ; http://www.getchromium.org/-, Mozilla Firefox -http://www.mozilla.org/es-AR/firefox/new/-) de la Notebook I3 y de la Notebook I5, y en el caso de las pruebas automáticas utilizamos una instancia de Apache JMeter 2.7 en cada máquina disponible.
 
@@ -374,17 +413,17 @@ Instancias de JMeter: en todas las computadoras que forman parte del cluster, ba
 
 
 
-Replicación de sesión
+	Replicación de sesión
 
 
 
-Caché
+	Caché
 
 
 
-Pruebas automáticas
+	Pruebas automáticas
 
-En nuestro caso implementamos 4 pruebas automáticas que atacan diferentes aspectos del cluster, y estas pruebas se fueron ejecutando con diferentes cantidades de usuarios, empezando por una cantidad relativamente baja y subiendo de a intervalos, esto lo hicimos para poder observar los tiempos de respuesta y el rendimiento a medida que aumentamos la carga sobre el cluster.
+	En nuestro caso implementamos 4 pruebas automáticas que atacan diferentes aspectos del cluster, y estas pruebas se fueron ejecutando con diferentes cantidades de usuarios, empezando por una cantidad relativamente baja y subiendo de a intervalos, esto lo hicimos para poder observar los tiempos de respuesta y el rendimiento a medida que aumentamos la carga sobre el cluster.
 
 	Las pruebas automáticas implementadas son:
 
@@ -393,24 +432,24 @@ En nuestro caso implementamos 4 pruebas automáticas que atacan diferentes aspec
 
 	El plan de pruebas “HttpProxy - Test Plan - Prueba completa” consiste en:
 
-Guardar dos resoluciones + sincronizar texto de trabajos prácticos
-Ver estadística y actualizarla
-Guardar un Trabajo Practico
-Guardar dos resoluciones + sincronizar texto de trabajos prácticos
-Evaluar una resolución
-Guardar cuatro resoluciones + sincronizar texto de trabajos prácticos
-Ver estadística y actualizarla
-Guardar un Trabajo Práctico
+Guardar dos resoluciones + sincronizar texto de trabajos prácticos.
+Ver estadística y actualizarla.
+Guardar un Trabajo Practico.
+Guardar dos resoluciones + sincronizar texto de trabajos prácticos.
+Evaluar una resolución.
+Guardar cuatro resoluciones + sincronizar texto de trabajos prácticos.
+Ver estadística y actualizarla.
+Guardar un Trabajo Práctico.
 
 	Load Test (LT)
 
 
 	El plan de pruebas “HttpProxy - Test Plan - Prueba completa Simple” consiste en:
 
-Buscar Trabajos Prácticos
-Iniciar Resolución
-Sincronizar texto de resolución 10 veces
-Guardar Resolución
+Buscar Trabajos Prácticos.
+Iniciar Resolución.
+Sincronizar texto de resolución 10 veces.
+Guardar Resolución.
 
 
 	Load Test Datos Clusterizados (ST)
@@ -418,16 +457,16 @@ Guardar Resolución
 
 	El plan de pruebas “HttpProxy - Test Plan – Prueba de solo sincronizar” consiste en:
 
-Sincronizar 	texto de resolución 10 veces
+Sincronizar 	texto de resolución 10 veces.
 
 	Load Test Datos No Clusterizados (NST)
 
 
 	El plan de pruebas “HttpProxy - Test Plan - Prueba sin sincronizar” consiste en:
 
-Buscar Trabajos Prácticos
-Iniciar Resolución
-Guardar Resolución
+Buscar Trabajos Prácticos.
+Iniciar Resolución.
+Guardar Resolución.
 
 	Todas estas pruebas automáticas se pueden mostrar gráficamente de la siguiente forma, donde la “nube” de clientes se logra utilizando Jmeter:
 
@@ -445,12 +484,12 @@ Guardar Resolución
 
 	Finalmente, esta propuesta de presentar el trabajo en una imagen virtualizada fue dejada de lado por un simple tema de recursos de las computadoras. Seguramente es una idea que fomenta la prolijidad, pero lamentablemente no la pudimos implementar.
 
-Los ambientes se montaron, se corrieron y se correrán directamente sobre el sistema operativo primario de las Notebooks
+Los ambientes se montaron, se corrieron y se correrán directamente sobre el sistema operativo primario de las Notebooks.
 
 
 	Repetibilidad
 
-	Al notar enseguida que cualquier prueba automática podría ser ejecutada múltiples veces (para anotar mejor los resultados, para poder determinar si el uso de la memoria RAM fue el adecuado, etc), decidimos estructurar los ambientes en scripts de shell. De esta manera, no solo nos pudimos abstraer de recordar continuamente varios detalles del armado de los ambientes, sino que además afrontamos con mayor comodidad la repetición de pruebas, ya que cualquier configuración particular de cualquier ambiente es alcanzada manipulando un script en particular
+	Al notar enseguida que cualquier prueba automática podría ser ejecutada múltiples veces (para anotar mejor los resultados, para poder determinar si el uso de la memoria RAM fue el adecuado, etc), decidimos estructurar los ambientes en scripts de shell. De esta manera, no solo nos pudimos abstraer de recordar continuamente varios detalles del armado de los ambientes, sino que además afrontamos con mayor comodidad la repetición de pruebas, ya que cualquier configuración particular de cualquier ambiente es alcanzada manipulando un script en particular.
 
 	Apache
 
@@ -458,11 +497,11 @@ Los ambientes se montaron, se corrieron y se correrán directamente sobre el sis
 
 	Sin embargo, por supuesto que una vez levantado Apache, se convierte en un actor más en nuestros ambientes, independientemente de que nuestra intención fuera disponer solamente de un balanceador de carga.
 
-	En las primeras pruebas con el servidor Apache levantado, debido a una impericia, se nos desarmó el Cluster armado con JBoss; uno de los dos nodos colapsó, y el otro nodo disparó un número muy elevado de peticiones de manera desequilibrada. Posteriormente, notamos que colapsó todo lo que quedaba del cluster: la base de datos (ver punto siguiente), el Apache, por ende el balanceador de carga, y además el sistema operativo quedó muy lento
+	En las primeras pruebas con el servidor Apache levantado, debido a una impericia, se nos desarmó el Cluster armado con JBoss; uno de los dos nodos colapsó, y el otro nodo disparó un número muy elevado de peticiones de manera desequilibrada. Posteriormente, notamos que colapsó todo lo que quedaba del cluster: la base de datos (ver punto siguiente), el Apache, por ende el balanceador de carga, y además el sistema operativo quedó muy lento.
 
 	Finalmente, luego de investigar los logs de Apache, JBoss y del sistema operativo en sí, pudimos detectar que el problema se dio por el lado de la configuración de Apache, ya que el nodo de JBoss que emitió muchísimas peticiones de manera desequilibrada, emitió más peticiones que las máximas permitidas por Apache.
 
-	Por supuesto que esta situación defectuosa no nos interesa, es decir, no nos interesa que Apache nos permita manejar el desborde de un nodo, siendo que ningún nodo debería desbordar. Sin embargo, como este trabajo no está enfocado en investigar buenas prácticas de uso del Apache, por ejemplo, tomamos la decisión de llevar al máximo la posibilidad de conexiones que tolera el Apache, para poder estar seguros de que cuando todo nos funcionara bien, jamás una prueba se viera interrumpida por el Apache
+	Por supuesto que esta situación defectuosa no nos interesa, es decir, no nos interesa que Apache nos permita manejar el desborde de un nodo, siendo que ningún nodo debería desbordar. Sin embargo, como este trabajo no está enfocado en investigar buenas prácticas de uso del Apache, por ejemplo, tomamos la decisión de llevar al máximo la posibilidad de conexiones que tolera el Apache, para poder estar seguros de que cuando todo nos funcionara bien, jamás una prueba se viera interrumpida por el Apache.
 
 	Finalmente, editamos en el archivo /etc/apache2/apache2.conf, lo siguiente:
 
@@ -592,7 +631,7 @@ java.sql.SQLException: null,  message from server: "Host 'rocha.local' is blocke
 
 mysqladmin -u root - p flush-hosts
 
-	… y posteriormente, como al igual que en el caso del Apache, nuestra investigación no focaliza sobre MySQL y sus debidos usos, tomamos la decisión de llevar la cantidad máxima de conexiones incorrectas y correctas a niveles muy altos. Editamos en el archivo /etc/mysql/my.cnf
+	… y posteriormente, como al igual que en el caso del Apache, nuestra investigación no focaliza sobre MySQL y sus debidos usos, tomamos la decisión de llevar la cantidad máxima de conexiones incorrectas y correctas a niveles muy altos. Editamos en el archivo /etc/mysql/my.cnf:
 
 #
 # * Fine Tuning
@@ -617,8 +656,8 @@ max_connect_errors     = 10000
 
 	Investigamos esta situación. Dimos con la definición de wmem_max y rmem_max:
 
-rmem_max: ventana máxima de recepción UDP (en bytes)
-wmem_max: ventana máxima de envío UDP (en bytes)
+rmem_max: ventana máxima de recepción UDP (en bytes).
+wmem_max: ventana máxima de envío UDP (en bytes).
 
 	Es decir que en esta situación, JBoss nos informó que los buffers de envío y recepción UDP estaban configurados muy por debajo de sus máximos. Ambos buffers tenían 128 Kb, y en realidad rmem_max puede llegar hasta 24 Mb y wmem_max puede llegar hasta  640 Kb
 
@@ -641,7 +680,7 @@ net.core.rmem_max = 26214400
 
 session required			pam_limits.so
 
-… ejecutamos ulimit -n && ulimit -a, reiniciamos la sesión de usuario, y constatamos que los nuevos límites de cantidad de archivos tomaron lugar
+… ejecutamos ulimit -n && ulimit -a, reiniciamos la sesión de usuario, y constatamos que los nuevos límites de cantidad de archivos tomaron lugar.
 
 
 	Generalidades
@@ -655,10 +694,10 @@ session required			pam_limits.so
 
 	En líneas generales, los ajustes de código fueron:
 
-Ajustes generales de performance y mejor manejo de excepciones
-Evitar logear información; que el nivel de log sera fatal o error
-No utilizar transacciones al hacer consultas de sólo lectura para no trabar a las posibles inserciones, modificaciones o borrados que pudieran darse en simultáneo (ver sección “Transacciones”)
-Ingresar al caché las entidades de clase Materia, ya que son invariables; utilizar el cache
+Ajustes generales de performance y mejor manejo de excepciones.
+Evitar logear información; que el nivel de log sera fatal o error.
+No utilizar transacciones al hacer consultas de sólo lectura para no trabar a las posibles inserciones, modificaciones o borrados que pudieran darse en simultáneo (ver sección “Transacciones”).
+Ingresar al caché las entidades de clase Materia, ya que son invariables; utilizar el cache.
 Variaciones de todo lo anterior, tal como se puede ver en la progresión de commits en http://code.google.com/p/qin-cluster/source/list
 
 
@@ -672,7 +711,7 @@ Variaciones de todo lo anterior, tal como se puede ver en la progresión de comm
 
 	De esta manera, pudimos solucionar todos los problemas de rendimiento relacionados directamente con el código fuente de la aplicación.
 
-	Ver “7.3. Apéndice 3: Detalle del manejo de transacciones”
+	Ver “7.3. Apéndice 3: Detalle del manejo de transacciones”.
 
 	Java - GC
 
@@ -680,20 +719,20 @@ Variaciones de todo lo anterior, tal como se puede ver en la progresión de comm
 
 -Xms512m -Xmx2048m -Xmn128m -XX:MaxPermSize=256M
 
-… a diferencia de JMeter, que tiene esta configuración
+… a diferencia de JMeter, que tiene esta configuración.
 
 -Xms1024m -Xmx1024m -XX:MaxPermSize=256m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=128m
 
 	Además, en todos los casos, se utilizan los siguientes parámetros del garbage collector:
 
--Dsun.rmi.dgc.client.gcInterval=3600000 : máximo intervalo de tiempo entre llamadas al GC para que vacíe el HEAP local
--Dsun.rmi.dgc.server.gcInterval=3600000 : máximo intervalo de tiempo entre llamadas al GC para que vacíe el HEAP local
--XX:+UseConcMarkSweepGC : habilita el GC concurrente y de baja pausa; la aplicación se pausa muy corto tiempo en el recolectado de basura
+-Dsun.rmi.dgc.client.gcInterval=3600000 : máximo intervalo de tiempo entre llamadas al GC para que vacíe el HEAP local.
+-Dsun.rmi.dgc.server.gcInterval=3600000 : máximo intervalo de tiempo entre llamadas al GC para que vacíe el HEAP local.
+-XX:+UseConcMarkSweepGC : habilita el GC concurrente y de baja pausa; la aplicación se pausa muy corto tiempo en el recolectado de basura.
 -XX:+CMSClassUnloadingEnabled : recolectar basura de PermGen también
--XX:+CMSParallelRemarkEnabled : reduce las pausas de remarcado
--XX:+UseParNewGC : utilizar todos los núcleos en paralelo para minimizar la pausa de recolectado
--XX:CMSInitiatingOccupancyFraction=60 : comenzar a correr el thread bckground de recolección cuando esté ocupado más del 60% de la memoria
--XX:+UseCMSInitiatingOccupancyOnly : utilizar sólamente el parámetro anterior para definir cuando levantar el thread del gc
+-XX:+CMSParallelRemarkEnabled : reduce las pausas de remarcado.
+-XX:+UseParNewGC : utilizar todos los núcleos en paralelo para minimizar la pausa de recolectado.
+-XX:CMSInitiatingOccupancyFraction=60 : comenzar a correr el thread bckground de recolección cuando esté ocupado más del 60% de la memoria.
+-XX:+UseCMSInitiatingOccupancyOnly : utilizar sólamente el parámetro anterior para definir cuando levantar el thread del gc.
 
 	Estos parámetros se utilizan en el entorno productivo de una institucion pública de alcance nacional, por lo cual consideramos que es si estos parámetros demuestran rendir en el contexto de dicha institución, entonces seguramente van a rendir en nuestro trabajo.
 
@@ -762,7 +801,7 @@ nucleo3=`more /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor`
 
 	El borrado preventivo de dichos directorios fue incorporado a los scripts de trabajo.
 
-	Ver “7.2. Apéndice 2: Breve listado de los scripts creados”
+	Ver “7.2. Apéndice 2: Breve listado de los scripts creados”.
 
 	Singleton
 
@@ -782,19 +821,19 @@ nucleo3=`more /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor`
 	Investigando esta posibilidad, dimos con un problema que a partir de que lo supimos detectar, lo pudimos reconocer en todos y cada uno de los inconvenientes vividos. Se intenta explicar a continuación sus aspectos más importantes:
 
 Al comenzar este trabajo, elegimos utilizar el servidor JBoss cuya versión se puede ver en “7.1. Apéndice 1: Cómo utilizar las herramientas seleccionadas”; las versiones posteriores del mismo en aquel momento nos parecieron demasiado nuevas como para ser suficientemente estables, y las versiones anteriores al mismo parecieron estar suficientemente superadas como para elegirlas.
-La documentación de las versiones previas a la elegida, es realmente muy completa y útil; además, dichas versiones previas tenían integradas las herramientas de JBossCache, y PojoCache (http://www.jboss.org/jbosscache), dos herramientas que nos interesaba sumar, pero que finalmente son complicadas de utilizar debido a lo que se explica a continuación
-La documentación de la versión elegida de JBoss quedó inconclusa, porque cuando la comunidad de JBoss resolvió a dar origen a la versión posterior, tomó la decisión de prácticamente eliminar todo el código fuente y empezar nuevamente, por ende toda la documentación de la versión elegida se torna obsoleta automáticamente, por lo cual ante la evidencia de un esfuerzo sin sentido cesó el proceso de documentación de la versión de JBoss elegido
+La documentación de las versiones previas a la elegida, es realmente muy completa y útil; además, dichas versiones previas tenían integradas las herramientas de JBossCache, y PojoCache (http://www.jboss.org/jbosscache), dos herramientas que nos interesaba sumar, pero que finalmente son complicadas de utilizar debido a lo que se explica a continuación.
+La documentación de la versión elegida de JBoss quedó inconclusa, porque cuando la comunidad de JBoss resolvió a dar origen a la versión posterior, tomó la decisión de prácticamente eliminar todo el código fuente y empezar nuevamente, por ende toda la documentación de la versión elegida se torna obsoleta automáticamente, por lo cual ante la evidencia de un esfuerzo sin sentido cesó el proceso de documentación de la versión de JBoss elegido.
 Como la versión nueva de JBoss es una reescritura por completo, su documentación no puede ser tomada para nuestro caso.
-Los componentes de JBossCache y PojoCache tan correctamente integrados y documentados en las versiones previas, en la versión elegida han sido reemplazados por Infinispan, cuya documentación no es suficiente y además adolece de un reemplazante natural para PojoCache
+Los componentes de JBossCache y PojoCache tan correctamente integrados y documentados en las versiones previas, en la versión elegida han sido reemplazados por Infinispan, cuya documentación no es suficiente y además adolece de un reemplazante natural para PojoCache.
 
 	Teniendo todo lo anteriormente nombrado en cuenta, se decidió:
 
 Leer la documentación de todas las versiones posibles y sacar de esa lectura todas las conclusiones que se puedan sacar, y realizar todas las pruebas y todos los códigos de prueba que se puedan hacer.
 Utilizar Infinispan sólo para cache de segundo nivel de persistencia.
-Integrar manualmente a las instancias de JBoss, el componente PojoCache
-No trabajar con JBossCache
+Integrar manualmente a las instancias de JBoss, el componente PojoCache.
+No trabajar con JbossCache.
 
-	Ver sección “Cache de segundo nivel” de este punto, y ver “7.4. Apéndice 4: Diferencias en la implementación de la sincronización” y “7.5. Apéndice 5: Código de la clase PojoCacheManagerImpl, utilizada en el cluster con JBoss”
+	Ver sección “Cache de segundo nivel” de este punto, y ver “7.4. Apéndice 4: Diferencias en la implementación de la sincronización” y “7.5. Apéndice 5: Código de la clase PojoCacheManagerImpl, utilizada en el cluster con Jboss”.
 
 	Cache de segundo nivel
 
@@ -804,38 +843,38 @@ No trabajar con JBossCache
 
 	En lo que respecta a documentación de caches de segundo nivel en JBoss, cabe destacar que la documentación más rica es la de JBoss 5, pero en esa versión, se usaba JBossCache. En nuestro caso, estamos usando JBoss 6. Nos encontramos con que no solamente la documentación no es tan buena para JBoss 6, sino que además en JBoss 6 JBossCache fue reemplazado por Infinispan. Para completar el cuadro, no se puede obtener ayuda desde la documentación de JBoss 7 porque JBoss 7 fue prácticamente reescrito.
 
-	De todas maneras, luego de unas intensas sesiones de investigación, prueba y error, se logró con éxito activar Infinispan en JBoss 6 como cache de segundo nivel. 
+	De todas maneras, luego de unas intensas sesiones de investigación, prueba y error, se logró con éxito activar Infinispan en JBoss 6 como cache de segundo nivel.
 
-	Los resultados que obtuvimos, distaron de ser los esperados y los deseados. Si bien dejamos este cache activo, hemos visto como al estar activo se siente que el desempeño del cluster con JBoss en su totalidad es peor que el desempeño del mismo cluster sin este cache de segundo nivel
+	Los resultados que obtuvimos, distaron de ser los esperados y los deseados. Si bien dejamos este cache activo, hemos visto como al estar activo se siente que el desempeño del cluster con JBoss en su totalidad es peor que el desempeño del mismo cluster sin este cache de segundo nivel.
 
 	Creemos que esto se debe a:
 
-Las características de uso no configurables que tiene este cache: en la documentación [INFINISPAN] se ve con claridad que al entrar un leer un objeto de la base de datos, necesariamente este último se almacena en el cache local, para evitar comunicaciones intra-cluster de más. Además, cuando una entidad es actualizada en un cache, se dispara un mensaje a todos los otros caches del cluster informando que se deben invalidar y refrescar por completo. Ninguna de estas características es configurable
-	
-Lo que se expresa claramente en la documentación [INFINISPAN]: se cita textualmente
+Las características de uso no configurables que tiene este cache: en la documentación [INFINISPAN] se ve con claridad que al entrar un leer un objeto de la base de datos, necesariamente este último se almacena en el cache local, para evitar comunicaciones intra-cluster de más. Además, cuando una entidad es actualizada en un cache, se dispara un mensaje a todos los otros caches del cluster informando que se deben invalidar y refrescar por completo. Ninguna de estas características es configurable.
+
+Lo que se expresa claramente en la documentación [INFINISPAN]: se cita textualmente.
 
 “On Caching
 Query result caching, or entity caching, may or may not improve application performance. Be sure to benchmark your application with and without caching.”
 
-	Claramente, este es un caso en que no se mejora la performance, sin lugar a dudas
+	Claramente, este es un caso en que no se mejora la performance, sin lugar a dudas.
 
-Replicación de sesiones
+	Replicación de sesiones
 
-	Por inexperiencia, a priori ignorábamos cómo marcar las sesiones de JBoss como distribuidas. Por suerte esto fue exageradamente más simple que en el caso anterior, al marcar el web.xml como <distributable/> se logra esto automáticamente
+	Por inexperiencia, a priori ignorábamos cómo marcar las sesiones de JBoss como distribuidas. Por suerte esto fue exageradamente más simple que en el caso anterior, al marcar el web.xml como <distributable/> se logra esto automáticamente.
 
 5.6.3. Terracotta + Tomcat
 
 	Replicación de datos clusterizados
 
-	En terracotta existen dos formas para poder compartir los datos de las resoluciones de trabajos prácticos inclusive entre los distintos nodos del cluster. 
+	En terracotta existen dos formas para poder compartir los datos de las resoluciones de trabajos prácticos inclusive entre los distintos nodos del cluster.
 
 1.-	La primera es totalmente por configuración, con lo que se hace uso de las capacidades de terracotta de emular una única JVM a partir de las JVM de los nodos, de esta forma cualquier variable dentro de java (que se encuentre correctamente configurada) puede ser compartida entre todos los nodos del cluster, logrando así compartir datos sin necesitar de soluciones adicionales. Sin embargo este enfoque no es el recomendado en la documentación de Terracotta, ya que requiere tener en cuenta y configurar “a mano” bloqueos para evitar problemas de concurrencia. La documentación solo recomienda esta opción ante situaciones en las que no se pueda utilizar la opción número 2 [TERRACOTTA VENTAJAS TOOKIT] 
 
-2.-	La segunda opción, la recomendada en la documentación (y la que utilizamos en nuestro sistema), es mas intrusiva porque requiere de una modificación en el código fuente de la aplicación. En nuestro caso necesitamos usar una estructura tipo Mapa para contener el estado de una Resolución compartida en progreso, y teniendo en cuenta la recomendación de Terracotta el único cambio a realizar es cambiar el mapa utilizado por uno de terracotta [TERRACOTTA TOOLKIT] :
+2.-	La segunda opción, la recomendada en la documentación (y la que utilizamos en nuestro sistema), es mas intrusiva porque requiere de una modificación en el código fuente de la aplicación. En nuestro caso necesitamos usar una estructura tipo Mapa para contener el estado de una Resolución compartida en progreso, y teniendo en cuenta la recomendación de Terracotta el único cambio a realizar es cambiar el mapa utilizado por uno de terracotta [TERRACOTTA TOOLKIT]:
 
 Map mapaResoluciones = new TerracottaClient("ip_terracotta:9510").getToolkit().getMap("myStaticMap");
 
-De esta forma, evitamos todo tipo de configuración, y todo el manejo de concurrencia y sincronización del mapa está dado automáticamente.
+	De esta forma, evitamos todo tipo de configuración, y todo el manejo de concurrencia y sincronización del mapa está dado automáticamente.
 
 
 	Cache de segundo nivel
@@ -844,11 +883,11 @@ De esta forma, evitamos todo tipo de configuración, y todo el manejo de concurr
 
 	La configuración necesaria para habilitar dicha cache se realiza en dos pasos:
 
-	1- Archivo hibernate.cfg.xml
+	1- Archivo hibernate.cfg.xml:
 
 <property name="net.sf.ehcache.configurationResourceName">ehcache.xml</property>
 
-	2- Archivo de configuración ehcache.xml
+	2- Archivo de configuración ehcache.xml:
 
 <ehcache name="QinWebCache">
 <defaultCache maxElementsInMemory="15000" eternal="false"
@@ -882,13 +921,13 @@ De esta forma, evitamos todo tipo de configuración, y todo el manejo de concurr
 
 	En todos los casos:
 
-Rendimiento: [resquests/segundo]
-Media: [milisegundos]
-Desviación estándar: [milisegundos]
+Rendimiento: [resquests/segundo].
+Media: [milisegundos].
+Desviación estándar: [milisegundos].
 
-Eje X: cantidad de usuarios
+Eje X: cantidad de usuarios.
 
-Para determinar si las mediciones están dentro de los tiempos estándar, se debe recordar la tabla en “5.5. Pruebas”. Sintetizando, la información contenida en dicha tabla indica que: la aplicación responde correctamente si cualquier petición tarda entre 0,1 y 10 segundos. Una respuesta de 1 segundo es el punto medio de dicho intervalo. Por ende, para poder concluir a partir de los gráficos que la aplicación se encuentra dentro de su comportamiento estándar, considerando que en dichos gráficos hay promedios acumulados en las distintas corridas con JMeter, se define que media + la desviación estándar en cualquier punto debe ser como mucho igual a un 1 segundo; cuando esto se cumpla, la aplicación en ese punto presentará los valores estándar de respuesta. Llamaremos a esta medicion, por motivos de practicidad, “punto de tiempo estándar”
+Para determinar si las mediciones están dentro de los tiempos estándar, se debe recordar la tabla en “5.5. Pruebas”. Sintetizando, la información contenida en dicha tabla indica que: la aplicación responde correctamente si cualquier petición tarda entre 0,1 y 10 segundos. Una respuesta de 1 segundo es el punto medio de dicho intervalo. Por ende, para poder concluir a partir de los gráficos que la aplicación se encuentra dentro de su comportamiento estándar, considerando que en dichos gráficos hay promedios acumulados en las distintas corridas con JMeter, se define que media + la desviación estándar en cualquier punto debe ser como mucho igual a un 1 segundo; cuando esto se cumpla, la aplicación en ese punto presentará los valores estándar de respuesta. Llamaremos a esta medicion, por motivos de practicidad, “punto de tiempo estándar”.
 
 5.7.1. JBoss
 
@@ -907,12 +946,12 @@ Ir con ambos usuarios, a resolver un mismo trabajo práctico de manera colaborat
 Escribir texto para que se sincronice.
 Bajar el nodo que se levantó primero.
 Confirmar que la aplicación sigue andando.
-Confirmar que el usuario que fue atendido por el nodo bajado, ahora es atendido por el otro nodo; el cambio se produce de manera transparente para el usuario
-Volver a levantar el nodo que se bajó anteriormente
-Comprobar que el cluster se vuelve a armar
+Confirmar que el usuario que fue atendido por el nodo bajado, ahora es atendido por el otro nodo; el cambio se produce de manera transparente para el usuario.
+Volver a levantar el nodo que se bajó anteriormente.
+Comprobar que el cluster se vuelve a armar.
 Comprobar mediante la consola administrativa del servidor de sincronización, que el caché ha sido usado.
 
-	Habiendo ejecutado la prueba anterior correctamente, ya no queda duda alguna del correcto funcionamiento del cluster, por lo que a partir de ese momento nos pudimos enfocar en las pruebas automáticas para obtener información relacionada con tiempos de respuesta y rendimiento. Para información detallada de la salida de dicha prueba ver “7.6. Apéndice 6: Ejecución de la combinación de casos de pruebas manuales”
+	Habiendo ejecutado la prueba anterior correctamente, ya no queda duda alguna del correcto funcionamiento del cluster, por lo que a partir de ese momento nos pudimos enfocar en las pruebas automáticas para obtener información relacionada con tiempos de respuesta y rendimiento. Para información detallada de la salida de dicha prueba ver “7.6. Apéndice 6: Ejecución de la combinación de casos de pruebas manuales”.
 
 	Pruebas automáticas
 
@@ -1008,7 +1047,7 @@ Desviación estándar total datos sin clusterizar
 
 	El punto de tiempo estándar más alto en toda la prueba, es de 38,94 milisegundos, para los datos sin clusterizar con 900 usuarios, que es un valor aceptable. Se concluye que en toda la prueba, los tiempos fueron los deseables.
 
-	En este caso, se puede ver que el nodo individual es mucho más exigido que en la configuración en cluster; en la oportunidad anterior, se pudieron atender a 1300 usuarios, en este caso, con un nodo individual, se pueden atender solamente a 900, pero con la particularidad de que los 900 van al mismo nodo, frente a la foto ideal en equilibrio del caso anterior de como máximo 650 usuarios por nodo
+	En este caso, se puede ver que el nodo individual es mucho más exigido que en la configuración en cluster; en la oportunidad anterior, se pudieron atender a 1300 usuarios, en este caso, con un nodo individual, se pueden atender solamente a 900, pero con la particularidad de que los 900 van al mismo nodo, frente a la foto ideal en equilibrio del caso anterior de como máximo 650 usuarios por nodo.
 
 	Se puede apreciar aquí una particularidad de la comparación nodo individual - cluster: mientras responde el nodo individual, es más rápido que el cluster lo cual también se puede concluir comparando ambos puntos de tiempo estándar, sin embargo, el cluster tiene más escalabilidad y por definición brinda alta disponibilidad.
 
@@ -1146,7 +1185,7 @@ Desviación estándar total datos sin clusterizar
 
 	El punto de tiempo estándar más alto en toda la prueba, es de 105,54 milisegundos, para los datos sin clusterizar con 3800 usuarios, que es un valor aceptable. Se concluye que en toda la prueba, los tiempos fueron los deseables.
 
-	Mismo patrón de comportamiento que en el caso anterior
+	Mismo patrón de comportamiento que en el caso anterior.
 
 	Load Test Datos Clusterizados (ST) - Cluster
 
@@ -1293,7 +1332,7 @@ Desviación estándar total datos sin clusterizar
 
 	Siguiendo el mismo razonamiento que en la sección correspondiente de JBoss, planteamos exactamente el mismo caso de prueba con el objetivo de verificar que con este cluster también se superan las pruebas manuales. Una diferencia con el caso de JBoss, es que en el caso de Terracotta, la  información de log se obtiene consultando la consola administrativa de Terracotta a diferencia de JBoss donde necesariamente debemos consultar los archivos de log.
 
-	Para más información ver “7.6. Apéndice 6: Ejecución de la combinación de casos de pruebas manuales”
+	Para más información ver “7.6. Apéndice 6: Ejecución de la combinación de casos de pruebas manuales”.
 
 	Pruebas automáticas
 
@@ -1345,7 +1384,7 @@ Desviación estándar total datos sin clusterizar
 
 	Creemos haber demostrado que esta característica, se debe a que el cluster con JBoss demanda muchos más recursos de hardware y de conectividad, por el tipo de tecnología y servicios que ofrece JBoss. Para ejemplificar: no es lo mismo sincronizar con JGroups (JBoss), a simplemente, no sincronizar (ver Sync Test - Cluster).
 
-	Otra particularidad a tener en cuenta, es que en el caso de JBoss los datos clusterizados fueron siempre los que entregaron el pico en el punto de tiempo estándar, mientras que en este caso de Terracotta + Tomcat son los datos sin clusterizar los que dan ese pico. Concluimos que esto se debe a que con Terracotta se dá una combinación muy particular al disponer de una muy buena sincronización, sin demandar los recursos que demanda JBoss, lo cual le permite tener un rendimiento incluso superior a Tomcat en este caso, que ya de por sí es mucho más liviano que JBoss
+	Otra particularidad a tener en cuenta, es que en el caso de JBoss los datos clusterizados fueron siempre los que entregaron el pico en el punto de tiempo estándar, mientras que en este caso de Terracotta + Tomcat son los datos sin clusterizar los que dan ese pico. Concluimos que esto se debe a que con Terracotta se dá una combinación muy particular al disponer de una muy buena sincronización, sin demandar los recursos que demanda JBoss, lo cual le permite tener un rendimiento incluso superior a Tomcat en este caso, que ya de por sí es mucho más liviano que JBoss.
 
 	Stress Test (STT) - Individual
 
@@ -1627,7 +1666,7 @@ Desviación estándar total datos clusterizados
 
 	El punto de tiempo estándar con 6600 usuarios, el más alto hasta ese punto, es de 102,35 milisegundos, y el mismo valor en el paso siguiente de 7350 usuarios salta hasta 672,98 milisegundos; si bien el salto es considerable, se sigue estando dentro de los tiempos estádar.
 
-Se repite el caso anterior, en que el cluster con Terracotta - Tomcat exhibe unos números notables, llegando a atender a más de 7000 usuarios
+	Se repite el caso anterior, en que el cluster con Terracotta - Tomcat exhibe unos números notables, llegando a atender a más de 7000 usuarios.
 
 	Load Test Datos No Clusterizados (NST) - Cluster
 
@@ -1666,6 +1705,7 @@ Desviación estándar total datos sin clusterizar
 
 
 
+
 	El punto de tiempo estándar con 3600 usuarios, el más alto hasta ese punto, es de 795,73 milisegundos, y el mismo valor en el paso siguiente de 4800 usuarios salta hasta 1359,89 milisegundos, lo cual excede los tiempos estándar esperados en una aplicación web. De hecho, valores al margen, queda más que claro contemplando el gráfico, que a los 3000 usuarios el sistema empieza a colapsar, pero soporta hasta 3800 usuarios. A continuación, el ambiente se queda sin recursos, y colapsa por completo.
 
 	Se retorna a los patrones de comportamiento más frecuentes.
@@ -1698,13 +1738,13 @@ Desviación estándar total datos sin clusterizar
 
 	El punto de tiempo estándar con 1700 usuarios, el más alto hasta ese punto, es de 74,27 milisegundos, y el mismo valor en el paso siguiente de 2000 usuarios salta hasta 638,79 milisegundos; si bien el salto es considerable, se sigue estando dentro de los tiempos estándar de respuesta.
 
-	Se retorna a los patrones de comportamiento más frecuentes
+	Se retorna a los patrones de comportamiento más frecuentes.
 
 6. Conclusiones
 
 	Podemos analizar los resultados a partir de las propiedades de arquitectura perseguidas:
 
-Buena performance: con ambas herramientas conseguimos igualmente buenos resultados en cuanto a tiempos de respuesta, y rendimiento. Incluso se estuvo en casi todas las pruebas, dentro de los tiempos estándar de respuesta de una aplicación web. 
+Buena performance: con ambas herramientas conseguimos igualmente buenos resultados en cuanto a tiempos de respuesta, y rendimiento. Incluso se estuvo en casi todas las pruebas, dentro de los tiempos estándar de respuesta de una aplicación web.
 
 Gracias a los ajustes explicados anteriormente, se ha llegado a acomodar una cantidad máxima de usuarios entre los 4500 y 6000, según la prueba. Si se tiene en cuenta que nunca dispusimos de un servidor real, y que al mismo tiempo los servidores debían correr la aplicación de pruebas (la cual consume muchos recursos), podemos conjeturar que el planteo de la aplicación de pruebas que es una aplicación que aporta servicios en una institución educativa de gran tamaño, y que a modo de comparación se toma el caso de la Facultad de Ingeniería de la Universidad de Buenos Aires con sus 8000 alumnos, creemos que se puede decir que se cumplieron los objetivos de servicio masivo planteados.
 
@@ -1717,7 +1757,6 @@ Elasticidad: en los siguientes gráfico presentamos la comparativa de los result
 
 
 	Observando la performance y redimiento conseguidos con ambas herramientas, podemos ver que Jboss es mas predecible, ya que a medida que aumentamos la carga, los tiempos de respuesta se van incrementando paulatinamente. Por el contrario, si bien Terracotta + Tomcat nos provee de una performance similar, al aumentar la carga sobre el sistema llegamos a un punto de quiebre, en donde los tiempos de respuesta se disparan. Teniendo esto en cuenta, podemos decir que la arquitectura implementada con JBoss es una arquitectura mas elástica que la implementada con Terracotta + Tomcat ya que al ser mas predecible se pueden tomar las acciones necesarias para aumentar la cantidad de nodos del cluster y asi obtener una mayor tolerancia al incremento en la carga.
-
 7. Apéndices
 
 7.1. Apéndice 1: Cómo utilizar las herramientas seleccionadas
@@ -1753,9 +1792,9 @@ worker2
 
 	Se define [home 1 de JBoss 6] como directorio de instalación de la instancia de JBoss que conforma el worker1, por ejemplo /opt/jboss-6.1.0.Final, y [home 2 de JBoss 6] como directorio de instalación de la instancia de JBoss que conforma el worker2, por ejemplo /opt/jboss-6.1.0.Final.2., independientemente de la computadora.
 
-Si en worker1 se ejecuta:
+	Si en worker1 se ejecuta:
 
-[home 1 de JBoss 6]/bin/run.sh -c all -g qin -u 239.1.2.3 -b worker1 -Djboss.messaging.ServerPeerID=1 -Djboss.service.binding.set=ports-default 
+[home 1 de JBoss 6]/bin/run.sh -c all -g qin -u 239.1.2.3 -b worker1 -Djboss.messaging.ServerPeerID=1 -Djboss.service.binding.set=ports-default
 
 … y en worker2 se ejecuta:
 
@@ -1769,7 +1808,7 @@ Si en worker1 se ejecuta:
 -u 239.1.2.3: dirección IP para multicast, utilizada por los mecanismos de sincronización del cluster, como el servicio de multicaste JGroups (http://www.jgroups.org/) y el sistema de mensajería Hornetq (https://www.jboss.org/hornetq) en que se basa el clustering provisto por JBoss
 -b worker1: dirección IP en que atiende esta instancia en particular; se utiliza directamente worker1, para que se levante el IP definido para el alias worker1 en /etc/hosts; equivalente en el caso de -b worker2.
 -Djboss.messaging.ServerPeerID=1: identificación del canal de mensajería que se le asigna al nodo; único para cada nodo; en este caso se toma el canal 1. En el caso de worker2 el canal es el 2.
--Djboss.service.binding.set=ports-default: set de puertos a tomar en la computadora en que corre el nodo; en este caso, el set por defecto, que determina http en el puerto 8080 y ajp en el puerto 8009. En el caso de -Djboss.service.binding.set=ports-01, se le indica a la instancia de JBoss que incremente el número de sus puertos en una centena (se determina la cantidad de centenas con el “01” de “ports-01”; en este caso, una centena); esto no es necesario cuando los nodos se encuentran en computadoras distintas, es decir cuando la topología es horizontal, pero igualmente decidimos utilizar siempre esta opción para el worker2, para de esta manera poder levantar todo en una sola computadora, si así fuera necesario, con los mismos comandos. Naturalmente, http queda en el puerto 8180 y ajp queda en el puerto 8109
+-Djboss.service.binding.set=ports-default: set de puertos a tomar en la computadora en que corre el nodo; en este caso, el set por defecto, que determina http en el puerto 8080 y ajp en el puerto 8009. En el caso de -Djboss.service.binding.set=ports-01, se le indica a la instancia de JBoss que incremente el número de sus puertos en una centena (se determina la cantidad de centenas con el “01” de “ports-01”; en este caso, una centena); esto no es necesario cuando los nodos se encuentran en computadoras distintas, es decir cuando la topología es horizontal, pero igualmente decidimos utilizar siempre esta opción para el worker2, para de esta manera poder levantar todo en una sola computadora, si así fuera necesario, con los mismos comandos. Naturalmente, http queda en el puerto 8180 y ajp queda en el puerto 8109.
 
 	Nótese que de esta manera, los comandos para levantar el cluster quedan escritos “en genérico”, y sirven para cuanta combinación se determine, actualizando los valores de los IPs de worker1 y worker2 en el archivo /etc/hosts según lo que se necesite.
 
@@ -1785,8 +1824,7 @@ Si en worker1 se ejecuta:
 
 <Engine name="jboss.web" defaultHost="localhost" jvmRoute="worker2">
 
-
-… respectivamente. El valor del atributo jvmRoute, es el identificador con el que puede trabajar el balanceador de carga al ser configurado, como es nuestro caso, con StickySession, lo cual significa que una vez que un nodo atiende una petición para un usuario, dicho nodo atenderá todas las demás peticiones del mismo usuario; con este identificador, es que el balanceador de carga puede saber qué nodo (el nodo de jvmRoute igual a worker1 o el nodo de jvmRoute igual a worker2) atiende a qué usuario
+… respectivamente. El valor del atributo jvmRoute, es el identificador con el que puede trabajar el balanceador de carga al ser configurado, como es nuestro caso, con StickySession, lo cual significa que una vez que un nodo atiende una petición para un usuario, dicho nodo atenderá todas las demás peticiones del mismo usuario; con este identificador, es que el balanceador de carga puede saber qué nodo (el nodo de jvmRoute igual a worker1 o el nodo de jvmRoute igual a worker2) atiende a qué usuario.
 
 	Además, en todos los casos en [home 1 de JBoss 6]/bin/run.conf y [home 1 de JBoss 6]/bin/run.conf  se anuló la configuración titulada “Sample JPDA settings for remote socket debuging”, para evitar perder recursos al habilitar el debugging remoto.
 
@@ -1803,11 +1841,11 @@ Si en worker1 se ejecuta:
 
 	Terracotta
 
-	La manera de ejecutar Terracotta es: ([home de Terracotta 3.6] es el directorio donde se instaló Terracotta 3.6.0 en esa computadora)
+	La manera de ejecutar Terracotta es: ([home de Terracotta 3.6] es el directorio donde se instaló Terracotta 3.6.0 en esa computadora).
 
 [home de Terracotta 3.6]/bin/start-tc-server.sh
 
-	Luego de levantar el servidor de Terracotta de esta manera, el mismo se quedará esperando a que se le conecten clientes. En nuestro caso, los clientes son instancias de Tomcat. 
+	Luego de levantar el servidor de Terracotta de esta manera, el mismo se quedará esperando a que se le conecten clientes. En nuestro caso, los clientes son instancias de Tomcat.
 
 
 	Tomcat: utilizando a Terracotta como sincronizador
@@ -1861,53 +1899,53 @@ agregarEntradaEnRouter.sh: incorporar en el router, la entrada para multicast ud
 backupearArchivosConfiguracion.sh: antes de levantar Apache con su balanceador de carga mod_proxy, salvaguardar sus archivos de configuración.
 bajarAmbiente.sh: bajar cluster, no importa cual.
 bajarApacheCompleto.sh: bajar sólamente Apache, de manera completa, lo cual implica utilizar graceful-stop y recuperar los archivos de configuración salvaguardados.
-bajarApache.sh: bajar Apache, sólamente
-bajarJboss.sh: bajar cualquier instanciade JBoss
-bajarMysql.sh: bajar el servicio de MySQL
-bajarTerracotta.sh: bajar Terracotta
-bajarTomcat.sh: bajar cualquier instancia de Tomcat
-compilarYDeployarQinweb.sh: compilar y deployar el proyecto qinweb, tanto para y en JBoss como para y en Tomcat
-configurarProcesador.sh: elevar la velocidad de todos los núcleos del CPU al máximo posible
-detectarIpConexion.sh: detectar IP de la computadora
-editarArchivosConfiguracion.sh: editar archivos de configuración de Apache y de su balanceador de carga mod_proxy
-jmeter.sh: levantar JMeter
-limpiarAmbiente.sh: limpiar todos los archivos de log y temporales del entorno
-logearApache.sh: mostrar en terminal, el log de Apache
-logearJboss.sh: mostrar en terminal, el log de cualquier instancia de JBoss
-logearTerracotta.sh: mostrar en terminal, el log de Terracotta
-logearTomcat.sh: mostrar en terminal, el log de Tomcat
-manejarPermisos.sh: para evitar complicaciones, dar todos los permisos a todos los servidores utilizados
-recargarConfiguracionApache.sh: efectuar reload y configtest de la configuración de Apache
-reestablecerArchivosConfiguracion.sh: recuperar los archivos de configuración salvaguardados de Apache y su balanceador de carga mod_proxy
-resetearBaseDeDatos.sh: reconstruir la base de datos de pruebas, a su estado inicial
-resetearProcesador.sh: colocar la velocidad de todos los núcleos del CPU en modo onDemand
-subirAmbiente.sh: subir el cluster entero, ya sea de JBoss o de Terracotta
-subirApacheCompleto.sh: subir Apache y su balanceador de carga mod_proxy, recargando la configuración
-subirApache.sh: sólamente, subir Apache
-subirJboss.sh: subir cualquier instancia de JBoss
-subirMysql.sh: subir el servicio MySQL
-subirTerracotta.sh: subir Terracotta
+bajarApache.sh: bajar Apache, solamente.
+bajarJboss.sh: bajar cualquier instanciade Jboss.
+bajarMysql.sh: bajar el servicio de MySQL.
+bajarTerracotta.sh: bajar Terracotta.
+bajarTomcat.sh: bajar cualquier instancia de Tomcat.
+compilarYDeployarQinweb.sh: compilar y deployar el proyecto qinweb, tanto para y en JBoss como para y en Tomcat.
+configurarProcesador.sh: elevar la velocidad de todos los núcleos del CPU al máximo posible.
+detectarIpConexion.sh: detectar IP de la computadora.
+editarArchivosConfiguracion.sh: editar archivos de configuración de Apache y de su balanceador de carga mod_proxy.
+jmeter.sh: levantar Jmeter.
+limpiarAmbiente.sh: limpiar todos los archivos de log y temporales del entorno.
+logearApache.sh: mostrar en terminal, el log de Apache.
+logearJboss.sh: mostrar en terminal, el log de cualquier instancia de Jboss.
+logearTerracotta.sh: mostrar en terminal, el log de Terracotta.
+logearTomcat.sh: mostrar en terminal, el log de Tomcat.
+manejarPermisos.sh: para evitar complicaciones, dar todos los permisos a todos los servidores utilizados.
+recargarConfiguracionApache.sh: efectuar reload y configtest de la configuración de Apache.
+reestablecerArchivosConfiguracion.sh: recuperar los archivos de configuración salvaguardados de Apache y su balanceador de carga mod_proxy.
+resetearBaseDeDatos.sh: reconstruir la base de datos de pruebas, a su estado inicial.
+resetearProcesador.sh: colocar la velocidad de todos los núcleos del CPU en modo onDemand.
+subirAmbiente.sh: subir el cluster entero, ya sea de JBoss o de Terracotta.
+subirApacheCompleto.sh: subir Apache y su balanceador de carga mod_proxy, recargando la configuración.
+subirApache.sh: sólamente, subir Apache.
+subirJboss.sh: subir cualquier instancia de Jboss.
+subirMysql.sh: subir el servicio MySQL.
+subirTerracotta.sh: subir Terracotta.
 subirTomcat.sh: subir cualquier instancia de Tomcat
-terracottaDevConsole.sh: mostrar la consola de Terracotta
+terracottaDevConsole.sh: mostrar la consola de Terracotta.
 
-	Todos los scripts pueden ser ejecutados de manera independiente, o puenden llamarse automáticamente entre sí según se requiera. Todos los scripts toman parámetros por consola o en su defecto ejecutan sus parámetros por defecto
+	Todos los scripts pueden ser ejecutados de manera independiente, o puenden llamarse automáticamente entre sí según se requiera. Todos los scripts toman parámetros por consola o en su defecto ejecutan sus parámetros por defecto.
 
 	A partir de que un script encapsula una tarea en particular, cada vez que se necesita de esa tarea en otro script se llama al script que encapsula esa tarea. Por ejemplo, el script subirAmbiente.sh, realiza llamadas a los scripts (en este orden):
 
-bajarAmbiente.sh.
-limpiarAmbiente.sh.
-backupearArchivosConfiguracion.sh.
-subirMysql.sh.
-resetearBaseDeDatos.sh.
-compilarYDeployarQinweb.sh.
-Si el cluster se implementa con JBoss
-agregarEntradaEnRouter.sh.
-subirJboss.sh (dos veces).
-Si el cluster se implementa con Terracotta + Tomcat
-subirTerracotta.sh.
-subirTomcat.sh (dos veces).
-subirApacheCompleto.sh.
-manejarPermisos.sh.
+bajarAmbiente.sh
+limpiarAmbiente.sh
+backupearArchivosConfiguracion.sh
+subirMysql.sh
+resetearBaseDeDatos.sh
+compilarYDeployarQinweb.sh
+Si el cluster se implementa con Jboss:
+agregarEntradaEnRouter.sh
+subirJboss.sh (dos veces)
+Si el cluster se implementa con Terracotta + Tomcat:
+subirTerracotta.sh
+subirTomcat.sh (dos veces)
+subirApacheCompleto.sh
+manejarPermisos.sh
 
 	Todos los scripts ayudan a preservar los recursos de las computadoras en que se los corre: detectan el IP de la computadora, y si el mismo no es igual al IP de alias basededatos definido en /etc/hosts, bajan el servicio MySQL si es que está activo, porque si ese es el caso entonces es un desperdicio de recursos; el servicio MySQL sólo debe estar activo en la computadora cuyo IP es basededatos; lo mismo con terracotta y apache. Y además los scripts siempre elevan la velocidad de los núcleos del CPU.
 
@@ -1939,7 +1977,7 @@ manejarPermisos.sh.
 
 	La misma, se presenta cuando más de un alumno resuelven de manera colaborativa un mismo trabajo práctico, previo intercambio del código de resolución compartida.
 
-	En ese contexto, el texto que vierten los alumnos que resuelven el trabajo práctico de manera colaborativa en el sistema, y que aún no ha sido almacenado en la base de datos, es sincronizado de manera centralizada y actualizado automáticamente cada cinco segundos, presentando en la sesión de cada uno de los alumnos vinculados a esa resolución el mismo texto actualizado; en otras palabras, a modo de ejemplo sólo para hacernos entender y salvando las distancias, una especie de Google Docs ahora renombrado Google Drive (http://es.wikipedia.org/wiki/Google_Drive)
+	En ese contexto, el texto que vierten los alumnos que resuelven el trabajo práctico de manera colaborativa en el sistema, y que aún no ha sido almacenado en la base de datos, es sincronizado de manera centralizada y actualizado automáticamente cada cinco segundos, presentando en la sesión de cada uno de los alumnos vinculados a esa resolución el mismo texto actualizado; en otras palabras, a modo de ejemplo sólo para hacernos entender y salvando las distancias, una especie de Google Docs ahora renombrado Google Drive (http://es.wikipedia.org/wiki/Google_Drive).
 
 
 	La implementación de este servicio es en esencia la misma tanto para el cluster estructurado con JBoss como para el cluster estructurado con Terracotta + Tomcat: finalmente estamos hablando de una clase de sincronizacion de texto, que interactúa con un arreglo en que se almacenan todos los textos de todas las resoluciones colaborativas utilizadas por las sesiones de usuarios presentes y activas en el sistema. Dicho arreglo debe ser único en todo el cluster y debe estar sincronizado.
@@ -2210,7 +2248,7 @@ public interface PojoCacheManager {
 	String getValue(String key);
 }
 
-	Implementación: se demarca en negrita, el POJO cacheado, en este caso el arreglo con los textos de resolución colaborativa
+	Implementación: se demarca en negrita, el POJO cacheado, en este caso el arreglo con los textos de resolución colaborativa.
 
 package com.qin.cache.pojo.manager;
 
@@ -2251,8 +2289,8 @@ public class PojoCacheManagerImpl implements PojoCacheManager {
 	public void create() throws Exception {
 	}
 
-	
-@Override
+
+	@Override
 	public void start() throws Exception {
 		try {
 			// Remove from local JNDI until started as a singleton,
@@ -2310,7 +2348,7 @@ public class PojoCacheManagerImpl implements PojoCacheManager {
 		}
 	}
 
-@Override
+	@Override
 	public boolean existsKey(String key) {
 		try {
 			return pojoCache.containsKey(key);
@@ -2344,8 +2382,7 @@ public class PojoCacheManagerImpl implements PojoCacheManager {
 		}
 	}
 
-	
-@Override
+	@Override
 	public String getValue(String key) {
 		try {
 			String retorno = pojoCache.get(key);
@@ -2375,9 +2412,9 @@ public class PojoCacheManagerImpl implements PojoCacheManager {
 
 	En el caso de JBoss, se provee a continuación evidencia de una corrida de las características que permiten comprobar las pruebas manuales.
 
-Se levanta el cluster; se comprueba que se haya armado correctamente
+Se levanta el cluster; se comprueba que se haya armado correctamente.
 
-	Worker1 activándose y levantando el PojoCacheManager: cabe destacar, que como es el nodo que se levanta primero, se inicia en este nodo con startSingleton el servicio de sincronización (ver "7.4. Apéndice 4: Diferencias en la implementación de la sincronización" y "7.5. Apéndice 5: Código de la clase PojoCacheManagerImpl, utilizada en el cluster con JBoss")
+	Worker1 activándose y levantando el PojoCacheManager: cabe destacar, que como es el nodo que se levanta primero, se inicia en este nodo con startSingleton el servicio de sincronización (ver "7.4. Apéndice 4: Diferencias en la implementación de la sincronización" y "7.5. Apéndice 5: Código de la clase PojoCacheManagerImpl, utilizada en el cluster con Jboss").
 
 04:25:13,773 INFO  [JBossASKernel]     jboss.j2ee:ear=qinear-1.0.ear,jar=qinejb-1.0.jar,name=PojoCacheManagerImpl,service=EJB3; Required: Described
 04:25:13,773 INFO  [JBossASKernel]   and supplies:
@@ -2401,7 +2438,7 @@ Se levanta el cluster; se comprueba que se haya armado correctamente
 04:25:15,175 INFO  [JGroupsTransport] Starting JGroups Channel
 04:25:15,175 INFO  [JChannel] JGroups version: 2.11.0.GA
 
-	Worker2 activándose y levantando el PojoCacheManager, sin ejecutar startSingleton
+	Worker2 activándose y levantando el PojoCacheManager, sin ejecutar startSingleton.
 
 04:25:37,561 INFO  [JBossASKernel]     jboss.j2ee:ear=qinear-1.0.ear,jar=qinejb-1.0.jar,name=PojoCacheManagerImpl,service=EJB3; Required: Described
 04:25:37,562 INFO  [JBossASKernel]   and supplies:
@@ -2424,7 +2461,7 @@ Se levanta el cluster; se comprueba que se haya armado correctamente
 04:25:37,921 INFO  [JGroupsTransport] Starting JGroups Channel
 04:25:37,921 INFO  [JChannel] JGroups version: 2.11.0.GA
 
-	Worker1 detecta que se inicia worker2, lo toma para armar un cluster, y arranca definitivamente el PojoCacheManager, ya que ya se ha determinado que la instancia que queda sincronizando a nivel cluster es la de worker1
+	Worker1 detecta que se inicia worker2, lo toma para armar un cluster, y arranca definitivamente el PojoCacheManager, ya que ya se ha determinado que la instancia que queda sincronizando a nivel cluster es la de worker1.
 
 2012-10-17 04:25:27,544 INFO  [org.jboss.ha.framework.server.ClusterPartition.lifecycle.qin] (Incoming-5,null) New cluster view for partition qin (id: 1, delta: 1, merge: false) : [worker1:1099, worker2:1199]
 2012-10-17 04:25:27,548 INFO  [org.jboss.ha.core.framework.server.DistributedReplicantManagerImpl.qin] (AsynchViewChangeHandler Thread) I am (worker1:1099) received membershipChanged event:
@@ -2441,25 +2478,25 @@ Se levanta el cluster; se comprueba que se haya armado correctamente
 (WorkerThread#0[192.168.1.107:49793]) PojoCacheManagerImpl: setValue
 (WorkerThread#0[192.168.1.107:49794]) PojoCacheManagerImpl: getValue
 
-Se ingresa con el navegador Mozilla Firefox con usuario1
+Se ingresa con el navegador Mozilla Firefox con usuario1.
 
 
-Se confirma qué nodo atiende a usuario1; es el worker2
+Se confirma qué nodo atiende a usuario1; es el worker2.
 
 
-Se ingresa con el navegador Chromium con usuario2
+Se ingresa con el navegador Chromium con usuario2.
 
 
-Se confirma qué nodo atiende a usuario2; es el worker1
+Se confirma qué nodo atiende a usuario2; es el worker1.
 
 
-Se verifica que el sincronizador está trabajando
+Se verifica que el sincronizador está trabajando.
 
 
 
-Se baja worker1; comprobar que la sincronización continúa; se superan las pruebas manuales “Desconexión de un nodo en esquema colaborativo” y “Disponibilidad del sistema”
+Se baja worker1; comprobar que la sincronización continúa; se superan las pruebas manuales “Desconexión de un nodo en esquema colaborativo” y “Disponibilidad del sistema”.
 
-	Worker1 bajando y desconectando el PojoCacheManager
+	Worker1 bajando y desconectando el PojoCacheManager.
 
 2012-10-17 04:36:03,394 INFO  [org.jboss.system.server.jmx.JMXKernel] (Thread-30) Server exit called, exiting the JVM now!
 2012-10-17 04:36:03,409 INFO  [STDOUT] (Thread-1) Posting Shutdown Request to the server...
@@ -2539,7 +2576,7 @@ Se baja worker1; comprobar que la sincronización continúa; se superan las prue
 04:36:07,294 INFO  [AbstractServer] Stopped: JBossAS [6.1.0.Final "Neo"] in 3s:884ms
 
 
-	Worker2 activando su instancia de PojoCacheManager, para que ahora ésta pueda ser la instancia que sincroniza todo el cluster, y registrando que el cluster perdió un nodo
+	Worker2 activando su instancia de PojoCacheManager, para que ahora ésta pueda ser la instancia que sincroniza todo el cluster, y registrando que el cluster perdió un nodo.
 
 2012-10-17 04:36:03,586 INFO  [STDOUT] (AsynchKeyChangeHandler Thread) PojoCacheManagerImpl: startSingleton 
 2012-10-17 04:36:04,418 WARN  [org.hornetq.core.protocol.core.impl.RemotingConnectionImpl] (Thread-4 (group:HornetQ-client-global-threads-1602965727)) Connection failure has been detected: The connection was disconnected because of server shutdown [code=4]
@@ -2568,20 +2605,20 @@ Se baja worker1; comprobar que la sincronización continúa; se superan las prue
 	El balancer manager muestra que se perdió un nodo
 
 
-Se confirma en qué navegador de Internet se trabaja con qué usuario
+Se confirma en qué navegador de Internet se trabaja con qué usuario.
 
 
 	Usuario2 en Chromium y usuario1 en Mozilla Firefox
 
-Se comprueba que ambos usuarios estén siendo atendidos por el nodo que no se bajó, en este caso worker2; se supera la prueba manual “Réplicación de sesión”
+Se comprueba que ambos usuarios estén siendo atendidos por el nodo que no se bajó, en este caso worker2; se supera la prueba manual “Réplicación de sesión”.
 
 
-Se comprueba que el cache de segundo nivel de persistencia esté operando; se supera la prueba manual “Caché”
+Se comprueba que el cache de segundo nivel de persistencia esté operando; se supera la prueba manual “Caché”.
 
 
-Se vuelve a levantar el nodo que se bajó anteriormente
+Se vuelve a levantar el nodo que se bajó anteriormente.
 
-	Worker1 retorna y vuelve a conectarse con worker2
+	Worker1 retorna y vuelve a conectarse con worker2.
 
 2012-10-17 04:57:20,702 INFO  [org.hornetq.core.server.cluster.impl.BridgeImpl] (Thread-1 (group:HornetQ-server-threads1424309400-1907685389)) Connecting bridge sf.my-cluster.45ead1b5-1830-11e2-9578-68a3c49b1ef7 to its destination [30969d9a-1830-11e2-b820-68a3c49b1ef7]
 2012-10-17 04:57:21,146 INFO  [org.hornetq.core.server.cluster.impl.BridgeImpl] (Thread-1 (group:HornetQ-server-threads1424309400-1907685389)) Bridge sf.my-cluster.45ead1b5-1830-11e2-9578-68a3c49b1ef7 is connected [30969d9a-1830-11e2-b820-68a3c49b1ef7-> sf.my-cluster.45ead1b5-1830-11e2-9578-68a3c49b1ef7]
@@ -2608,7 +2645,7 @@ Se vuelve a levantar el nodo que se bajó anteriormente
 2012-10-17 05:01:00,483 WARN  [org.hornetq.core.protocol.core.impl.ChannelImpl] (Old I/O client worker (channelId: 236026373, /192.168.1.107:49462 => worker1/192.168.1.107:5445)) Can't find packet to clear:  last received command id 5 first stored command id 5
 2012-10-17 05:01:04,698 WARN  [org.hornetq.core.cluster.impl.DiscoveryGroupImpl] (hornetq-discovery-group-thread-dg-group1) There are more than one servers on the network broadcasting the same node id. You will see this message exactly once (per node) if a node is restarted, in which case it can be safely ignored. But if it is logged continuously it means you really do have more than one node on the same network active concurrently with the same node id. This could occur if you have a backup node active at the same time as its live node. nodeID=30969d9a-1830-11e2-b820-68a3c49b1ef7
 
-Se vuelve a armar el cluster
+Se vuelve a armar el cluster.
 
 
 	Como se puede apreciar, las pruebas manuales que sirvieron para regular el desarrollo del trabajo práctico, son igualmente superadas por este cluster en esta etapa de producto terminado, lo cual es de vital importancia porque cada prueba manual encierra propiedades que son a nuestro criterio deseables en una estructura de cluster de un ambiente productivo, y además cada prueba manual superada revalida la investigación efectuada.
@@ -2617,60 +2654,60 @@ Se vuelve a armar el cluster
 
 	En el caso de Terracotta + Tomcat, se provee a continuación evidencia de una corrida de las características que permiten comprobar las pruebas manuales.
 
-Se levanta el cluster; se comprueba que se haya armado correctamente
+Se levanta el cluster; se comprueba que se haya armado correctamente.
 
-	Aplican a este caso, las mismas imágenes de la aplicación de prueba qinweb y del balancer manager como en el caso de JBoss
+	Aplican a este caso, las mismas imágenes de la aplicación de prueba qinweb y del balancer manager como en el caso de Jboss.
 
-	Verificación de que se ven ambos nodos (con dos conexiones cada uno) en la consola adminitrativa de Terracotta
+	Verificación de que se ven ambos nodos (con dos conexiones cada uno) en la consola adminitrativa de Terracotta.
 
 
-Se ingresa con el navegador Mozilla Firefox con usuario1
+Se ingresa con el navegador Mozilla Firefox con usuario1.
 
-	Misma imagen que en el caso de JBoss
+	Misma imagen que en el caso de Jboss.
 
-Se confirma qué nodo atiende a usuario1; es el worker2
+Se confirma qué nodo atiende a usuario1; es el worker2.
 
-	Misma imagen que en el caso de JBoss
+	Misma imagen que en el caso de Jboss.
 
-Se ingresa con el navegador Google Chrome con usuario2
+Se ingresa con el navegador Google Chrome con usuario2.
 
-	Misma imagen que en el caso de JBoss
+	Misma imagen que en el caso de Jboss.
 
-Se confirma qué nodo atiende a usuario2; es el worker1
+Se confirma qué nodo atiende a usuario2; es el worker1.
 
-	Misma imagen que en el caso de JBoss
+	Misma imagen que en el caso de Jboss.
 
-Se verifica que el sincronizador está trabajando
+Se verifica que el sincronizador está trabajando.
 
 	El sincronizador es Terracotta, por ende sí está trabajando, ya que estamos usando su consola administrativa.
 
 
-Se baja worker1; comprobar que la sincronización continúa; se 	superan las pruebas manuales “Desconexión de un nodo en 	esquema colaborativo” y “Disponibilidad del sistema”
+Se baja worker1; comprobar que la sincronización continúa; se superan las pruebas manuales “Desconexión de un nodo en 	esquema colaborativo” y “Disponibilidad del sistema”.
 
-	Aplica la imagen del balancer manager mostrando que se cayó un nodo vista en el caso de JBoss
+	Aplica la imagen del balancer manager mostrando que se cayó un nodo vista en el caso de Jboss.
 
-	Confirmación en la consola administrativa de Terracotta, de que faltan dos conexiones
-
-
-Se confirma en qué navegador de Internet se trabaja con qué usuario
-
-	Misma imagen que en el caso de JBoss
-
-Se comprueba que ambos usuarios estén siendo atendidos por el nodo que no se bajó, en este caso worker2; se supera la prueba manual “Réplicación de sesión”
-
-	Misma imagen que en el caso de JBoss
-
-Se comprueba que el cache de segundo nivel de persistencia estéoperando; se supera la prueba manual “Caché”
-
-	Estadísticas de ehcache
+	Confirmación en la consola administrativa de Terracotta, de que faltan dos conexiones.
 
 
-	Estadísticas de hibernate
+Se confirma en qué navegador de Internet se trabaja con qué usuario.
+
+	Misma imagen que en el caso de Jboss.
+
+Se comprueba que ambos usuarios estén siendo atendidos por el nodo que no se bajó, en este caso worker2; se supera la prueba manual “Réplicación de sesión”.
+
+	Misma imagen que en el caso de Jboss.
+
+Se comprueba que el cache de segundo nivel de persistencia estéoperando; se supera la prueba manual “Caché”.
+
+	Estadísticas de ehcache.
 
 
-Se vuelve a levantar el nodo que se bajó anteriormente
+	Estadísticas de hibernate.
 
-	Se confirma que se vuelven a ver ambos nodos (dos conexiones por nodo)
+
+Se vuelve a levantar el nodo que se bajó anteriormente.
+
+	Se confirma que se vuelven a ver ambos nodos (dos conexiones por nodo).
 
 
 	También en este caso, se superan las pruebas manuales, al igual que en el caso de JBoss. Aplica la misma conclusión que en el caso de Jboss.
