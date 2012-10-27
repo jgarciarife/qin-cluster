@@ -28,7 +28,7 @@ instancia="1"
 if [ "$cluster" == "jboss" ]; then
 	echo "Cluster: JBoss"
 	source "$posicion"/agregarEntradaEnRouter.sh
-	source "$posicion"/subirJboss.sh
+	#source "$posicion"/subirJboss.sh
 	if [ "$instancias" == "2" ] || [ "$instancias" == "3" ]; then
 		#instancia2
 		#instancia="2"
@@ -37,14 +37,15 @@ if [ "$cluster" == "jboss" ]; then
 	fi
 	if [ "$instancias" == "3" ]; then
 		#instancia3
-		instancia="3"
-		subirJboss
+		#instancia="3"
+		#subirJboss
+		echo " "
 	fi
 else
 	echo "Cluster: Terracotta"
 	source "$posicion"/subirTerracotta.sh
 	sleep 10
-	source "$posicion"/subirTomcat.sh
+	#source "$posicion"/subirTomcat.sh
 	if [ "$instancias" == "2" ] || [ "$instancias" == "3" ]; then
 		#instancia2
 		#instancia="2"
@@ -53,11 +54,11 @@ else
 	fi
 	if [ "$instancias" == "3" ]; then
 		#instancia3
-		instancia="3"
-		subirTomcat
+		#instancia="3"
+		#subirTomcat
+		echo " "
 	fi
 fi
 source "$posicion"/subirApacheCompleto.sh
 source "$posicion"/manejarPermisos.sh
 exit 0
-
