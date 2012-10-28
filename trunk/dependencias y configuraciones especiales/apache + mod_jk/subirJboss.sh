@@ -31,6 +31,8 @@ else
 	multicast=""
 fi
 
+multicast=""
+
 function subirJboss() {
 	sudo "$posicion"/configurarProcesador.sh
 	if [ "$instancia" == "1" ]; then
