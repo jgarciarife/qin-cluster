@@ -704,6 +704,32 @@ nucleo3=`more /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor`
 
 	En conclusión, se debe prestar especial atención a la hora de elegir las entidades/queries cacheables, en especial al trabajar con caches clusterizadas, ya que se pueden introducir grandes disminuciones en la performance.
 
+	Distribución de sesiones
+
+	Para poder comprobar que las sesiones de usuario se distribuyen correctamente, decidimos aplicar una prueba que se propone en uno de los ejemplos del paquete Terracotta (ver sección “5.4.2. Terracotta + Tomcat”). La misma consiste en:
+
+Logearse en la instancia del sistema desplegado en un nodo cualquiera, sin utilizar el balanceador de carga.
+Efectuar algunas operaciones básicas del sistema.
+Cambiar la URL, y apuntar al otro nodo, sin pasar por el balanceador de carga.
+Conclusión: debe verse que se actualiza la URL indicando que se cambió de nodo, que el usuario está también logeado en el segundo nodo, y que todas sus operaciones están tal cual estaban en el nodo original.
+
+	Si esto se cumple, se concluye que la sesión está correctamente distribuida.
+
+	Inicialmente, esta prueba no la pudimos comprobar, ya que en el tercer paso al cambiar la URL, el segundo nodo nos bloqueaba el acceso, o nos cambiaba la sesión de usuario.
+
+	Luego de experimentar lo necesario, llegamos a la conclusión de que el inconveniente que encontramos lo genera el navegador de internet: cuando detecta que el IP cambia, exige la creación de otra sesión de usuario, lo cual colisiona con la propuesta que le hace el nodo de seguir trabajando con la sesión original.
+
+	Para sortear este inconveniente, modificamos la prueba de la siguiente manera:
+
+Agregar una entrada en /etc/hosts que sirva de etiqueta para invocar al nodo con que vamos a comenzar la prueba.
+Logearse en el sistema desplegado en el nodo cuya etiqueta creamos en el punto anterior, sin utilizar el balanceador de carga, apuntando con el navegador de internet directamente a la etiqueta creada.
+Efectuar algunas operaciones básicas del sistema.
+Editar la entrada creada anteriormente en /etc/hosts, y hacer que ahora refiera al otro nodo que forma parte del cluster
+Refrescar la URL escrita en el navegador de internet; ahora el mismo IP para el navegador, direcciona a otro nodo del cluster, por lo cual al refrescar la pantalla se cambia de nodo sin que el navegador de internet lo perciba y sin que el mismo gestione una nueva sesión.
+De esta manera, ocurre tal como se comenta en el ejemplo de Terracotta, que el usuario está también logeado en el segundo nodo, y que todas sus operaciones están tal cual estaban en el nodo original.
+
+	Esto lo pudimos comprobar en ambos clusters, por lo cual concluimos que efectivamente las sesiones de usuario se distribuyen correctamente.
+
 5.6.2. JBoss
 
 	Cluster vertical
