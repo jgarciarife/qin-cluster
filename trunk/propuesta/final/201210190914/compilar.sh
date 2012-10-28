@@ -2,14 +2,18 @@
 
 # Unificar carátula e informe y generar la versión final
 
+nombre_archivo="Trabajo Final - Qin Cluster"
+nombre_archivo_auxiliar="$nombre_archivo-aux.pdf"
+nombre_archivo_final="$nombre_archivo.pdf"
+
 rm -f ./"Trabajo Final - Qin.pdf"
 
-# pdftk ./caratula.pdf ./InformeFinal.pdf cat output ./"Trabajo Final - Qin.pdf"
+# pdftk ./caratula.pdf ./InformeFinal.pdf cat output ./"$nombre_archivo_final"
 
-pdfsam-console -compressed -f ./caratula.pdf -f ./InformeFinal.pdf -o ./"Trabajo Final - Qin-aux.pdf" -overwrite -pdfversion 7 concat
+pdfsam-console -compressed -f ./caratula.pdf -f ./InformeFinal.pdf -o ./"$nombre_archivo_auxiliar" -overwrite -pdfversion 7 concat
 
-pdfopt ./"Trabajo Final - Qin-aux.pdf" ./"Trabajo Final - Qin.pdf"
+pdfopt ./"$nombre_archivo_auxiliar" ./"$nombre_archivo_final"
 
-rm -f ./"Trabajo Final - Qin-aux.pdf"
+rm -f ./"$nombre_archivo_auxiliar"
 
 rm -f ./"PDFsam*"
