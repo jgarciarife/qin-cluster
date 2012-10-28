@@ -1,0 +1,16 @@
+01.- Datos cluster (resolución compartida)	=> En misma máquina: 1 en Firefox, 1 en Chromium
+											=> Primero ver qué nodo responde
+											=> Dar de baja un nodo ; verificar que cambia el session id
+											=> Sincronizar
+											=> Subir nodo ; entrar al sistema por ese nodo así el Balancer Manager le cambia el status a Ok
+											=> Sincronizar
+											=> Bajar el otro nodo => Disponibilidad + Replicación de sesión
+											=> Sincronizar
+											=> Alta
+											=> Sincronizar
+02.- Cache
+	- Explicar que en JBoss no se ve
+	- Mostrar consola de Terracotta
+
+03.- Antes la primera corrida: eliminar el histórico de los browsers
+	 Antes de la corrida de JBoss: eliminar el histórico de los browsers
