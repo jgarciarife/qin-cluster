@@ -38,4 +38,6 @@ svn cleanup
 
 svn add --force * --auto-props --parents --depth infinity && svn ci -m "" *
 
+svn update
+
 exit 0
