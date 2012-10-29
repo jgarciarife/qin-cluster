@@ -11,7 +11,7 @@ rm -f ./"InformeFinal.pdf"
 rm -f ./"InformeFinal.doc"
 rm -f ./"caratula.pdf"
 rm -f ./"caratula.doc"
-rm -f ./*~
+rm -f ./"*~"
 
 echo "Por favor, cierre correctamente todas las instancias de LibreOffice y/o OpenOffice que esté usando, y luego presione ENTER"
 read -e variableEntrada
