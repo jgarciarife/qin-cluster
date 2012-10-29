@@ -4,6 +4,7 @@
 
 nombre_archivo="Trabajo Profesional - Qin Cluster"
 nombre_archivo_auxiliar="$nombre_archivo-aux.pdf"
+nombre_archivo_auxiliar2="$nombre_archivo-aux2.pdf"
 nombre_archivo_final="$nombre_archivo.pdf"
 
 rm -f ./"$nombre_archivo_final"
@@ -28,10 +29,12 @@ sudo killall openoffice
 
 pdfsam-console -compressed -f ./caratula.pdf -f ./InformeFinal.pdf -o ./"$nombre_archivo_auxiliar" -overwrite -pdfversion 7 concat
 
-pdfopt ./"$nombre_archivo_auxiliar" ./"$nombre_archivo_final"
+pdftk ./"$nombre_archivo_auxiliar" update_info ./metadata.txt output ./"$nombre_archivo_auxiliar2"
+
+pdfopt ./"$nombre_archivo_auxiliar2" ./"$nombre_archivo_final"
 
 rm -f ./"$nombre_archivo_auxiliar"
-
+rm -f ./"$nombre_archivo_auxiliar2"
 rm -f ./"PDFsam*"
 
 svn cleanup
