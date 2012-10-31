@@ -5,4 +5,4 @@ InfoValue: Barrabino Diego (80183) y Moreyra Martin (84394)
 InfoKey: Subject
 InfoValue: Trabajo Profesional - Qin Cluster
 InfoKey: Keywords
-InfoValue: Trabajo Profesional, cluster, JBoss, Terracotta, Tomcat, replicar, distribuir, pojocache, cache, infinispan, ehcache
+InfoValue: Trabajo Profesional, cluster, JBoss, Terracotta, Tomcat, replicar, distribuir, PojoCache, Cache, Infinispan, Ehcache
