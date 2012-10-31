@@ -53,9 +53,7 @@ function compilarPresentacion() {
 }
 
 function commitear() {
-	svn cleanup
-	svn add --force * --auto-props --parents --depth infinity && svn ci -m "" *
-	svn update
+	svn cleanup && svn add --force * --auto-props --parents --depth infinity && svn ci -m "" * && svn update
 }
 
 # compilarInforme
