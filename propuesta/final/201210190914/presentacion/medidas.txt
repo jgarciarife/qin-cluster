@@ -1,0 +1,6 @@
+Ancho original	25,7
+Alto original	20,56
+	
+Ancho nuevo	18,3571428571
+Alto nuevo	15
+
