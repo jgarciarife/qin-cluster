@@ -1,0 +1,19 @@
+Minuta del 31/10/2012
+
+- ¿Explicar el origen del nombre? 
+
+http://en.wikipedia.org/wiki/Terracotta_Army
+The Terracotta Army or the "Terra Cotta Warriors and Horses", is a collection of terracotta sculptures depicting the armies of Qin Shi Huang, the first Emperor of China. It is a form of funerary art buried with the emperor in 210–209 BC and whose purpose was to protect the emperor in his afterlife.
+
+- La primera parte de la presentación es de Martín (hasta “Entonces qué hacemos”), luego sigue Diego, luego mitad cada uno; la demo, vemos: y la parte de las conclusiones es mitad cada uno, Diego las dos primeras, Martín las dos segundas, y a partir de ahí lo que se pueda sumar, copado; en la parte de las conclusiones de alta performance, decir que tuvimos JMeter que es pesadísimo, corriendo en la misma PC
+- Hay que repasar los puntos de la minuta del sábado 27/10/2012, ahí había anotaciones sobre la demo en sí, tal vez se pueda “guionar” la demo
+- Inconvenientes encontrados (Diego): no hablar en la parte de "Cache", sobre PojoCache, es más para hablar de cache de persistencia, política de Infinispan, que hay que elegir qué se cachea, esas cosas; luego en la parte de "Replicación de datos", ahí si PojoCache; ir más a lo conceptual, no perder tiempo en detalles
+- Parte en que se explican las implementaciones JBoss y Terracotta (Diego): hacer un corte, que se note que JBoss es una cosa, y que Terracotta + Tomcat es otra cosa; en la parte en de Terracotta, recordar decir que sirve para cualquier aplicación (salvo por retoques menores en el código)
+- Ver cuál es la mejor manera de explicar que ambas implementaciones cumplen con lo que queremos
+- Conclusiones: luego de la demo; hay que cambiar el flujo de la presentación
+- Resultados de las pruebas: Diego; explicar la cantidad de pruebas que hicimos, que cada vez que descubríamos algo hacíamos todo nuevamente, la cantidad de gráficos que hicimos, cómo se interpretan los gráficos, qué hay en cada eje, etc
+
+- Llevar cartelitos con nombres de las PCs ("worker1", "worker2", "basededatos / apache / terracotta")
+- Llevar cable HDMI; quien sabe...
+
+- Viernes, 19 hs, ¿en dónde?
