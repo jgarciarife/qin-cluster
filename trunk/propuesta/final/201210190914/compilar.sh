@@ -52,13 +52,36 @@ function compilarPresentacion() {
 	rm -f ./"PDFsam*"
 }
 
+function compilarCartaActa() {
+	nombre_archivo_auxiliar_carta_acta="carta y acta - aux.pdf"
+	nombre_archivo_final_carta_acta="Trabajo Profesional - Qin Cluster - Carta y Acta.pdf"
+	rm -f ./"$nombre_archivo_final_carta_acta"
+	rm -f ./"carta y acta.pdf"
+	rm -f ./"carta y acta.doc"
+	rm -f ./*~
+	echo "Por favor, cierre correctamente todas las instancias de LibreOffice y/o OpenOffice que esté usando, y luego presione ENTER"
+	read -e variableEntrada
+	sudo killall libreoffice
+	sudo killall openoffice
+	# libreoffice --headless --invisible --convert-to doc ./carta y acta.odt
+	libreoffice --headless --invisible --convert-to pdf ./"carta y acta.odt"
+	sudo killall libreoffice
+	sudo killall openoffice
+	pdftk ./"carta y acta.pdf" update_info ./"metadata - carta y acta.txt" output ./"$nombre_archivo_auxiliar_carta_acta"
+	pdfopt ./"$nombre_archivo_auxiliar_carta_acta" ./"$nombre_archivo_final_carta_acta"
+	rm -f ./"$nombre_archivo_auxiliar_carta_acta"
+	rm -f ./"PDFsam*"
+}
+
 function commitear() {
 	svn cleanup && svn add --force * --auto-props --parents --depth infinity && svn ci -m "" * && svn update
 }
 
 # compilarInforme
 
-compilarPresentacion
+# compilarPresentacion
+
+compilarCartaActa
 
 # commitear
 
