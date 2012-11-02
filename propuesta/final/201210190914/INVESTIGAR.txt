@@ -1,0 +1,11 @@
+- Investigar política de selección de nodos de modproxy
+- Investigar exactamente qué hace JBoss con la sesión distribuida; ¿se hace efectivo cuando se cae el nodo, o uno debiera esperar que siempre si o si todas las sesiones estén en todos los nodos?
+	Aparentemente, JBoss distribuye la sesión solo cuando el nodo cae limpiamente, y no cuando por ejemplo le cortás el cable
+	Tendrá que ver con el sticky session ?
+	Si le das tiempo mal que mal vuelve !; cuando vuelve, hay que reiniciar el nodo afectado; lo del reinicio pasa tal cual en Terracotta
+
+- Ver si hay timeout para determinar que un nodo se desconectó posta
+
+- Eliminar histórico de los navegadores web
+
+- Terracotta: si o si la prueba del cache; tal vez se pueda mostrar con JBoss, pero ojo que es horrible
