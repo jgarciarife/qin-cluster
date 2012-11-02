@@ -79,11 +79,11 @@ function commitear() {
 
 # compilarInforme
 
-# compilarPresentacion
+compilarPresentacion
 
-compilarCartaActa
+# compilarCartaActa
 
-# commitear
+commitear
 
 exit 0
 
